@@ -1,0 +1,351 @@
+/* ========================================
+   Página de Conversa por Voz - Mobile First
+   ======================================== */
+
+.pagina-voz {
+    min-height: 100vh;
+    background: var(--gradient-primary);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ========================================
+   Cabeçalho
+   ======================================== */
+
+.cabecalho-voz {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    position: relative;
+    z-index: 10;
+}
+
+.botao-voltar,
+.botao-acessibilidade {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255, 255, 255, 0.21);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    transition: all var(--transition-base);
+}
+
+.botao-acessibilidade {
+    background: white;
+}
+
+.botao-voltar:hover,
+.botao-acessibilidade:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.botao-voltar:active,
+.botao-acessibilidade:active {
+    transform: scale(0.95);
+}
+
+.logo-voz {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
+    background: var(--gradient-title);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+}
+
+/* ========================================
+   Área de Conversa/Mensagens
+   ======================================== */
+
+.area-conversa {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+}
+
+.container-mensagens {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.mensagem-inicial {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.texto-inicial {
+    font-size: var(--font-size-lg);
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Mensagens do usuário e assistente */
+.mensagem-usuario,
+.mensagem-assistente {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    max-width: 85%;
+    animation: aparecer-mensagem var(--transition-base) ease-out;
+}
+
+.mensagem-usuario {
+    align-self: flex-end;
+    background: rgba(254, 41, 187, 0.2);
+    border: 1px solid rgba(254, 41, 187, 0.3);
+    color: var(--color-white);
+}
+
+.mensagem-assistente {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-white);
+}
+
+.mensagem-usuario p,
+.mensagem-assistente p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+@keyframes aparecer-mensagem {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   Controle de Voz
+   ======================================== */
+
+.area-controle-voz {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+    position: relative;
+}
+
+/* Indicador de áudio (ondas) */
+.indicador-audio {
+    display: flex;
+    gap: 4px;
+    height: 40px;
+    align-items: center;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.indicador-audio.ativo {
+    opacity: 1;
+}
+
+.onda-audio {
+    width: 4px;
+    background: var(--color-accent-pink);
+    border-radius: 2px;
+    animation: pulsar-onda 1s ease-in-out infinite;
+}
+
+.onda-audio:nth-child(1) { animation-delay: 0s; }
+.onda-audio:nth-child(2) { animation-delay: 0.1s; }
+.onda-audio:nth-child(3) { animation-delay: 0.2s; }
+.onda-audio:nth-child(4) { animation-delay: 0.3s; }
+.onda-audio:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes pulsar-onda {
+    0%, 100% {
+        height: 10px;
+    }
+    50% {
+        height: 40px;
+    }
+}
+
+/* Botão de Microfone */
+.botao-microfone {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform var(--transition-base);
+}
+
+.botao-microfone:hover {
+    transform: scale(1.05);
+}
+
+.botao-microfone:active {
+    transform: scale(0.95);
+}
+
+.circulo-externo {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(254, 41, 187, 0.3);
+    transition: all var(--transition-base);
+}
+
+.botao-microfone:hover .circulo-externo {
+    border-color: rgba(254, 41, 187, 0.5);
+    box-shadow: 0 0 20px rgba(254, 41, 187, 0.3);
+}
+
+.circulo-interno {
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    background: rgba(254, 41, 187, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+    border: 1px solid rgba(254, 41, 187, 0.3);
+}
+
+.botao-microfone:hover .circulo-interno {
+    background: rgba(254, 41, 187, 0.3);
+}
+
+.icone-microfone {
+    color: var(--color-white);
+    transition: transform var(--transition-base);
+}
+
+/* Estado: Gravando */
+.botao-microfone.gravando .circulo-externo {
+    border-color: var(--color-accent-pink);
+    animation: pulsar-circulo 2s ease-in-out infinite;
+}
+
+.botao-microfone.gravando .circulo-interno {
+    background: var(--color-accent-pink);
+    border-color: var(--color-accent-pink);
+}
+
+@keyframes pulsar-circulo {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* Status de Gravação */
+.status-gravacao {
+    font-size: var(--font-size-base);
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+}
+
+/* ========================================
+   Área de Alternância de Modo
+   ======================================== */
+
+.area-alternar {
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: center;
+}
+
+.link-alternar-modo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    color: var(--color-white);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-base);
+    backdrop-filter: blur(10px);
+}
+
+.link-alternar-modo:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.link-alternar-modo svg {
+    flex-shrink: 0;
+}
+
+/* ========================================
+   Responsividade - Tablet e Desktop
+   ======================================== */
+
+@media (min-width: 768px) {
+    .cabecalho-voz {
+        padding: var(--spacing-xl) var(--spacing-2xl);
+    }
+
+    .logo-voz {
+        font-size: var(--font-size-6xl);
+    }
+
+    .botao-voltar,
+    .botao-acessibilidade {
+        width: 70px;
+        height: 70px;
+    }
+
+    .area-conversa {
+        padding: var(--spacing-xl) var(--spacing-2xl);
+    }
+
+    .botao-microfone {
+        width: 120px;
+        height: 120px;
+    }
+
+    .texto-inicial {
+        font-size: var(--font-size-xl);
+    }
+}
+
+@media (min-width: 1024px) {
+    .botao-microfone {
+        width: 140px;
+        height: 140px;
+    }
+
+    .icone-microfone {
+        width: 70px;
+        height: 70px;
+    }
+}
