@@ -9,7 +9,13 @@
     --color-primary-medium: #5A02BB;
     --color-primary-light: #7A01FF;
     --color-primary-lighter: #A78BFA;
-    
+
+    /* Cores de Ícones e Bordas para os botões */
+    --color-primary-icon: #FFFFFF;
+    --color-primary-border: rgba(255, 255, 255, 0.21);
+    --color-primary-border-hover: rgba(255, 255, 255, 0.3);
+    --color-primary-background-hover: rgba(255, 255, 255, 0.2);
+  
     /* Cores de Destaque */
     --color-accent-pink: #FE29BB;
     --color-accent-purple: #8C5AD5;

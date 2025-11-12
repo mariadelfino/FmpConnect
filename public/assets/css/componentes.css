@@ -1,0 +1,87 @@
+/* Componentes Reutilizáveis */
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    position: relative;
+    z-index: 10;
+}
+
+.logo-senachat {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
+    background: var(--gradient-title);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+}
+
+
+.botao-voltar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    border: 1.5px solid var(--color-primary-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary-icon);
+    transition: all var(--transition-base);
+}
+
+.botao-acessibilidade {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    border: 1.5px solid var(--color-primary-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary-icon);
+    transition: all var(--transition-base);
+    flex-shrink: 0;
+}
+
+.botao-voltar:hover,
+.botao-acessibilidade:hover {
+    background: var(--color-primary-background-hover);
+    border-color: var(--color-primary-border-hover);
+    transform: scale(1.05);
+}
+
+.botao-acessibilidade:active {
+    transform: scale(0.95);
+}
+
+.botao-acessibilidade svg path {
+    stroke: white;
+    fill: none;
+} 
+
+.botao-voltar:active,
+.botao-acessibilidade:active {
+    transform: scale(0.95);
+}
+
+
+/* --- Responsividade para Acessibilidade e Logo --- */
+@media (min-width: 768px) {
+    .cabecalho {
+        padding: var(--spacing-xl) var(--spacing-2xl);
+    }
+
+    .botao-voltar,
+    .botao-acessibilidade {
+        width: 70px;
+        height: 70px;
+    }
+
+    .logo-senachat {
+        font-size: var(--font-size-6xl);
+    }
+}

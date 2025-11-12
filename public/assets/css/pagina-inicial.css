@@ -1,167 +1,160 @@
-/* ========================================
-   Página Inicial - Conteúdo Principal
-   ======================================== */
-
-.conteudo-principal {
+.pagina-inicial {
     min-height: 100vh;
-    background-color: var(--color-gray-50);
+    background: var(--gradient-primary);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
 }
 
-/* Container */
-.container {
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-}
-
-/* ========================================
-   Cabeçalho Principal
-   ======================================== */
-
-.cabecalho-principal {
-    background: var(--color-white);
-    box-shadow: var(--shadow-sm);
-    position: sticky;
-    top: 0;
-    z-index: var(--z-sticky);
-}
-
-.cabecalho-principal .container {
+.cabecalho-inicial {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: var(--spacing-md);
-    padding-bottom: var(--spacing-md);
+    padding: var(--spacing-2xl) var(--container-padding);
+    position: relative;
+    z-index: 10;
 }
 
-.cabecalho-principal_logo h1 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.cabecalho-inicial_placeholder {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
 }
 
-/* Navegação */
-.navegacao-principal_lista {
-    display: flex;
-    gap: var(--spacing-lg);
-}
-
-.navegacao-principal_link {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-gray-700);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
-}
-
-.navegacao-principal_link:hover {
-    color: var(--color-primary);
-    background-color: var(--color-gray-100);
-}
-
-/* ========================================
-   Seção Hero
-   ======================================== */
-
-.secao-hero {
-    padding: var(--spacing-3xl) 0;
-    text-align: center;
-    background: linear-gradient(135deg, rgba(107, 33, 168, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-}
-
-.secao-hero_titulo {
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-gray-900);
-    margin-bottom: var(--spacing-md);
-}
-
-.secao-hero_descricao {
-    font-size: var(--font-size-lg);
-    color: var(--color-gray-600);
+.secao-opcoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) var(--container-padding) var(--spacing-xl);
     max-width: 600px;
+    width: 100%;
     margin: 0 auto;
+    flex-grow: 1;
 }
 
-/* ========================================
-   Seção de Chat
-   ======================================== */
-
-.secao-chat {
-    padding: var(--spacing-2xl) 0;
-}
-
-.container-chat {
-    background: var(--color-white);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-xl);
-    box-shadow: var(--shadow-md);
-    min-height: 400px;
-}
-
-.placeholder-chat {
+.opcao-chat {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    min-height: 400px;
-    color: var(--color-gray-500);
-    font-size: var(--font-size-lg);
-}
-
-/* ========================================
-   Rodapé
-   ======================================== */
-
-.rodape-principal {
-    background: var(--color-gray-900);
-    color: var(--color-gray-300);
-    padding: var(--spacing-xl) 0;
+    gap: var(--spacing-md);
+    color: var(--color-white);
     text-align: center;
-    margin-top: auto;
+    min-height: 160px;
+    transition: background var(--transition-base), transform var(--transition-base);
 }
 
-.rodape-principal p {
-    font-size: var(--font-size-sm);
+.opcao-chat:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
 }
 
-/* ========================================
-   Responsividade - Desktop
-   ======================================== */
+.opcao-chat_icone {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-full);
+    background: rgba(0, 0, 0, 0.2);
+    display: grid;
+    place-items: center;
+    transition: transform var(--transition-base);
+}
+
+.opcao-chat:hover .opcao-chat_icone {
+    transform: scale(1.05);
+}
+
+.opcao-chat_titulo {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+}
+
+.opcao-chat_icone svg {
+    width: 32px;
+    height: 32px;
+    stroke: var(--color-white);
+    stroke-width: 1.5;
+}
+
+.opcao-chat--texto .opcao-chat_icone svg {
+    width: 36px;
+    height: 36px;
+    stroke-width: 2;
+}
 
 @media (min-width: 768px) {
-    .cabecalho-principal .container {
-        padding-top: var(--spacing-lg);
-        padding-bottom: var(--spacing-lg);
+    .cabecalho-inicial {
+        padding: var(--spacing-xl) var(--spacing-2xl);
     }
 
-    .cabecalho-principal_logo h1 {
-        font-size: var(--font-size-2xl);
+    .cabecalho-inicial_placeholder {
+        width: 70px;
+        height: 70px;
     }
 
-    .navegacao-principal_link {
-        font-size: var(--font-size-base);
+    .botao-acessibilidade {
+        width: 70px;
+        height: 70px;
     }
 
-    .secao-hero_titulo {
-        font-size: var(--font-size-4xl);
+    .logo-inicial {
+        font-size: var(--font-size-6xl);
     }
 
-    .secao-hero_descricao {
-        font-size: var(--font-size-xl);
+    .secao-opcoes {
+        padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl);
+        gap: var(--spacing-lg);
     }
 
-    .container-chat {
-        padding: var(--spacing-2xl);
+    .opcao-chat {
+        min-height: 220px;
+        padding: var(--spacing-xl);
+        border-radius: var(--radius-xl);
+    }
+
+    .opcao-chat_icone {
+        width: 100px;
+        height: 100px;
+    }
+
+    .opcao-chat_icone svg {
+        width: 44px;
+        height: 44px;
+    }
+
+    .opcao-chat--texto .opcao-chat_icone svg {
+        width: 48px;
+        height: 48px;
     }
 }
 
 @media (min-width: 1024px) {
-    .secao-hero_titulo {
-        font-size: var(--font-size-5xl);
+    .secao-opcoes {
+        max-width: 700px;
+        gap: var(--spacing-xl);
+    }
+
+    .opcao-chat {
+        min-height: 250px;
+    }
+
+    .opcao-chat_icone {
+        width: 120px;
+        height: 120px;
+    }
+
+    .opcao-chat_icone svg {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .opcao-chat--texto .opcao-chat_icone svg {
+        width: 54px;
+        height: 54px;
     }
 }

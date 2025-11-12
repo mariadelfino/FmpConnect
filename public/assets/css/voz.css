@@ -12,59 +12,6 @@
 }
 
 /* ========================================
-   Cabeçalho
-   ======================================== */
-
-.cabecalho-voz {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--spacing-2xl) var(--spacing-lg);
-    position: relative;
-    z-index: 10;
-}
-
-.botao-voltar,
-.botao-acessibilidade {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(255, 255, 255, 0.21);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-white);
-    transition: all var(--transition-base);
-}
-
-.botao-acessibilidade {
-    background: white;
-}
-
-.botao-voltar:hover,
-.botao-acessibilidade:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-}
-
-.botao-voltar:active,
-.botao-acessibilidade:active {
-    transform: scale(0.95);
-}
-
-.logo-voz {
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-extrabold);
-    background: var(--gradient-title);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-align: center;
-}
-
-/* ========================================
    Área de Conversa/Mensagens
    ======================================== */
 
@@ -310,20 +257,6 @@
    ======================================== */
 
 @media (min-width: 768px) {
-    .cabecalho-voz {
-        padding: var(--spacing-xl) var(--spacing-2xl);
-    }
-
-    .logo-voz {
-        font-size: var(--font-size-6xl);
-    }
-
-    .botao-voltar,
-    .botao-acessibilidade {
-        width: 70px;
-        height: 70px;
-    }
-
     .area-conversa {
         padding: var(--spacing-xl) var(--spacing-2xl);
     }

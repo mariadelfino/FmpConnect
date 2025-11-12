@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="./assets/css/componentes.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/variables.css">
     <link rel="stylesheet" href="./assets/css/modal-boas-vindas.css">
@@ -61,47 +62,70 @@
         </div>
     </aside>
 
-    <!-- Conteúdo Principal da Home -->
-    <main id="conteudoPrincipal" class="conteudo-principal" style="display: none;">
-        <header class="cabecalho-principal">
-            <div class="container">
-                <div class="cabecalho-principal_logo">
-                    <h1>SenaChat</h1>
-                </div>
-                <nav class="navegacao-principal" aria-label="Navegação principal">
-                    <ul class="navegacao-principal_lista">
-                        <li><a href="#inicio" class="navegacao-principal_link">Início</a></li>
-                        <li><a href="#sobre" class="navegacao-principal_link">Sobre</a></li>
-                        <li><a href="#contato" class="navegacao-principal_link">Contato</a></li>
-                    </ul>
-                </nav>
-            </div>
+     <!-- Conteúdo Principal da Home (começa oculto) -->
+     <main class="pagina-inicial" id="conteudoPrincipal" style="display: none;">
+        
+        <!-- Cabeçalho (Padrão voz.html) -->
+        <header class="cabecalho">
+            <!-- 
+                Elemento vazio para balancear o space-between do flexbox,
+                já que não temos o botão "voltar" aqui.
+            -->
+            <div class="cabecalho-inicial_placeholder" aria-hidden="true"></div>
+
+            <h1 class="logo-senachat">SenaChat</h1>
+
+            <button 
+                class="botao-acessibilidade" 
+                aria-label="Opções de acessibilidade"
+                type="button">
+            
+                <svg width="1000" height="1000" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
+                </svg>
+                
+        </button>
         </header>
 
-        <section class="secao-hero" id="inicio">
-            <div class="container">
-                <h2 class="secao-hero_titulo">Bem-vindo ao SenaChat</h2>
-                <p class="secao-hero_descricao">Seu assistente virtual inteligente está pronto para ajudar!</p>
-            </div>
+        <!-- Seção de Opções de Chat -->
+        <section class="secao-opcoes">
+            <a href="./chat.html" class="opcao-chat opcao-chat--texto">
+                <div class="opcao-chat_icone">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 17C12 14.7909 13.7909 13 16 13H32C34.2091 13 36 14.7909 36 17V27C36 29.2091 34.2091 31 32 31H16C13.7909 31 12 29.2091 12 27V17Z" stroke="white" stroke-width="2"/>
+                        <path d="M16 31L12 35V31H16Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18 20H30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M18 25H26" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h2 class="opcao-chat_titulo">Converse por texto com o SenaChat</h2>
+            </a>
+
+            <a href="./voz.html" class="opcao-chat opcao-chat--voz">
+                <div class="opcao-chat_icone">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 10C18 6.68629 20.6863 4 24 4C27.3137 4 30 6.68629 30 10V24C30 27.3137 27.3137 30 24 30C20.6863 30 18 27.3137 18 24V10Z" stroke="white" stroke-width="2"/>
+                        <path d="M12 21V24C12 30.6274 17.3726 36 24 36C30.6274 36 36 30.6274 36 24V21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M24 36V44M20 44H28" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>                        
+                </div>
+                <h2 class="opcao-chat_titulo">Fale com o SenaChat por voz</h2>
+            </a>
         </section>
 
-        <section class="secao-chat" id="chat">
-            <div class="container">
-                <article class="container-chat">
-                    <h2 class="visualmente-oculto">Interface de Chat</h2>
-                    <!-- Chat interface será implementada aqui -->
-                    <div class="placeholder-chat">
-                        <p>Interface de chat em breve...</p>
-                    </div>
-                </article>
-            </div>
-        </section>
+        <!-- As outras seções (Dúvidas, Saiba Mais, Rodapé) virão aqui depois -->
 
-        <footer class="rodape-principal">
-            <div class="container">
-                <p>&copy; 2025 SenaChat. Todos os direitos reservados.</p>
-            </div>
-        </footer>
     </main>
 
     <!-- Scripts -->
