@@ -15,6 +15,7 @@
     --color-primary-border: rgba(255, 255, 255, 0.21);
     --color-primary-border-hover: rgba(255, 255, 255, 0.3);
     --color-primary-background-hover: rgba(255, 255, 255, 0.2);
+    --color-secondary-background-icon: #573785;
   
     /* Cores de Destaque */
     --color-accent-pink: #FE29BB;
@@ -92,7 +93,7 @@
     --radius-md: 0.5rem;      /* 8px */
     --radius-lg: 1rem;        /* 16px */
     --radius-xl: 1.5rem;      /* 24px */
-    --radius-2xl: 2rem;       /* 32px */
+    --radius-icone: 50px;     
     --radius-full: 9999px;
     
     /* Sombras */

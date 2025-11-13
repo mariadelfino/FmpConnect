@@ -30,7 +30,6 @@
     max-width: 600px;
     width: 100%;
     margin: 0 auto;
-    flex-grow: 1;
 }
 
 .opcao-chat {
@@ -57,8 +56,8 @@
 .opcao-chat_icone {
     width: 80px;
     height: 80px;
-    border-radius: var(--radius-full);
-    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-icone);
+    background: var( --color-secondary-background-icon);
     display: grid;
     place-items: center;
     transition: transform var(--transition-base);

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SenaChat - Conheça o assistente virtual inteligente">
+    <meta name="theme-color" content="#6B21A8">
+    <title>Conheça o SenaChat</title>
+    
+    <!-- Google Fonts - Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <!-- (Mantém os links de CSS que o modal precisa) -->
+    <link rel="stylesheet" href="./assets/css/componentes.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/modal-boas-vindas.css">
+</head>
+
+<body>
+    <!-- 
+      O <aside> foi trocado por <main>, pois este é o conteúdo 
+      principal desta página específica.
+    -->
+    <main id="modalBoasVindas" class="modal-boas-vindas" role="main" aria-labelledby="titulo-boas-vindas">
+        <div class="modal-boas-vindas_conteudo">
+            <header class="modal-boas-vindas_cabecalho">
+                <h1 id="titulo-boas-vindas" class="modal-boas-vindas_titulo">
+                    Conheça o<br>
+                    <span class="modal-boas-vindas_titulo-destaque">SenaChat!</span>
+                </h1>
+            </header>
+            
+            <div class="modal-boas-vindas_acao">
+                <button 
+                    id="botaoArrastar" 
+                    class="botao-arrastar" 
+                    aria-label="Deslize para começar"
+                    type="button">
+                    <div class="botao-arrastar_trilho">
+                        <div class="botao-arrastar_botao" id="botaoArrastarBotao">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M30 55C43.8071 55 55 43.8071 55 30C55 16.1929 43.8071 5 30 5C16.1929 5 5 16.1929 5 30C5 43.8071 16.1929 55 30 55Z" stroke="#FE29BB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21.25 30H36.25" stroke="#FE29BB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M31.25 37.5L38.75 30L31.25 22.5" stroke="#FE29BB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="botao-arrastar_texto">Deslize para começar</span>
+                        <div class="botao-arrastar_setas" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.94 13.28L10.2867 8.9333C10.8 8.41997 10.8 7.57997 10.2867 7.06664L5.94 2.71997" stroke="#3B018A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.94 13.28L10.2867 8.9333C10.8 8.41997 10.8 7.57997 10.2867 7.06664L5.94 2.71997" stroke="#3B018A80" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.94 13.28L10.2867 8.9333C10.8 8.41997 10.8 7.57997 10.2867 7.06664L5.94 2.71997" stroke="#3B018A33" stroke-width="1.semic" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 
+      Este script agora só será carregado nesta página 
+      e sua função mudará (veja abaixo).
+    -->
+    <script src="./assets/js/modal-boas-vindas.js"></script>
+</body>
+</html>

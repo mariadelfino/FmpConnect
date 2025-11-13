@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SenaChat - Seu assistente virtual inteligente">
-    <meta name="theme-color" content="#6B21A8">
-    <title>SenaChat - Assistente Virtual Inteligente</title>
+    <meta name="description" content="SenaChat - Converse por texto com seu assistente virtual">
+    <meta name="theme-color" content="#3B018A">
+    <title>SenaChat - Conversa por Texto</title>
     
-    <!-- Google Fonts - Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./assets/css/componentes.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/chat.css"> 
     <link rel="stylesheet" href="./assets/css/variables.css">
-    <link rel="stylesheet" href="./assets/css/pagina-inicial.css">
 </head>
 <body>
-     <!-- Conteúdo Principal da Home (começa oculto) -->
-     <main class="pagina-inicial" id="conteudoPrincipal">
-        
-        <!-- Cabeçalho (Padrão voz.html) -->
+    <!-- Página de Conversa por Texto -->
+    <main class="pagina-chat">
+        <!-- Cabeçalho -->
         <header class="cabecalho">
-            <a href="boasvindas.html" aria-label="Voltar para a página de boas vindas">
+            <a href="index.html" aria-label="Voltar para página inicial">
                 <button 
                     class="botao-voltar" 
                     type="button">
@@ -34,13 +35,13 @@
                 </button>
             </a>
 
-            <h1 class="logo-senachat">SenaChat</h1> 
+            <h1 class="logo-senachat">SenaChat</h1>
 
             <button 
                 class="botao-acessibilidade" 
                 aria-label="Opções de acessibilidade"
                 type="button">
-            
+                
                 <svg width="1000" height="1000" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
                     <path d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
@@ -55,40 +56,6 @@
                     <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
                     <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3" stroke="black" stroke-width="8" stroke-miterlimit="10"/>
                 </svg>
-                
-        </button>
+            </button>
         </header>
-
-        <!-- Seção de Opções de Chat -->
-        <section class="secao-opcoes">
-            <a href="./chat.html" class="opcao-chat opcao-chat--texto">
-                <div class="opcao-chat_icone">
-                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2917 36.4167H15.3333C7.66668 36.4167 3.83334 34.5 3.83334 24.9167V15.3334C3.83334 7.66671 7.66668 3.83337 15.3333 3.83337H30.6667C38.3333 3.83337 42.1667 7.66671 42.1667 15.3334V24.9167C42.1667 32.5834 38.3333 36.4167 30.6667 36.4167H29.7083C29.1142 36.4167 28.5392 36.7042 28.175 37.1834L25.3 41.0167C24.035 42.7034 21.965 42.7034 20.7 41.0167L17.825 37.1834C17.5183 36.7617 16.8092 36.4167 16.2917 36.4167Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13.4167 15.3334H32.5834" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13.4167 24.9166H24.9167" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <h2 class="opcao-chat_titulo">Converse por texto com o SenaChat</h2>
-            </a>
-
-            <a href="./voz.html" class="opcao-chat opcao-chat--voz">
-                <div class="opcao-chat_icone">
-                    <svg class="icone-microfone" width="46" height="46" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M25 32.2916C29.6041 32.2916 33.3333 28.5625 33.3333 23.9583V12.5C33.3333 7.89579 29.6041 4.16663 25 4.16663C20.3958 4.16663 16.6666 7.89579 16.6666 12.5V23.9583C16.6666 28.5625 20.3958 32.2916 25 32.2916Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9.0625 20.1042V23.6459C9.0625 32.4376 16.2083 39.5834 25 39.5834C33.7917 39.5834 40.9375 32.4376 40.9375 23.6459V20.1042" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M22.1041 13.3959C23.9791 12.7084 26.0208 12.7084 27.8958 13.3959" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M23.3334 17.8124C24.4375 17.5207 25.5834 17.5207 26.6875 17.8124" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M25 39.5834V45.8334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>                  
-                </div>
-                <h2 class="opcao-chat_titulo">Fale com o SenaChat por voz</h2>
-            </a>
-        </section>
-
-        <!-- As outras seções (Dúvidas, Saiba Mais, Rodapé) virão aqui depois -->
-
-    </main>
-
-</body>
 </html>

@@ -11,7 +11,6 @@
     const modal = document.getElementById('modalBoasVindas');
     const botaoArrastar = document.getElementById('botaoArrastar');
     const botaoArrastarBotao = document.getElementById('botaoArrastarBotao');
-    const conteudoPrincipal = document.getElementById('conteudoPrincipal');
     const trilho = botaoArrastar.querySelector('.botao-arrastar_trilho');
 
     // Variáveis de controle
@@ -183,16 +182,8 @@
         modal.classList.add('modal-boas-vindas-fechando');
         
         setTimeout(() => {
-            modal.style.display = 'none';
-            conteudoPrincipal.style.display = 'block';
-            
-            // Anima entrada do conteúdo
-            conteudoPrincipal.style.opacity = '0';
-            setTimeout(() => {
-                conteudoPrincipal.style.transition = 'opacity 0.5s ease-in-out';
-                conteudoPrincipal.style.opacity = '1';
-            }, 50);
-        }, 350); // Duração da animação de desaparecer
+            window.location.href = 'index.html'; // 🚀 A MÁGICA ACONTECE AQUI!
+        }, 350)
     }
 
     // Inicializa quando o DOM estiver pronto

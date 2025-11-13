@@ -1,0 +1,8 @@
+.pagina-chat{
+    min-height: 100vh;
+    background: var(--gradient-primary);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
