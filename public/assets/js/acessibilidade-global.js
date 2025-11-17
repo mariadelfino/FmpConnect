@@ -65,11 +65,26 @@
         // Aplica filtro de daltonismo
         aplicarFiltroDaltonismoCSS(estadoAtual.filtroDaltonismo);
 
-        // Aplica alto contraste
+        // Aplica alto contraste no MAIN em vez do body
+        const mains = document.querySelectorAll('main');
+        mains.forEach(main => {
+            if (estadoAtual.contraste) {
+                main.classList.add('alto-contraste');
+            } else {
+                main.classList.remove('alto-contraste');
+            }
+        });
+        
+        // Marca no body para referência e ativa otimizações
         if (estadoAtual.contraste) {
-            document.body.classList.add('alto-contraste');
+            document.body.setAttribute('data-alto-contraste', 'true');
+            document.body.classList.add('filtros-ativos'); // Ativa otimizações (remove shadows)
         } else {
-            document.body.classList.remove('alto-contraste');
+            document.body.removeAttribute('data-alto-contraste');
+            // Só remove filtros-ativos se também não tiver filtro de daltonismo
+            if (estadoAtual.filtroDaltonismo === 'none') {
+                document.body.classList.remove('filtros-ativos');
+            }
         }
     }
     
@@ -141,6 +156,7 @@
         const botaoFechar = painel.querySelector('.painel-acessibilidade_fechar');
         const conteudo = painel.querySelector('.painel-acessibilidade_conteudo');
         const opcoes = painel.querySelectorAll('.opcao-acessibilidade');
+        const botaoResetar = painel.querySelector('.painel-acessibilidade_resetar');
 
         function abrirPainel() {
             painel.classList.add('ativo');
@@ -170,6 +186,13 @@
                 handleOpcaoClick(tipo, opcao);
             });
         });
+
+        // Listener específico para o botão de resetar
+        if (botaoResetar) {
+            botaoResetar.addEventListener('click', () => {
+                resetarTudo();
+            });
+        }
     }
 
     function handleOpcaoClick(tipo, elemento) {
@@ -283,16 +306,37 @@
     }
 
     function aplicarFiltroDaltonismoCSS(tipo) {
-        // Remove filtros anteriores
+        // Remove filtros anteriores do BODY E MAIN
         document.body.classList.remove('filtro-protanopia', 'filtro-deuteranopia', 'filtro-tritanopia');
         
-        // Aplica novo filtro se não for 'none'
+        // Aplica filtro no MAIN em vez do body para não afetar o painel fixo
+        const mains = document.querySelectorAll('main');
+        mains.forEach(main => {
+            main.classList.remove('filtro-protanopia', 'filtro-deuteranopia', 'filtro-tritanopia');
+            if (tipo !== 'none') {
+                main.classList.add(`filtro-${tipo}`);
+            }
+        });
+        
+        // Exclui marquee de patrocinadores dos filtros (logos devem manter cores originais)
+        const marquees = document.querySelectorAll('.secao-patrocinadores, .marquee, .marquee_track');
+        marquees.forEach(marquee => {
+            marquee.classList.remove('filtro-protanopia', 'filtro-deuteranopia', 'filtro-tritanopia');
+        });
+        
+        // Marca no body para referência (sem aplicar filtro)
         if (tipo !== 'none') {
-            document.body.classList.add(`filtro-${tipo}`);
+            document.body.setAttribute('data-filtro-daltonismo', tipo);
+            document.body.classList.add('filtros-ativos'); // Ativa otimizações (remove shadows)
+        } else {
+            document.body.removeAttribute('data-filtro-daltonismo');
+            document.body.classList.remove('filtros-ativos'); // Remove otimizações
         }
     }
 
     function resetarTudo() {
+        console.log('[Acessibilidade] Resetando todas as configurações...');
+        
         estadoAtual = {
             tema: detectarTemaDoSistema(),
             contraste: false,
@@ -303,6 +347,8 @@
         aplicarEstado();
         salvarPreferencias();
         atualizarUIParaEstadoAtual();
+        
+        console.log('[Acessibilidade] Configurações resetadas para:', estadoAtual);
     }
 
     // Carrega preferências ao iniciar
@@ -316,31 +362,31 @@
         
         svg.innerHTML = `
             <defs>
-                <!-- Protanopia -->
-                <filter id="protanopia-filter">
+                <!-- Protanopia (Deficiência de VERMELHO) - Matriz ajustada -->
+                <filter id="protanopia-filter" color-interpolation-filters="linearRGB">
                     <feColorMatrix type="matrix" values="
-                        0.567, 0.433, 0,     0, 0
-                        0.558, 0.442, 0,     0, 0
-                        0,     0.242, 0.758, 0, 0
-                        0,     0,     0,     1, 0"/>
+                        0.56667, 0.43333, 0,      0, 0
+                        0.55833, 0.44167, 0,      0, 0
+                        0,       0.24167, 0.75833, 0, 0
+                        0,       0,       0,       1, 0"/>
                 </filter>
                 
-                <!-- Deuteranopia -->
-                <filter id="deuteranopia-filter">
+                <!-- Deuteranopia (Deficiência de VERDE) - Matriz mais diferenciada -->
+                <filter id="deuteranopia-filter" color-interpolation-filters="linearRGB">
                     <feColorMatrix type="matrix" values="
-                        0.625, 0.375, 0,   0, 0
-                        0.7,   0.3,   0,   0, 0
-                        0,     0.3,   0.7, 0, 0
-                        0,     0,     0,   1, 0"/>
+                        0.625,  0.375,  0,      0, 0
+                        0.7,    0.3,    0,      0, 0
+                        0,      0.3,    0.7,    0, 0
+                        0,      0,      0,      1, 0"/>
                 </filter>
                 
-                <!-- Tritanopia -->
-                <filter id="tritanopia-filter">
+                <!-- Tritanopia (Deficiência de AZUL) - Mantida -->
+                <filter id="tritanopia-filter" color-interpolation-filters="linearRGB">
                     <feColorMatrix type="matrix" values="
-                        0.95, 0.05,  0,     0, 0
-                        0,    0.433, 0.567, 0, 0
-                        0,    0.475, 0.525, 0, 0
-                        0,    0,     0,     1, 0"/>
+                        0.95,  0.05,  0,      0, 0
+                        0,     0.433, 0.567,  0, 0
+                        0,     0.475, 0.525,  0, 0
+                        0,     0,     0,      1, 0"/>
                 </filter>
             </defs>
         `;

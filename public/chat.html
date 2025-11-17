@@ -7,6 +7,49 @@
     <meta name="theme-color" content="#3B018A">
     <title>SenaChat - Conversa por Texto</title>
     
+    <!-- Script Crítico de Acessibilidade - DEVE vir ANTES de tudo para evitar flash -->
+    <script>
+        (function() {
+            try {
+                const saved = localStorage.getItem('senachat-acessibilidade');
+                if (saved) {
+                    const estado = JSON.parse(saved);
+                    
+                    // Aplica tema IMEDIATAMENTE
+                    if (estado.tema === 'claro') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    }
+                    
+                    // Aplica escala de fonte
+                    if (estado.scaleFactor && estado.scaleFactor !== 1) {
+                        document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
+                    }
+                    
+                    // Prepara classes de filtro no MAIN (não no body para evitar quebrar position:fixed)
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const mains = document.querySelectorAll('main');
+                        
+                        if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
+                            mains.forEach(function(main) {
+                                main.classList.add('filtro-' + estado.filtroDaltonismo);
+                            });
+                            document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
+                        }
+                        
+                        if (estado.contraste) {
+                            mains.forEach(function(main) {
+                                main.classList.add('alto-contraste');
+                            });
+                            document.body.setAttribute('data-alto-contraste', 'true');
+                        }
+                    });
+                }
+            } catch (e) {
+                // Silently fail - não quebrar a página
+            }
+        })();
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">

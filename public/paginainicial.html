@@ -1,17 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SenaChat - Seu assistente virtual inteligente">
     <meta name="theme-color" content="#6B21A8">
     <title>SenaChat - Assistente Virtual Inteligente</title>
-    
+
+    <!-- Script Crítico de Acessibilidade - DEVE vir ANTES de tudo para evitar flash -->
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('senachat-acessibilidade');
+                if (saved) {
+                    const estado = JSON.parse(saved);
+
+                    // Aplica tema IMEDIATAMENTE
+                    if (estado.tema === 'claro') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    }
+
+                    // Aplica escala de fonte
+                    if (estado.scaleFactor && estado.scaleFactor !== 1) {
+                        document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
+                    }
+
+                    // Prepara classes de filtro no MAIN (não no body para evitar quebrar position:fixed)
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const mains = document.querySelectorAll('main');
+
+                        if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
+                            mains.forEach(function (main) {
+                                main.classList.add('filtro-' + estado.filtroDaltonismo);
+                            });
+                            document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
+                        }
+
+                        if (estado.contraste) {
+                            mains.forEach(function (main) {
+                                main.classList.add('alto-contraste');
+                            });
+                            document.body.setAttribute('data-alto-contraste', 'true');
+                        }
+                    });
+                }
+            } catch (e) {
+                // Silently fail - não quebrar a página
+            }
+        })();
+    </script>
+
     <!-- Google Fonts - Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="./assets/css/componentes.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
@@ -19,56 +64,84 @@
     <link rel="stylesheet" href="./assets/css/pagina-inicial.css">
     <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
     <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/robo-animacao.css">
 </head>
+
 <body>
-     <!-- Conteúdo Principal da Home (começa oculto) -->
-     <main class="pagina-inicial" id="conteudoPrincipal">
-        
+    <!-- Conteúdo Principal da Home (começa oculto) -->
+    <main class="pagina-inicial" id="conteudoPrincipal">
+
         <!-- Cabeçalho (Padrão voz.html) -->
         <header class="cabecalho">
             <a href="boasvindas.html" aria-label="Voltar para a página de boas vindas">
-                <button 
-                    class="botao-voltar" 
-                    type="button">
+                <button class="botao-voltar" type="button">
                     <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
             </a>
 
-            <h1 class="logo-senachat">SenaChat</h1> 
+            <h1 class="logo-senachat">
+                SenaChat
 
-            <button 
-                class="botao-acessibilidade" 
-                aria-label="Opções de acessibilidade"
-                type="button">
-            
-                <svg width="1000" height="1000" viewBox="320 330 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
+            </h1>
+
+            <button class="botao-acessibilidade" aria-label="Opções de acessibilidade" type="button">
+
+                <svg width="1000" height="1000" viewBox="320 330 360 360" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path
+                        d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
                 </svg>
-                
-        </button>
-        </header>
 
+            </button>
+
+
+        </header>
+        <div class="SenaChat_mascote SenaChat_mascote--icone">
+            <img src="./assets/images/senachat.svg" alt="Robô mascote SenaChat">
+        </div>
         <!-- Seção de Opções de Chat -->
         <section class="secao-opcoes">
             <a href="./chat.html" class="opcao-chat opcao-chat--texto">
                 <div class="opcao-chat_icone">
                     <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2917 36.4167H15.3333C7.66668 36.4167 3.83334 34.5 3.83334 24.9167V15.3334C3.83334 7.66671 7.66668 3.83337 15.3333 3.83337H30.6667C38.3333 3.83337 42.1667 7.66671 42.1667 15.3334V24.9167C42.1667 32.5834 38.3333 36.4167 30.6667 36.4167H29.7083C29.1142 36.4167 28.5392 36.7042 28.175 37.1834L25.3 41.0167C24.035 42.7034 21.965 42.7034 20.7 41.0167L17.825 37.1834C17.5183 36.7617 16.8092 36.4167 16.2917 36.4167Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13.4167 15.3334H32.5834" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13.4167 24.9166H24.9167" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path
+                            d="M16.2917 36.4167H15.3333C7.66668 36.4167 3.83334 34.5 3.83334 24.9167V15.3334C3.83334 7.66671 7.66668 3.83337 15.3333 3.83337H30.6667C38.3333 3.83337 42.1667 7.66671 42.1667 15.3334V24.9167C42.1667 32.5834 38.3333 36.4167 30.6667 36.4167H29.7083C29.1142 36.4167 28.5392 36.7042 28.175 37.1834L25.3 41.0167C24.035 42.7034 21.965 42.7034 20.7 41.0167L17.825 37.1834C17.5183 36.7617 16.8092 36.4167 16.2917 36.4167Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M13.4167 15.3334H32.5834" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13.4167 24.9166H24.9167" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
                 <h2 class="opcao-chat_titulo">Converse por texto com o SenaChat</h2>
@@ -77,12 +150,19 @@
             <a href="./voz.html" class="opcao-chat opcao-chat--voz">
                 <div class="opcao-chat_icone">
                     <svg width="46" height="46" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M25 32.2916C29.6041 32.2916 33.3333 28.5625 33.3333 23.9583V12.5C33.3333 7.89579 29.6041 4.16663 25 4.16663C20.3958 4.16663 16.6666 7.89579 16.6666 12.5V23.9583C16.6666 28.5625 20.3958 32.2916 25 32.2916Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9.0625 20.1042V23.6459C9.0625 32.4376 16.2083 39.5834 25 39.5834C33.7917 39.5834 40.9375 32.4376 40.9375 23.6459V20.1042" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M22.1041 13.3959C23.9791 12.7084 26.0208 12.7084 27.8958 13.3959" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M23.3334 17.8124C24.4375 17.5207 25.5834 17.5207 26.6875 17.8124" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M25 39.5834V45.8334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>                  
+                        <path
+                            d="M25 32.2916C29.6041 32.2916 33.3333 28.5625 33.3333 23.9583V12.5C33.3333 7.89579 29.6041 4.16663 25 4.16663C20.3958 4.16663 16.6666 7.89579 16.6666 12.5V23.9583C16.6666 28.5625 20.3958 32.2916 25 32.2916Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M9.0625 20.1042V23.6459C9.0625 32.4376 16.2083 39.5834 25 39.5834C33.7917 39.5834 40.9375 32.4376 40.9375 23.6459V20.1042"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M22.1041 13.3959C23.9791 12.7084 26.0208 12.7084 27.8958 13.3959" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M23.3334 17.8124C24.4375 17.5207 25.5834 17.5207 26.6875 17.8124" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M25 39.5834V45.8334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
                 </div>
                 <h2 class="opcao-chat_titulo">Fale com o SenaChat por voz</h2>
             </a>
@@ -94,10 +174,11 @@
             <div class="container-carrossel">
                 <button class="carrossel-seta carrossel-seta--esquerda" aria-label="Voltar">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
                 </button>
-                
+
                 <div class="carrossel-duvidas" id="carrosselDuvidas">
                     <button class="duvida-btn" type="button">
                         <div class="duvida-btn_icone">?</div>
@@ -127,11 +208,12 @@
 
                 <button class="carrossel-seta carrossel-seta--direita" aria-label="Avançar">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
                 </button>
             </div>
-            
+
             <div class="carrossel-indicadores" id="carrosselIndicadores">
                 <span class="indicador ativo"></span>
                 <span class="indicador"></span>
@@ -144,7 +226,8 @@
             <a href="./sobre.html" class="botao-saiba-mais">
                 Saiba mais sobre o projeto do SenaChat
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
                 </svg>
             </a>
         </section>
@@ -156,16 +239,20 @@
                 <div class="marquee_track">
                     <img src="./assets/images/patrocinadores/admsistemas.png" alt="ADM Sistemas" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/ap.controle.png" alt="AP Controle" class="marquee_logo">
-                    <img src="./assets/images/patrocinadores/artsystemsistemas.png" alt="Art System Sistemas" class="marquee_logo">
+                    <img src="./assets/images/patrocinadores/artsystemsistemas.png" alt="Art System Sistemas"
+                        class="marquee_logo">
                     <img src="./assets/images/patrocinadores/cbsistmeas.png" alt="CB Sistemas" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/cloudpark.png" alt="Cloud Park" class="marquee_logo">
-                    <img src="./assets/images/patrocinadores/clubesassociadossoftwarebylimber.png" alt="Clubes Associados Software by Limber" class="marquee_logo">
+                    <img src="./assets/images/patrocinadores/clubesassociadossoftwarebylimber.png"
+                        alt="Clubes Associados Software by Limber" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/datainfo.png" alt="Data Info" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/datarunk.png" alt="Data Runk" class="marquee_logo">
-                    <img src="./assets/images/patrocinadores/dev10pedidos10.png" alt="Dev10 Pedidos 10" class="marquee_logo">
+                    <img src="./assets/images/patrocinadores/dev10pedidos10.png" alt="Dev10 Pedidos 10"
+                        class="marquee_logo">
                     <img src="./assets/images/patrocinadores/dgsys.png" alt="DG Sys" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/eximio.png" alt="Eximio" class="marquee_logo">
-                    <img src="./assets/images/patrocinadores/grupobstsistemas.png" alt="Grupo BST Sistemas" class="marquee_logo">
+                    <img src="./assets/images/patrocinadores/grupobstsistemas.png" alt="Grupo BST Sistemas"
+                        class="marquee_logo">
                     <img src="./assets/images/patrocinadores/klab.png" alt="KLab" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/loqquei.png" alt="Loqquei" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/ndd.png" alt="NDD" class="marquee_logo">
@@ -178,16 +265,20 @@
                     <!-- Duplicado para loop infinito -->
                     <img src="./assets/images/patrocinadores/admsistemas.png" alt="ADM Sistemas" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/ap.controle.png" alt="AP Controle" class="marquee_logo">
-                    <img src="./assets/images/patrocinadores/artsystemsistemas.png" alt="Art System Sistemas" class="marquee_logo">
+                    <img src="./assets/images/patrocinadores/artsystemsistemas.png" alt="Art System Sistemas"
+                        class="marquee_logo">
                     <img src="./assets/images/patrocinadores/cbsistmeas.png" alt="CB Sistemas" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/cloudpark.png" alt="Cloud Park" class="marquee_logo">
-                    <img src="./assets/images/patrocinadores/clubesassociadossoftwarebylimber.png" alt="Clubes Associados Software by Limber" class="marquee_logo">
+                    <img src="./assets/images/patrocinadores/clubesassociadossoftwarebylimber.png"
+                        alt="Clubes Associados Software by Limber" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/datainfo.png" alt="Data Info" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/datarunk.png" alt="Data Runk" class="marquee_logo">
-                    <img src="./assets/images/patrocinadores/dev10pedidos10.png" alt="Dev10 Pedidos 10" class="marquee_logo">
+                    <img src="./assets/images/patrocinadores/dev10pedidos10.png" alt="Dev10 Pedidos 10"
+                        class="marquee_logo">
                     <img src="./assets/images/patrocinadores/dgsys.png" alt="DG Sys" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/eximio.png" alt="Eximio" class="marquee_logo">
-                    <img src="./assets/images/patrocinadores/grupobstsistemas.png" alt="Grupo BST Sistemas" class="marquee_logo">
+                    <img src="./assets/images/patrocinadores/grupobstsistemas.png" alt="Grupo BST Sistemas"
+                        class="marquee_logo">
                     <img src="./assets/images/patrocinadores/klab.png" alt="KLab" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/loqquei.png" alt="Loqquei" class="marquee_logo">
                     <img src="./assets/images/patrocinadores/ndd.png" alt="NDD" class="marquee_logo">
@@ -203,51 +294,67 @@
 
         <!-- Redes Sociais -->
         <footer class="secao-redes-sociais">
-            <a href="https://www.instagram.com/programa_jovemprogramador/#" target="_blank" rel="noopener noreferrer" class="rede-social-link" aria-label="Instagram">
-               <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <a href="https://www.instagram.com/programa_jovemprogramador/#" target="_blank" rel="noopener noreferrer"
+                class="rede-social-link" aria-label="Instagram">
+                <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_22_195)">
-                    <path d="M10.5 1.89082C13.3055 1.89082 13.6377 1.90312 14.741 1.95234C15.7664 1.99746 16.3201 2.16973 16.6893 2.31328C17.1773 2.50195 17.5301 2.73164 17.8951 3.09668C18.2643 3.46582 18.4898 3.81445 18.6785 4.30254C18.8221 4.67168 18.9943 5.22949 19.0395 6.25078C19.0887 7.3582 19.101 7.69043 19.101 10.4918C19.101 13.2973 19.0887 13.6295 19.0395 14.7328C18.9943 15.7582 18.8221 16.3119 18.6785 16.6811C18.4898 17.1691 18.2602 17.5219 17.8951 17.8869C17.526 18.2561 17.1773 18.4816 16.6893 18.6703C16.3201 18.8139 15.7623 18.9861 14.741 19.0312C13.6336 19.0805 13.3014 19.0928 10.5 19.0928C7.69453 19.0928 7.36231 19.0805 6.25899 19.0312C5.23359 18.9861 4.67988 18.8139 4.31074 18.6703C3.82266 18.4816 3.46992 18.252 3.10488 17.8869C2.73574 17.5178 2.51016 17.1691 2.32148 16.6811C2.17793 16.3119 2.00566 15.7541 1.96055 14.7328C1.91133 13.6254 1.89902 13.2932 1.89902 10.4918C1.89902 7.68633 1.91133 7.3541 1.96055 6.25078C2.00566 5.22539 2.17793 4.67168 2.32148 4.30254C2.51016 3.81445 2.73984 3.46172 3.10488 3.09668C3.47402 2.72754 3.82266 2.50195 4.31074 2.31328C4.67988 2.16973 5.2377 1.99746 6.25899 1.95234C7.36231 1.90312 7.69453 1.89082 10.5 1.89082ZM10.5 0C7.64942 0 7.29258 0.0123047 6.17285 0.0615234C5.05723 0.110742 4.29024 0.291211 3.62578 0.549609C2.93262 0.820312 2.34609 1.17715 1.76367 1.76367C1.17715 2.34609 0.820313 2.93262 0.549609 3.62168C0.291211 4.29023 0.110742 5.05312 0.0615234 6.16875C0.0123047 7.29258 0 7.64941 0 10.5C0 13.3506 0.0123047 13.7074 0.0615234 14.8271C0.110742 15.9428 0.291211 16.7098 0.549609 17.3742C0.820313 18.0674 1.17715 18.6539 1.76367 19.2363C2.34609 19.8188 2.93262 20.1797 3.62168 20.4463C4.29024 20.7047 5.05313 20.8852 6.16875 20.9344C7.28848 20.9836 7.64531 20.9959 10.4959 20.9959C13.3465 20.9959 13.7033 20.9836 14.823 20.9344C15.9387 20.8852 16.7057 20.7047 17.3701 20.4463C18.0592 20.1797 18.6457 19.8188 19.2281 19.2363C19.8105 18.6539 20.1715 18.0674 20.4381 17.3783C20.6965 16.7098 20.877 15.9469 20.9262 14.8313C20.9754 13.7115 20.9877 13.3547 20.9877 10.5041C20.9877 7.65352 20.9754 7.29668 20.9262 6.17695C20.877 5.06133 20.6965 4.29434 20.4381 3.62988C20.1797 2.93262 19.8229 2.34609 19.2363 1.76367C18.6539 1.18125 18.0674 0.820312 17.3783 0.553711C16.7098 0.295312 15.9469 0.114844 14.8313 0.065625C13.7074 0.0123047 13.3506 0 10.5 0Z" fill="currentColor"/>
-                    <path d="M10.5 5.10645C7.52227 5.10645 5.10645 7.52227 5.10645 10.5C5.10645 13.4777 7.52227 15.8936 10.5 15.8936C13.4777 15.8936 15.8936 13.4777 15.8936 10.5C15.8936 7.52227 13.4777 5.10645 10.5 5.10645ZM10.5 13.9986C8.56816 13.9986 7.00137 12.4318 7.00137 10.5C7.00137 8.56816 8.56816 7.00137 10.5 7.00137C12.4318 7.00137 13.9986 8.56816 13.9986 10.5C13.9986 12.4318 12.4318 13.9986 10.5 13.9986Z" fill="currentColor"/>
-                    <path d="M17.366 4.89321C17.366 5.59048 16.8 6.1524 16.1068 6.1524C15.4096 6.1524 14.8477 5.58638 14.8477 4.89321C14.8477 4.19595 15.4137 3.63403 16.1068 3.63403C16.8 3.63403 17.366 4.20005 17.366 4.89321Z" fill="currentColor"/>
+                        <path
+                            d="M10.5 1.89082C13.3055 1.89082 13.6377 1.90312 14.741 1.95234C15.7664 1.99746 16.3201 2.16973 16.6893 2.31328C17.1773 2.50195 17.5301 2.73164 17.8951 3.09668C18.2643 3.46582 18.4898 3.81445 18.6785 4.30254C18.8221 4.67168 18.9943 5.22949 19.0395 6.25078C19.0887 7.3582 19.101 7.69043 19.101 10.4918C19.101 13.2973 19.0887 13.6295 19.0395 14.7328C18.9943 15.7582 18.8221 16.3119 18.6785 16.6811C18.4898 17.1691 18.2602 17.5219 17.8951 17.8869C17.526 18.2561 17.1773 18.4816 16.6893 18.6703C16.3201 18.8139 15.7623 18.9861 14.741 19.0312C13.6336 19.0805 13.3014 19.0928 10.5 19.0928C7.69453 19.0928 7.36231 19.0805 6.25899 19.0312C5.23359 18.9861 4.67988 18.8139 4.31074 18.6703C3.82266 18.4816 3.46992 18.252 3.10488 17.8869C2.73574 17.5178 2.51016 17.1691 2.32148 16.6811C2.17793 16.3119 2.00566 15.7541 1.96055 14.7328C1.91133 13.6254 1.89902 13.2932 1.89902 10.4918C1.89902 7.68633 1.91133 7.3541 1.96055 6.25078C2.00566 5.22539 2.17793 4.67168 2.32148 4.30254C2.51016 3.81445 2.73984 3.46172 3.10488 3.09668C3.47402 2.72754 3.82266 2.50195 4.31074 2.31328C4.67988 2.16973 5.2377 1.99746 6.25899 1.95234C7.36231 1.90312 7.69453 1.89082 10.5 1.89082ZM10.5 0C7.64942 0 7.29258 0.0123047 6.17285 0.0615234C5.05723 0.110742 4.29024 0.291211 3.62578 0.549609C2.93262 0.820312 2.34609 1.17715 1.76367 1.76367C1.17715 2.34609 0.820313 2.93262 0.549609 3.62168C0.291211 4.29023 0.110742 5.05312 0.0615234 6.16875C0.0123047 7.29258 0 7.64941 0 10.5C0 13.3506 0.0123047 13.7074 0.0615234 14.8271C0.110742 15.9428 0.291211 16.7098 0.549609 17.3742C0.820313 18.0674 1.17715 18.6539 1.76367 19.2363C2.34609 19.8188 2.93262 20.1797 3.62168 20.4463C4.29024 20.7047 5.05313 20.8852 6.16875 20.9344C7.28848 20.9836 7.64531 20.9959 10.4959 20.9959C13.3465 20.9959 13.7033 20.9836 14.823 20.9344C15.9387 20.8852 16.7057 20.7047 17.3701 20.4463C18.0592 20.1797 18.6457 19.8188 19.2281 19.2363C19.8105 18.6539 20.1715 18.0674 20.4381 17.3783C20.6965 16.7098 20.877 15.9469 20.9262 14.8313C20.9754 13.7115 20.9877 13.3547 20.9877 10.5041C20.9877 7.65352 20.9754 7.29668 20.9262 6.17695C20.877 5.06133 20.6965 4.29434 20.4381 3.62988C20.1797 2.93262 19.8229 2.34609 19.2363 1.76367C18.6539 1.18125 18.0674 0.820312 17.3783 0.553711C16.7098 0.295312 15.9469 0.114844 14.8313 0.065625C13.7074 0.0123047 13.3506 0 10.5 0Z"
+                            fill="currentColor" />
+                        <path
+                            d="M10.5 5.10645C7.52227 5.10645 5.10645 7.52227 5.10645 10.5C5.10645 13.4777 7.52227 15.8936 10.5 15.8936C13.4777 15.8936 15.8936 13.4777 15.8936 10.5C15.8936 7.52227 13.4777 5.10645 10.5 5.10645ZM10.5 13.9986C8.56816 13.9986 7.00137 12.4318 7.00137 10.5C7.00137 8.56816 8.56816 7.00137 10.5 7.00137C12.4318 7.00137 13.9986 8.56816 13.9986 10.5C13.9986 12.4318 12.4318 13.9986 10.5 13.9986Z"
+                            fill="currentColor" />
+                        <path
+                            d="M17.366 4.89321C17.366 5.59048 16.8 6.1524 16.1068 6.1524C15.4096 6.1524 14.8477 5.58638 14.8477 4.89321C14.8477 4.19595 15.4137 3.63403 16.1068 3.63403C16.8 3.63403 17.366 4.20005 17.366 4.89321Z"
+                            fill="currentColor" />
                     </g>
                     <defs>
-                    <clipPath id="clip0_22_195">
-                    <rect width="21" height="21" fill="currentColor"/>
-                    </clipPath>
+                        <clipPath id="clip0_22_195">
+                            <rect width="21" height="21" fill="currentColor" />
+                        </clipPath>
                     </defs>
                 </svg>
 
             </a>
-            <a href="https://www.facebook.com/programajovemprogramador" target="_blank" rel="noopener noreferrer" class="rede-social-link" aria-label="Facebook">
+            <a href="https://www.facebook.com/programajovemprogramador" target="_blank" rel="noopener noreferrer"
+                class="rede-social-link" aria-label="Facebook">
                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_22_194)">
-                    <path d="M10.5 0C4.70106 0 0 4.70106 0 10.5C0 15.4241 3.39024 19.556 7.96362 20.6909V13.7088H5.79852V10.5H7.96362V9.11736C7.96362 5.54358 9.58104 3.8871 13.0897 3.8871C13.755 3.8871 14.9029 4.01772 15.3724 4.14792V7.05642C15.1246 7.03038 14.6941 7.01736 14.1595 7.01736C12.4379 7.01736 11.7726 7.66962 11.7726 9.36516V10.5H15.2023L14.6131 13.7088H11.7726V20.9231C16.9718 20.2952 21.0004 15.8684 21.0004 10.5C21 4.70106 16.2989 0 10.5 0Z" fill="currentColor"/>
+                        <path
+                            d="M10.5 0C4.70106 0 0 4.70106 0 10.5C0 15.4241 3.39024 19.556 7.96362 20.6909V13.7088H5.79852V10.5H7.96362V9.11736C7.96362 5.54358 9.58104 3.8871 13.0897 3.8871C13.755 3.8871 14.9029 4.01772 15.3724 4.14792V7.05642C15.1246 7.03038 14.6941 7.01736 14.1595 7.01736C12.4379 7.01736 11.7726 7.66962 11.7726 9.36516V10.5H15.2023L14.6131 13.7088H11.7726V20.9231C16.9718 20.2952 21.0004 15.8684 21.0004 10.5C21 4.70106 16.2989 0 10.5 0Z"
+                            fill="currentColor" />
                     </g>
                     <defs>
-                    <clipPath id="clip0_22_194">
-                    <rect width="21" height="21" fill="currentColor"/>
-                    </clipPath>
+                        <clipPath id="clip0_22_194">
+                            <rect width="21" height="21" fill="currentColor" />
+                        </clipPath>
                     </defs>
                 </svg>
 
             </a>
-            <a href="https://www.tiktok.com/@jovemprogramador_sc" target="_blank" rel="noopener noreferrer" class="rede-social-link" aria-label="TikTok">
+            <a href="https://www.tiktok.com/@jovemprogramador_sc" target="_blank" rel="noopener noreferrer"
+                class="rede-social-link" aria-label="TikTok">
                 <svg width="21" height="21" viewBox="0 0 21 21" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14.9385 0H11.3993V14.3043C11.3993 16.0087 10.0382 17.4087 8.34423 17.4087C6.65029 17.4087 5.2891 16.0087 5.2891 14.3043C5.2891 12.6304 6.62005 11.2608 8.2535 11.2V7.60871C4.65388 7.66955 1.75 10.6217 1.75 14.3043C1.75 18.0174 4.71437 21 8.37449 21C12.0346 21 14.9989 17.987 14.9989 14.3043V6.96955C16.3299 7.94348 17.9633 8.52174 19.6875 8.55219V4.96087C17.0256 4.86957 14.9385 2.67826 14.9385 0Z" fill="currentColor"/>
+                    <path
+                        d="M14.9385 0H11.3993V14.3043C11.3993 16.0087 10.0382 17.4087 8.34423 17.4087C6.65029 17.4087 5.2891 16.0087 5.2891 14.3043C5.2891 12.6304 6.62005 11.2608 8.2535 11.2V7.60871C4.65388 7.66955 1.75 10.6217 1.75 14.3043C1.75 18.0174 4.71437 21 8.37449 21C12.0346 21 14.9989 17.987 14.9989 14.3043V6.96955C16.3299 7.94348 17.9633 8.52174 19.6875 8.55219V4.96087C17.0256 4.86957 14.9385 2.67826 14.9385 0Z"
+                        fill="currentColor" />
                 </svg>
 
             </a>
-            <a href="https://www.linkedin.com/company/programajovemprogramador" target="_blank" rel="noopener noreferrer" class="rede-social-link" aria-label="LinkedIn">
-               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_22_196)">
-                <path d="M20.3715 0H1.62422C0.726172 0 0 0.708984 0 1.58555V20.4102C0 21.2867 0.726172 22 1.62422 22H20.3715C21.2695 22 22 21.2867 22 20.4145V1.58555C22 0.708984 21.2695 0 20.3715 0ZM6.52695 18.7473H3.26133V8.2457H6.52695V18.7473ZM4.89414 6.81484C3.8457 6.81484 2.99922 5.96836 2.99922 4.92422C2.99922 3.88008 3.8457 3.03359 4.89414 3.03359C5.93828 3.03359 6.78477 3.88008 6.78477 4.92422C6.78477 5.96406 5.93828 6.81484 4.89414 6.81484ZM18.7473 18.7473H15.4859V13.6426C15.4859 12.4266 15.4645 10.8582 13.7887 10.8582C12.0914 10.8582 11.8336 12.1859 11.8336 13.5566V18.7473H8.57656V8.2457H11.7047V9.68086H11.7477C12.1816 8.85586 13.2473 7.98359 14.8328 7.98359C18.1371 7.98359 18.7473 10.1578 18.7473 12.9852V18.7473Z" fill="currentColor"/>
-                </g>
-                <defs>
-                <clipPath id="clip0_22_196">
-                <rect width="22" height="22" fill="currentColor"/>
-                </clipPath>
-                </defs>
-            </svg>
+            <a href="https://www.linkedin.com/company/programajovemprogramador" target="_blank"
+                rel="noopener noreferrer" class="rede-social-link" aria-label="LinkedIn">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_22_196)">
+                        <path
+                            d="M20.3715 0H1.62422C0.726172 0 0 0.708984 0 1.58555V20.4102C0 21.2867 0.726172 22 1.62422 22H20.3715C21.2695 22 22 21.2867 22 20.4145V1.58555C22 0.708984 21.2695 0 20.3715 0ZM6.52695 18.7473H3.26133V8.2457H6.52695V18.7473ZM4.89414 6.81484C3.8457 6.81484 2.99922 5.96836 2.99922 4.92422C2.99922 3.88008 3.8457 3.03359 4.89414 3.03359C5.93828 3.03359 6.78477 3.88008 6.78477 4.92422C6.78477 5.96406 5.93828 6.81484 4.89414 6.81484ZM18.7473 18.7473H15.4859V13.6426C15.4859 12.4266 15.4645 10.8582 13.7887 10.8582C12.0914 10.8582 11.8336 12.1859 11.8336 13.5566V18.7473H8.57656V8.2457H11.7047V9.68086H11.7477C12.1816 8.85586 13.2473 7.98359 14.8328 7.98359C18.1371 7.98359 18.7473 10.1578 18.7473 12.9852V18.7473Z"
+                            fill="currentColor" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_22_196">
+                            <rect width="22" height="22" fill="currentColor" />
+                        </clipPath>
+                    </defs>
+                </svg>
             </a>
         </footer>
 
@@ -256,4 +363,5 @@
     <script src="./assets/js/acessibilidade-global.js"></script>
     <script src="./assets/js/pagina-inicial.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,547 @@
+/* ========================================
+   Animações do Robô Mascote - SenaChat
+   ======================================== */
+
+.SenaChat_mascote {
+    /* Centralização */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Dimensões */
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    
+    /* Efeitos visuais */
+    position: relative;
+    z-index: 1;
+}
+
+.SenaChat_mascote img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    
+    /* Animação principal - Flutuação */
+    animation: 
+        float 3s ease-in-out infinite,
+        glow-pulse 2s ease-in-out infinite alternate;
+    
+    /* Filtro para brilho sutil */
+    filter: drop-shadow(0 10px 30px rgba(123, 31, 162, 0.3));
+    
+    /* Transições suaves para hover */
+    transition: 
+        filter 0.5s ease,
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hover - Robô reage ao mouse */
+.SenaChat_mascote img:hover {
+    /* Mantém todas as animações + adiciona bounce */
+    animation: 
+        float 3s ease-in-out infinite,
+        glow-pulse 2s ease-in-out infinite alternate,
+        bounce 0.6s ease-in-out;
+    
+    filter: drop-shadow(0 15px 40px rgba(123, 31, 162, 0.5));
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* ========================================
+   ANIMAÇÃO 1: Flutuação Suave
+   ======================================== */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-15px) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-25px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+/* ========================================
+   ANIMAÇÃO 2: Pulso de Brilho
+   ======================================== */
+@keyframes glow-pulse {
+    0% {
+        filter: drop-shadow(0 10px 30px rgba(123, 31, 162, 0.3));
+    }
+    100% {
+        filter: drop-shadow(0 10px 40px rgba(168, 85, 247, 0.6));
+    }
+}
+
+/* ========================================
+   ANIMAÇÃO 3: Pulo ao Hover
+   ======================================== */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    25% {
+        transform: translateY(-30px) scale(1.05);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.02);
+    }
+    75% {
+        transform: translateY(-20px) scale(1.04);
+    }
+}
+
+/* ========================================
+   Partículas de Energia (Background)
+   ======================================== */
+.SenaChat_mascote::before {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(168, 85, 247, 0.1) 0%,
+        rgba(123, 31, 162, 0.05) 30%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    animation: energy-pulse 4s ease-in-out infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes energy-pulse {
+    0%, 100% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* ========================================
+   Círculos Orbitais Decorativos
+   ======================================== */
+.SenaChat_mascote::after {
+    content: '';
+    position: absolute;
+    width: 140%;
+    height: 140%;
+    border-radius: 50%;
+    animation: orbit-rotate 20s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes orbit-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================================
+   Responsividade
+   ======================================== */
+@media (max-width: 768px) {
+    .SenaChat_mascote {
+        max-width: 450px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+    }
+    
+    .SenaChat_mascote img {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .SenaChat_mascote {
+        max-width: 380px;
+        margin: 1.5rem auto;
+        padding: 1rem;
+    }
+    
+    .SenaChat_mascote img {
+        max-width: 350px;
+    }
+    
+    /* Reduz animações em mobile para performance */
+    .SenaChat_mascote::before,
+    .SenaChat_mascote::after {
+        display: none;
+    }
+}
+
+@keyframes wave-hand {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    10%, 30% {
+        transform: rotate(-15deg);
+    }
+    20%, 40% {
+        transform: rotate(-25deg);
+    }
+    50%, 90% {
+        transform: rotate(0deg);
+    }
+}
+
+/* ========================================
+   Acessibilidade - Reduz movimento
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .SenaChat_mascote img {
+        animation: none;
+    }
+    
+    .SenaChat_mascote::before,
+    .SenaChat_mascote::after {
+        animation: none;
+    }
+    
+    .SenaChat_mascote img:hover {
+        animation: none;
+        transform: scale(1.02);
+    }
+}
+
+/* ========================================
+   Modo Escuro - Ajustes de Brilho
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+    .SenaChat_mascote img {
+        filter: drop-shadow(0 10px 40px rgba(168, 85, 247, 0.4));
+    }
+    
+    .SenaChat_mascote img:hover {
+        filter: drop-shadow(0 15px 50px rgba(168, 85, 247, 0.7));
+    }
+}
+/* ========================================
+   Animações do Robô Mascote - SenaChat
+   ======================================== */
+
+.SenaChat_mascote {
+    /* Centralização */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Dimensões */
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    
+    /* Efeitos visuais */
+    position: relative;
+    z-index: 1;
+}
+
+.SenaChat_mascote svg {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    
+    /* Animação principal - Flutuação */
+    animation: 
+        float 3s ease-in-out infinite,
+        glow-pulse 2s ease-in-out infinite alternate;
+    
+    /* Filtro para brilho sutil */
+    filter: drop-shadow(0 10px 30px rgba(123, 31, 162, 0.3));
+    transition: all 0.3s ease;
+}
+
+/* Hover - Robô reage ao mouse */
+.SenaChat_mascote svg:hover {
+    /* Mantém todas as animações + adiciona bounce */
+    animation: 
+        float 3s ease-in-out infinite,
+        glow-pulse 2s ease-in-out infinite alternate,
+        bounce 0.6s ease-in-out;
+    
+    filter: drop-shadow(0 15px 40px rgba(123, 31, 162, 0.5));
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* ========================================
+   ANIMAÇÃO 1: Flutuação Suave
+   ======================================== */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-15px) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-25px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+/* ========================================
+   ANIMAÇÃO 2: Pulso de Brilho
+   ======================================== */
+@keyframes glow-pulse {
+    0% {
+        filter: drop-shadow(0 10px 30px rgba(123, 31, 162, 0.3));
+    }
+    100% {
+        filter: drop-shadow(0 10px 40px rgba(168, 85, 247, 0.6));
+    }
+}
+
+/* ========================================
+   ANIMAÇÃO 3: Pulo ao Hover
+   ======================================== */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    25% {
+        transform: translateY(-30px) scale(1.05);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.02);
+    }
+    75% {
+        transform: translateY(-20px) scale(1.04);
+    }
+}
+
+/* ========================================
+   Partículas de Energia (Background)
+   ======================================== */
+.SenaChat_mascote::before {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(168, 85, 247, 0.1) 0%,
+        rgba(123, 31, 162, 0.05) 30%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    animation: energy-pulse 4s ease-in-out infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes energy-pulse {
+    0%, 100% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* ========================================
+   Círculos Orbitais Decorativos
+   ======================================== */
+.SenaChat_mascote::after {
+    content: '';
+    position: absolute;
+    width: 140%;
+    height: 140%;
+    border-radius: 50%;
+    animation: orbit-rotate 20s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes orbit-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================================
+   Responsividade
+   ======================================== */
+@media (max-width: 768px) {
+    .SenaChat_mascote {
+        max-width: 450px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+    }
+    
+    .SenaChat_mascote svg {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .SenaChat_mascote {
+        max-width: 380px;
+        margin: 1.5rem auto;
+        padding: 1rem;
+    }
+    
+    .SenaChat_mascote svg {
+        max-width: 350px;
+    }
+    
+    /* Reduz animações em mobile para performance */
+    .SenaChat_mascote::before,
+    .SenaChat_mascote::after {
+        display: none;
+    }
+}
+
+@keyframes wave-hand {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    10%, 30% {
+        transform: rotate(-15deg);
+    }
+    20%, 40% {
+        transform: rotate(-25deg);
+    }
+    50%, 90% {
+        transform: rotate(0deg);
+    }
+}
+
+/* ========================================
+   Acessibilidade - Reduz movimento
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .SenaChat_mascote svg {
+        animation: none;
+    }
+    
+    .SenaChat_mascote svg #mao-direita,
+    .SenaChat_mascote svg #mao-direita-contorno {
+        animation: none;
+    }
+    
+    .SenaChat_mascote::before,
+    .SenaChat_mascote::after {
+        animation: none;
+    }
+    
+    .SenaChat_mascote svg:hover {
+        animation: none;
+        transform: scale(1.02);
+    }
+}
+
+/* ========================================
+   Modo Escuro - Ajustes de Brilho
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+    .SenaChat_mascote svg {
+        filter: drop-shadow(0 10px 40px rgba(168, 85, 247, 0.4));
+    }
+    
+    .SenaChat_mascote svg:hover {
+        filter: drop-shadow(0 15px 50px rgba(168, 85, 247, 0.7));
+    }
+}
+
+/* ========================================
+/* ========================================
+   ROBÔ ÍCONE - Versão Compacta Header
+   ======================================== */
+.SenaChat_mascote--icone {
+    /* Centralização horizontal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    
+    /* Remove efeitos de background */
+    position: relative;
+    z-index: 1;
+}
+
+/* Remove os pseudo-elementos ::before e ::after do ícone */
+.SenaChat_mascote--icone::before,
+.SenaChat_mascote--icone::after {
+    display: none;
+}
+
+.SenaChat_mascote--icone img {
+    /* Tamanho fixo para mobile e desktop */
+    width: 250px;
+    height: 250px;
+    max-width: 250px;
+    
+    /* Centraliza a imagem + margin negativo para compensar padding do SVG */
+    display: block;
+    margin: -5rem auto -3.5rem auto;
+    
+    /* Animações sutis */
+    animation: 
+        float-subtle 3s ease-in-out infinite,
+        glow-pulse-subtle 2s ease-in-out infinite alternate;
+    
+    /* Brilho bem suave */
+    filter: drop-shadow(0 2px 8px rgba(123, 31, 162, 0.3));
+    
+    /* Transições suaves */
+    transition: 
+        filter 0.4s ease,
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.SenaChat_mascote--icone img:hover {
+    /* Hover discreto */
+    animation: 
+        float-subtle 3s ease-in-out infinite,
+        glow-pulse-subtle 2s ease-in-out infinite alternate;
+    
+    filter: drop-shadow(0 3px 12px rgba(123, 31, 162, 0.5));
+    transform: scale(1.15) rotate(5deg);
+    cursor: pointer;
+}
+
+/* Animações sutis para o ícone */
+@keyframes float-subtle {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes glow-pulse-subtle {
+    0% {
+        filter: drop-shadow(0 2px 8px rgba(123, 31, 162, 0.3));
+    }
+    100% {
+        filter: drop-shadow(0 3px 12px rgba(168, 85, 247, 0.5));
+    }
+}
+
+/* Responsivo - MAIOR em telas maiores para ficar bem visível */

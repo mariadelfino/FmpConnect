@@ -194,6 +194,288 @@
 }
 
 /* ========================================
+   SEÇÃO: ACESSIBILIDADE E INCLUSÃO
+   ======================================== */
+.secao-acessibilidade {
+    padding: var(--spacing-3xl) 0;
+    background: color-mix(in srgb, var(--color-sobre-secao-bg) 50%, transparent);
+}
+
+.secao-acessibilidade_cabecalho {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.secao-acessibilidade_icone-titulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.icone-accessibility {
+    color: var(--color-accent-pink);
+    flex-shrink: 0;
+}
+
+.secao-acessibilidade_titulo {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-sobre-texto-principal);
+    line-height: 1.2;
+}
+
+.secao-acessibilidade_descricao {
+    font-size: var(--font-size-lg);
+    color: var(--color-sobre-texto-secundario);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Grid de Testemunhos */
+.grid-testemunhos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    max-width: 1200px;
+    margin: 0 auto var(--spacing-3xl);
+}
+
+/* Card de Testemunho - Formato Orgânico com Balão de Fala */
+.card-testemunho {
+    position: relative;
+    background: #FFFFFF; /* Fundo branco sólido */
+    border: 3px solid var(--color-accent-pink); /* Borda roxa/magenta */
+    border-radius: 30px; /* Bordas arredondadas orgânicas */
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    padding-top: 60px; /* Espaço extra para o avatar */
+    padding-left: 120px; /* Espaço para o avatar posicionado à esquerda */
+    min-height: 280px;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-testemunho:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(254, 41, 187, 0.2);
+    border-color: var(--color-accent-purple);
+}
+
+/* Avatar - Posicionado fora do card, no canto superior esquerdo da borda */
+.card-testemunho_avatar {
+    position: absolute;
+    left: 20px;
+    top: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #FFFFFF; /* Fundo branco */
+    border: 4px solid var(--color-accent-pink); /* Borda roxa/magenta */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-testemunho_avatar svg {
+    width: 48px;
+    height: 48px;
+    color: var(--color-accent-pink); /* Ícone na cor roxa/magenta */
+}
+
+/* Aspas Decorativas Superior Esquerda */
+.card-testemunho_aspas-superior {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 50px;
+    height: 50px;
+    background: var(--color-accent-pink); /* Fundo roxo/magenta */
+    border-radius: 50% 50% 50% 0; /* Bolha orgânica */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(254, 41, 187, 0.3);
+}
+
+.card-testemunho_aspas-superior svg {
+    width: 24px;
+    height: 24px;
+    color: #FFFFFF; /* Aspas brancas */
+}
+
+/* Aspas Decorativas Inferior Direita */
+.card-testemunho_aspas-inferior {
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    width: 50px;
+    height: 50px;
+    background: var(--color-accent-pink); /* Fundo roxo/magenta */
+    border-radius: 50% 50% 0 50%; /* Bolha orgânica invertida */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(254, 41, 187, 0.3);
+}
+
+.card-testemunho_aspas-inferior svg {
+    width: 24px;
+    height: 24px;
+    color: #FFFFFF; /* Aspas brancas */
+}
+
+/* Conteúdo Interno do Card */
+.card-testemunho_conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+/* Nome do Testador */
+.card-testemunho_nome {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1A0145; /* Preto/cinza escuro */
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.2;
+}
+
+/* Ocupação */
+.card-testemunho_ocupacao {
+    font-size: 1rem;
+    color: #4A4A4A; /* Cinza médio */
+    font-weight: 400;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Barra Decorativa Horizontal */
+.card-testemunho_barra-decorativa {
+    width: 60px;
+    height: 3px;
+    background: var(--color-accent-pink); /* Roxo/magenta */
+    margin: var(--spacing-sm) 0;
+    border-radius: 2px;
+}
+
+/* Informação da Deficiência (substitui as estrelas) */
+.card-testemunho_deficiencia {
+    font-size: 0.95rem;
+    color: var(--color-accent-purple); /* Roxo destacado */
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    display: inline-block;
+}
+
+/* Citação/Depoimento */
+.card-testemunho_citacao {
+    font-size: 0.95rem;
+    color: #2D2D2D; /* Preto/cinza escuro */
+    line-height: 1.7;
+    font-style: normal;
+    margin: 0;
+    text-align: left;
+}
+
+/* Ajustes para Modo Escuro */
+[data-theme="dark"] .card-testemunho {
+    background: rgba(255, 255, 255, 0.05); /* Fundo levemente translúcido para modo escuro */
+    border-color: var(--color-accent-purple);
+}
+
+[data-theme="dark"] .card-testemunho_avatar {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-accent-purple);
+}
+
+[data-theme="dark"] .card-testemunho_avatar svg {
+    color: var(--color-accent-purple);
+}
+
+[data-theme="dark"] .card-testemunho_nome {
+    color: #FFFFFF;
+}
+
+[data-theme="dark"] .card-testemunho_ocupacao {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .card-testemunho_citacao {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="dark"] .card-testemunho_aspas-superior,
+[data-theme="dark"] .card-testemunho_aspas-inferior {
+    background: var(--color-accent-purple);
+}
+
+/* Recursos Implementados */
+.recursos-implementados {
+    background: var(--color-sobre-card-bg);
+    border: 2px solid var(--color-sobre-card-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.recursos-implementados_titulo {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-sobre-texto-principal);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.recursos-implementados_lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.recurso-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-sobre-card-bg);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.recurso-item:hover {
+    background: var(--color-sobre-card-bg-hover);
+    transform: translateX(4px);
+}
+
+.recurso-item_icone {
+    width: 24px;
+    height: 24px;
+    color: var(--color-accent-purple);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.recurso-item_texto {
+    font-size: var(--font-size-base);
+    color: var(--color-sobre-texto-secundario);
+    line-height: 1.6;
+}
+
+.recurso-item_texto strong {
+    color: var(--color-sobre-texto-principal);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* ========================================
    SEÇÃO: A EQUIPE
    ======================================== */
 .secao-equipe {
@@ -342,18 +624,92 @@
 }
 
 /* ========================================
+   RESPONSIVIDADE - MOBILE
+   ======================================== */
+@media (max-width: 767px) {
+    .card-testemunho {
+        padding: var(--spacing-xl) var(--spacing-md);
+        padding-top: 50px;
+        padding-left: 90px;
+        min-height: 260px;
+    }
+
+    .card-testemunho_avatar {
+        width: 70px;
+        height: 70px;
+        left: 15px;
+        top: 25px;
+    }
+
+    .card-testemunho_avatar svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card-testemunho_aspas-superior,
+    .card-testemunho_aspas-inferior {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card-testemunho_aspas-superior svg,
+    .card-testemunho_aspas-inferior svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .card-testemunho_nome {
+        font-size: 1.25rem;
+    }
+
+    .card-testemunho_ocupacao {
+        font-size: 0.9rem;
+    }
+
+    .card-testemunho_deficiencia {
+        font-size: 0.875rem;
+    }
+
+    .card-testemunho_citacao {
+        font-size: 0.875rem;
+    }
+}
+
+/* ========================================
    RESPONSIVIDADE - TABLET
    ======================================== */
 @media (min-width: 768px) {
     .secao-projeto_icone-titulo,
-    .secao-equipe_icone-titulo {
-        flex-direction: row;
+    .secao-equipe_icone-titulo,
+    .secao-acessibilidade_icone-titulo {
         justify-content: center;
     }
 
     .secao-projeto_titulo,
-    .secao-equipe_titulo {
+    .secao-equipe_titulo,
+    .secao-acessibilidade_titulo {
         font-size: var(--font-size-4xl);
+    }
+
+    .grid-testemunhos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-testemunho {
+        padding-left: 120px;
+        min-height: 300px;
+    }
+
+    .card-testemunho_avatar {
+        width: 90px;
+        height: 90px;
+        left: 25px;
+        top: 35px;
+    }
+
+    .card-testemunho_avatar svg {
+        width: 52px;
+        height: 52px;
     }
 
     .fluxo-tecnico_etapas {
@@ -392,13 +748,19 @@
    ======================================== */
 @media (min-width: 1024px) {
     .secao-projeto_titulo,
-    .secao-equipe_titulo {
+    .secao-equipe_titulo,
+    .secao-acessibilidade_titulo {
         font-size: var(--font-size-5xl);
     }
 
     .secao-projeto_texto,
-    .secao-equipe_descricao {
+    .secao-equipe_descricao,
+    .secao-acessibilidade_descricao {
         font-size: var(--font-size-xl);
+    }
+
+    .grid-testemunhos {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .card-destaque_titulo {
@@ -462,4 +824,19 @@
     .etapa-tecnica:hover {
         transform: none;
     }
+}
+
+/* Rodapé Jovem Programador */
+.rodape-jovem-programador {
+    width: 100%;
+    background: #1A0145;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 0 16px 0;
+}
+.logo-jovem-programador {
+    max-width: 140px;
+    height: auto;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.08));
 }
