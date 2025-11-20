@@ -6,26 +6,21 @@
     <meta name="description" content="SenaChat - Converse por texto com seu assistente virtual">
     <meta name="theme-color" content="#3B018A">
     <title>SenaChat - Conversa por Texto</title>
-    
-    <!-- Script Crítico de Acessibilidade - DEVE vir ANTES de tudo para evitar flash -->
     <script>
         (function() {
             try {
                 const saved = localStorage.getItem('senachat-acessibilidade');
                 if (saved) {
                     const estado = JSON.parse(saved);
-                    
-                    // Aplica tema IMEDIATAMENTE
+
                     if (estado.tema === 'claro') {
                         document.documentElement.setAttribute('data-theme', 'light');
                     }
                     
-                    // Aplica escala de fonte
                     if (estado.scaleFactor && estado.scaleFactor !== 1) {
                         document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
                     }
                     
-                    // Prepara classes de filtro no MAIN (não no body para evitar quebrar position:fixed)
                     document.addEventListener('DOMContentLoaded', function() {
                         const mains = document.querySelectorAll('main');
                         
@@ -45,7 +40,6 @@
                     });
                 }
             } catch (e) {
-                // Silently fail - não quebrar a página
             }
         })();
     </script>
@@ -62,7 +56,6 @@
     <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
 </head>
 <body>
-    <!-- Página de Conversa por Texto -->
     <main class="pagina-chat">
         <header class="cabecalho">
             <a href="paginainicial.html" aria-label="Voltar para página inicial">
@@ -75,7 +68,7 @@
                 </button>
             </a>
 
-            <h1 class="logo-senachat">SenaChat aaaaaa</h1>
+            <h1 class="logo-senachat">SenaChat</h1>
 
             <button 
                 class="botao-acessibilidade" 
@@ -90,7 +83,7 @@
                     <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
                     <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
                     <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
-                    <path d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
+                    <path d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 458.427 476.473 477.5 500 477.5Z" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
                     <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
                     <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
                     <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624" stroke="currentColor" stroke-width="8" stroke-miterlimit="10"/>
@@ -99,47 +92,43 @@
             </button>
         </header>
         <section class="area-mensagens" id="chat-container">
-            <!-- Mensagem do Usuário -->
-            <div class="mensagem-balao usuario">
-                <p>Como funciona o programa?</p>
-            </div>
-                <p>Lorem ipsum dolor sit amet. Qui error tenetur eum nostrum quis ut voluptatem cupiditate sit nisi voluptatem! Rem aperiam dicta et maxime nesciunt sed voluptas.</p>
-            </div>
-            
-
         </section>
-        <footer class="area-input-pergunta">
-            <div class="container-input">
-                <input type="text" id="pergunta-input" placeholder="Faça a sua pergunta">
-                
-                <!-- Botão de Waveform (Parar/Enviar) -->
-                <button class="botao-icone botao-waveform" id="botao-parar" title="Parar gravação">
-                    <div class="waveform-icon">
-                        <span class="bar" style="height: 6px;"></span>
-                        <span class="bar" style="height: 14px;"></span>
-                        <span class="bar" style="height: 10px;"></span>
-                        <span class="bar" style="height: 16px;"></span>
-                        <span class="bar" style="height: 8px;"></span>
-                    </div>
-                <button class="botao-icone" id="botao-microfone" title="Iniciar gravação" type="button">
-                     <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14.5 18.7291C17.1704 18.7291 19.3333 16.5662 19.3333 13.8958V7.24996C19.3333 4.57954 17.1704 2.41663 14.5 2.41663C11.8295 2.41663 9.66663 4.57954 9.66663 7.24996V13.8958C9.66663 16.5662 11.8295 18.7291 14.5 18.7291Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M5.25623 11.6605V13.7147C5.25623 18.8139 9.40081 22.9584 14.5 22.9584C19.5991 22.9584 23.7437 18.8139 23.7437 13.7147V11.6605" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12.8204 7.76964C13.9079 7.37089 15.0921 7.37089 16.1796 7.76964" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13.5333 10.3312C14.1737 10.1621 14.8383 10.1621 15.4787 10.3312" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14.5 22.9583V26.5833" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
 
-                     <button class="botao-icone" id="botao-enviar-wave" title="Enviar" type="button">
-                <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="17.5" cy="17.5" r="17.5" fill="white"/>
-                    <path d="M18 12V24M26 11V25M10 16V20M14 9V27M22 14V22" stroke="#FE29BB" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                </button>
+        <div id="welcome-modal" class="welcome-modal hidden" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+            <div class="welcome-card">
+                <h2 id="welcome-title">Oi! Como posso te ajudar?</h2>
+                <div class="welcome-options">
+                    <button class="welcome-option">Como funciona o programa?</button>
+                    <button class="welcome-option">Como me inscrevo?</button>
+                    <button class="welcome-option">Existe idade mínima?</button>
+                    <button class="welcome-option">O curso é pra mim?</button>
+                </div>
+            </div>
+        </div>
+        <footer class="area-input-pergunta">
+            <div class="container-input full-width">
+                <input type="text" id="pergunta-input" name="senachat-pergunta" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Faça a sua pergunta">
+                <div class="acoes-input">
+                    <button class="botao-icone" id="botao-microfone" title="Iniciar gravação" type="button">
+                        <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.5 18.7291C17.1704 18.7291 19.3333 16.5662 19.3333 13.8958V7.24996C19.3333 4.57954 17.1704 2.41663 14.5 2.41663C11.8295 2.41663 9.66663 4.57954 9.66663 7.24996V13.8958C9.66663 16.5662 11.8295 18.7291 14.5 18.7291Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5.25623 11.6605V13.7147C5.25623 18.8139 9.40081 22.9584 14.5 22.9584C19.5991 22.9584 23.7437 18.8139 23.7437 13.7147V11.6605" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12.8204 7.76964C13.9079 7.37089 15.0921 7.37089 16.1796 7.76964" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.5333 10.3312C14.1737 10.1621 14.8383 10.1621 15.4787 10.3312" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14.5 22.9583V26.5833" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                    <button class="botao-icone" id="botao-enviar-wave" title="Enviar" type="button">
+                    <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="17.5" cy="17.5" r="17.5" fill="white"/> 
+                        <path d="M18 12V24M26 11V25M10 16V20M14 9V27M22 14V22" stroke="#FE29BB" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    </button>
+                </div>
             </div>
         </footer>
- </main>
+    </main>
     <script src="./assets/js/acessibilidade-global.js"></script>
     <script src="./assets/js/chat.js" defer></script>
 </body>

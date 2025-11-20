@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -76,6 +76,12 @@ def home():
             "/config": "Retorna configurações do Gemini para texto"
         }
     })
+
+
+@app.route('/public/<path:filename>')
+def serve_public(filename):
+    """Serve arquivos estáticos da pasta `public/` (mesma rota que em `app.py`)."""
+    return send_from_directory('public', filename)
 
 
 if __name__ == '__main__':
