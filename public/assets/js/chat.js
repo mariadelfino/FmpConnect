@@ -53,12 +53,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (texto !== "") {
             adicionarMensagem(texto, 'usuario');
 
+            /*
             input.value = "";
             if (!isRelatedToCourse(texto)) {
                 const msg = "Desculpe — eu só respondo perguntas relacionadas ao curso 'Jovem Programador' oferecido pelo Senac. Por favor, pergunte sobre conteúdo, duração, matrícula, pré-requisitos, valor, certificação, cronograma, local ou público-alvo.";
                 adicionarMensagem(msg, 'bot');
                 return;
             }
+
+            */
 
             const botBalao = adicionarMensagem('...', 'bot');
             (async () => {
