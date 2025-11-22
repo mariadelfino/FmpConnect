@@ -1,107 +1,157 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-
     const chatContainer = document.getElementById('chat-container');
     const input = document.getElementById('pergunta-input');
-    const sendButton = document.getElementById('botao-enviar') || document.getElementById('botao-enviar-wave') || document.querySelector('.botao-enviar') || document.querySelector('button[title="Enviar"]');
+    const sendButton = document.getElementById('botao-enviar') || document.getElementById('botao-enviar-wave');
+    const micButton = document.getElementById('botao-microfone');
 
-    const COURSE_KEYWORDS = ['jovem programador','jovemprogramador','senac','curso','programador','programação','programacao','inscr','matr','dura','duração','duracao','certificado','conteúdo','conteudo','grade','horário','horario','valor','preço','preco','local','público','publico'];
-
-    function isRelatedToCourse(text) {
-        if (!text) return false;
-        const txt = text.toLowerCase();
-        return COURSE_KEYWORDS.some(kw => txt.includes(kw));
+    if (micButton) {
+        micButton.addEventListener('click', () => {
+            window.location.href = 'voz.html';
+        });
     }
 
-    if (chatContainer) {
-        chatContainer.innerHTML = '';
+    const HISTORICO_KEY = 'senachat_sessao_atual_v1';
+    const welcomeModal = document.getElementById('welcome-modal');
+    const welcomeOptions = welcomeModal && welcomeModal.querySelectorAll('.welcome-option');
+
+    function rolarParaOFinal() {
+        if (chatContainer) {
+            setTimeout(() => {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 50);
+        }
     }
 
-    function adicionarMensagem(texto, tipo) {
+    function salvarSessaoLocal() {
+        const mensagens = [];
+        const wrappers = chatContainer.querySelectorAll('.mensagem-wrapper');
+
+        wrappers.forEach(wrapper => {
+            const isUser = wrapper.classList.contains('user');
+            const role = isUser ? 'user' : 'model';
+            let texto = "";
+
+            if (isUser) {
+                texto = wrapper.querySelector('.mensagem-balao p').innerText;
+            } else {
+                const conteudo = wrapper.querySelector('.mensagem-conteudo');
+                texto = conteudo ? conteudo.innerText : "";
+            }
+
+            if (texto) mensagens.push({ role, content: texto });
+        });
+
+        sessionStorage.setItem(HISTORICO_KEY, JSON.stringify(mensagens));
+    }
+
+    function obterHistoricoParaAPI() {
+        const historico = [];
+        const wrappers = document.querySelectorAll('.area-mensagens .mensagem-wrapper');
+
+        wrappers.forEach(wrapper => {
+            if (wrapper.innerText.trim() === '...') return;
+            if (wrapper.innerText.includes("Erro de conexão")) return;
+
+            const isUser = wrapper.classList.contains('user');
+            const role = isUser ? 'user' : 'model';
+            let content = "";
+
+            if (isUser) {
+                const p = wrapper.querySelector('.mensagem-balao p');
+                if (p) content = p.innerText.trim();
+            } else {
+                const divConteudo = wrapper.querySelector('.mensagem-conteudo');
+                if (divConteudo) content = divConteudo.innerText.trim();
+            }
+
+            if (content && content.length > 0) {
+                historico.push({ role: role, content: content });
+            }
+        });
+
+        return historico;
+    }
+
+    function adicionarMensagemVisual(texto, tipo) {
         const wrapper = document.createElement('div');
         wrapper.classList.add('mensagem-wrapper', tipo);
 
         const balaoMensagem = document.createElement('div');
         balaoMensagem.classList.add('mensagem-balao', tipo);
-        balaoMensagem.innerHTML = `<div class="mensagem-conteudo">${escapeHtml(texto)}</div>`;
 
         if (tipo === 'bot') {
+            balaoMensagem.innerHTML = `<div class="mensagem-conteudo">${texto}</div>`;
             wrapper.appendChild(balaoMensagem);
-        } else if (tipo === 'usuario') {
+        } else {
             wrapper.classList.add('user');
-
             const balaoUsuario = document.createElement('div');
             balaoUsuario.classList.add('mensagem-balao', 'usuario');
             balaoUsuario.innerHTML = `<p>${texto}</p>`;
-
             wrapper.appendChild(balaoUsuario);
-            chatContainer.appendChild(wrapper);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-            return balaoUsuario;
-        } else {
-            wrapper.appendChild(balaoMensagem);
         }
+
         chatContainer.appendChild(wrapper);
-
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-
+        rolarParaOFinal();
         return balaoMensagem;
     }
-    function enviarMensagemDoUsuario() {
-        const texto = input.value.trim(); 
-    
-        if (texto !== "") {
-            adicionarMensagem(texto, 'usuario');
 
-            /*
-            input.value = "";
-            if (!isRelatedToCourse(texto)) {
-                const msg = "Desculpe — eu só respondo perguntas relacionadas ao curso 'Jovem Programador' oferecido pelo Senac. Por favor, pergunte sobre conteúdo, duração, matrícula, pré-requisitos, valor, certificação, cronograma, local ou público-alvo.";
-                adicionarMensagem(msg, 'bot');
-                return;
+    function carregarSessaoAnterior() {
+        const salvo = sessionStorage.getItem(HISTORICO_KEY);
+        if (salvo && chatContainer) {
+            try {
+                const mensagens = JSON.parse(salvo);
+                chatContainer.innerHTML = '';
+                mensagens.forEach(msg => {
+                    adicionarMensagemVisual(msg.content, msg.role === 'user' ? 'usuario' : 'bot');
+                });
+                return true;
+            } catch (e) {
+                console.error("Erro ao carregar sessão", e);
             }
-
-            */
-
-            const botBalao = adicionarMensagem('...', 'bot');
-            (async () => {
-                try {
-                    const resp = await fetch(window.location.origin + '/text/chat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ prompt: texto })
-                    });
-
-                    if (!resp.ok) {
-                        const text = await resp.text().catch(()=>null);
-                        console.error('Fetch /text/chat erro:', resp.status, text);
-                        botBalao.querySelector('.mensagem-conteudo').textContent = `Erro ${resp.status}: resposta do servidor inválida.`;
-                        return;
-                    }
-
-                    const data = await resp.json().catch(err => {
-                        console.error('Erro ao parsear JSON de /text/chat:', err);
-                        return null;
-                    });
-
-                    if (!data) {
-                        botBalao.querySelector('.mensagem-conteudo').textContent = 'Resposta inválida do servidor';
-                        return;
-                    }
-
-                    if (data.answer) {
-                        const md = data.answer;
-                        botBalao.querySelector('.mensagem-conteudo').innerHTML = renderMarkdownToHtml(md);
-                    } else if (data.error) {
-                        botBalao.querySelector('.mensagem-conteudo').textContent = data.error;
-                    } else {
-                        botBalao.querySelector('.mensagem-conteudo').textContent = 'Resposta inesperada do servidor';
-                    }
-                } catch (e) {
-                    botBalao.querySelector('.mensagem-conteudo').textContent = 'Erro ao contatar o servidor';
-                }
-            })();
         }
+        return false;
+    }
+
+    function enviarMensagemDoUsuario() {
+        const texto = input.value.trim();
+        if (texto === "") return;
+
+        const historicoContexto = obterHistoricoParaAPI();
+
+        adicionarMensagemVisual(texto, 'usuario');
+        input.value = "";
+
+        const botBalao = adicionarMensagemVisual('...', 'bot');
+
+        (async () => {
+            try {
+                const resp = await fetch(window.location.origin + '/text/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        prompt: texto,
+                        history: historicoContexto
+                    })
+                });
+
+                if (!resp.ok) throw new Error(`Erro ${resp.status}`);
+
+                const data = await resp.json();
+
+                if (data.answer) {
+                    const htmlFinal = renderMarkdownToHtml(data.answer);
+                    botBalao.querySelector('.mensagem-conteudo').innerHTML = htmlFinal;
+                    salvarSessaoLocal();
+                    rolarParaOFinal();
+                } else {
+                    botBalao.querySelector('.mensagem-conteudo').textContent = "Desculpe, não entendi.";
+                }
+
+            } catch (e) {
+                console.error(e);
+                botBalao.querySelector('.mensagem-conteudo').textContent = "Erro de conexão.";
+            }
+        })();
     }
 
     function escapeHtml(str) {
@@ -113,119 +163,53 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!mdText) return '';
         let text = mdText.toString();
 
-        text = text.replace(/```([\s\S]*?)```/g, function(_, code) {
-            return '<pre><code>' + escapeHtml(code) + '</code></pre>';
-        });
-        text = text.replace(/^###\s*(.*)$/gm, '<h3>$1</h3>');
-        text = text.replace(/^##\s*(.*)$/gm, '<h2>$1</h2>');
-        text = text.replace(/^#\s*(.*)$/gm, '<h1>$1</h1>');
-        text = text.replace(/(^|\n)-\s+(.*?)(?=\n|$)/g, function(_, prefix, item) {
-            return '\n<ul><li>' + escapeHtml(item) + '</li></ul>';
-        });
-        text = text.replace(/`([^`]+)`/g, function(_, code) {
-            return '<code>' + escapeHtml(code) + '</code>';
-        });
         text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        text = text.replace(/__(.*?)__/g, '<strong>$1</strong>');
         text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
-        text = text.replace(/_(.*?)_/g, '<em>$1</em>');
 
-        const parts = text.split(/(<pre>[\s\S]*?<\/pre>)/g);
-        for (let i = 0; i < parts.length; i++) {
-            if (!parts[i].startsWith('<pre>')) {
+        const listPattern = /(^|\n)[ \t]*([\*+-])[ \t]+(.*?)(?=\n|$)/g;
+        text = text.replace(listPattern, '$1<li>$3</li>');
+        text = text.replace(/((<li>.*?<\/li>[\s\S]*?)+)/g, '<ul>$1</ul>');
 
-                parts[i] = escapeHtml(parts[i]);
-                parts[i] = parts[i].replace(/&lt;h1&gt;(.*?)&lt;\/h1&gt;/g, '<h1>$1</h1>');
-                parts[i] = parts[i].replace(/&lt;h2&gt;(.*?)&lt;\/h2&gt;/g, '<h2>$1</h2>');
-                parts[i] = parts[i].replace(/&lt;h3&gt;(.*?)&lt;\/h3&gt;/g, '<h3>$1</h3>');
-                parts[i] = parts[i].replace(/&lt;pre&gt;(.*?)&lt;\/pre&gt;/g, '<pre>$1</pre>');
-                parts[i] = parts[i].replace(/&lt;code&gt;(.*?)&lt;\/code&gt;/g, '<code>$1</code>');
-                parts[i] = parts[i].replace(/\n/g, '<br>');
-            }
-        }
-        text = parts.join('');
-
-        text = text.replace(/(<ul>\s*<li>.*?<\/li>\s*<\/ul>)+/gs, function(m) { return m; });
+        text = text.replace(/\n/g, '<br>');
 
         return text;
     }
 
-    function simularRespostaBot(pergunta) {
-        adicionarMensagem("Esta é uma resposta automática. A IA ainda não está conectada.", 'bot');
-    }
-    if (sendButton) {
-        sendButton.addEventListener('click', enviarMensagemDoUsuario);
-    }
-
-    input.addEventListener('keypress', (event) => {
-
-        if (event.key === 'Enter') {
-            event.preventDefault(); 
+    if (sendButton) sendButton.addEventListener('click', enviarMensagemDoUsuario);
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
             enviarMensagemDoUsuario();
         }
     });
 
-    console.log("Chat.js carregado com sucesso!");
-    const WELCOME_KEY = 'senachat_welcome_shown_v1';
-    const welcomeModal = document.getElementById('welcome-modal');
-    const welcomeOptions = welcomeModal && welcomeModal.querySelectorAll('.welcome-option');
+    const temHistorico = carregarSessaoAnterior();
 
-    let _modalShownAt = null; 
-    let _lastPointerDown = 0; 
-
-    document.addEventListener('pointerdown', () => { _lastPointerDown = Date.now(); }, true);
-
-    function hideWelcomeModal(persist = true) {
-        if (!welcomeModal) return;
-        welcomeModal.classList.add('hidden');
-        _modalShownAt = null;
-        if (persist) {
-            try { localStorage.setItem(WELCOME_KEY, '1'); console.log('[Welcome] flag salva em localStorage'); } catch (e) { console.warn('[Welcome] falha ao salvar flag', e); }
-        } else {
-            console.log('[Welcome] modal escondido sem persistir a flag (modo não-persistente)');
-        }
+    if (!temHistorico && welcomeModal) {
+        setTimeout(() => {
+            welcomeModal.classList.remove('hidden');
+        }, 500);
     }
 
-    function showWelcomeModalIfNeeded() {
-        if (!welcomeModal) return;
-        try {
-            console.log('[Welcome] exibindo modal (ignorado localStorage para garantir visibilidade)');
-        } catch (e) {}
-        welcomeModal.classList.remove('hidden');
-        _modalShownAt = Date.now();
-    }
-
-    if (welcomeOptions && welcomeOptions.length) {
+    if (welcomeOptions) {
         welcomeOptions.forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', () => {
                 const q = btn.textContent.trim();
-                if (input) { input.value = q; }
-                hideWelcomeModal(true);
-                setTimeout(() => {
-                    enviarMensagemDoUsuario();
-                }, 120);
+                input.value = q;
+                if (welcomeModal) welcomeModal.classList.add('hidden');
+                setTimeout(enviarMensagemDoUsuario, 200);
             });
         });
     }
-    if (input) {
+
+    if (input && welcomeModal) {
         input.addEventListener('focus', () => {
-            if (!_modalShownAt) {
-                hideWelcomeModal(false);
-                return;
-            }
-            const elapsed = Date.now() - _modalShownAt;
-            if (elapsed > 700) {
-                const sincePointer = Date.now() - _lastPointerDown;
-                const userClicked = sincePointer < 800; 
-                hideWelcomeModal(userClicked);
-            }
+            welcomeModal.classList.add('hidden');
         });
     }
-    setTimeout(showWelcomeModalIfNeeded, 400);
 
-    window.forceShowWelcomeModal = function() {
-        try { localStorage.removeItem(WELCOME_KEY); } catch (e) {}
-        console.log('[Welcome] forceShowWelcomeModal chamado — removida flag e mostrando modal.');
-        showWelcomeModalIfNeeded();
+    window.resetChat = function() {
+        sessionStorage.removeItem(HISTORICO_KEY);
+        location.reload();
     };
 });
