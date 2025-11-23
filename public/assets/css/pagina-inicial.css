@@ -383,6 +383,20 @@
     width: 100%;
     overflow: hidden;
     position: relative;
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgb(0, 0, 0) 15%,
+        rgb(0, 0, 0) 85%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgb(0, 0, 0) 15%,
+        rgb(0, 0, 0) 85%,
+        transparent 100%
+    );
 }
 
 .marquee_track {

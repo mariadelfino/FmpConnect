@@ -72,4 +72,19 @@
     window.addEventListener('resize', atualizarSetas);
 
     atualizarSetas();
+    
+    const CHATBOT_BASE_URL = 'chat.html';
+    const duvidaButtons = document.querySelectorAll('.secao-duvidas .duvida-btn');
+
+    duvidaButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const pergunta = this.getAttribute('data-question');
+
+            if (pergunta) {
+                const perguntaCodificada = encodeURIComponent(pergunta);
+                const urlDeRedirecionamento = `${CHATBOT_BASE_URL}?pergunta=${perguntaCodificada}`;
+                window.location.href = urlDeRedirecionamento;
+            }
+        });
+    });
 })();
