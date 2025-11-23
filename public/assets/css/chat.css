@@ -142,7 +142,7 @@
     display: inline-flex;
     padding: 10px 20px;
     max-width: 80%;
-    text-align: center;
+    text-align: left;
 }
 [data-theme="light"] .area-mensagens,
 [data-theme="light"] .mensagem-balao,
