@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const chatContainer = document.getElementById('chat-container');
     const input = document.getElementById('pergunta-input');
-    const sendButton = document.getElementById('botao-enviar') || document.getElementById('botao-enviar-wave');
+    const sendButton = document.getElementById('botao-enviar') || document.getElementById('botao-enviar-wave'); 
     const micButton = document.getElementById('botao-microfone');
 
     if (micButton) {
@@ -32,7 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let texto = "";
 
             if (isUser) {
-                texto = wrapper.querySelector('.mensagem-balao p').innerText;
+                const p = wrapper.querySelector('.mensagem-balao p');
+                texto = p ? p.innerText : "";
             } else {
                 const conteudo = wrapper.querySelector('.mensagem-conteudo');
                 texto = conteudo ? conteudo.innerText : "";
@@ -95,6 +96,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return balaoMensagem;
     }
 
+    function toggleInput(disable) {
+        if (input) input.disabled = disable;
+        if (sendButton) sendButton.disabled = disable;
+        const inputContainer = document.querySelector('.area-input-pergunta .container-input');
+        if (inputContainer) {
+            inputContainer.classList.toggle('input-disabled', disable);
+        }
+    }
+
     function carregarSessaoAnterior() {
         const salvo = sessionStorage.getItem(HISTORICO_KEY);
         if (salvo && chatContainer) {
@@ -112,14 +122,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return false;
     }
 
-    function enviarMensagemDoUsuario() {
-        const texto = input.value.trim();
+    function enviarMensagemDoUsuario(textoAutomatico) {
+        const texto = textoAutomatico ? textoAutomatico.trim() : input.value.trim();
         if (texto === "") return;
+        toggleInput(true); 
 
         const historicoContexto = obterHistoricoParaAPI();
 
         adicionarMensagemVisual(texto, 'usuario');
-        input.value = "";
+        input.value = ""; 
 
         const botBalao = adicionarMensagemVisual('...', 'bot');
 
@@ -150,6 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
             } catch (e) {
                 console.error(e);
                 botBalao.querySelector('.mensagem-conteudo').textContent = "Erro de conexão.";
+            } finally {
+                toggleInput(false);
             }
         })();
     }
@@ -183,9 +196,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    const params = new URLSearchParams(window.location.search);
+    const perguntaPreDefinida = params.get('pergunta'); 
+    
+    if (perguntaPreDefinida) {
+        history.replaceState(null, '', window.location.pathname);
+    }
+
     const temHistorico = carregarSessaoAnterior();
 
-    if (!temHistorico && welcomeModal) {
+    if (perguntaPreDefinida) {
+        if (welcomeModal) welcomeModal.classList.add('hidden');
+        
+        setTimeout(() => enviarMensagemDoUsuario(perguntaPreDefinida), 200);
+
+    } else if (!temHistorico && welcomeModal) {
         setTimeout(() => {
             welcomeModal.classList.remove('hidden');
         }, 500);
@@ -197,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const q = btn.textContent.trim();
                 input.value = q;
                 if (welcomeModal) welcomeModal.classList.add('hidden');
-                setTimeout(enviarMensagemDoUsuario, 200);
+                setTimeout(() => enviarMensagemDoUsuario(q), 200); 
             });
         });
     }
