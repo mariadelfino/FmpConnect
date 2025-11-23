@@ -76,13 +76,13 @@
     width: auto;
     min-width: 220px;
     max-width: 420px;
-    box-shadow: 0 8px 24px rgba(7,0,30,0.45);
-    transform: translateY(8px);
+    box-shadow: 0 2px 5px rgba(122, 1, 255, 0.21);
+    transform: translateY(3px);
     opacity: 0;
     transition: transform .36s cubic-bezier(.2,.9,.2,1), opacity .36s cubic-bezier(.2,.9,.2,1), box-shadow .16s ease;
 }
-.welcome-modal:not(.hidden) .welcome-option { transform: translateY(0); opacity: 1; }
-.welcome-option:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(7,0,30,0.55); }
+.welcome-modal:not(.hidden) .welcome-option { opacity: 1; }
+.welcome-option:hover { transform: translateY(-6px); box-shadow: 0 5px 5px rgba(122, 1, 255, 0.21); }
 .welcome-modal:not(.hidden) .welcome-option:nth-child(1) { transition-delay: .05s; }
 .welcome-modal:not(.hidden) .welcome-option:nth-child(2) { transition-delay: .10s; }
 .welcome-modal:not(.hidden) .welcome-option:nth-child(3) { transition-delay: .15s; }
@@ -152,13 +152,13 @@
     color: #000 !important;
 }
 [data-theme="light"] .mensagem-balao {
-    background: rgba(122, 1, 255, 0.12) !important;
+    background: var(--color-opcao-chat-background) !important;
     color: #000 !important;
     border: none !important;
 }
 
 [data-theme="light"] .mensagem-balao.usuario {
-    background: rgba(122, 1, 255, 0.14) !important;
+    background: rgba(122, 1, 255, 0.05) !important;
 }
 
 
@@ -273,7 +273,6 @@
     padding: 10px 20px !important;
     max-width: 80% !important;
     text-align: center !important;
-    box-shadow: 0 8px 24px rgba(7,0,30,0.15);
 }
 
 [data-theme="light"] .mensagem-wrapper.bot {
@@ -303,12 +302,12 @@
 }
 
 [data-theme="light"] .container-input.full-width {
-    background: rgba(122, 1, 255, 0.12) !important;
+    background: var(--color-opcao-chat-background)!important;
 }
 
 .container-input.full-width input[type="text"] {
     flex: 1;
-    min-width: 0; 
+    min-width: 0;
     background: transparent;
     border: none;
     color: var(--color-white);
@@ -462,4 +461,9 @@ input:-internal-autofill-selected {
     -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
     box-shadow: 0 0 0px 1000px transparent inset !important;
     -webkit-text-fill-color: inherit !important;
+}
+
+/* Modo claro: título do welcome-card em cor primária de texto */
+html[data-theme="light"] .welcome-card h2 {
+    color: var(--color-primary-text) !important;
 }

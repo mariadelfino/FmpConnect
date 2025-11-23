@@ -56,7 +56,7 @@
         if (estadoAtual.tema === 'claro') {
             document.documentElement.setAttribute('data-theme', 'light');
         } else {
-            document.documentElement.removeAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', 'dark');
         }
 
         // Aplica escala de fonte
@@ -395,6 +395,164 @@
     }
 
     injetarFiltrosSVG();
+
+    // Troca o mascote para a versão branca quando o tema estiver em modo escuro.
+    // Compatível com as páginas que usam a classe .SenaChat_mascote e <img src=".../senachat.svg">.
+    (function () {
+        function updateMascoteForTheme() {
+            try {
+                const root = document.documentElement;
+                const body = document.body;
+                const themeAttr = root.getAttribute('data-theme') || body.getAttribute('data-theme');
+                const isDark = themeAttr === 'dark' || (!themeAttr && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+                document.querySelectorAll('.SenaChat_mascote img').forEach(img => {
+                    if (!img || !img.src) return;
+
+                        // Se a URL já referencia uma das versões do mascote, substitui pelo nome correto
+                        const match = img.src.match(/senachat(?:-branco)?\.svg/);
+                        if (match) {
+                            const desired = isDark ? 'senachat-branco.svg' : 'senachat.svg';
+                            if (!img.src.includes(desired)) {
+                                img.src = img.src.replace(/senachat(?:-branco)?\.svg/, desired);
+                            }
+                            return;
+                        }
+
+                        // Fallback: troca apenas o último segmento do path para o arquivo desejado
+                        try {
+                            const parts = img.src.split('/');
+                            parts[parts.length - 1] = isDark ? 'senachat-branco.svg' : 'senachat.svg';
+                            img.src = parts.join('/');
+                        } catch (e) {
+                            // não faz nada se não for possível modificar
+                        }
+                });
+            } catch (e) {
+                // não interrompe execução
+            }
+        }
+
+        // Atualiza no carregamento do DOM
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateMascoteForTheme);
+        } else {
+            updateMascoteForTheme();
+        }
+
+        // Observa mudanças no atributo data-theme para alternar dinamicamente
+        try {
+            const observer = new MutationObserver(mutations => {
+                for (const m of mutations) {
+                    if (m.type === 'attributes' && (m.attributeName === 'data-theme')) {
+                        updateMascoteForTheme();
+                        break;
+                    }
+                }
+            });
+            observer.observe(document.documentElement, { attributes: true });
+        } catch (e) {
+            // browsers antigos podem falhar aqui
+        }
+    })();
+
+    // Atualiza logos de patrocinadores conforme o tema (troca para versões brancas no modo escuro)
+    (function () {
+        function updateSponsorLogosForTheme() {
+            try {
+                const root = document.documentElement;
+                const body = document.body;
+                const themeAttr = root.getAttribute('data-theme') || body.getAttribute('data-theme');
+                const isDark = themeAttr === 'dark' || (!themeAttr && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+                // Seleciona imagens de patrocinadores (áreas de patrocinadores / marquee)
+                const imgs = document.querySelectorAll('.secao-patrocinadores img, .marquee img, .marquee_track img');
+                imgs.forEach(img => {
+                    if (!img || !img.src) return;
+
+                    // Guarda o src original (colorido) para restaurar posteriormente
+                    if (!img.dataset.originalSrc) img.dataset.originalSrc = img.src;
+                    const original = img.dataset.originalSrc;
+
+                    if (!isDark) {
+                        // No modo claro, restaura a versão original colorida
+                        if (img.src !== original) img.src = original;
+                        return;
+                    }
+
+                    // Modo escuro: tenta carregar uma versão branca equivalente
+                    // Possíveis sufixos: -branco, -white, _white
+                    const trySuffixes = ['-branco', '-white', '_white'];
+                    // Resolve path components
+                    try {
+                        const url = new URL(original, location.href);
+                        const pathParts = url.pathname.split('/');
+                        const file = pathParts.pop();
+                        const m = file.match(/(.+)(\.[a-zA-Z0-9]+)$/);
+                        if (!m) return;
+                        const name = m[1];
+                        const ext = m[2];
+
+                        let tried = 0;
+                        const tryNext = () => {
+                            if (tried >= trySuffixes.length) {
+                                // Nenhuma variante branca encontrada — mantém a original
+                                return;
+                            }
+                            const candidateFile = name + trySuffixes[tried] + ext;
+                            const candidatePath = pathParts.concat([candidateFile]).join('/');
+                            const candidateUrl = url.origin + candidatePath;
+
+                            const testImg = new Image();
+                            testImg.onload = function () {
+                                // Substitui apenas se o carregamento foi bem-sucedido
+                                img.src = candidateUrl;
+                                img.dataset.currentVariant = candidateFile;
+                            };
+                            testImg.onerror = function () {
+                                tried += 1;
+                                tryNext();
+                            };
+                            // Tenta carregar sem cache-buster — se houver cache problemático, podemos adicionar depois
+                            testImg.src = candidateUrl;
+                        };
+
+                        // Se já estiver apontando para uma variante branca correta, não faz nada
+                        if (/senachat(?:-branco|-white|_white)?\.svg/.test(img.src) || /.+(?:-branco|-white|_white)\.[a-zA-Z0-9]+$/.test(img.src)) {
+                            return;
+                        }
+
+                        tryNext();
+                    } catch (e) {
+                        // Se URL falhar, ignora
+                    }
+                });
+            } catch (e) {
+                // não interrompe execução
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateSponsorLogosForTheme);
+        } else {
+            updateSponsorLogosForTheme();
+        }
+
+        // Observa mudanças no atributo data-theme para alternar dinamicamente
+        try {
+            const observer = new MutationObserver(mutations => {
+                for (const m of mutations) {
+                    if (m.type === 'attributes' && (m.attributeName === 'data-theme')) {
+                        updateSponsorLogosForTheme();
+                        break;
+                    }
+                }
+            });
+            observer.observe(document.documentElement, { attributes: true });
+        } catch (e) {
+            // browsers antigos podem falhar aqui
+        }
+    })();
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', carregarPainelAcessibilidade);

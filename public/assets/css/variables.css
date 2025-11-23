@@ -185,11 +185,11 @@
     --color-primary-border: rgba(122, 1, 255, 0.21);
     --color-primary-border-hover: rgba(122, 1, 255, 0.3);
     --color-primary-background-hover: rgba(122, 1, 255, 0.1);
-    --color-secondary-background-icon: #DDD6FE;
+    --color-secondary-background-icon: rgba(122, 1, 255, 0.09);
 
     --color-opcao-chat-background: rgba(122, 1, 255, 0.05);
     --color-opcao-chat-background-hover: rgba(122, 1, 255, 0.1);
-    --color-opcao-chat-principal-background-hover: rgba(122, 1, 255, 0.2);
+    --color-opcao-chat-principal-background-hover: rgba(122, 1, 255, 0.1);
     --color-opcao-chat-border: rgba(122, 1, 255, 0.1);
   
     /* Cores de Destaque - Mantém as mesmas */
@@ -199,7 +199,7 @@
     --color-accent-light: #D0B6F3;
     
     /* Gradiente Principal - Fundo Claro */
-    --gradient-primary: radial-gradient(50% 50% at 50% 50%, #EDE9FE 0%, #F5F3FF 100%);
+    --gradient-primary: radial-gradient(50% 50% at 50% 50%, #f6f4ff 0%, #f8f7ff 100%);
     --gradient-primary-hover: radial-gradient(circle at center, #DDD6FE 0%, #EDE9FE 100%);
     
     /* Gradiente Título SenaChat - Mantém */

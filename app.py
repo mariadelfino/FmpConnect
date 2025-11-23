@@ -14,8 +14,8 @@ load_dotenv()
 try:
     API_KEY = os.environ["GOOGLE_API_KEY"]
 except KeyError:
-    print("❌ ERRO: GOOGLE_API_KEY não encontrada no .env")
-    print("📝 Crie um arquivo .env com: GOOGLE_API_KEY=sua_chave_aqui")
+    print("ERRO: GOOGLE_API_KEY não encontrada no .env")
+    print("Crie um arquivo .env com: GOOGLE_API_KEY=sua_chave_aqui")
     exit(1)
 
 # Palavras-chave para filtro básico
@@ -100,7 +100,7 @@ def serve_public(filename):
 def get_voice_token():
     """Retorna API Key para o frontend de Voz."""
     try:
-        print("✅ [Voz] API Key solicitada")
+        print("[Voz] API Key solicitada")
         return jsonify({"token": API_KEY})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -109,7 +109,7 @@ def get_voice_token():
 def get_voice_config():
     """Retorna configurações para o frontend de Voz."""
     try:
-        print("📋 [Voz] Configurações enviadas")
+        print("[Voz] Configurações enviadas")
         return jsonify(GEMINI_VOICE_CONFIG)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -120,7 +120,7 @@ def get_voice_config():
 def get_text_token():
     """Retorna API Key para o frontend de Texto."""
     try:
-        print("✅ [Texto] API Key solicitada")
+        print("[Texto] API Key solicitada")
         return jsonify({"token": API_KEY})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -129,7 +129,7 @@ def get_text_token():
 def get_text_config():
     """Retorna configurações para o frontend de Texto."""
     try:
-        print("📋 [Texto] Configurações enviadas")
+        print("[Texto] Configurações enviadas")
         return jsonify(GEMINI_TEXT_CONFIG)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -216,11 +216,11 @@ def text_diag():
 
 if __name__ == '__main__':
     print("\n" + "="*50)
-    print("🚀 SenaChat Backend UNIFICADO (Voz + Texto)")
+    print("SenaChat Backend UNIFICADO (Voz + Texto)")
     print("="*50)
-    print("📡 Servidor rodando em: http://localhost:5000")
-    print("🔑 Endpoints Voz: /token, /config")
-    print("💬 Endpoints Texto: /text/token, /text/config, /text/chat")
+    print("Servidor rodando em: http://localhost:5000")
+    print("Endpoints Voz: /token, /config")
+    print("Endpoints Texto: /text/token, /text/config, /text/chat")
     print("="*50)
     
     app.run(host='0.0.0.0', port=5000, debug=True)

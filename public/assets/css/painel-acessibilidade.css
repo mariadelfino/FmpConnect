@@ -58,7 +58,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.5rem;
-    background: var(--color-primary-lighter);
+    background: linear-gradient(90deg, #FE29BB 0%, #7A01FF 100%);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 9999px;
@@ -117,7 +117,6 @@
     padding-bottom: 0.5rem; /* 8px fixo */
     border-bottom: 1px solid color-mix(in srgb, var(--color-white) 20%, transparent);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
     grid-column: 1 / -1;
 }
 
@@ -135,7 +134,7 @@
     align-items: center;
     gap: 0.25rem; /* 4px fixo */
     padding: 0.5rem 1rem;
-    background: var(--color-primary-lighter);
+    background: #3B018A;
     border: 1.5px solid rgba(255, 255, 255, 0.25);
     border-radius: 1rem; /* 16px fixo */
     color: white;
@@ -145,17 +144,15 @@
 }
 
 .opcao-acessibilidade:hover {
-    background: rgba(140, 90, 213, 0.7);
+    background: #1A0145;
     border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .opcao-acessibilidade.ativo {
-    background: rgba(254, 41, 187, 0.35);
-    border-color: rgba(254, 41, 187, 0.8);
-    box-shadow: 0 0 25px rgba(254, 41, 187, 0.4),
-                0 6px 16px rgba(254, 41, 187, 0.2);
+    background: #FE29BB;
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .opcao-acessibilidade_icone {
@@ -180,17 +177,17 @@
 }
 
 .opcao-acessibilidade.ativo .opcao-acessibilidade_icone {
-    background: rgba(254, 41, 187, 0.9);
+    background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 20px rgba(254, 41, 187, 0.5);
 }
 
 /* Ícones coloridos para daltonismo */
 .opcao-acessibilidade_icone--cor-vermelho {
-    background: rgba(239, 68, 68, 0.3);
+    background: rgb(239, 68, 68);
 }
 
 .opcao-acessibilidade:hover .opcao-acessibilidade_icone--cor-vermelho {
-    background: rgba(239, 68, 68, 0.5);
+    background: rgb(239, 68, 68);
 }
 
 .opcao-acessibilidade.ativo .opcao-acessibilidade_icone--cor-vermelho {
@@ -199,11 +196,11 @@
 }
 
 .opcao-acessibilidade_icone--cor-verde {
-    background: rgba(34, 197, 94, 0.3);
+    background: rgb(34, 197, 94);
 }
 
 .opcao-acessibilidade:hover .opcao-acessibilidade_icone--cor-verde {
-    background: rgba(34, 197, 94, 0.5);
+    background: rgb(34, 197, 94);
 }
 
 .opcao-acessibilidade.ativo .opcao-acessibilidade_icone--cor-verde {
@@ -212,11 +209,11 @@
 }
 
 .opcao-acessibilidade_icone--cor-azul {
-    background: rgba(59, 130, 246, 0.3);
+    background: rgb(59, 131, 246);
 }
 
 .opcao-acessibilidade:hover .opcao-acessibilidade_icone--cor-azul {
-    background: rgba(59, 130, 246, 0.5);
+    background: rgb(59, 131, 246);
 }
 
 .opcao-acessibilidade.ativo .opcao-acessibilidade_icone--cor-azul {
@@ -251,12 +248,12 @@
 }
 
 .opcao-acessibilidade.ativo .opcao-acessibilidade_status {
-    color: rgba(254, 41, 187, 1);
+    color: rgba(255, 255, 255, 0.75);
     font-weight: var(--font-weight-semibold);
 }
 
 .opcao-acessibilidade.ativo .opcao-acessibilidade_titulo {
-    color: rgba(254, 41, 187, 1);
+    color: white;
 }
 
 /* ========================================
@@ -274,7 +271,7 @@
     align-items: center;
     gap: 0.5rem; /* 8px fixo */
     padding: 1rem 2rem; /* 16px 32px fixo */
-    background: var(--color-primary-lighter);
+    background: #3B018A;
     border-radius: 9999px; /* radius-full fixo */
     color: white;
     font-size: 0.875rem; /* 14px fixo */
@@ -286,7 +283,7 @@
 }
 
 .painel-acessibilidade_resetar:hover {
-    background: rgba(140, 90, 213, 0.8);
+    background: #1A0145;
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
