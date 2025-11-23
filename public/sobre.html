@@ -4,614 +4,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SenaChat - Seu assistente virtual inteligente">
+    <meta name="description" content="SenaChat - Sobre o Projeto">
     <meta name="theme-color" content="#6B21A8">
-    <title>SenaChat - Assistente Virtual Inteligente</title>
+    <title>SenaChat - Sobre Nós</title>
 
-    <!-- Script Crítico de Acessibilidade - DEVE vir ANTES de tudo para evitar flash -->
     <script>
         (function() {
             try {
                 const saved = localStorage.getItem('senachat-acessibilidade');
                 if (saved) {
                     const estado = JSON.parse(saved);
-                    
-                    // Aplica tema IMEDIATAMENTE
-                    if (estado.tema === 'claro') {
-                        document.documentElement.setAttribute('data-theme', 'light');
-                    }
-                    
-                    // Aplica escala de fonte
-                    if (estado.scaleFactor && estado.scaleFactor !== 1) {
-                        document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
-                    }
-                    
-                    // Prepara classes de filtro no MAIN (não no body para evitar quebrar position:fixed)
+                    if (estado.tema === 'claro') document.documentElement.setAttribute('data-theme', 'light');
+                    if (estado.scaleFactor && estado.scaleFactor !== 1) document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
                     document.addEventListener('DOMContentLoaded', function() {
                         const mains = document.querySelectorAll('main');
-                        
                         if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
-                            mains.forEach(function(main) {
-                                main.classList.add('filtro-' + estado.filtroDaltonismo);
-                            });
+                            mains.forEach(m => m.classList.add('filtro-' + estado.filtroDaltonismo));
                             document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
                         }
-                        
                         if (estado.contraste) {
-                            mains.forEach(function(main) {
-                                main.classList.add('alto-contraste');
-                            });
+                            mains.forEach(m => m.classList.add('alto-contraste'));
                             document.body.setAttribute('data-alto-contraste', 'true');
                         }
                     });
                 }
-            } catch (e) {
-                // Silently fail - não quebrar a página
-            }
+            } catch (e) {}
         })();
     </script>
 
-    <!-- Google Fonts - Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="./assets/css/componentes.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/variables.css">
     <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
     <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
     <link rel="stylesheet" href="./assets/css/sobre.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
-    <!-- Conteúdo Principal da Home (começa oculto) -->
     <main class="pagina-sobre">
 
-        <!-- Cabeçalho (Padrão voz.html) -->
         <header class="cabecalho">
-            <a href="paginainicial.html" aria-label="Voltar para a página de boas vindas">
+            <a href="paginainicial.html" aria-label="Voltar para a página inicial">
                 <button class="botao-voltar" type="button">
                     <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
             </a>
-
             <h1 class="logo-senachat">SenaChat</h1>
-
             <button class="botao-acessibilidade" aria-label="Opções de acessibilidade" type="button">
-
-                <svg width="1000" height="1000" viewBox="320 330 360 360" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
-                    <path
-                        d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
-                    <path
-                        d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
-                    <path
-                        d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
-                    <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
-                    <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8"
-                        stroke-miterlimit="10" />
-                    <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8"
-                        stroke-miterlimit="10" />
-                    <path
-                        d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
-                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
-                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
-                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
-                    <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3"
-                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                <svg width="30" height="30" viewBox="320 330 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z" stroke="currentColor" stroke-width="25" stroke-miterlimit="10" />
+                    <path d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z" stroke="currentColor" stroke-width="25" stroke-miterlimit="10" />
+                    <path d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z" stroke="currentColor" stroke-width="25" stroke-miterlimit="10" />
+                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9" stroke="currentColor" stroke-width="25" stroke-miterlimit="10" />
+                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624" stroke="currentColor" stroke-width="25" stroke-miterlimit="10" />
+                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624" stroke="currentColor" stroke-width="25" stroke-miterlimit="10" />
                 </svg>
-
             </button>
         </header>
 
-
-
-        <!-- Seção: A Gênese do Projeto -->
-        <section class="secao-projeto">
+        <section class="secao-contexto">
             <div class="container">
-                <header class="secao-projeto_cabecalho">
-                    <div class="secao-projeto_icone-titulo">
-                        <svg class="icone-lightbulb" width="200" height="200" viewBox="0 0 433 512" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M256.68 57.4265C259.688 56.3973 262.847 55.8736 266.026 55.8765C268.832 55.8765 271.554 56.2775 274.118 57.0205C277.533 58.0225 280.965 55.5595 280.965 52.0015V16.1145C280.965 11.1185 285.199 7.20555 290.186 7.51755C365.395 12.2255 425.599 75.0546 425.496 151.765C425.496 154.497 425.419 157.21 425.269 159.904C425.003 164.673 421.104 168.424 416.328 168.424H397.388C393.898 168.424 391.317 165.075 392.319 161.735C393.46 157.883 393.793 153.838 393.296 149.852C391.693 136.75 381.054 126.262 367.927 124.834C350.566 122.938 335.869 136.5 335.869 153.476C335.869 156.29 336.27 159.004 337.013 161.576C338.015 164.991 335.552 168.423 331.994 168.423H292.806C286.266 168.423 280.964 163.121 280.964 156.581V117.377C280.964 113.855 277.581 111.335 274.203 112.33C270.368 113.454 266.342 113.779 262.376 113.286C249.266 111.674 238.777 101.019 237.366 87.8836C237.242 86.7328 237.186 85.5759 237.196 84.4185M263.879 418.12H134.301V480.334C134.301 493.681 145.121 504.501 158.468 504.501H239.711C253.058 504.501 263.878 493.681 263.878 480.334V418.12H263.879ZM155.492 170.131C156.903 183.266 167.391 193.922 180.502 195.533C184.642 196.039 188.642 195.663 192.329 194.577C195.707 193.582 199.09 196.103 199.09 199.624V250.671H148.043C144.552 250.671 141.981 254.011 142.974 257.36C144.085 261.068 144.46 265.093 143.951 269.251C142.348 282.353 131.693 292.833 118.574 294.252C101.222 296.122 86.5411 282.586 86.5411 265.61C86.5411 262.804 86.9421 260.082 87.6931 257.518C88.6871 254.103 86.2231 250.671 82.6661 250.671H55.5121C54.8521 244.951 54.5271 239.122 54.5601 233.218C54.9691 157.355 114.893 94.7846 189.5 89.8006C194.683 89.4546 199.091 93.5386 199.091 98.7326V134.248C199.091 137.806 195.659 140.269 192.244 139.267C189.614 138.506 186.89 138.121 184.152 138.123C167.183 138.123 153.63 152.795 155.492 170.131Z"
-                                stroke="url(#paint0_linear_202_124)" stroke-width="15" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M332.25 250.671C337.848 250.671 342.103 255.76 341.054 261.259C336.021 287.632 323.811 311.459 306.544 330.636C285.559 353.942 270.762 382.133 264.875 412.93L263.881 418.124H199.089V367.077C199.089 363.587 202.429 361.006 205.778 362.008C209.632 363.149 213.68 363.482 217.669 362.985C230.771 361.373 241.251 350.727 242.67 337.599C244.541 320.255 231.004 305.567 214.028 305.567C211.219 305.567 208.493 305.969 205.927 306.722C202.516 307.723 199.089 305.247 199.089 301.692V250.671H250.119C253.64 250.671 256.161 247.289 255.167 243.911C254.043 240.08 253.717 236.06 254.211 232.099C255.814 218.997 266.453 208.509 279.58 207.081C296.941 205.185 311.638 218.747 311.638 235.723C311.638 238.537 311.237 241.251 310.486 243.823C309.492 247.238 311.956 250.67 315.513 250.67L332.25 250.671Z"
-                                stroke="url(#paint1_linear_202_124)" stroke-width="15" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M93.1311 332.272C72.7471 310.319 59.1111 282.019 55.5121 250.671H82.6681C86.1581 250.671 88.7391 254.011 87.7371 257.36C86.5961 261.211 86.2634 265.257 86.7601 269.243C88.3631 282.345 99.0101 292.816 112.129 294.244C129.498 296.14 144.178 282.595 144.178 265.61C144.181 262.871 143.793 260.146 143.026 257.518C142.024 254.103 144.487 250.671 148.053 250.671H199.091V301.692C199.091 305.258 202.523 307.721 205.938 306.719C208.567 305.952 211.292 305.564 214.03 305.567C231.007 305.567 244.543 320.255 242.672 337.599C241.252 350.726 230.773 361.373 217.671 362.985C213.682 363.481 209.634 363.149 205.78 362.008C202.431 361.006 199.091 363.586 199.091 367.077V418.124H134.298L133.363 413.197C129.901 395.109 123.628 377.689 114.652 361.79M187.938 446.311H263.879V476.311H134.301V446.311H153.4M378.826 300.358L404.908 301.769M356.196 358.991L375.935 375.035M310.143 418.374L303.425 393.126M117.838 69.7625L113.754 43.9635M61.8391 98.2955L43.8521 80.3085M7.5011 150.205L33.3061 154.294"
-                                stroke="url(#paint2_linear_202_124)" stroke-width="15" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <defs>
-                                <linearGradient id="paint0_linear_202_124" x1="240.027" y1="7.50011" x2="240.027"
-                                    y2="504.501" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7A01FF" />
-                                    <stop offset="1" stop-color="#FE29BB" />
-                                </linearGradient>
-                                <linearGradient id="paint1_linear_202_124" x1="270.151" y1="206.903" x2="270.151"
-                                    y2="418.124" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7A01FF" />
-                                    <stop offset="1" stop-color="#FE29BB" />
-                                </linearGradient>
-                                <linearGradient id="paint2_linear_202_124" x1="206.205" y1="43.9635" x2="206.205"
-                                    y2="476.311" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7A01FF" />
-                                    <stop offset="1" stop-color="#FE29BB" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-
-
-
-                        <h2 class="secao-projeto_titulo">
-                            Nascido no <span class="destaque-gradiente">Jovem Programador</span>
-                        </h2>
+                <div class="grid-contexto">
+                    <div class="coluna-texto gsap-fade-up">
+                        <div class="badge">Iniciativa</div>
+                        <h2 class="titulo-secao">O Jovem <span class="destaque-gradiente">Programador</span></h2>
+                        <p class="texto-padrao">
+                            O Jovem Programador é um programa de capacitação tecnológica que permite a qualquer pessoa, a partir de 16 anos e cursando a partir do 1º ano do ensino médio, qualificar-se em Tecnologia da Informação.
+                        </p>
+                        <p class="texto-padrao">
+                            É uma iniciativa do <strong>SEPROSC</strong> com realização do <strong>SENAC</strong>. A parceria auxilia na formação profissional em 23 municípios de SC, oferecendo aulas híbridas e infraestrutura completa para preparar estudantes para o mercado de TI.
+                        </p>
                     </div>
-                </header>
-
-                <div class="secao-projeto_conteudo">
-                    <p class="secao-projeto_texto">
-                        O SenaChat é o resultado do Projeto Integrador do curso Jovem Programador de 2025.
-                        Nosso objetivo era aplicar os conhecimentos de Inteligência Artificial e
-                        Desenvolvimento Web para criar uma ferramenta prática que auxilie futuros
-                        alunos a tirar dúvidas sobre o curso, de forma rápida e precisa.
-                    </p>
-
-
+                    <div class="coluna-video gsap-fade-up" data-delay="0.2">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/uLHLEg7c3sk?si=HnK-XgN4uO8yP7x_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção: Acessibilidade e Inclusão -->
-        <section class="secao-acessibilidade">
+        <section class="secao-sobre-projeto">
             <div class="container">
-                <header class="secao-acessibilidade_cabecalho">
-                    <div class="secao-acessibilidade_icone-titulo">
-                        <svg class="icone-accessibility" width="200" height="200" viewBox="0 0 191 191" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M188.906 59.0586C185.992 58.0992 183.717 57.4789 182.194 50.9172C181.698 48.7789 178.641 48.7844 178.146 50.9172C176.656 57.3336 174.579 58.0203 171.435 59.0594C169.541 59.6852 169.536 62.3781 171.435 63.0055C176.658 64.7313 177.25 67.2836 178.146 71.1469C178.644 73.2899 181.697 73.2891 182.195 71.1469C183.683 64.7313 185.874 64.0071 188.906 63.0055C190.799 62.3789 190.803 59.686 188.906 59.0586Z"
-                                fill="url(#paint0_linear_202_81)" />
-                            <path
-                                d="M18.8932 59.0586C15.9799 58.0992 13.7049 57.4789 12.1814 50.9172C11.6854 48.7789 8.62832 48.7844 8.13379 50.9172C6.64395 57.3336 4.5666 58.0203 1.42207 59.0594C-0.471679 59.6852 -0.476367 62.3781 1.42207 63.0055C6.64551 64.7313 7.2377 67.2836 8.13379 71.1469C8.63145 73.2899 11.6846 73.2891 12.1822 71.1469C13.6705 64.7313 15.8611 64.0071 18.8939 63.0055C20.7869 62.3789 20.7908 59.686 18.8932 59.0586Z"
-                                fill="url(#paint1_linear_202_81)" />
-                            <path
-                                d="M181.554 143.805L145.679 179.68C144.858 180.497 144.208 181.469 143.765 182.539C143.322 183.609 143.097 184.757 143.101 185.915V188.891C143.101 189.409 143.307 189.906 143.673 190.272C144.039 190.639 144.536 190.845 145.054 190.845C145.572 190.845 146.069 190.639 146.435 190.272C146.801 189.906 147.007 189.409 147.007 188.891V185.915C147.007 184.602 147.515 183.376 148.445 182.446L184.32 146.563C185.222 145.665 185.937 144.597 186.424 143.421C186.91 142.245 187.159 140.984 187.156 139.711L187.406 108.118C187.406 103.141 183.367 99.0945 178.406 99.0859C173.445 99.0945 169.406 103.125 169.39 108.087L169.14 130.993V131.009C169.14 132.102 168.71 133.134 167.937 133.907L145.921 155.93C143.971 157.88 140.562 158.063 138.585 156.157C138.097 155.684 137.708 155.119 137.44 154.494C137.172 153.869 137.031 153.197 137.026 152.517C137.02 151.838 137.149 151.163 137.406 150.534C137.663 149.905 138.043 149.333 138.523 148.852L147.453 139.93C150.68 136.702 150.86 131.434 147.687 128.125C144.488 124.769 139.046 124.633 135.703 127.992L129.124 134.57C128.943 134.751 128.8 134.966 128.702 135.203C128.604 135.44 128.553 135.693 128.553 135.949C128.553 136.205 128.604 136.459 128.702 136.695C128.8 136.932 128.943 137.147 129.124 137.328C129.859 138.07 131.148 138.07 131.882 137.328C134.554 134.664 134.835 134.383 138.468 130.75C138.889 130.329 139.39 129.996 139.941 129.771C140.492 129.546 141.083 129.433 141.678 129.44C142.274 129.447 142.862 129.572 143.408 129.809C143.954 130.046 144.447 130.39 144.859 130.82C146.613 132.663 146.355 135.496 144.695 137.172L135.757 146.094C132.165 149.702 132.27 155.485 135.874 158.962C139.406 162.391 145.249 162.11 148.679 158.696L170.703 136.665C172.21 135.156 173.046 133.157 173.046 131.032L173.296 108.126V108.102C173.304 105.29 175.593 103.002 178.406 102.993C181.21 103.002 183.492 105.29 183.499 108.102L183.257 139.696C183.255 141.237 182.643 142.715 181.554 143.805ZM123.609 140.079V140.087C122.851 140.845 122.851 142.079 123.609 142.837C124.413 143.625 125.656 143.571 126.374 142.837C127.132 142.079 127.132 140.837 126.374 140.08C125.64 139.337 124.351 139.337 123.609 140.079ZM120.859 148.352C121.617 147.587 121.617 146.352 120.859 145.587C120.117 144.852 118.828 144.852 118.093 145.587C117.329 146.367 117.378 146.301 116.82 146.86C114.188 149.492 112.101 152.616 110.678 156.054C109.254 159.493 108.522 163.178 108.523 166.899V188.891C108.523 189.409 108.729 189.905 109.095 190.272C109.461 190.638 109.958 190.844 110.476 190.844C110.994 190.844 111.491 190.638 111.857 190.272C112.223 189.905 112.429 189.409 112.429 188.891V166.899C112.429 160.462 115.038 154.164 119.578 149.626C120.012 149.201 119.71 149.5 120.859 148.352ZM3.16816 139.715C3.16816 142.299 4.17753 144.732 6.01113 146.566L41.8838 182.445C42.3409 182.899 42.7034 183.44 42.9501 184.036C43.1968 184.632 43.323 185.271 43.3213 185.916V188.893C43.3213 189.149 43.3718 189.403 43.47 189.64C43.5681 189.877 43.712 190.093 43.8933 190.274C44.0747 190.455 44.29 190.599 44.527 190.697C44.7639 190.796 45.0179 190.846 45.2744 190.846C45.5309 190.846 45.7849 190.796 46.0218 190.697C46.2588 190.599 46.4741 190.455 46.6555 190.274C46.8368 190.093 46.9807 189.877 47.0789 189.64C47.177 189.403 47.2275 189.149 47.2275 188.893V185.916C47.2275 183.561 46.3111 181.348 44.6463 179.682L8.77285 143.804C8.23199 143.266 7.80327 142.627 7.51157 141.922C7.21988 141.218 7.07101 140.462 7.07363 139.7L6.82675 108.105C6.82675 105.289 9.11191 102.997 11.9213 102.997C14.7377 102.997 17.0299 105.289 17.0299 108.127L17.2768 131.013C17.2768 133.145 18.1111 135.155 19.626 136.67L41.6424 158.691C45.1361 162.186 51.0041 162.309 54.4549 158.962C58.1088 155.432 58.1041 149.649 54.5674 146.095L45.633 137.167C43.8752 135.409 43.7986 132.564 45.4627 130.827C47.2697 128.941 50.1658 129.059 51.8603 130.753L70.7471 149.626C78.7557 157.634 77.8025 167.241 77.8955 168.023V188.892C77.8955 189.41 78.1013 189.907 78.4676 190.273C78.8338 190.64 79.3306 190.845 79.8486 190.845C80.3666 190.845 80.8634 190.64 81.2297 190.273C81.596 189.907 81.8018 189.41 81.8018 188.892V167.798C81.8018 159.108 78.7971 152.152 73.5088 146.864L54.6229 127.992C53.8342 127.202 52.8954 126.578 51.8619 126.156C50.8284 125.734 49.7209 125.523 48.6046 125.535C47.4884 125.548 46.3859 125.783 45.3619 126.228C44.338 126.673 43.4134 127.318 42.6424 128.125C39.5205 131.386 39.6228 136.681 42.8713 139.93L51.8025 148.855C53.8197 150.881 53.8033 154.161 51.7377 156.156C49.8166 158.02 46.3885 157.916 44.4049 155.93L22.3885 133.909C22.0042 133.527 21.6998 133.072 21.4928 132.572C21.2859 132.071 21.1806 131.535 21.183 130.993L20.9361 108.106C20.9361 103.136 16.8924 99.0914 11.9213 99.0914C6.958 99.0914 2.9205 103.136 2.9205 108.122L3.16816 139.715ZM45.4135 21.5781H45.4057C44.6939 22.3531 44.6877 23.582 45.4994 24.3438C46.2674 25.0633 47.5205 25.0508 48.2572 24.25C49.0064 23.4688 48.9486 22.2203 48.1713 21.493C47.4135 20.782 46.1244 20.8289 45.4135 21.5781Z"
-                                fill="url(#paint2_linear_202_81)" />
-                            <path
-                                d="M163.304 68.1414C163.304 30.743 133.062 0 95.1557 0C78.9807 0 63.5182 5.67656 51.2338 16.0469C51.0375 16.2119 50.8758 16.4141 50.7578 16.6418C50.6397 16.8694 50.5678 17.1181 50.546 17.3736C50.5242 17.6292 50.5531 17.8865 50.6309 18.1308C50.7087 18.3752 50.8339 18.6018 50.9994 18.7977C51.6635 19.5867 52.9525 19.7039 53.7494 19.0398L53.7572 19.032C65.3119 9.28281 80.015 3.90703 95.1635 3.90703C130.664 3.90703 159.398 32.6398 159.398 68.1422C159.398 103.634 130.666 132.369 95.1635 132.369C59.6697 132.369 30.9291 103.645 30.9291 68.1422C30.9291 54.3289 35.2494 41.1656 43.4135 30.0789C44.0565 29.2102 43.8674 27.9789 42.9994 27.3531C42.1635 26.7273 40.8822 26.9313 40.2729 27.7664C31.8049 39.2453 27.0229 53.2547 27.0229 68.1414C27.0229 105.716 57.4588 136.274 95.1635 136.274C132.951 136.274 163.304 105.627 163.304 68.1414Z"
-                                fill="url(#paint3_linear_202_81)" />
-                            <path
-                                d="M58.2619 53.9219C58.2619 57.9586 61.5455 61.2422 65.5822 61.2422H78.0815L74.4346 106.561C74.0455 111.394 77.8705 115.539 82.719 115.539C87.0768 115.539 90.7197 112.133 91.0119 107.784L92.0533 92.2742C92.1083 91.4859 92.4598 90.7477 93.0371 90.2081C93.6145 89.6686 94.3748 89.3679 95.1651 89.3664C95.9551 89.3683 96.7152 89.6693 97.2922 90.209C97.8693 90.7486 98.2205 91.4868 98.2752 92.275L99.3166 107.784C99.6088 112.132 103.252 115.539 107.61 115.539C112.458 115.539 116.283 111.393 115.894 106.561L112.247 61.2422H124.746C128.783 61.2422 132.067 57.9586 132.067 53.9219V53.9141C132.067 49.8773 128.782 46.5938 124.746 46.5938H104.347C106.577 44.2898 107.957 41.1586 107.957 37.707C107.957 30.6531 102.218 24.9141 95.1643 24.9141C88.1104 24.9141 82.3713 30.6531 82.3713 37.707C82.3713 41.1586 83.7518 44.2898 85.9815 46.5938H65.5815C61.5455 46.5938 58.2619 49.8773 58.2619 53.9219ZM128.16 53.9141V53.9219C128.16 55.8047 126.628 57.3359 124.746 57.3359H110.13C109.86 57.3361 109.594 57.392 109.347 57.5002C109.1 57.6084 108.878 57.7665 108.695 57.9646C108.512 58.1628 108.372 58.3966 108.284 58.6514C108.196 58.9062 108.162 59.1765 108.183 59.4453L112 106.873C112.05 107.48 111.973 108.09 111.775 108.666C111.576 109.241 111.261 109.769 110.848 110.216C110.435 110.663 109.935 111.02 109.377 111.264C108.819 111.508 108.217 111.633 107.609 111.633C106.492 111.63 105.418 111.204 104.603 110.442C103.787 109.679 103.291 108.636 103.213 107.522L102.172 92.0133C101.926 88.3391 98.8479 85.4602 95.1619 85.4602C91.4791 85.4602 88.401 88.3391 88.1549 92.0125L87.1135 107.522C87.0361 108.636 86.5397 109.679 85.7243 110.442C84.9088 111.204 83.8347 111.63 82.7182 111.633C82.1096 111.633 81.5076 111.508 80.95 111.264C80.3925 111.02 79.8915 110.663 79.4789 110.216C79.0662 109.769 78.7507 109.241 78.5524 108.666C78.3541 108.09 78.2773 107.48 78.3268 106.873L82.144 59.4453C82.1655 59.1765 82.1312 58.9062 82.0432 58.6513C81.9551 58.3964 81.8152 58.1625 81.6323 57.9644C81.4495 57.7662 81.2275 57.6081 80.9805 57.4999C80.7335 57.3918 80.4667 57.3359 80.1971 57.3359H65.5815C64.675 57.3359 63.8056 56.9758 63.1646 56.3348C62.5236 55.6938 62.1635 54.8245 62.1635 53.918C62.1635 53.0115 62.5236 52.1421 63.1646 51.5011C63.8056 50.8601 64.675 50.5 65.5815 50.5H124.745C126.628 50.5 128.16 52.0313 128.16 53.9141ZM86.2768 37.707C86.2768 32.807 90.2635 28.8203 95.1635 28.8203C100.063 28.8203 104.05 32.807 104.05 37.707C104.05 42.607 100.063 46.5938 95.1635 46.5938C90.2635 46.5938 86.2768 42.607 86.2768 37.707Z"
-                                fill="url(#paint4_linear_202_81)" />
-                            <defs>
-                                <linearGradient id="paint0_linear_202_81" x1="170.35" y1="50.8412" x2="189.255"
-                                    y2="68.8237" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7A01FF" />
-                                    <stop offset="1" stop-color="#FE29BB" />
-                                </linearGradient>
-                                <linearGradient id="paint1_linear_202_81" x1="0.337662" y1="50.8412" x2="19.2426"
-                                    y2="68.8237" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7A01FF" />
-                                    <stop offset="1" stop-color="#FE29BB" />
-                                </linearGradient>
-                                <linearGradient id="paint2_linear_202_81" x1="5.98688" y1="32.0435" x2="141.076"
-                                    y2="193.062" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7A01FF" />
-                                    <stop offset="1" stop-color="#FE29BB" />
-                                </linearGradient>
-                                <linearGradient id="paint3_linear_202_81" x1="29.288" y1="8.87044" x2="138.867"
-                                    y2="129.134" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7A01FF" />
-                                    <stop offset="1" stop-color="#FE29BB" />
-                                </linearGradient>
-                                <linearGradient id="paint4_linear_202_81" x1="59.4887" y1="30.8131" x2="132.217"
-                                    y2="95.8147" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7A01FF" />
-                                    <stop offset="1" stop-color="#FE29BB" />
-                                </linearGradient>
-                            </defs>
+                <header class="header-centralizado gsap-fade-up">
+                    <div class="icone-titulo">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
-
-                        <h2 class="secao-acessibilidade_titulo">
-                            Acessibilidade Confirmada: <span class="destaque-gradiente">Desenvolvido para Todos</span>
-                        </h2>
                     </div>
-                    <p class="secao-acessibilidade_descricao">
-                        O SenaChat foi planejado com o carinho e o rigor necessários para ser uma ferramenta
-                        verdadeiramente inclusiva.
-                        Implementamos recursos de acessibilidade e submetemos o projeto à aprovação de pessoas que
-                        utilizam tecnologias
-                        assistivas no dia a dia.
+                    <h2 class="titulo-secao">O Que é o <span class="destaque-gradiente">SenaChat?</span></h2>
+                    <p class="texto-centralizado">
+                        Resultado do Projeto Integrador de 2025, o SenaChat é um assistente virtual inteligente criado para tirar dúvidas sobre o curso de forma automática.
                     </p>
                 </header>
 
-                <!-- Cards de Testemunho -->
-                <div class="grid-testemunhos">
-                    <!-- Testemunho 1 -->
-                    <article class="card-testemunho">
-                        <!-- Aspas Superior Esquerda -->
-                        <div class="card-testemunho_aspas-superior" aria-hidden="true">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                            </svg>
-                        </div>
+                <div class="conteudo-projeto">
+                    <p class="texto-padrao gsap-fade-up">
+                        Desenvolvido pelos alunos Davi Amorim, Isabella Schlemper, Maria Fernanda e Nathalia Schlemper em Palhoça/SC, o sistema interpreta o site oficial e gera respostas via Inteligência Artificial, sem necessidade de cadastro manual.
+                    </p>
 
-                        <!-- Avatar Circular Fora do Card -->
-                        <div class="card-testemunho_avatar">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
-                                <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </div>
-
-                        <!-- Conteúdo Interno do Card -->
-                        <div class="card-testemunho_conteudo">
-                            <h3 class="card-testemunho_nome">{Nome do Testador}</h3>
-                            <p class="card-testemunho_ocupacao">{Profissão/Ocupação}</p>
-                            <div class="card-testemunho_barra-decorativa"></div>
-                            <p class="card-testemunho_deficiencia">{Tipo de Deficiência/Condição}</p>
-                            <blockquote class="card-testemunho_citacao">
-                                {Feedback detalhado sobre a experiência com o site e recursos de acessibilidade
-                                implementados}
-                            </blockquote>
-                        </div>
-
-                        <!-- Aspas Inferior Direita -->
-                        <div class="card-testemunho_aspas-inferior" aria-hidden="true">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
-                            </svg>
-                        </div>
-                    </article>
-
-                    <!-- Testemunho 2 -->
-                    <article class="card-testemunho">
-                        <!-- Aspas Superior Esquerda -->
-                        <div class="card-testemunho_aspas-superior" aria-hidden="true">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                            </svg>
-                        </div>
-
-                        <!-- Avatar Circular Fora do Card -->
-                        <div class="card-testemunho_avatar">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
-                                <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </div>
-
-                        <!-- Conteúdo Interno do Card -->
-                        <div class="card-testemunho_conteudo">
-                            <h3 class="card-testemunho_nome">{Nome do Testador}</h3>
-                            <p class="card-testemunho_ocupacao">{Profissão/Ocupação}</p>
-                            <div class="card-testemunho_barra-decorativa"></div>
-                            <p class="card-testemunho_deficiencia">{Tipo de Deficiência/Condição}</p>
-                            <blockquote class="card-testemunho_citacao">
-                                {Feedback detalhado sobre a experiência com o site e recursos de acessibilidade
-                                implementados}
-                            </blockquote>
-                        </div>
-
-                        <!-- Aspas Inferior Direita -->
-                        <div class="card-testemunho_aspas-inferior" aria-hidden="true">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
-                            </svg>
-                        </div>
-                    </article>
-
-                    <!-- Testemunho 3 -->
-                    <article class="card-testemunho">
-                        <!-- Aspas Superior Esquerda -->
-                        <div class="card-testemunho_aspas-superior" aria-hidden="true">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                            </svg>
-                        </div>
-
-                        <!-- Avatar Circular Fora do Card -->
-                        <div class="card-testemunho_avatar">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
-                                <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </div>
-
-                        <!-- Conteúdo Interno do Card -->
-                        <div class="card-testemunho_conteudo">
-                            <h3 class="card-testemunho_nome">{Nome do Testador}</h3>
-                            <p class="card-testemunho_ocupacao">{Profissão/Ocupação}</p>
-                            <div class="card-testemunho_barra-decorativa"></div>
-                            <p class="card-testemunho_deficiencia">{Tipo de Deficiência/Condição}</p>
-                            <blockquote class="card-testemunho_citacao">
-                                {Feedback detalhado sobre a experiência com o site e recursos de acessibilidade
-                                implementados}
-                            </blockquote>
-                        </div>
-
-                        <!-- Aspas Inferior Direita -->
-                        <div class="card-testemunho_aspas-inferior" aria-hidden="true">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
-                            </svg>
-                        </div>
-                    </article>
-                </div>
-
-                <!-- Resumo dos Recursos -->
-                <div class="recursos-implementados">
-                    <h3 class="recursos-implementados_titulo">O Que Implementamos:</h3>
-                    <ul class="recursos-implementados_lista">
-                        <li class="recurso-item">
-                            <svg class="recurso-item_icone" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <div class="recurso-item_texto">
-                                <strong>Contraste de Cores Otimizado:</strong> Garantindo a legibilidade para usuários
-                                com daltonismo e baixa visão.
+                    <div class="grid-modulos">
+                        <div class="card-tech gsap-fade-up" data-delay="0.1">
+                            <div class="card-tech_header">
+                                <svg class="tech-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                                <h3>Módulo Back-end</h3>
                             </div>
-                        </li>
-                        <li class="recurso-item">
-                            <svg class="recurso-item_icone" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <div class="recurso-item_texto">
-                                <strong>Suporte Total a Leitor de Tela (ARIA):</strong> Código-fonte marcado
-                                corretamente para navegação assistiva.
+                            <p>Focado na coleta de informações do site (web scraping) e na produção de respostas automáticas através de uma API robusta e escalável.</p>
+                        </div>
+
+                        <div class="card-tech gsap-fade-up" data-delay="0.2">
+                            <div class="card-tech_header">
+                                <svg class="tech-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                                </svg>
+                                <h3>Módulo Front-end</h3>
                             </div>
-                        </li>
-                        <li class="recurso-item">
-                            <svg class="recurso-item_icone" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <div class="recurso-item_texto">
-                                <strong>Navegação por Teclado (Atalhos):</strong> Permitindo o acesso sem o uso do
-                                mouse.
-                            </div>
-                        </li>
-                        <li class="recurso-item">
-                            <svg class="recurso-item_icone" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <div class="recurso-item_texto">
-                                <strong>Painel de Acessibilidade Customizável:</strong> Ajustes de tema, fonte e filtros
-                                para daltonismo em tempo real.
-                            </div>
-                        </li>
-                    </ul>
+                            <p>Construção de uma interface web amigável, responsiva e acessível, onde os usuários interagem com o chatbot de forma clara e intuitiva.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção: A Equipe -->
         <section class="secao-equipe">
             <div class="container">
-                <header class="secao-equipe_cabecalho">
-                    <div class="secao-equipe_icone-titulo">
-                        <svg class="icone-team" width="200" height="200" viewBox="0 0 468 449" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M0.954221 275.995C-0.165363 279.217 -0.303048 282.698 0.558625 285.998C1.4203 289.298 3.24252 292.268 5.79422 294.531C28.7842 315.073 58.5343 326.427 89.3642 326.427C120.194 326.427 149.944 315.073 172.934 294.531C175.487 292.27 177.312 289.302 178.177 286.003C179.042 282.704 178.909 279.222 177.794 275.999C173.065 262.442 165.281 250.154 155.044 240.086C144.808 230.017 132.392 222.439 118.758 217.935C127.803 211.67 134.61 202.679 138.187 192.273C141.763 181.868 141.922 170.592 138.64 160.09C135.358 149.588 128.807 140.409 119.941 133.891C111.076 127.374 100.361 123.859 89.3582 123.859C78.3552 123.859 67.64 127.374 58.7749 133.891C49.9099 140.409 43.3587 149.588 40.0767 160.09C36.7947 170.592 36.9534 181.868 40.5298 192.273C44.1062 202.679 50.9132 211.67 59.9582 217.935C46.3298 222.441 33.9202 230.02 23.6889 240.088C13.4577 250.155 5.67895 262.441 0.954221 275.995ZM51.7302 175.535C51.7239 168.092 53.9248 160.815 58.0546 154.623C62.1844 148.431 68.0576 143.602 74.9315 140.748C81.8054 137.894 89.3713 137.142 96.6725 138.588C103.974 140.034 110.682 143.612 115.949 148.871C121.217 154.129 124.807 160.832 126.265 168.13C127.723 175.429 126.984 182.996 124.142 189.875C121.299 196.754 116.481 202.635 110.296 206.775C104.111 210.916 96.8371 213.129 89.3942 213.135H89.3102C79.3474 213.111 69.7999 209.141 62.7569 202.094C55.714 195.048 51.7492 185.498 51.7302 175.535ZM89.3302 227.163H89.3942C105.915 227.176 122.024 232.325 135.488 241.898C148.953 251.472 159.108 264.995 164.546 280.595C164.748 281.207 164.765 281.865 164.597 282.487C164.428 283.109 164.081 283.668 163.598 284.095C143.175 302.341 116.747 312.427 89.3602 312.427C61.9733 312.427 35.5456 302.341 15.1222 284.095C14.6402 283.668 14.2936 283.109 14.1252 282.487C13.9567 281.865 13.9738 281.207 14.1742 280.595C19.608 264.991 29.7597 251.463 43.2231 241.885C56.6865 232.307 72.7953 227.152 89.3182 227.135L89.3302 227.163ZM289.818 275.995C288.699 279.217 288.562 282.698 289.423 285.998C290.285 289.298 292.107 292.268 294.658 294.531C317.648 315.071 347.397 326.425 378.226 326.425C409.055 326.425 438.804 315.071 461.794 294.531C464.347 292.268 466.169 289.297 467.032 285.997C467.894 282.696 467.757 279.214 466.638 275.991C461.911 262.438 454.13 250.153 443.897 240.087C433.665 230.02 421.255 222.441 407.626 217.935C416.672 211.67 423.481 202.678 427.058 192.272C430.635 181.866 430.794 170.588 427.512 160.085C424.23 149.582 417.678 140.402 408.812 133.884C399.947 127.366 389.23 123.85 378.226 123.85C367.222 123.85 356.506 127.366 347.64 133.884C338.774 140.402 332.223 149.582 328.94 160.085C325.658 170.588 325.818 181.866 329.395 192.272C332.972 202.678 339.78 211.67 348.826 217.935C335.198 222.442 322.788 230.022 312.557 240.089C302.325 250.156 294.545 262.442 289.818 275.995ZM340.594 175.535C340.593 168.093 342.798 160.817 346.93 154.628C351.063 148.438 356.938 143.613 363.813 140.762C370.687 137.911 378.253 137.162 385.553 138.61C392.853 140.059 399.56 143.638 404.826 148.898C410.092 154.157 413.68 160.859 415.138 168.157C416.595 175.456 415.856 183.022 413.014 189.9C410.171 196.779 405.354 202.66 399.17 206.8C392.985 210.941 385.713 213.155 378.27 213.163H378.194C368.223 213.144 358.666 209.173 351.618 202.119C344.57 195.066 340.606 185.506 340.594 175.535ZM378.194 227.135H378.278C394.797 227.157 410.9 232.314 424.358 241.892C437.816 251.47 447.963 264.995 453.394 280.595C453.596 281.206 453.614 281.863 453.446 282.485C453.278 283.106 452.932 283.665 452.45 284.091C432.027 302.337 405.599 312.423 378.212 312.423C350.825 312.423 324.398 302.337 303.974 284.091C303.492 283.664 303.145 283.105 302.977 282.483C302.809 281.861 302.828 281.203 303.03 280.591C308.464 264.984 318.619 251.453 332.087 241.875C345.554 232.297 361.668 227.146 378.194 227.135ZM145.394 152.163C144.272 155.383 144.129 158.863 144.984 162.165C145.838 165.466 147.651 168.44 150.194 170.711C160.312 179.778 171.856 187.112 184.362 192.419C186.071 193.147 187.998 193.166 189.721 192.473C191.444 191.779 192.82 190.43 193.548 188.721C194.276 187.013 194.295 185.085 193.602 183.362C192.908 181.64 191.559 180.263 189.85 179.535C178.76 174.828 168.521 168.325 159.546 160.287C159.064 159.854 158.718 159.29 158.551 158.663C158.384 158.037 158.403 157.375 158.606 156.759C164.04 141.148 174.198 127.616 187.671 118.039C201.143 108.461 217.262 103.314 233.792 103.312C250.321 103.309 266.442 108.451 279.917 118.024C293.393 127.597 303.555 141.126 308.994 156.735C309.198 157.349 309.219 158.009 309.054 158.635C308.889 159.261 308.546 159.825 308.066 160.259C298.948 168.415 288.54 175.002 277.266 179.751C276.419 180.108 275.65 180.628 275.004 181.282C274.358 181.935 273.846 182.71 273.499 183.561C273.153 184.413 272.977 185.324 272.982 186.243C272.987 187.163 273.174 188.072 273.53 188.919C273.887 189.766 274.407 190.535 275.061 191.182C275.714 191.828 276.489 192.339 277.34 192.686C278.192 193.033 279.103 193.209 280.022 193.203C280.942 193.198 281.851 193.012 282.698 192.655C295.405 187.306 307.137 179.885 317.414 170.695C319.951 168.421 321.758 165.447 322.608 162.148C323.459 158.849 323.315 155.372 322.194 152.155C317.469 138.598 309.689 126.31 299.456 116.241C289.222 106.172 276.81 98.592 263.178 94.0872C272.227 87.8244 279.038 78.8343 282.618 68.4282C286.198 58.0221 286.359 46.7445 283.079 36.2402C279.798 25.7359 273.247 16.5545 264.381 10.0353C255.516 3.51604 244.799 0 233.794 0C222.79 0 212.073 3.51604 203.207 10.0353C194.341 16.5545 187.79 25.7359 184.51 36.2402C181.229 46.7445 181.391 58.0221 184.971 68.4282C188.55 78.8343 195.361 87.8244 204.41 94.0872C190.778 98.5928 178.365 106.174 168.131 116.245C157.898 126.315 150.118 138.605 145.394 152.163ZM196.194 51.6872C196.194 44.2429 198.402 36.9659 202.539 30.7767C206.675 24.5874 212.554 19.764 219.432 16.9167C226.311 14.0694 233.879 13.326 241.18 14.7806C248.48 16.2353 255.186 19.8226 260.447 25.0887C265.709 30.3548 269.291 37.0632 270.739 44.3652C272.187 51.6672 271.438 59.2347 268.584 66.1105C265.731 72.9863 260.903 78.8614 254.71 82.9926C248.517 87.1238 241.238 89.3255 233.794 89.3192C223.817 89.3076 214.252 85.339 207.197 78.2842C200.142 71.2293 196.174 61.6643 196.162 51.6872H196.194ZM223.046 202.111C222.13 202.035 221.238 201.779 220.421 201.358C219.604 200.937 218.877 200.359 218.283 199.658C217.689 198.956 217.239 198.144 216.959 197.269C216.679 196.393 216.574 195.471 216.65 194.555C216.726 193.639 216.982 192.747 217.403 191.93C217.824 191.113 218.402 190.386 219.104 189.792C219.805 189.198 220.617 188.748 221.492 188.468C222.368 188.188 223.29 188.083 224.206 188.159C230.423 188.698 236.675 188.712 242.894 188.203C243.819 188.105 244.754 188.192 245.645 188.459C246.536 188.726 247.365 189.168 248.083 189.759C248.801 190.35 249.394 191.078 249.828 191.901C250.262 192.724 250.527 193.625 250.608 194.552C250.689 195.478 250.585 196.412 250.302 197.298C250.018 198.184 249.561 199.004 248.957 199.711C248.353 200.418 247.613 200.998 246.783 201.416C245.952 201.834 245.046 202.083 244.118 202.147C240.85 202.435 237.482 202.575 233.826 202.575C230.342 202.575 226.714 202.419 223.014 202.111H223.046ZM145.394 398.979C144.27 402.2 144.128 405.682 144.988 408.984C145.848 412.285 147.67 415.256 150.222 417.519C168.251 433.663 190.581 444.224 214.498 447.919C216.32 448.174 218.17 447.701 219.646 446.603C221.122 445.505 222.106 443.869 222.386 442.051C222.666 440.232 222.218 438.377 221.14 436.886C220.062 435.394 218.441 434.388 216.626 434.083C195.388 430.795 175.562 421.411 159.554 407.071C159.073 406.645 158.727 406.087 158.56 405.466C158.393 404.846 158.412 404.189 158.614 403.579C164.044 387.985 174.189 374.464 187.642 364.89C201.096 355.316 217.193 350.161 233.706 350.139H233.882C250.402 350.161 266.506 355.319 279.964 364.899C293.421 374.48 303.567 388.009 308.994 403.611C309.193 404.216 309.21 404.866 309.044 405.481C308.877 406.096 308.535 406.649 308.058 407.071C292.047 421.417 272.215 430.805 250.97 434.095C250.054 434.227 249.174 434.539 248.38 435.013C247.585 435.487 246.893 436.114 246.342 436.857C245.791 437.601 245.393 438.446 245.171 439.344C244.949 440.242 244.908 441.176 245.049 442.09C245.189 443.004 245.51 443.882 245.992 444.671C246.474 445.461 247.108 446.147 247.857 446.69C248.606 447.234 249.455 447.623 250.355 447.836C251.256 448.049 252.189 448.081 253.102 447.931C277.027 444.231 299.362 433.661 317.394 417.507C319.94 415.246 321.757 412.28 322.616 408.986C323.475 405.691 323.336 402.215 322.218 398.999C317.497 385.436 309.718 373.141 299.484 363.066C289.249 352.991 276.834 345.407 263.198 340.899C272.243 334.634 279.05 325.643 282.627 315.238C286.203 304.832 286.362 293.556 283.08 283.054C279.798 272.552 273.247 263.373 264.382 256.855C255.516 250.338 244.801 246.823 233.798 246.823C222.795 246.823 212.08 250.338 203.215 256.855C194.35 263.373 187.799 272.552 184.517 283.054C181.235 293.556 181.393 304.832 184.97 315.238C188.546 325.643 195.353 334.634 204.398 340.899C190.768 345.407 178.357 352.989 168.125 363.061C157.894 373.132 150.116 385.421 145.394 398.979ZM196.162 298.511C196.161 291.072 198.366 283.799 202.496 277.612C206.627 271.425 212.499 266.601 219.37 263.749C226.241 260.898 233.803 260.147 241.101 261.591C248.399 263.036 255.105 266.611 260.372 271.865C265.638 277.119 269.23 283.816 270.692 291.11C272.154 298.404 271.422 305.968 268.587 312.847C265.753 319.725 260.943 325.608 254.766 329.754C248.589 333.9 241.322 336.122 233.882 336.139H233.706C223.745 336.105 214.202 332.127 207.166 325.076C200.13 318.024 196.174 308.473 196.162 298.511Z"
-                                fill="url(#paint0_linear_203_349)" />
-                            <defs>
-                                <linearGradient id="paint0_linear_203_349" x1="374.91" y1="381.455" x2="92.6782"
-                                    y2="99.2232" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#FE29BB" />
-                                    <stop offset="1" stop-color="#7A01FF" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
+                <header class="header-centralizado gsap-fade-up">
+                    <h2 class="titulo-secao">Quem <span class="destaque-gradiente">Fez Acontecer</span></h2>
+                    <p class="texto-centralizado">Somos um time dedicado a construir o futuro da interação digital.</p>
+                </header>
+                
+                <div class="grid-equipe">
+                    <article class="card-membro gsap-fade-up" data-delay="0.1">
+                         <a class="card-membro_linkedin" href="#" target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor"><path d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z"/></svg></a>
+                         <div class="card-membro_foto"><svg class="card-membro_avatar" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 1 0-16 0" /></svg></div>
+                         <div class="card-membro_info"><h3 class="card-membro_nome">Davi Amorim</h3><p class="card-membro_funcao">Back-end / Dados</p></div>
+                    </article>
+                    <article class="card-membro gsap-fade-up" data-delay="0.2">
+                         <a class="card-membro_linkedin" href="#" target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor"><path d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z"/></svg></a>
+                         <div class="card-membro_foto"><svg class="card-membro_avatar" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 1 0-16 0" /></svg></div>
+                         <div class="card-membro_info"><h3 class="card-membro_nome">Isabella Schlemper</h3><p class="card-membro_funcao">Front-end</p></div>
+                    </article>
+                    <article class="card-membro gsap-fade-up" data-delay="0.3">
+                         <a class="card-membro_linkedin" href="#" target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor"><path d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z"/></svg></a>
+                         <div class="card-membro_foto"><svg class="card-membro_avatar" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 1 0-16 0" /></svg></div>
+                         <div class="card-membro_info"><h3 class="card-membro_nome">Maria Fernanda</h3><p class="card-membro_funcao">UI/UX Designer</p></div>
+                    </article>
+                    <article class="card-membro gsap-fade-up" data-delay="0.4">
+                         <a class="card-membro_linkedin" href="#" target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor"><path d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z"/></svg></a>
+                         <div class="card-membro_foto"><svg class="card-membro_avatar" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 1 0-16 0" /></svg></div>
+                         <div class="card-membro_info"><h3 class="card-membro_nome">Nathalia Schlemper</h3><p class="card-membro_funcao">Gerente de Projeto</p></div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-                        <h2 class="secao-equipe_titulo">
-                            A Equipe de Alunos do <span class="destaque-gradiente">Jovem Programador</span>
-                        </h2>
+        <section class="secao-acessibilidade-detalhes">
+            <div class="container">
+                <header class="header-centralizado gsap-fade-up">
+                    <div class="icone-titulo">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                     </div>
-                    <p class="secao-equipe_descricao">
-                        Somos um time dedicado, utilizando tecnologias de ponta para desenvolver
-                        o futuro da interação digital. Conheça os desenvolvedores:
-                    </p>
+                    <h2 class="titulo-secao">Acessibilidade <span class="destaque-gradiente">Para Todos</span></h2>
+                    <p class="texto-centralizado">Não fizemos apenas um chatbot, criamos uma ferramenta inclusiva submetida à aprovação de quem realmente precisa.</p>
                 </header>
 
-                <div class="grid-equipe">
-                    <!-- Membro 1 -->
-                    <article class="card-membro">
-                        <a class="card-membro_linkedin" href="#" aria-label="LinkedIn do desenvolvedor" target="_blank"
-                            rel="noopener noreferrer">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <g clip-path="url(#clip0_22_196_1)">
-                                    <path
-                                        d="M20.3715 0H1.62422C0.726172 0 0 0.708984 0 1.58555V20.4102C0 21.2867 0.726172 22 1.62422 22H20.3715C21.2695 22 22 21.2867 22 20.4145V1.58555C22 0.708984 21.2695 0 20.3715 0ZM6.52695 18.7473H3.26133V8.2457H6.52695V18.7473ZM4.89414 6.81484C3.8457 6.81484 2.99922 5.96836 2.99922 4.92422C2.99922 3.88008 3.8457 3.03359 4.89414 3.03359C5.93828 3.03359 6.78477 3.88008 6.78477 4.92422C6.78477 5.96406 5.93828 6.81484 4.89414 6.81484ZM18.7473 18.7473H15.4859V13.6426C15.4859 12.4266 15.4645 10.8582 13.7887 10.8582C12.0914 10.8582 11.8336 12.1859 11.8336 13.5566V18.7473H8.57656V8.2457H11.7047V9.68086H11.7477C12.1816 8.85586 13.2473 7.98359 14.8328 7.98359C18.1371 7.98359 18.7473 10.1578 18.7473 12.9852V18.7473Z"
-                                        fill="currentColor" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_22_196_1">
-                                        <rect width="22" height="22" fill="currentColor" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </a>
-                        <div class="card-membro_foto">
-                            <svg class="card-membro_avatar" width="80" height="80" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
-                                <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </div>
-                        <div class="card-membro_info">
-                            <h3 class="card-membro_nome">Desenvolvedor 1</h3>
-                            <p class="card-membro_funcao">Front-end / UX</p>
-                            <p class="card-membro_frase">
-                                "Meu foco é na experiência: o chatbot deve ser fácil para todos."
-                            </p>
-                        </div>
-                    </article>
+                <div class="grid-features">
+                    <div class="card-feature gsap-fade-up">
+                        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                        <h3>Painel Customizável</h3>
+                        <p>Ajuste tema, fonte e filtros em tempo real, garantindo autonomia na navegação.</p>
+                    </div>
 
-                    <!-- Membro 2 -->
-                    <article class="card-membro">
-                        <a class="card-membro_linkedin" href="#" aria-label="LinkedIn do desenvolvedor" target="_blank"
-                            rel="noopener noreferrer">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <g clip-path="url(#clip0_22_196_2)">
-                                    <path
-                                        d="M20.3715 0H1.62422C0.726172 0 0 0.708984 0 1.58555V20.4102C0 21.2867 0.726172 22 1.62422 22H20.3715C21.2695 22 22 21.2867 22 20.4145V1.58555C22 0.708984 21.2695 0 20.3715 0ZM6.52695 18.7473H3.26133V8.2457H6.52695V18.7473ZM4.89414 6.81484C3.8457 6.81484 2.99922 5.96836 2.99922 4.92422C2.99922 3.88008 3.8457 3.03359 4.89414 3.03359C5.93828 3.03359 6.78477 3.88008 6.78477 4.92422C6.78477 5.96406 5.93828 6.81484 4.89414 6.81484ZM18.7473 18.7473H15.4859V13.6426C15.4859 12.4266 15.4645 10.8582 13.7887 10.8582C12.0914 10.8582 11.8336 12.1859 11.8336 13.5566V18.7473H8.57656V8.2457H11.7047V9.68086H11.7477C12.1816 8.85586 13.2473 7.98359 14.8328 7.98359C18.1371 7.98359 18.7473 10.1578 18.7473 12.9852V18.7473Z"
-                                        fill="currentColor" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_22_196_2">
-                                        <rect width="22" height="22" fill="currentColor" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </a>
-                        <div class="card-membro_foto">
-                            <svg class="card-membro_avatar" width="80" height="80" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
-                                <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </div>
-                        <div class="card-membro_info">
-                            <h3 class="card-membro_nome">Desenvolvedor 2</h3>
-                            <p class="card-membro_funcao">Back-end / API</p>
-                            <p class="card-membro_frase">
-                                "Eu garanto que a IA leia e interprete o site com a maior precisão possível."
-                            </p>
-                        </div>
-                    </article>
+                    <div class="card-feature gsap-fade-up" data-delay="0.1">
+                        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg></div>
+                        <h3>Temas e Contraste</h3>
+                        <p>Modo Claro, Escuro e Alto Contraste para reduzir fadiga visual e apoiar baixa visão.</p>
+                    </div>
 
-                    <!-- Membro 3 -->
-                    <article class="card-membro">
-                        <a class="card-membro_linkedin" href="#" aria-label="LinkedIn do desenvolvedor" target="_blank"
-                            rel="noopener noreferrer">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <g clip-path="url(#clip0_22_196_3)">
-                                    <path
-                                        d="M20.3715 0H1.62422C0.726172 0 0 0.708984 0 1.58555V20.4102C0 21.2867 0.726172 22 1.62422 22H20.3715C21.2695 22 22 21.2867 22 20.4145V1.58555C22 0.708984 21.2695 0 20.3715 0ZM6.52695 18.7473H3.26133V8.2457H6.52695V18.7473ZM4.89414 6.81484C3.8457 6.81484 2.99922 5.96836 2.99922 4.92422C2.99922 3.88008 3.8457 3.03359 4.89414 3.03359C5.93828 3.03359 6.78477 3.88008 6.78477 4.92422C6.78477 5.96406 5.93828 6.81484 4.89414 6.81484ZM18.7473 18.7473H15.4859V13.6426C15.4859 12.4266 15.4645 10.8582 13.7887 10.8582C12.0914 10.8582 11.8336 12.1859 11.8336 13.5566V18.7473H8.57656V8.2457H11.7047V9.68086H11.7477C12.1816 8.85586 13.2473 7.98359 14.8328 7.98359C18.1371 7.98359 18.7473 10.1578 18.7473 12.9852V18.7473Z"
-                                        fill="currentColor" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_22_196_3">
-                                        <rect width="22" height="22" fill="currentColor" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </a>
-                        <div class="card-membro_foto">
-                            <svg class="card-membro_avatar" width="80" height="80" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
-                                <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </div>
-                        <div class="card-membro_info">
-                            <h3 class="card-membro_nome">Desenvolvedor 3</h3>
-                            <p class="card-membro_funcao">UI/Designer / Acessibilidade</p>
-                            <p class="card-membro_frase">
-                                "A inclusão digital é fundamental. Implementamos recursos para que todos possam usar o
-                                SenaChat."
-                            </p>
-                        </div>
-                    </article>
+                    <div class="card-feature gsap-fade-up" data-delay="0.2">
+                        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.05 13a9 9 0 0 1 17.65-2.86"></path><path d="M21.51 9a9 9 0 0 1-.56 8.35"></path><path d="M16 19a9 9 0 0 1-13.3-3.6"></path><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0"></path></svg></div>
+                        <h3>Filtros de Cor</h3>
+                        <p>Suporte a Protanopia, Deuteranopia e Tritanopia, ajustando a paleta para cada visão.</p>
+                    </div>
 
-                    <!-- Membro 4 -->
-                    <article class="card-membro">
-                        <a class="card-membro_linkedin" href="#" aria-label="LinkedIn do desenvolvedor" target="_blank"
-                            rel="noopener noreferrer">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <g clip-path="url(#clip0_22_196_4)">
-                                    <path
-                                        d="M20.3715 0H1.62422C0.726172 0 0 0.708984 0 1.58555V20.4102C0 21.2867 0.726172 22 1.62422 22H20.3715C21.2695 22 22 21.2867 22 20.4145V1.58555C22 0.708984 21.2695 0 20.3715 0ZM6.52695 18.7473H3.26133V8.2457H6.52695V18.7473ZM4.89414 6.81484C3.8457 6.81484 2.99922 5.96836 2.99922 4.92422C2.99922 3.88008 3.8457 3.03359 4.89414 3.03359C5.93828 3.03359 6.78477 3.88008 6.78477 4.92422C6.78477 5.96406 5.93828 6.81484 4.89414 6.81484ZM18.7473 18.7473H15.4859V13.6426C15.4859 12.4266 15.4645 10.8582 13.7887 10.8582C12.0914 10.8582 11.8336 12.1859 11.8336 13.5566V18.7473H8.57656V8.2457H11.7047V9.68086H11.7477C12.1816 8.85586 13.2473 7.98359 14.8328 7.98359C18.1371 7.98359 18.7473 10.1578 18.7473 12.9852V18.7473Z"
-                                        fill="currentColor" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_22_196_4">
-                                        <rect width="22" height="22" fill="currentColor" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </a>
-                        <div class="card-membro_foto">
-                            <svg class="card-membro_avatar" width="80" height="80" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
-                                <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
+                    <div class="card-feature gsap-fade-up" data-delay="0.3">
+                        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V8Z"></path><path d="M12 2v20"></path></svg></div>
+                        <h3>VLibras</h3>
+                        <p>Tradução automática para a Língua Brasileira de Sinais, democratizando o acesso.</p>
+                    </div>
+
+                    <div class="card-feature gsap-fade-up" data-delay="0.4">
+                        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2-3v-3a7 7 0 0 1 4-6"></path><path d="M9 17v1a3 3 0 0 0 6 0v-1"></path></svg></div>
+                        <h3>Suporte WAI-ARIA</h3>
+                        <p>Código otimizado para leitores de tela como NVDA, permitindo que cegos "ouçam" a estrutura.</p>
+                    </div>
+
+                    <div class="card-feature span-2 gsap-fade-up" data-delay="0.5">
+                        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><path d="M6 8h.001"></path><path d="M10 8h.001"></path><path d="M14 8h.001"></path><path d="M18 8h.001"></path><path d="M6 12h.001"></path><path d="M10 12h.001"></path><path d="M14 12h.001"></path><path d="M18 12h.001"></path><path d="M7 16h10"></path></svg></div>
+                        <h3>Navegação por Teclado</h3>
+                        <p>Use <code>Tab</code>, <code>Shift+Tab</code> e <code>Espaço</code> para controlar todo o site sem mouse.</p>
+                    </div>
+                </div>
+
+                <div class="grid-testemunhos-wrapper">
+                    <h3 class="subtitulo-secao gsap-fade-up">O que dizem os usuários</h3>
+                    <div class="grid-testemunhos">
+                        <article class="card-testemunho gsap-fade-up">
+                            <div class="card-testemunho_aspas-superior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg></div>
+                            <div class="card-testemunho_avatar"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21" stroke-linecap="round" /></svg></div>
+                            <div class="card-testemunho_conteudo"><h3 class="card-testemunho_nome">João Silva</h3><p class="card-testemunho_ocupacao">Estudante</p><div class="card-testemunho_barra-decorativa"></div><p class="card-testemunho_deficiencia">Baixa Visão</p><blockquote class="card-testemunho_citacao">"O modo de alto contraste facilitou muito minha leitura. Consigo estudar sem cansar a vista."</blockquote></div>
+                            <div class="card-testemunho_aspas-inferior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg></div>
+                        </article>
+                         <article class="card-testemunho gsap-fade-up" data-delay="0.1">
+                            <div class="card-testemunho_aspas-superior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg></div>
+                            <div class="card-testemunho_avatar"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21" stroke-linecap="round" /></svg></div>
+                            <div class="card-testemunho_conteudo"><h3 class="card-testemunho_nome">Maria Oliveira</h3><p class="card-testemunho_ocupacao">Desenvolvedora</p><div class="card-testemunho_barra-decorativa"></div><p class="card-testemunho_deficiencia">Daltonismo</p><blockquote class="card-testemunho_citacao">"Os filtros de cor funcionam perfeitamente. Pela primeira vez vi os gráficos com clareza."</blockquote></div>
+                            <div class="card-testemunho_aspas-inferior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg></div>
+                        </article>
+                         <article class="card-testemunho gsap-fade-up" data-delay="0.2">
+                            <div class="card-testemunho_aspas-superior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg></div>
+                            <div class="card-testemunho_avatar"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21" stroke-linecap="round" /></svg></div>
+                            <div class="card-testemunho_conteudo"><h3 class="card-testemunho_nome">Pedro Santos</h3><p class="card-testemunho_ocupacao">Analista</p><div class="card-testemunho_barra-decorativa"></div><p class="card-testemunho_deficiencia">Deficiência Motora</p><blockquote class="card-testemunho_citacao">"A navegação por teclado é fluida e lógica. Consigo acessar tudo sem usar o mouse."</blockquote></div>
+                            <div class="card-testemunho_aspas-inferior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao-recursos">
+            <div class="container">
+                <header class="header-centralizado gsap-fade-up">
+                    <h2 class="titulo-secao">Ferramentas <span class="destaque-gradiente">Extras</span></h2>
+                    <p class="texto-centralizado">Desenvolvemos soluções para auxiliar no aprendizado prático dos alunos.</p>
+                </header>
+
+                <div class="grid-resources">
+                    <div class="card-resource gsap-fade-up">
+                        <div class="resource-content">
+                            <h3>Simulador Python</h3>
+                            <p>Um terminal exclusivo rodando no navegador. O aluno insere o código, executa e vê o resultado instantaneamente, sem sair do ambiente de estudo.</p>
+                            <span class="tag-tech">Python</span>
                         </div>
-                        <div class="card-membro_info">
-                            <h3 class="card-membro_nome">Desenvolvedor 4</h3>
-                            <p class="card-membro_funcao">Gerente de Projeto</p>
-                            <p class="card-membro_frase">
-                                "Nosso desafio é entregar uma solução real e pronta para ser implementada."
-                            </p>
+                        <div class="resource-visual">
+                             <div class="code-preview">
+                                 <span class="code-line">print("Olá, Mundo!")</span>
+                                 <span class="code-line success">> Olá, Mundo!</span>
+                             </div>
                         </div>
-                    </article>
+                    </div>
+
+                    <div class="card-resource gsap-fade-up" data-delay="0.2">
+                        <div class="resource-content">
+                            <h3>BR Diagrama</h3>
+                            <p>Ferramenta visual que gera Diagramas Entidade-Relacionamento (DER) automaticamente enquanto você digita código SQL. Identifica erros em tempo real.</p>
+                            <span class="tag-tech">SQL</span>
+                        </div>
+                        <div class="resource-visual">
+                            <div class="diagram-preview">
+                                <div class="table-box"></div>
+                                <div class="connector"></div>
+                                <div class="table-box"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Rodapé Jovem Programador -->
     <footer class="rodape-jovem-programador">
         <img src="./assets/images/logo_rodape.png" alt="Logo Jovem Programador" class="logo-jovem-programador" width="140" height="auto" loading="lazy">
     </footer>
-    <script src="./assets/js/acessibilidade-global.js"></script>
-</body>
 
+    <script src="./assets/js/acessibilidade-global.js"></script>
+    
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animação Fade Up Geral
+        const fadeElements = document.querySelectorAll('.gsap-fade-up');
+        
+        fadeElements.forEach(element => {
+            const delay = element.getAttribute('data-delay') || 0;
+            
+            gsap.fromTo(element, 
+                { 
+                    y: 50, 
+                    opacity: 0 
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    delay: delay,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%", // Inicia quando o topo do elemento bate em 85% da tela
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+    </script>
+</body>
 </html>
