@@ -28,8 +28,8 @@ def is_related_to_course(prompt_text: str) -> bool:
 try:
     API_KEY = os.environ["GOOGLE_API_KEY"]
 except KeyError:
-    print("❌ ERRO: GOOGLE_API_KEY não encontrada no .env")
-    print("📝 Crie um arquivo .env com: GOOGLE_API_KEY=sua_chave_aqui")
+    print("ERRO: GOOGLE_API_KEY não encontrada no .env")
+    print("Crie um arquivo .env com: GOOGLE_API_KEY=sua_chave_aqui")
     exit(1)
 
 
@@ -87,7 +87,7 @@ def get_token():
     Para projeto integrador está OK.
     """
     try:
-        print("✅ API Key enviada para o frontend")
+        print("[Voz] API Key solicitada")
         return jsonify({"token": API_KEY})
     
     except Exception as e:
@@ -102,9 +102,8 @@ def get_config():
     Centralizando configurações no backend!
     """
     try:
-        print("📋 Configurações enviadas para o frontend")
+        print("[Voz] Configurações enviadas")
         return jsonify(GEMINI_CONFIG)
-    
     except Exception as e:
         print(f"❌ Erro: {e}")
         return jsonify({"error": str(e)}), 500
@@ -114,7 +113,7 @@ def get_config():
 def get_text_token():
     """Retorna a mesma API key usada pelo backend de texto (compatível com `chat.py`)."""
     try:
-        print("✅ [Texto] API Key enviada para o frontend via /text/token")
+        print("[Texto] API Key solicitada")
         return jsonify({"token": API_KEY})
     except Exception as e:
         print(f"❌ [Texto] Erro: {e}")
@@ -125,7 +124,7 @@ def get_text_token():
 def get_text_config():
     """Retorna a configuração do Gemini para o modo texto (compatível com `chat.py`)."""
     try:
-        print("📋 [Texto] Configurações enviadas para o frontend via /text/config")
+        print("[Texto] Configurações enviadas")
         return jsonify(GEMINI_TEXT_CONFIG)
     except Exception as e:
         print(f"❌ [Texto] Erro: {e}")
@@ -401,12 +400,11 @@ def serve_public(filename):
 
 if __name__ == '__main__':
     print("\n" + "="*50)
-    print("🚀 SenaChat Backend")
+    print("SenaChat Backend UNIFICADO (Voz + Texto)")
     print("="*50)
-    print("📡 Servidor: http://localhost:5000")
-    print("🔑 Endpoints:")
-    print("   - GET /token  → API Key")
-    print("   - GET /config → Configurações do Gemini")
+    print("Servidor rodando em: http://localhost:5000")
+    print("Endpoints Voz: /token, /config")
+    print("Endpoints Texto: /text/token, /text/config, /text/chat")
     print("="*50)
     
     print("\n🔍 Rotas registradas no Flask:")

@@ -23,6 +23,8 @@
     height: 100%;
     padding: var(--spacing-2xl) var(--spacing-lg);
     text-align: center;
+    max-height: 90%; /* Limita a altura do conteúdo para evitar cortes */
+    overflow-y: auto; /* Permite rolagem interna caso o conteúdo seja muito grande */
 }
 
 .modal-boas-vindas_cabecalho {
@@ -30,7 +32,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-top: var(--spacing-3xl);
+    padding-top: var(--spacing-2xl);
 }
 
 .modal-boas-vindas_titulo {
@@ -91,11 +93,21 @@
 
 @media (min-width: 1024px) {
     .modal-boas-vindas_titulo {
-        font-size: var(--font-size-5xl);
+        font-size: var(--font-size-3xl);
     }
 
     .modal-boas-vindas_titulo-destaque {
-        font-size: var(--font-size-6xl);
+        font-size: var(--font-size-5xl);
+    }
+    
+    .modal-boas-vindas {
+        overflow-y: auto;
+        height: 100vh;
+    }
+
+    .modal-boas-vindas_conteudo {
+        max-height: 100%; /* Limita a altura do conteúdo para evitar cortes */
+        overflow-y: auto; /* Permite rolagem interna caso o conteúdo seja muito grande */
     }
 }
 
