@@ -6,10 +6,14 @@
     background: var(--gradient-primary);
     display: flex;
     flex-direction: column;
+    height: 100vh;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden; 
 }
-
+body {
+    position: relative;
+    overflow-x: hidden; 
+}
 .area-mensagens {
     flex: 1;
     overflow-y: auto;
@@ -31,9 +35,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+
+
+    width: calc(100% - 24px); 
+    
     max-width: 720px;
     padding: 12px;
+    box-sizing: border-box;
+
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -246,7 +255,7 @@
 }
 
 .area-input-pergunta {
-    padding: calc(var(--spacing-md) + 8px);
+    padding: 12px;
     background: transparent;
     position: sticky;
     bottom: 0;
@@ -258,7 +267,7 @@
 .container-input.full-width {
     width: 100%;
     margin: 0 auto;
-    padding: 10px 16px;
+    padding: 8px 16px; 
     box-sizing: border-box;
     background: linear-gradient(90deg, #7A01FF 0%, #4B007A 100%);
     border-radius: var(--radius-full);
@@ -278,7 +287,7 @@
     border: none;
     color: var(--color-white);
     font-size: var(--font-size-base);
-    padding: 10px 4px;
+    padding: 3px 4px; 
     outline: none !important;
     box-shadow: none !important;
 }
@@ -311,8 +320,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px; 
     background: transparent;
     border: none;
     padding: 0;
@@ -322,17 +331,17 @@
 }
 
 #botao-microfone svg {
-    width: 24px;
-    height: 24px;
-    stroke: #ffffff !important;
-    fill: none !important;
-    color: #ffffff !important;
-    display: block;
+width: 30px; 
+height: 30px; 
+stroke: #ffffff !important;
+fill: none !important;
+color: #ffffff !important;
+display: block;
 }
 
 #botao-enviar-wave {
-    width: 42px;
-    height: 42px;
+    width: 34px; 
+    height: 34px; 
     background: transparent;
     border: none;
     border-radius: 50%;
@@ -340,7 +349,7 @@
     align-items: center;
     justify-content: center;
     padding: 0;
-    box-shadow: 0 4px 12px rgba(11,2,40,0.2);
+    box-shadow: 0 2px 8px rgba(11,2,40,0.15); 
     cursor: pointer;
     flex-shrink: 0;
     transition: transform 0.2s;
