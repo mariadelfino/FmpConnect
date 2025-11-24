@@ -71,6 +71,16 @@
 
 
     <style>
+ 
+
+        .CodeMirror {
+            height: 100% !important;
+            width: 100% !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
         .cm-s-dracula.CodeMirror {
             height: 100%;
             font-family: 'Courier New', monospace;
@@ -97,9 +107,11 @@
             color: #00ff00;
             font-family: 'Courier New', monospace;
             flex: 1;
-            overflow: auto;
             padding: var(--spacing-md);
+            overflow-x: hidden;
+            overflow-y: auto;
             line-height: 1.6;
+            height: 100%;
         }
 
         .terminal-prompt {
@@ -139,21 +151,10 @@
     </style>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-family-primary);
-            background: var(--gradient-primary);
-            color: var(--color-white);
-            overflow: hidden;
-        }
-
         .pagina-programacao {
-            min-height: 100vh;
+            height: 100vh;
+            height: 100dvh;
+            min-height: unset;
             background: var(--gradient-primary);
             display: flex;
             flex-direction: column;
@@ -166,8 +167,11 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            padding: var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-xl);
             gap: var(--spacing-md);
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
         .barra-ferramentas {
@@ -230,10 +234,11 @@
             align-items: center;
             gap: var(--spacing-sm);
             padding: var(--spacing-sm) var(--spacing-md);
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--color-secondary-background-icon);
             border-radius: var(--radius-md);
             font-size: var(--font-size-sm);
             margin-left: auto;
+            color: var(--color-white);
         }
 
         .status-indicador {
@@ -268,6 +273,7 @@
             grid-template-rows: 1fr 1fr;
             gap: var(--spacing-md);
             overflow: hidden;
+            min-height: 0;
         }
 
         @media (min-width: 768px) {
@@ -284,6 +290,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
 
         .painel-header {
@@ -295,6 +302,7 @@
             align-items: center;
             gap: var(--spacing-sm);
             font-weight: var(--font-weight-semibold);
+            flex-shrink: 0
         }
 
         .painel-header svg {
@@ -304,7 +312,6 @@
         }
 
         .editor-container {
-            padding: 0;
             overflow: hidden;
             flex: 1;
             position: relative;
@@ -360,10 +367,6 @@
 
         /* Responsividade adicional */
         @media (max-width: 767px) {
-            .cabecalho {
-                padding: var(--spacing-sm) var(--spacing-md);
-            }
-
             .logo-senachat {
                 font-size: var(--font-size-lg);
             }
@@ -399,23 +402,7 @@
         }
 
         /* Scrollbar customizada */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--color-primary-light);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--color-accent-pink);
-        }
+      
     </style>
 </head>
 
