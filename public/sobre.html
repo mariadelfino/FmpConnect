@@ -469,10 +469,42 @@
     </main>
 
     <footer class="rodape-jovem-programador">
-        <img src="./assets/images/logo_rodape.png" alt="Logo Jovem Programador" class="logo-jovem-programador" width="140" height="auto" loading="lazy">
+        <img src="./assets/images/logo_rodape.png" alt="Logo Jovem Programador" class="logo-jovem-programador" id="logo-rodape" width="140" height="auto" loading="lazy">
     </footer>
 
     <script src="./assets/js/acessibilidade-global.js"></script>
+    
+    <script>
+        // Atualiza logo do rodapé baseado no tema
+        function atualizarLogoRodape() {
+            const tema = document.documentElement.getAttribute('data-theme');
+            const logoRodape = document.getElementById('logo-rodape');
+            if (logoRodape) {
+                if (tema === 'light') {
+                    logoRodape.src = './assets/images/logo_rodape-colorido.png';
+                } else {
+                    logoRodape.src = './assets/images/logo_rodape.png';
+                }
+            }
+        }
+
+        // Atualiza logo no carregamento
+        atualizarLogoRodape();
+
+        // Observa mudanças no atributo data-theme
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                    atualizarLogoRodape();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    </script>
     
     <script>
         gsap.registerPlugin(ScrollTrigger);

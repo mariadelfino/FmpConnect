@@ -27,12 +27,30 @@
     overflow-y: auto; /* Permite rolagem interna caso o conteúdo seja muito grande */
 }
 
-.modal-boas-vindas_cabecalho {
-    flex: 1;
+/* Container para texto + robô lado a lado em desktop */
+.modal-boas-vindas_bloco-principal {
     display: flex;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
-    padding-top: var(--spacing-2xl);
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: var(--spacing-md);
+}
+
+/* Compensa espaço transparente do PNG do robô */
+.SenaChat_mascote {
+    margin-left: calc(var(--spacing-xl) * -1);
+}
+
+.modal-boas-vindas_cabecalho {
+    flex: 0 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
 }
 
 .modal-boas-vindas_titulo {
@@ -108,6 +126,41 @@
     .modal-boas-vindas_conteudo {
         max-height: 100%; /* Limita a altura do conteúdo para evitar cortes */
         overflow-y: auto; /* Permite rolagem interna caso o conteúdo seja muito grande */
+        justify-content: center;
+    }
+    
+    /* Layout horizontal: texto à esquerda, robô à direita */
+    .modal-boas-vindas_bloco-principal {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--spacing-lg);
+    }
+    
+    .modal-boas-vindas_cabecalho {
+        text-align: left;
+        padding-top: 0;
+    }
+    
+    .SenaChat_mascote {
+        flex-shrink: 0;
+        margin-left: calc(var(--spacing-3xl) * -1.5);
+    }
+}
+
+/* Mobile: mantém layout vertical */
+@media (max-width: 1023px) {
+    .modal-boas-vindas_bloco-principal {
+        flex-direction: column;
+        gap: var(--spacing-xl);
+    }
+    
+    .modal-boas-vindas_cabecalho {
+        text-align: center;
+        padding-top: var(--spacing-2xl);
+    }
+    
+    .SenaChat_mascote {
+        margin-left: 0;
     }
 }
 
