@@ -442,7 +442,7 @@
    mas garante que elas se comportem bem no novo layout flex/grid */
 .card-membro, .card-testemunho {
     /* Forçando comportamento responsivo caso o CSS antigo tenha larguras fixas */
-    max-width: 100%; 
+    max-width: 90%; 
     box-sizing: border-box;
 }
 
@@ -468,7 +468,7 @@
 /* Responsividade interna do card para Desktop */
 @media (min-width: 768px) {
     .card-testemunho {
-        padding-left: 120px; /* Espaço lateral para avatar no desktop */
+        padding-left: 70px; /* Espaço lateral para avatar no desktop */
         padding-top: 24px;
     }
 }
@@ -613,7 +613,7 @@
 @media (min-width: 768px) {
     .card-membro {
         flex-direction: row;
-        text-align: left;
+        text-align: center;
         align-items: center;
     }
 }
