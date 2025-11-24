@@ -32,7 +32,7 @@
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
-    color: var(--color-white);
+    color: var(--color-sobre-texto-principal);
 }
 
 .subtitulo-secao {
@@ -40,12 +40,13 @@
     font-weight: 600;
     margin-bottom: 2rem;
     text-align: center;
+    color: var(--color-sobre-texto-principal);
 }
 
 .texto-padrao {
     font-size: 1rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--color-sobre-texto-secundario);
     margin-bottom: 1.5rem;
 }
 
@@ -54,7 +55,7 @@
     max-width: 700px;
     margin: 0 auto;
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--color-sobre-texto-secundario);
     line-height: 1.6;
 }
 
@@ -126,9 +127,9 @@
     display: inline-block;
     padding: 6px 12px;
     border-radius: 20px;
-    border: 1px solid rgba(122, 1, 255, 0.5);
-    background: rgba(122, 1, 255, 0.1);
-    color: #cecece;
+    border: 1px solid var(--color-primary-border);
+    background: var(--color-opcao-chat-background);
+    color: var(--color-sobre-texto-secundario);
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -143,7 +144,7 @@
     overflow: hidden;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid var(--color-sobre-card-border);
 }
 
 .video-wrapper iframe {
@@ -159,7 +160,7 @@
    ======================================== */
 .secao-sobre-projeto {
     padding: 80px 0;
-    background: rgba(0,0,0,0.2); /* Sutilmente mais escuro */
+    background: var(--color-sobre-secao-bg);
 }
 
 .grid-modulos {
@@ -182,8 +183,8 @@
 
 /* Estilo Card GitHub */
 .card-tech {
-    background: rgba(22, 27, 34, 0.6); /* Cor base estilo GitHub */
-    border: 1px solid rgba(48, 54, 61, 0.7);
+    background: var(--color-sobre-card-bg);
+    border: 1px solid var(--color-sobre-card-border);
     border-radius: 12px;
     padding: 24px;
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -192,7 +193,7 @@
 
 .card-tech:hover {
     transform: translateY(-5px);
-    border-color: var(--color-accent-pink, #FE29BB);
+    border-color: var(--color-sobre-card-border-hover);
     box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
 
@@ -210,12 +211,12 @@
 .card-tech h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--color-white);
+    color: var(--color-sobre-texto-principal);
 }
 
 .card-tech p {
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.7);
+    color: var(--color-sobre-texto-secundario);
     line-height: 1.5;
 }
 
@@ -234,27 +235,27 @@
 }
 
 .card-feature {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-sobre-card-bg);
+    border: 1px solid var(--color-sobre-card-border);
     border-radius: 16px;
     padding: 24px;
     transition: all 0.3s ease;
 }
 
 .card-feature:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(122, 1, 255, 0.5);
+    background: var(--color-sobre-card-bg-hover);
+    border-color: var(--color-sobre-card-border-hover);
 }
 
 .feature-icon {
     width: 48px;
     height: 48px;
-    background: rgba(122, 1, 255, 0.2);
+    background: var(--color-opcao-chat-background-hover);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #bd8aff;
+    color: var(--color-accent-purple);
     margin-bottom: 16px;
 }
 
@@ -262,12 +263,12 @@
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 8px;
-    color: #fff;
+    color: var(--color-sobre-texto-principal);
 }
 
 .card-feature p {
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.7);
+    color: var(--color-sobre-texto-secundario);
     line-height: 1.4;
 }
 
@@ -349,8 +350,8 @@
 }
 
 .card-resource {
-    background: #0d1117; /* Bem escuro */
-    border: 1px solid #30363d;
+    background: var(--color-sobre-card-bg);
+    border: 1px solid var(--color-sobre-card-border);
     border-radius: 16px;
     overflow: hidden;
     display: flex;
@@ -361,7 +362,7 @@
 
 .card-resource:hover {
     transform: translateY(-5px);
-    border-color: #FE29BB;
+    border-color: var(--color-sobre-card-border-hover);
 }
 
 .resource-content {
@@ -373,6 +374,7 @@
     font-size: 1.4rem;
     font-weight: 700;
     margin-bottom: 12px;
+    color: var(--color-sobre-texto-principal);
 }
 
 .tag-tech {
@@ -387,9 +389,9 @@
 }
 
 .resource-visual {
-    background: #010409;
+    background: var(--color-sobre-secao-bg);
     padding: 20px;
-    border-top: 1px solid #30363d;
+    border-top: 1px solid var(--color-sobre-card-border);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -399,7 +401,7 @@
 /* Mini terminal visual */
 .code-preview {
     font-family: monospace;
-    color: #e6edf3;
+    color: var(--color-sobre-texto-secundario);
     width: 100%;
 }
 .code-line {
@@ -407,7 +409,7 @@
     margin-bottom: 4px;
 }
 .code-line.success {
-    color: #3fb950;
+    color: var(--color-success);
 }
 
 /* Mini diagrama visual */
@@ -420,14 +422,14 @@
 .table-box {
     width: 40px;
     height: 50px;
-    border: 2px solid #58a6ff;
+    border: 2px solid var(--color-info);
     border-radius: 4px;
-    background: rgba(88, 166, 255, 0.1);
+    background: var(--color-opcao-chat-background);
 }
 .connector {
     width: 30px;
     height: 2px;
-    background: #8b949e;
+    background: var(--color-gray-500);
 }
 
 /* ========================================
@@ -595,9 +597,9 @@
    ======================================== */
 
 .card-membro {
-    background: rgba(255, 255, 255, 0.05); /* Fundo vidro escuro */
+    background: var(--color-sobre-card-bg);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--color-sobre-card-border);
     border-radius: 20px;
     padding: 32px;
     display: flex;
@@ -607,7 +609,7 @@
     gap: 20px;
     transition: all 0.3s ease;
     position: relative;
-    color: var(--color-white);
+    color: var(--color-sobre-texto-principal);
 }
 
 @media (min-width: 768px) {
@@ -619,8 +621,8 @@
 }
 
 .card-membro:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--color-accent-pink, #FE29BB);
+    background: var(--color-sobre-card-bg-hover);
+    border-color: var(--color-sobre-card-border-hover);
     transform: translateY(-8px);
 }
 
@@ -634,13 +636,13 @@
     border-radius: 8px;
     display: grid;
     place-items: center;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--color-sobre-texto-secundario);
     transition: all 0.2s ease;
 }
 
 .card-membro_linkedin:hover {
-    color: #FFF;
-    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-sobre-texto-principal);
+    background: var(--color-opcao-chat-background-hover);
 }
 
 /* Foto/Avatar */
@@ -648,7 +650,7 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: rgba(0,0,0,0.2);
+    background: var(--color-sobre-secao-bg);
     border: 3px solid var(--color-accent-pink, #FE29BB);
     display: flex;
     align-items: center;
@@ -669,7 +671,7 @@
 .card-membro_avatar {
     width: 60px;
     height: 60px;
-    color: #FFF;
+    color: var(--color-sobre-texto-principal);
 }
 
 /* Informações */
@@ -682,7 +684,7 @@
 .card-membro_nome {
     font-size: 1.3rem;
     font-weight: 700;
-    color: #FFF;
+    color: var(--color-sobre-texto-principal);
 }
 
 .card-membro_funcao {
@@ -699,7 +701,7 @@
    ======================================== */
 .rodape-jovem-programador {
     width: 100%;
-    background: #1A0145;
+    background: var(--color-primary-dark);
     display: flex;
     justify-content: center;
     align-items: center;
