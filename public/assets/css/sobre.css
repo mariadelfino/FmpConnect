@@ -91,6 +91,37 @@
     }
 }
 
+/* ========================================
+   EQUIPA - GRID DE MEMBROS
+   ======================================== */
+.grid-equipe {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (min-width: 768px) {
+    .grid-equipe {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid-equipe {
+        grid-template-columns: repeat(4, 1fr); /* 4 cards lado a lado em desktop grande */
+        gap: 28px;
+    }
+}
+
+.grid-equipe .card-membro {
+    height: 100%; /* garante que o card ocupe toda a célula do grid */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .badge {
     display: inline-block;
     padding: 6px 12px;
@@ -136,6 +167,11 @@
     grid-template-columns: 1fr;
     gap: 24px;
     margin-top: 40px;
+}
+
+/* Centraliza os parágrafos dentro do bloco de conteúdo do projeto (seção Sobre) */
+.conteudo-projeto .texto-padrao {
+    text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -254,6 +290,42 @@
 /* Ajustes no Wrapper de Testemunhos para espaçamento */
 .grid-testemunhos-wrapper {
     margin-top: 60px;
+}
+
+/* Centraliza o título dentro do wrapper de depoimentos */
+.grid-testemunhos-wrapper .titulo-secao {
+    text-align: center;
+}
+
+/* ========================================
+   DEPOIMENTOS (PCDs) - GRID DE TESTEMUNHOS
+   ======================================== */
+.grid-testemunhos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+@media (min-width: 768px) {
+    .grid-testemunhos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid-testemunhos {
+        grid-template-columns: repeat(3, 1fr); /* 3 depoimentos lado a lado em desktop grande */
+        gap: 28px;
+    }
+}
+
+.grid-testemunhos .card-testemunho {
+    height: 100%; /* garante que o card ocupe toda a célula do grid */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 /* ========================================
@@ -583,6 +655,15 @@
     justify-content: center;
     flex-shrink: 0;
     overflow: hidden;
+}
+
+/* Quando houver uma imagem real dentro do círculo */
+.card-membro_foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
 }
 
 .card-membro_avatar {
