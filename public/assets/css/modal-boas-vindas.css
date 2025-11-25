@@ -2,6 +2,13 @@
    Modal de Boas-vindas - Mobile First
    ======================================== */
 
+.modal-boas-vindas_bloco-principal {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .modal-boas-vindas {
     position: fixed;
     inset: 0;
@@ -23,8 +30,8 @@
     height: 100%;
     padding: var(--spacing-2xl) var(--spacing-lg);
     text-align: center;
-    max-height: 90%; /* Limita a altura do conteúdo para evitar cortes */
-    overflow-y: auto; /* Permite rolagem interna caso o conteúdo seja muito grande */
+    max-height: 90%;
+    overflow-y: auto;
 }
 
 /* Container para texto + robô lado a lado em desktop */

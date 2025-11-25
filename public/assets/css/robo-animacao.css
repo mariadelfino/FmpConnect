@@ -170,7 +170,7 @@
 @media (max-width: 480px) {
     .SenaChat_mascote {
         max-width: 380px;
-        margin: 1.5rem auto;
+        margin: auto;
         padding: 1rem;
     }
     
