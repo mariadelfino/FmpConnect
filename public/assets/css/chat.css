@@ -14,6 +14,41 @@ body {
     position: relative;
     overflow-x: hidden; 
 }
+
+/* Container com borda única para desktop */
+.chat-container-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+    .chat-container-wrapper {
+        border: 2px solid var(--color-opcao-chat-border);
+        border-radius: var(--radius-xl);
+        margin: 20px auto;
+        max-width: 900px;
+        width: calc(100% - 40px);
+        padding: 16px;
+        background: transparent;
+    }
+}
+
+@media (min-width: 1280px) {
+    .chat-container-wrapper {
+        max-width: 1100px;
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1536px) {
+    .chat-container-wrapper {
+        max-width: 1000px;
+        padding: 24px;
+    }
+}
+
 .area-mensagens {
     flex: 1;
     overflow-y: auto;
@@ -28,22 +63,23 @@ body {
 
 @media (min-width: 1024px) {
     .area-mensagens {
-        padding-left: max(20px, calc((100vw - 700px) / 2));
-        padding-right: max(20px, calc((100vw - 700px) / 2));
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
     }
 }
 
 @media (min-width: 1280px) {
     .area-mensagens {
-        padding-left: max(20px, calc((100vw - 1000px) / 2));
-        padding-right: max(20px, calc((100vw - 1000px) / 2));
+        padding-left: 24px;
+        padding-right: 24px;
     }
 }
 
 @media (min-width: 1536px) {
     .area-mensagens {
-        padding-left: max(20px, calc((100vw - 800px) / 2));
-        padding-right: max(20px, calc((100vw - 800px) / 2));
+        padding-left: 24px;
+        padding-right: 24px;
     }
 }
 
@@ -145,6 +181,7 @@ body {
     justify-content: flex-end;
     align-items: flex-start;
     padding-right: 12px;
+    flex-direction: row;
 }
 
 .mensagem-icone {
@@ -201,15 +238,16 @@ body {
 .mensagem-balao.usuario {
     background-color: var(--color-primary-light);
     color: var(--color-primary-text);
-    align-self: flex-start;
     border-bottom-right-radius: var(--radius-md);
     border-radius: 999px;
-    display: inline-flex;
-    align-self: flex-end;
+    display: inline-block;
     padding: 10px 20px;
     max-width: 80%;
-    text-align: center;
+    width: auto;
+    text-align: left;
     box-shadow: 0 8px 24px rgba(7,0,30,0.15);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .mensagem-balao.bot {
@@ -295,22 +333,25 @@ body {
 
 @media (min-width: 1024px) {
     .area-input-pergunta {
-        padding-left: max(12px, calc((100vw - 800px) / 2));
-        padding-right: max(12px, calc((100vw - 800px) / 2));
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 0;
+        position: relative;
+        bottom: auto;
     }
 }
 
 @media (min-width: 1280px) {
     .area-input-pergunta {
-        padding-left: max(12px, calc((100vw - 800px) / 2));
-        padding-right: max(12px, calc((100vw - 800px) / 2));
+        padding-left: 24px;
+        padding-right: 24px;
     }
 }
 
 @media (min-width: 1536px) {
     .area-input-pergunta {
-        padding-left: max(12px, calc((100vw - 800px) / 2));
-        padding-right: max(12px, calc((100vw - 800px) / 2));
+        padding-left: 24px;
+        padding-right: 24px;
     }
 }
 
