@@ -1,0 +1,6 @@
+# Arquivos de Chave e Ambiente
+.env
+venv/
+
+# Arquivo de Serviço Local
+public/assets/js/services/gemini-service.js
