@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,10 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    
+
     <title>SenaChat - Conversa por Texto</title>
     <script>
-        (function() {
+        (function () {
             try {
                 const saved = localStorage.getItem('senachat-acessibilidade');
                 if (saved) {
@@ -20,23 +21,23 @@
                     if (estado.tema === 'claro') {
                         document.documentElement.setAttribute('data-theme', 'light');
                     }
-                    
+
                     if (estado.scaleFactor && estado.scaleFactor !== 1) {
                         document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
                     }
-                    
-                    document.addEventListener('DOMContentLoaded', function() {
+
+                    document.addEventListener('DOMContentLoaded', function () {
                         const mains = document.querySelectorAll('main');
-                        
+
                         if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
-                            mains.forEach(function(main) {
+                            mains.forEach(function (main) {
                                 main.classList.add('filtro-' + estado.filtroDaltonismo);
                             });
                             document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
                         }
-                        
+
                         if (estado.contraste) {
-                            mains.forEach(function(main) {
+                            mains.forEach(function (main) {
                                 main.classList.add('alto-contraste');
                             });
                             document.body.setAttribute('data-alto-contraste', 'true');
@@ -47,27 +48,28 @@
             }
         })();
     </script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="./assets/css/componentes.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="./assets/css/chat.css"> 
+    <link rel="stylesheet" href="./assets/css/chat.css">
     <link rel="stylesheet" href="./assets/css/variables.css">
     <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
     <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
 </head>
+
 <body>
     <main class="pagina-chat">
         <header class="cabecalho">
             <a href="paginainicial.html" aria-label="Voltar para página inicial">
-                <button 
-                    class="botao-voltar" 
-                    type="button">
+                <button class="botao-voltar" type="button">
                     <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
             </a>
@@ -113,7 +115,8 @@
         </header>
         <section class="area-mensagens" id="chat-container">
         </section>
-       <div id="welcome-modal" class="welcome-modal hidden" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+        <div id="welcome-modal" class="welcome-modal hidden" role="dialog" aria-modal="true"
+            aria-labelledby="welcome-title">
             <div class="welcome-card">
                 <h2 id="welcome-title">Oi! Como posso te ajudar?</h2>
                 <div class="welcome-options">
@@ -124,28 +127,37 @@
                     <button class="welcome-option **acessibilidade-surdez**" id="opcao-modo-surdez">
                         Respostas Claras (Acessibilidade Auditiva)
                     </button>
-                    </div>
+                </div>
             </div>
         </div>
         <footer class="area-input-pergunta">
             <div class="container-input full-width">
-                <input type="text" id="pergunta-input" name="senachat-pergunta" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Faça a sua pergunta">
-                
+                <input type="text" id="pergunta-input" name="senachat-pergunta" autocomplete="off" autocorrect="off"
+                    autocapitalize="off" spellcheck="false" placeholder="Faça a sua pergunta">
+
                 <div class="acoes-input">
                     <button class="botao-icone" id="botao-microfone" title="Ir para chat de voz" type="button">
                         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14.5 18.7291C17.1704 18.7291 19.3333 16.5662 19.3333 13.8958V7.24996C19.3333 4.57954 17.1704 2.41663 14.5 2.41663C11.8295 2.41663 9.66663 4.57954 9.66663 7.24996V13.8958C9.66663 16.5662 11.8295 18.7291 14.5 18.7291Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M5.25623 11.6605V13.7147C5.25623 18.8139 9.40081 22.9584 14.5 22.9584C19.5991 22.9584 23.7437 18.8139 23.7437 13.7147V11.6605" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12.8204 7.76964C13.9079 7.37089 15.0921 7.37089 16.1796 7.76964" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M13.5333 10.3312C14.1737 10.1621 14.8383 10.1621 15.4787 10.3312" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M14.5 22.9583V26.5833" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path
+                                d="M14.5 18.7291C17.1704 18.7291 19.3333 16.5662 19.3333 13.8958V7.24996C19.3333 4.57954 17.1704 2.41663 14.5 2.41663C11.8295 2.41663 9.66663 4.57954 9.66663 7.24996V13.8958C9.66663 16.5662 11.8295 18.7291 14.5 18.7291Z"
+                                stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M5.25623 11.6605V13.7147C5.25623 18.8139 9.40081 22.9584 14.5 22.9584C19.5991 22.9584 23.7437 18.8139 23.7437 13.7147V11.6605"
+                                stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12.8204 7.76964C13.9079 7.37089 15.0921 7.37089 16.1796 7.76964" stroke="white"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.5333 10.3312C14.1737 10.1621 14.8383 10.1621 15.4787 10.3312" stroke="white"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M14.5 22.9583V26.5833" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
                         </svg>
                     </button>
 
                     <button class="botao-icone" id="botao-enviar-wave" title="Enviar" type="button">
                         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="17.5" cy="17.5" r="17.5" fill="white"/> 
-                            <path d="M18 12V24M26 11V25M10 16V20M14 9V27M22 14V22" stroke="#FE29BB" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
+                            <path d="M18 12V24M26 11V25M10 16V20M14 9V27M22 14V22" stroke="#FE29BB" stroke-width="1.5"
+                                stroke-linecap="round" />
                         </svg>
                     </button>
                 </div>
@@ -154,5 +166,16 @@
     </main>
     <script src="./assets/js/acessibilidade-global.js"></script>
     <script src="./assets/js/chat.js" defer></script>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
+
 </html>
