@@ -9,14 +9,14 @@
     <title>SenaChat - Sobre Nós</title>
 
     <script>
-        (function() {
+        (function () {
             try {
                 const saved = localStorage.getItem('senachat-acessibilidade');
                 if (saved) {
                     const estado = JSON.parse(saved);
                     if (estado.tema === 'claro') document.documentElement.setAttribute('data-theme', 'light');
                     if (estado.scaleFactor && estado.scaleFactor !== 1) document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
-                    document.addEventListener('DOMContentLoaded', function() {
+                    document.addEventListener('DOMContentLoaded', function () {
                         const mains = document.querySelectorAll('main');
                         if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
                             mains.forEach(m => m.classList.add('filtro-' + estado.filtroDaltonismo));
@@ -28,13 +28,14 @@
                         }
                     });
                 }
-            } catch (e) {}
+            } catch (e) { }
         })();
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="./assets/css/componentes.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
@@ -109,18 +110,28 @@
                     <div class="coluna-texto gsap-fade-up">
                         <h2 class="titulo-secao">O Jovem <span class="destaque-gradiente">Programador</span></h2>
                         <p class="texto-padrao">
-                            O Jovem Programador é um programa de capacitação tecnológica que permite a qualquer pessoa, a partir de 16 anos e cursando a partir do 1º ano do ensino médio, qualificar-se em Tecnologia da Informação.
+                            O Jovem Programador é um programa de capacitação tecnológica que permite a qualquer pessoa,
+                            a partir de 16 anos e cursando a partir do 1º ano do ensino médio, qualificar-se em
+                            Tecnologia da Informação.
                         </p>
                         <p class="texto-padrao">
-                            O programa é uma iniciativa do SEPROSC (Sindicato das Empresas de Informática, Processamento de Dados e Tecnologia da Informação do Estado de Santa Catarina), com realização do SENAC (Serviço Nacional de Aprendizagem Comercial). Essa parceria auxilia na formação profissional e disponibiliza instalações completas em aproximadamente 23 municípios de Santa Catarina.
+                            O programa é uma iniciativa do SEPROSC (Sindicato das Empresas de Informática, Processamento
+                            de Dados e Tecnologia da Informação do Estado de Santa Catarina), com realização do SENAC
+                            (Serviço Nacional de Aprendizagem Comercial). Essa parceria auxilia na formação profissional
+                            e disponibiliza instalações completas em aproximadamente 23 municípios de Santa Catarina.
                         </p>
                         <p class="texto-padrao">
-                            Os alunos contam com infraestrutura técnica e aulas em formato híbrido (presencial e virtual). O objetivo central é proporcionar uma formação de qualidade para que os estudantes se preparem para buscar colocações em pequenas, médias e grandes empresas da área de TI.
+                            Os alunos contam com infraestrutura técnica e aulas em formato híbrido (presencial e
+                            virtual). O objetivo central é proporcionar uma formação de qualidade para que os estudantes
+                            se preparem para buscar colocações em pequenas, médias e grandes empresas da área de TI.
                         </p>
                     </div>
                     <div class="coluna-video gsap-fade-up" data-delay="0.2">
                         <div class="video-wrapper">
-                            <iframe src="https://www.youtube.com/embed/uLHLEg7c3sk?si=HnK-XgN4uO8yP7x_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/uLHLEg7c3sk?si=HnK-XgN4uO8yP7x_"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -131,7 +142,8 @@
             <div class="container">
                 <header class="header-centralizado gsap-fade-up">
                     <div class="icone-titulo">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
                     </div>
@@ -140,13 +152,19 @@
 
                 <div class="conteudo-projeto">
                     <p class="texto-padrao gsap-fade-up">
-                        No curso do Jovem Programador, os alunos desenvolvem um trabalho final: o Projeto Integrador, no qual implementam todo o aprendizado em uma única solução.
+                        No curso do Jovem Programador, os alunos desenvolvem um trabalho final: o Projeto Integrador, no
+                        qual implementam todo o aprendizado em uma única solução.
                     </p>
                     <p class="texto-padrao gsap-fade-up">
-                        O SenaChat é o resultado do Projeto Integrador de 2025 do Jovem Programador na cidade de Palhoça/SC, desenvolvido pelos alunos Davi Amorim de Lima, Isabella Schlemper Bernardo, Maria Fernanda Delfino e Nathalia Schlemper Bernardo. O trabalho teve como objetivo criar um chatbot capaz de responder dúvidas sobre o curso utilizando Inteligência Artificial.
+                        O SenaChat é o resultado do Projeto Integrador de 2025 do Jovem Programador na cidade de
+                        Palhoça/SC, desenvolvido pelos alunos Davi Amorim de Lima, Isabella Schlemper Bernardo, Maria
+                        Fernanda Delfino e Nathalia Schlemper Bernardo. O trabalho teve como objetivo criar um chatbot
+                        capaz de responder dúvidas sobre o curso utilizando Inteligência Artificial.
                     </p>
                     <p class="texto-padrao gsap-fade-up">
-                        Para isso, o sistema foi projetado para receber perguntas dos usuários, interpretar automaticamente o conteúdo disponível no site oficial do curso e gerar respostas, sem depender de um cadastro manual de perguntas e respostas.
+                        Para isso, o sistema foi projetado para receber perguntas dos usuários, interpretar
+                        automaticamente o conteúdo disponível no site oficial do curso e gerar respostas, sem depender
+                        de um cadastro manual de perguntas e respostas.
                     </p>
                     <p class="texto-padrao gsap-fade-up">
                         O desenvolvimento foi dividido em dois módulos:
@@ -155,28 +173,34 @@
                     <div class="grid-modulos">
                         <div class="card-tech gsap-fade-up" data-delay="0.1">
                             <div class="card-tech_header">
-                                <svg class="tech-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <svg class="tech-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
                                     <polyline points="16 18 22 12 16 6"></polyline>
                                     <polyline points="8 6 2 12 8 18"></polyline>
                                 </svg>
                                 <h3>Primeiro módulo (Back-end):</h3>
                             </div>
-                            <p>Focado na coleta de informações do site e na produção de respostas automáticas por meio de uma API.</p>
+                            <p>Focado na coleta de informações do site e na produção de respostas automáticas por meio
+                                de uma API.</p>
                         </div>
 
                         <div class="card-tech gsap-fade-up" data-delay="0.2">
                             <div class="card-tech_header">
-                                <svg class="tech-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <svg class="tech-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
                                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                                 </svg>
                                 <h3>Segundo módulo (Front-end):</h3>
                             </div>
-                            <p>Voltado à construção de uma interface web amigável e responsiva, onde os usuários podem interagir com o chatbot de forma clara e acessível.</p>
+                            <p>Voltado à construção de uma interface web amigável e responsiva, onde os usuários podem
+                                interagir com o chatbot de forma clara e acessível.</p>
                         </div>
                     </div>
                     <br><br>
                     <p class="texto-padrao gsap-fade-up">
-                        O projeto também cumpriu rigorosos requisitos de acessibilidade. Ao final, foram entregues documentos de requisitos, códigos-fonte, protótipos, testes e demonstrações práticas que comprovam o funcionamento do sistema desenvolvido.
+                        O projeto também cumpriu rigorosos requisitos de acessibilidade. Ao final, foram entregues
+                        documentos de requisitos, códigos-fonte, protótipos, testes e demonstrações práticas que
+                        comprovam o funcionamento do sistema desenvolvido.
                     </p>
                 </div>
             </div>
@@ -187,7 +211,8 @@
                 <header class="header-centralizado gsap-fade-up">
                     <div class="icone-titulo" aria-hidden="true">
                         <!-- Icon: users / equipe -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M17 21v-2a4 4 0 0 0-3-3.87"></path>
                             <path d="M7 21v-2a4 4 0 0 1 3-3.87"></path>
                             <path d="M12 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path>
@@ -196,31 +221,67 @@
                     <h2 class="titulo-secao">Nossa <span class="destaque-gradiente">equipe</span></h2>
                     <p class="texto-centralizado">Somos um time dedicado a construir o futuro da interação digital.</p>
                 </header>
-                
+
                 <div class="grid-equipe">
                     <article class="card-membro gsap-fade-up" data-delay="0.1">
-                        <a class="card-membro_linkedin" href="#" target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor"><path d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z"/></svg></a>
+                        <a class="card-membro_linkedin" href="#" target="_blank"><svg width="22" height="22"
+                                viewBox="0 0 22 22" fill="currentColor">
+                                <path
+                                    d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z" />
+                            </svg></a>
                         <div class="card-membro_foto">
-                            <img src="./assets/images/fotodavi.png" alt="Foto de Davi Amorim de Lima" width="100" height="100" loading="lazy">
+                            <img src="./assets/images/fotodavi.png" alt="Foto de Davi Amorim de Lima" width="100"
+                                height="100" loading="lazy">
                         </div>
-                        <div class="card-membro_info"><h3 class="card-membro_nome">Davi Amorim de Lima</h3><p class="card-membro_funcao">Desenvolvedor Full Stack</p></div>
+                        <div class="card-membro_info">
+                            <h3 class="card-membro_nome">Davi Amorim de Lima</h3>
+                            <p class="card-membro_funcao">Desenvolvedor Full Stack</p>
+                        </div>
                     </article>
                     <article class="card-membro gsap-fade-up" data-delay="0.2">
-                        <a class="card-membro_linkedin" href="#" target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor"><path d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z"/></svg></a>
+                        <a class="card-membro_linkedin" href="#" target="_blank"><svg width="22" height="22"
+                                viewBox="0 0 22 22" fill="currentColor">
+                                <path
+                                    d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z" />
+                            </svg></a>
                         <div class="card-membro_foto">
-                            <img src="./assets/images/fotoisa.png" alt="Foto de Isabella Schlemper Bernardo" width="100" height="100" loading="lazy">
+                            <img src="./assets/images/fotoisa.png" alt="Foto de Isabella Schlemper Bernardo" width="100"
+                                height="100" loading="lazy">
                         </div>
-                        <div class="card-membro_info"><h3 class="card-membro_nome">Isabella Schlemper Bernardo</h3><p class="card-membro_funcao">UI/UX Designer/Front end</p></div>
+                        <div class="card-membro_info">
+                            <h3 class="card-membro_nome">Isabella Schlemper Bernardo</h3>
+                            <p class="card-membro_funcao">UI/UX Designer/Front end</p>
+                        </div>
                     </article>
                     <article class="card-membro gsap-fade-up" data-delay="0.1">
-                         <a class="card-membro_linkedin" href="https://www.linkedin.com/in/maria-fernanda-delfino/" target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor"><path d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z"/></svg></a>
-                         <div class="card-membro_foto"><svg class="card-membro_avatar" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 1 0-16 0" /></svg></div>
-                         <div class="card-membro_info"><h3 class="card-membro_nome">Maria Fernanda Delfino</h3><p class="card-membro_funcao">Desenvolvedora Full Stack</p></div>
+                        <a class="card-membro_linkedin" href="https://www.linkedin.com/in/maria-fernanda-delfino/"
+                            target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor">
+                                <path
+                                    d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z" />
+                            </svg></a>
+                        <div class="card-membro_foto"><svg class="card-membro_avatar" width="80" height="80"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="8" r="5" />
+                                <path d="M20 21a8 8 0 1 0-16 0" />
+                            </svg></div>
+                        <div class="card-membro_info">
+                            <h3 class="card-membro_nome">Maria Fernanda Delfino</h3>
+                            <p class="card-membro_funcao">Desenvolvedora Full Stack</p>
+                        </div>
                     </article>
                     <article class="card-membro gsap-fade-up" data-delay="0.4">
-                         <a class="card-membro_linkedin" href="https://www.linkedin.com/in/nathalia-schlemper-bernardo-b78672154/" target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor"><path d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z"/></svg></a>
-                         <div class="card-membro_foto"><img src="./assets/images/fotonath.png" alt="Foto de Nathalia Schlemper Bernardo" width="100" height="100" loading="lazy"></div>
-                         <div class="card-membro_info"><h3 class="card-membro_nome">Nathalia Schlemper Bernardo</h3><p class="card-membro_funcao">Product Owner/Agilista</p></div>
+                        <a class="card-membro_linkedin"
+                            href="https://www.linkedin.com/in/nathalia-schlemper-bernardo-b78672154/"
+                            target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor">
+                                <path
+                                    d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z" />
+                            </svg></a>
+                        <div class="card-membro_foto"><img src="./assets/images/fotonath.png"
+                                alt="Foto de Nathalia Schlemper Bernardo" width="100" height="100" loading="lazy"></div>
+                        <div class="card-membro_info">
+                            <h3 class="card-membro_nome">Nathalia Schlemper Bernardo</h3>
+                            <p class="card-membro_funcao">Product Owner/Agilista</p>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -229,36 +290,48 @@
         <section class="secao-acessibilidade-detalhes">
             <div class="container">
                 <header class="header-centralizado gsap-fade-up">
-                            <div class="icone-titulo" aria-hidden="true">
-                                <!-- Icon: universal access / acessibilidade -->
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <circle cx="12" cy="4" r="2"></circle>
-                                    <path d="M12 6v6"></path>
-                                    <path d="M5 12h14"></path>
-                                    <path d="M8 20l4-4 4 4"></path>
-                                </svg>
-                            </div>
-                            <h2 class="titulo-secao">Acessibilidade para <span class="destaque-gradiente">todos</span></h2>
-                            <p class="texto-padrao gsap-fade-up">
-                        Um dos requisitos do Projeto Integrador era a inclusão de, pelo menos, um recurso de acessibilidade digital no chatbot. No entanto, nosso grupo decidiu ir mais longe: pensamos em criar uma ferramenta verdadeiramente inclusiva. Implementamos diversos recursos de acessibilidade e submetemos o projeto à aprovação de pessoas que realmente precisam e utilizam tecnologias assistivas no dia a dia.
+                    <div class="icone-titulo" aria-hidden="true">
+                        <!-- Icon: universal access / acessibilidade -->
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="4" r="2"></circle>
+                            <path d="M12 6v6"></path>
+                            <path d="M5 12h14"></path>
+                            <path d="M8 20l4-4 4 4"></path>
+                        </svg>
+                    </div>
+                    <h2 class="titulo-secao">Acessibilidade para <span class="destaque-gradiente">todos</span></h2>
+                    <p class="texto-padrao gsap-fade-up">
+                        Um dos requisitos do Projeto Integrador era a inclusão de, pelo menos, um recurso de
+                        acessibilidade digital no chatbot. No entanto, nosso grupo decidiu ir mais longe: pensamos em
+                        criar uma ferramenta verdadeiramente inclusiva. Implementamos diversos recursos de
+                        acessibilidade e submetemos o projeto à aprovação de pessoas que realmente precisam e utilizam
+                        tecnologias assistivas no dia a dia.
                     </p>
                     <p class="texto-padrao gsap-fade-up">
-                        Os benefícios são claros: a implementação da acessibilidade digital democratiza o acesso, garantindo o entendimento e o controle da navegação por todos os usuários, independentemente de suas capacidades físico-motoras, perceptivas, culturais ou sociais.
+                        Os benefícios são claros: a implementação da acessibilidade digital democratiza o acesso,
+                        garantindo o entendimento e o controle da navegação por todos os usuários, independentemente de
+                        suas capacidades físico-motoras, perceptivas, culturais ou sociais.
                     </p><br><br>
                     <div class="icone-titulo" aria-hidden="true">
                         <!-- Icon: checklist / implementadas -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M9 11l2 2 4-4"></path>
-                            <path d="M21 11v-6a2 2 0 0 0-2-2h-4.18a2 2 0 0 1-1.64-.82L12 2 10.82 2.18A2 2 0 0 1 9.18 3H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14"></path>
+                            <path
+                                d="M21 11v-6a2 2 0 0 0-2-2h-4.18a2 2 0 0 1-1.64-.82L12 2 10.82 2.18A2 2 0 0 1 9.18 3H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14">
+                            </path>
                         </svg>
                     </div>
-                    <h2 class="titulo-secao">Acessibilidades que <span class="destaque-gradiente">implementamos</span></h2>
+                    <h2 class="titulo-secao">Acessibilidades que <span class="destaque-gradiente">implementamos</span>
+                    </h2>
                 </header>
                 <div class="grid-features">
                     <div class="card-feature gsap-fade-up">
                         <div class="feature-icon">
                             <!-- Icon: sliders (painel de acessibilidade) -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M4 6h6" />
                                 <circle cx="18" cy="6" r="2" />
                                 <path d="M14 18h6" />
@@ -268,13 +341,16 @@
                             </svg>
                         </div>
                         <h3>Painel de acessibilidade customizável</h3>
-                        <p>Desenvolvemos um painel que permite ajustes de tema, fonte e filtros para daltonismo em tempo real, dando autonomia ao usuário para configurar a interface conforme sua necessidade visual.</p>
+                        <p>Desenvolvemos um painel que permite ajustes de tema, fonte e filtros para daltonismo em tempo
+                            real, dando autonomia ao usuário para configurar a interface conforme sua necessidade
+                            visual.</p>
                     </div>
 
                     <div class="card-feature gsap-fade-up" data-delay="0.1">
                         <div class="feature-icon">
                             <!-- Icon: sun (temas e contraste) -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="4"></circle>
                                 <path d="M12 2v2"></path>
                                 <path d="M12 20v2"></path>
@@ -287,13 +363,17 @@
                             </svg>
                         </div>
                         <h3>Temas e contraste</h3>
-                        <p><strong>Oferecemos modo claro, modo escuro e alto contraste.</strong> O alto contraste é fundamental para pessoas com baixa visão (visão subnormal) ou sensibilidade à luz (fotofobia), pois destaca os elementos essenciais da tela, facilitando a leitura e reduzindo a fadiga visual.</p>
+                        <p><strong>Oferecemos modo claro, modo escuro e alto contraste.</strong> O alto contraste é
+                            fundamental para pessoas com baixa visão (visão subnormal) ou sensibilidade à luz
+                            (fotofobia), pois destaca os elementos essenciais da tela, facilitando a leitura e reduzindo
+                            a fadiga visual.</p>
                     </div>
 
                     <div class="card-feature gsap-fade-up" data-delay="0.2">
                         <div class="feature-icon">
                             <!-- Icon: text (tamanho do texto) -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M4 6h16"></path>
                                 <path d="M9 6v12"></path>
                                 <path d="M15 18V6"></path>
@@ -301,55 +381,71 @@
                             </svg>
                         </div>
                         <h3>Tamanho do texto</h3>
-                        <p><strong>Opções para aumentar a fonte, diminuir a fonte e resetar para o tamanho original.</strong> Esse recurso é ideal para idosos, pessoas com presbiopia ("vista cansada") ou baixa visão, permitindo que o conteúdo seja lido confortavelmente sem a necessidade de ferramentas de zoom externas que podem quebrar o layout da página.</p>
+                        <p><strong>Opções para aumentar a fonte, diminuir a fonte e resetar para o tamanho
+                                original.</strong> Esse recurso é ideal para idosos, pessoas com presbiopia ("vista
+                            cansada") ou baixa visão, permitindo que o conteúdo seja lido confortavelmente sem a
+                            necessidade de ferramentas de zoom externas que podem quebrar o layout da página.</p>
                     </div>
 
                     <div class="card-feature gsap-fade-up" data-delay="0.3">
                         <div class="feature-icon">
                             <!-- Icon: hand (Libras) -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 2c1 2 2 4 2 6v8a4 4 0 0 1-8 0V8c0-2 1-4 2-6"></path>
                                 <path d="M14 9v2"></path>
                                 <path d="M10 9v2"></path>
                             </svg>
                         </div>
                         <h3>Libras</h3>
-                        <p><strong>Inclusão de um plugin de Libras (Língua Brasileira de Sinais).</strong> Essencial para a comunidade surda ou com deficiência auditiva severa que utiliza a língua de sinais como primeira língua, garantindo que o conteúdo textual seja traduzido e compreendido.
+                        <p><strong>Inclusão de um plugin de Libras (Língua Brasileira de Sinais).</strong> Essencial
+                            para a comunidade surda ou com deficiência auditiva severa que utiliza a língua de sinais
+                            como primeira língua, garantindo que o conteúdo textual seja traduzido e compreendido.
                         </p>
                     </div>
 
                     <div class="card-feature gsap-fade-up" data-delay="0.4">
                         <div class="feature-icon">
                             <!-- Icon: color-droplet (filtros de cor) -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 2s4 4 6 6a6 6 0 1 1-12 0c2-2 6-6 6-6z"></path>
                                 <circle cx="12" cy="14" r="2"></circle>
                             </svg>
                         </div>
                         <h3>Filtros de cor</h3>
                         <p>Implementamos filtros específicos para diferentes tipos de discromatopsia (daltonismo):
-<br>• Protanopia: Filtro para quem possui deficiência nos cones vermelhos (dificuldade em distinguir tons de vermelho e verde).
-<br>• Deuteranopia: Filtro para quem possui deficiência nos cones verdes (o tipo mais comum de daltonismo).
-<br>• Tritanopia: Filtro para quem possui deficiência nos cones azuis (dificuldade com tons de azul e amarelo).
-<br>• Normal: Visualização sem filtros, com as cores originais.</p>
+                            <br>• Protanopia: Filtro para quem possui deficiência nos cones vermelhos (dificuldade em
+                            distinguir tons de vermelho e verde).
+                            <br>• Deuteranopia: Filtro para quem possui deficiência nos cones verdes (o tipo mais comum
+                            de daltonismo).
+                            <br>• Tritanopia: Filtro para quem possui deficiência nos cones azuis (dificuldade com tons
+                            de azul e amarelo).
+                            <br>• Normal: Visualização sem filtros, com as cores originais.
+                        </p>
                     </div>
 
                     <div class="card-feature gsap-fade-up" data-delay="0.5">
                         <div class="feature-icon">
                             <!-- Icon: speaker (leitor de tela / ARIA) -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
                                 <path d="M19 8a5 5 0 0 1 0 8"></path>
                                 <path d="M17 5a9 9 0 0 1 0 14"></path>
                             </svg>
                         </div>
                         <h3>Suporte total a leitor de tela (ARIA)</h3>
-                        <p><strong>O código-fonte foi marcado corretamente seguindo as diretrizes WAI-ARIA.</strong> Isso permite que pessoas cegas ou com baixíssima visão utilizem softwares leitores de tela (como NVDA ou VoiceOver) para "ouvir" a estrutura da página e o conteúdo do chat, garantindo uma navegação assistiva fluida. </p>
+                        <p><strong>O código-fonte foi marcado corretamente seguindo as diretrizes WAI-ARIA.</strong>
+                            Isso permite que pessoas cegas ou com baixíssima visão utilizem softwares leitores de tela
+                            (como NVDA ou VoiceOver) para "ouvir" a estrutura da página e o conteúdo do chat, garantindo
+                            uma navegação assistiva fluida. </p>
                     </div>
                     <div class="card-feature gsap-fade-up" data-delay="0.6">
                         <div class="feature-icon">
                             <!-- Icon: keyboard (navegação por teclado) -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="6" width="20" height="12" rx="2"></rect>
                                 <path d="M6 10h.01"></path>
                                 <path d="M10 10h4"></path>
@@ -358,13 +454,16 @@
                             </svg>
                         </div>
                         <h3>Navegação por teclado</h3>
-                        <p>Implementamos uma navegação completa sem o uso do mouse, fundamental para pessoas com deficiências motoras ou que não conseguem utilizar dispositivos apontadores. Ela funciona da seguinte forma:
+                        <p>Implementamos uma navegação completa sem o uso do mouse, fundamental para pessoas com
+                            deficiências motoras ou que não conseguem utilizar dispositivos apontadores. Ela funciona da
+                            seguinte forma:
                         </p>
                     </div>
                     <div class="card-feature gsap-fade-up" data-delay="0.6">
                         <div class="feature-icon">
                             <!-- Icon: key (atalhos no teclado) -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 2l-6 6"></path>
                                 <circle cx="7" cy="17" r="4"></circle>
                                 <path d="M11 13l6-6"></path>
@@ -372,42 +471,103 @@
                         </div>
                         <h3>Atalhos no teclado</h3>
                         <p>• Tab: Navega por todos os elementos.
-<br>• Shift + Tab: Volta para o elemento anterior.
-<br>• Espaço: Vai para o próximo conteúdo.
-<br>• Shift + Espaço: Rola a página para o conteúdo anterior.
-<br>• PageUp/PageDown: Têm a mesma função de rolar a página para cima ou para baixo.
-<br>• Home/End: A tecla "Home" leva ao topo da página, a tecla "End" leva direto ao final.
-<br>• Enter: Aciona botões ou links selecionados.
-<br>• Esc: Fecha menus dropdown abertos.
+                            <br>• Shift + Tab: Volta para o elemento anterior.
+                            <br>• Espaço: Vai para o próximo conteúdo.
+                            <br>• Shift + Espaço: Rola a página para o conteúdo anterior.
+                            <br>• PageUp/PageDown: Têm a mesma função de rolar a página para cima ou para baixo.
+                            <br>• Home/End: A tecla "Home" leva ao topo da página, a tecla "End" leva direto ao final.
+                            <br>• Enter: Aciona botões ou links selecionados.
+                            <br>• Esc: Fecha menus dropdown abertos.
                         </p>
                     </div>
                 </div>
                 <div class="grid-testemunhos-wrapper">
                     <div class="icone-titulo" aria-hidden="true">
                         <!-- Icon: speech / depoimentos -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
                     </div>
                     <h2 class="titulo-secao">Depoimento de <span class="destaque-gradiente">PCD's</span></h2><br>
                     <div class="grid-testemunhos">
                         <article class="card-testemunho gsap-fade-up">
-                            <div class="card-testemunho_aspas-superior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg></div>
-                            <div class="card-testemunho_avatar"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21" stroke-linecap="round" /></svg></div>
-                            <div class="card-testemunho_conteudo"><h3 class="card-testemunho_nome">João Silva</h3><p class="card-testemunho_ocupacao">Estudante</p><div class="card-testemunho_barra-decorativa"></div><p class="card-testemunho_deficiencia">Baixa Visão</p><blockquote class="card-testemunho_citacao">"O modo de alto contraste facilitou muito minha leitura. Consigo estudar sem cansar a vista."</blockquote></div>
-                            <div class="card-testemunho_aspas-inferior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg></div>
+                            <div class="card-testemunho_aspas-superior" aria-hidden="true"><svg width="40" height="40"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                </svg></div>
+                            <div class="card-testemunho_avatar"><svg width="48" height="48" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
+                                        stroke-linecap="round" />
+                                </svg></div>
+                            <div class="card-testemunho_conteudo">
+                                <h3 class="card-testemunho_nome">João Silva</h3>
+                                <p class="card-testemunho_ocupacao">Estudante</p>
+                                <div class="card-testemunho_barra-decorativa"></div>
+                                <p class="card-testemunho_deficiencia">Baixa Visão</p>
+                                <blockquote class="card-testemunho_citacao">"O modo de alto contraste facilitou muito
+                                    minha leitura. Consigo estudar sem cansar a vista."</blockquote>
+                            </div>
+                            <div class="card-testemunho_aspas-inferior" aria-hidden="true"><svg width="40" height="40"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
+                                </svg></div>
                         </article>
-                         <article class="card-testemunho gsap-fade-up" data-delay="0.1">
-                            <div class="card-testemunho_aspas-superior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg></div>
-                            <div class="card-testemunho_avatar"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21" stroke-linecap="round" /></svg></div>
-                            <div class="card-testemunho_conteudo"><h3 class="card-testemunho_nome">Maria Oliveira</h3><p class="card-testemunho_ocupacao">Desenvolvedora</p><div class="card-testemunho_barra-decorativa"></div><p class="card-testemunho_deficiencia">Daltonismo</p><blockquote class="card-testemunho_citacao">"Os filtros de cor funcionam perfeitamente. Pela primeira vez vi os gráficos com clareza."</blockquote></div>
-                            <div class="card-testemunho_aspas-inferior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg></div>
+                        <article class="card-testemunho gsap-fade-up" data-delay="0.1">
+                            <div class="card-testemunho_aspas-superior" aria-hidden="true"><svg width="40" height="40"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                </svg></div>
+                            <div class="card-testemunho_avatar"><svg width="48" height="48" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
+                                        stroke-linecap="round" />
+                                </svg></div>
+                            <div class="card-testemunho_conteudo">
+                                <h3 class="card-testemunho_nome">Maria Oliveira</h3>
+                                <p class="card-testemunho_ocupacao">Desenvolvedora</p>
+                                <div class="card-testemunho_barra-decorativa"></div>
+                                <p class="card-testemunho_deficiencia">Daltonismo</p>
+                                <blockquote class="card-testemunho_citacao">"Os filtros de cor funcionam perfeitamente.
+                                    Pela primeira vez vi os gráficos com clareza."</blockquote>
+                            </div>
+                            <div class="card-testemunho_aspas-inferior" aria-hidden="true"><svg width="40" height="40"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
+                                </svg></div>
                         </article>
-                         <article class="card-testemunho gsap-fade-up" data-delay="0.2">
-                            <div class="card-testemunho_aspas-superior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg></div>
-                            <div class="card-testemunho_avatar"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21" stroke-linecap="round" /></svg></div>
-                            <div class="card-testemunho_conteudo"><h3 class="card-testemunho_nome">Pedro Santos</h3><p class="card-testemunho_ocupacao">Analista</p><div class="card-testemunho_barra-decorativa"></div><p class="card-testemunho_deficiencia">Deficiência Motora</p><blockquote class="card-testemunho_citacao">"A navegação por teclado é fluida e lógica. Consigo acessar tudo sem usar o mouse."</blockquote></div>
-                            <div class="card-testemunho_aspas-inferior" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg></div>
+                        <article class="card-testemunho gsap-fade-up" data-delay="0.2">
+                            <div class="card-testemunho_aspas-superior" aria-hidden="true"><svg width="40" height="40"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                </svg></div>
+                            <div class="card-testemunho_avatar"><svg width="48" height="48" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
+                                        stroke-linecap="round" />
+                                </svg></div>
+                            <div class="card-testemunho_conteudo">
+                                <h3 class="card-testemunho_nome">Pedro Santos</h3>
+                                <p class="card-testemunho_ocupacao">Analista</p>
+                                <div class="card-testemunho_barra-decorativa"></div>
+                                <p class="card-testemunho_deficiencia">Deficiência Motora</p>
+                                <blockquote class="card-testemunho_citacao">"A navegação por teclado é fluida e lógica.
+                                    Consigo acessar tudo sem usar o mouse."</blockquote>
+                            </div>
+                            <div class="card-testemunho_aspas-inferior" aria-hidden="true"><svg width="40" height="40"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
+                                </svg></div>
                         </article>
                     </div>
                 </div>
@@ -417,41 +577,61 @@
         <section class="secao-recursos">
             <div class="container">
                 <header class="header-centralizado gsap-fade-up">
-                    
+
                     <div class="icone-titulo" aria-hidden="true">
                         <!-- Icon: resources / caixa / pacote -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73L13 2l-7 4.27A2 2 0 0 0 5 8v8a2 2 0 0 0 1 1.73L11 22l7-4.27A2 2 0 0 0 21 16z"></path>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73L13 2l-7 4.27A2 2 0 0 0 5 8v8a2 2 0 0 0 1 1.73L11 22l7-4.27A2 2 0 0 0 21 16z">
+                            </path>
                             <path d="M12 2v6"></path>
                         </svg>
                     </div>
                     <h2 class="titulo-secao">Recursos <span class="destaque-gradiente">adicionais</span></h2><br>
-                    <p class="texto-padrao gsap-fade-up">Para tornar a experiência de aprendizado dos próximos alunos ainda melhor, nós criamos um simulador de back-end para a linguagem Python, que foi a tecnologia ensinada na grade de 2025 (ressaltando que as linguagens abordadas podem mudar conforme o ano).<br>
-<br>A ferramenta funciona como um terminal exclusivo para Python: serve para o aluno inserir o código, rodar e visualizar o resultado imediatamente. O objetivo é evitar que os estudantes precisem "sair" do ambiente de imersão do curso buscando outros sites ou compiladores externos, o que poderia gerar desentendimento entre os códigos e quebrar o fluxo de estudo.<br>
-<br>Além disso, também disponibilizamos o BR Diagrama, um site desenvolvido pelo aluno Davi Amorim de Lima. Embora tenha sido criado de forma paralela, fora das atividades obrigatórias do curso, identificamos que a ferramenta poderia ajudar muito os novos alunos que entrarem no Jovem Programador.<br>
-<br>O site utiliza a linguagem SQL e funciona com visualização em tempo real: enquanto o usuário digita o código de um lado da tela, a ferramenta gera automaticamente os Diagramas Entidade-Relacionamento (DER) do outro. Além de facilitar a visualização da estrutura do banco de dados, o sistema também aponta possíveis erros no código caso eles existam.
-</p>
+                    <p class="texto-padrao gsap-fade-up">Para tornar a experiência de aprendizado dos próximos alunos
+                        ainda melhor, nós criamos um simulador de back-end para a linguagem Python, que foi a tecnologia
+                        ensinada na grade de 2025 (ressaltando que as linguagens abordadas podem mudar conforme o
+                        ano).<br>
+                        <br>A ferramenta funciona como um terminal exclusivo para Python: serve para o aluno inserir o
+                        código, rodar e visualizar o resultado imediatamente. O objetivo é evitar que os estudantes
+                        precisem "sair" do ambiente de imersão do curso buscando outros sites ou compiladores externos,
+                        o que poderia gerar desentendimento entre os códigos e quebrar o fluxo de estudo.<br>
+                        <br>Além disso, também disponibilizamos o BR Diagrama, um site desenvolvido pelo aluno Davi
+                        Amorim de Lima. Embora tenha sido criado de forma paralela, fora das atividades obrigatórias do
+                        curso, identificamos que a ferramenta poderia ajudar muito os novos alunos que entrarem no Jovem
+                        Programador.<br>
+                        <br>O site utiliza a linguagem SQL e funciona com visualização em tempo real: enquanto o usuário
+                        digita o código de um lado da tela, a ferramenta gera automaticamente os Diagramas
+                        Entidade-Relacionamento (DER) do outro. Além de facilitar a visualização da estrutura do banco
+                        de dados, o sistema também aponta possíveis erros no código caso eles existam.
+                    </p>
                 </header>
 
                 <div class="grid-resources">
-                    <a href="programacao.html" class="card-resource gsap-fade-up card-resource-link" aria-label="Abrir Simulador Python">
+                    <a href="programacao.html" class="card-resource gsap-fade-up card-resource-link"
+                        aria-label="Abrir Simulador Python">
                         <div class="resource-content">
                             <h3>Simulador Python</h3>
-                            <p>Um terminal exclusivo rodando no navegador. O aluno insere o código, executa e vê o resultado instantaneamente, sem sair do ambiente de estudo.</p>
+                            <p>Um terminal exclusivo rodando no navegador. O aluno insere o código, executa e vê o
+                                resultado instantaneamente, sem sair do ambiente de estudo.</p>
                             <span class="tag-tech">Python</span>
                         </div>
                         <div class="resource-visual">
-                             <div class="code-preview">
-                                 <span class="code-line">print("Olá, Mundo!")</span>
-                                 <span class="code-line success">&gt; Olá, Mundo!</span>
-                             </div>
+                            <div class="code-preview">
+                                <span class="code-line">print("Olá, Mundo!")</span>
+                                <span class="code-line success">&gt; Olá, Mundo!</span>
+                            </div>
                         </div>
                     </a>
 
-                    <a href="https://brdiagrama.com/gerador" class="card-resource gsap-fade-up card-resource-link" data-delay="0.2" target="_blank" rel="noopener noreferrer" aria-label="Abrir BR Diagrama em nova aba">
+                    <a href="https://brdiagrama.com/gerador" class="card-resource gsap-fade-up card-resource-link"
+                        data-delay="0.2" target="_blank" rel="noopener noreferrer"
+                        aria-label="Abrir BR Diagrama em nova aba">
                         <div class="resource-content">
                             <h3>BR Diagrama</h3>
-                            <p>Ferramenta visual que gera Diagramas Entidade-Relacionamento (DER) automaticamente enquanto você digita código SQL. Identifica erros em tempo real.</p>
+                            <p>Ferramenta visual que gera Diagramas Entidade-Relacionamento (DER) automaticamente
+                                enquanto você digita código SQL. Identifica erros em tempo real.</p>
                             <span class="tag-tech">SQL</span>
                         </div>
                         <div class="resource-visual">
@@ -469,11 +649,12 @@
     </main>
 
     <footer class="rodape-jovem-programador">
-        <img src="./assets/images/logo_rodape.png" alt="Logo Jovem Programador" class="logo-jovem-programador" id="logo-rodape" width="140" height="auto" loading="lazy">
+        <img src="./assets/images/logo_rodape.png" alt="Logo Jovem Programador" class="logo-jovem-programador"
+            id="logo-rodape" width="140" height="auto" loading="lazy">
     </footer>
 
     <script src="./assets/js/acessibilidade-global.js"></script>
-    
+
     <script>
         // Atualiza logo do rodapé baseado no tema
         function atualizarLogoRodape() {
@@ -492,8 +673,8 @@
         atualizarLogoRodape();
 
         // Observa mudanças no atributo data-theme
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
+        const observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
                     atualizarLogoRodape();
                 }
@@ -505,20 +686,20 @@
             attributeFilter: ['data-theme']
         });
     </script>
-    
+
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
         // Animação Fade Up Geral
         const fadeElements = document.querySelectorAll('.gsap-fade-up');
-        
+
         fadeElements.forEach(element => {
             const delay = element.getAttribute('data-delay') || 0;
-            
-            gsap.fromTo(element, 
-                { 
-                    y: 50, 
-                    opacity: 0 
+
+            gsap.fromTo(element,
+                {
+                    y: 50,
+                    opacity: 0
                 },
                 {
                     y: 0,
@@ -535,5 +716,17 @@
             );
         });
     </script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
+
 </html>
