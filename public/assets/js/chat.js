@@ -1,16 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     const chatContainer = document.getElementById('chat-container');
     const input = document.getElementById('pergunta-input');
-    const sendButton = document.getElementById('botao-enviar') || document.getElementById('botao-enviar-wave');
+    // Captura direta do botão de envio
+    const sendButton = document.getElementById('botao-enviar');
     const micButton = document.getElementById('botao-microfone');
 
-    // =================================================================
-    // INÍCIO: NOVAS VARIÁVEIS E CONSTANTES PARA MODO SURDEZ
-    // 1. CHAVE PARA O ESTADO DO MODO SURDEZ
+    const resetButton = document.getElementById('botao-reset');
+    
     const SURDEZ_KEY = 'senachat_modo_surdez';
-    // 2. INSTRUÇÃO COMPLETA PARA A IA
     const INSTRUCAO_SURDEZ = 'INSTRUÇÃO ESPECIAL: Responda de forma extremamente concisa e clara. Use frases curtas, evite gírias, ironias, metáforas e termos difíceis. Se usar um termo técnico, explique-o rapidamente com um exemplo concreto. Aplique todas as regras de comunicação acessível para pessoas com deficiência auditiva em português.';
-    // =================================================================
+
 
     if (micButton) {
         micButton.addEventListener('click', () => {
@@ -21,11 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const HISTORICO_KEY = 'senachat_sessao_atual_v1';
     const welcomeModal = document.getElementById('welcome-modal');
     const welcomeOptions = welcomeModal && welcomeModal.querySelectorAll('.welcome-option');
-    // =================================================================
-    // NOVA VARIÁVEL
-    const deafModeOption = document.getElementById('opcao-modo-surdez'); // ID do novo botão
-    // =================================================================
-
+    const deafModeOption = document.getElementById('opcao-modo-surdez'); 
     function rolarParaOFinal() {
         if (chatContainer) {
             setTimeout(() => {
@@ -76,12 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 const divConteudo = wrapper.querySelector('.mensagem-conteudo');
                 if (divConteudo) content = divConteudo.innerText.trim();
             }
-
             if (content && content.length > 0) {
                 historico.push({ role: role, content: content });
             }
         });
-
         return historico;
     }
 
@@ -102,12 +95,10 @@ document.addEventListener("DOMContentLoaded", () => {
             balaoUsuario.innerHTML = `<p>${texto}</p>`;
             wrapper.appendChild(balaoUsuario);
         }
-
         chatContainer.appendChild(wrapper);
         rolarParaOFinal();
         return balaoMensagem;
     }
-
     function toggleInput(disable) {
         if (input) input.disabled = disable;
         if (sendButton) sendButton.disabled = disable;
@@ -133,26 +124,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return false;
     }
-
     function enviarMensagemDoUsuario(textoAutomatico) {
         const texto = textoAutomatico ? textoAutomatico.trim() : input.value.trim();
         if (texto === "") return;
         toggleInput(true);
-
-        // =================================================================
-        // INÍCIO: LÓGICA DE INJEÇÃO DO PROMPT MODO SURDEZ
         let promptFinal = texto;
         const modoSurdezAtivo = sessionStorage.getItem(SURDEZ_KEY) === 'true';
         const historicoContexto = obterHistoricoParaAPI();
 
-        // Se o modo surdez estiver ativo e o histórico estiver vazio, 
-        // injetamos a instrução no prompt da primeira mensagem.
         if (modoSurdezAtivo && historicoContexto.length === 0) {
             promptFinal = `${INSTRUCAO_SURDEZ} ${texto}`;
         }
-        // FIM: LÓGICA DE INJEÇÃO DO PROMPT MODO SURDEZ
-        // =================================================================
-
         adicionarMensagemVisual(texto, 'usuario');
         input.value = "";
 
@@ -164,12 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        // USAR promptFinal AQUI
                         prompt: promptFinal,
                         history: historicoContexto
                     })
                 });
-
                 if (!resp.ok) throw new Error(`Erro ${resp.status}`);
 
                 const data = await resp.json();
@@ -182,7 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     botBalao.querySelector('.mensagem-conteudo').textContent = "Desculpe, não entendi.";
                 }
-
             } catch (e) {
                 console.error(e);
                 botBalao.querySelector('.mensagem-conteudo').textContent = "Erro de conexão.";
@@ -191,12 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })();
     }
-
     function escapeHtml(str) {
         if (!str) return '';
         return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
-
     function renderMarkdownToHtml(mdText) {
         if (!mdText) return '';
         let text = mdText.toString();
@@ -212,8 +189,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return text;
     }
-
-    if (sendButton) sendButton.addEventListener('click', enviarMensagemDoUsuario);
+    if (sendButton) {
+        sendButton.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            enviarMensagemDoUsuario();
+        });
+    }
     input.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -240,66 +221,47 @@ document.addEventListener("DOMContentLoaded", () => {
             welcomeModal.classList.remove('hidden');
         }, 500);
     }
-
-    // =================================================================
-    // INÍCIO: NOVO BLOCO LÓGICO PARA MODO SURDEZ
     if (deafModeOption) {
         deafModeOption.addEventListener('click', () => {
             const instrucaoAcessivel = 'Sou deficiente auditivo e desejo que você me responda de forma mais acessível e clara em português.';
-
-            // 3. Ativa e Salva o estado do Modo Surdez
             sessionStorage.setItem(SURDEZ_KEY, 'true');
 
-            // Simula o envio de uma pergunta de instrução
             if (welcomeModal) welcomeModal.classList.add('hidden');
             setTimeout(() => enviarMensagemDoUsuario(instrucaoAcessivel), 200);
         });
     }
-    // FIM: NOVO BLOCO LÓGICO PARA MODO SURDEZ
-    // =================================================================
-
     if (welcomeOptions) {
         welcomeOptions.forEach(btn => {
-            // =================================================================
-            // CORREÇÃO: PULA O BOTÃO DE SURDEZ PARA NÃO DUPLICAR O ENVIO
             if (btn.id === 'opcao-modo-surdez') return;
-            // =================================================================
-
             btn.addEventListener('click', () => {
                 const q = btn.textContent.trim();
                 input.value = q;
-
-                // =================================================================
-                // DESATIVA O MODO SURDEZ SE OUTRA OPÇÃO FOR ESCOLHIDA
                 sessionStorage.setItem(SURDEZ_KEY, 'false');
-                // =================================================================
 
                 if (welcomeModal) welcomeModal.classList.add('hidden');
                 setTimeout(() => enviarMensagemDoUsuario(q), 200);
             });
         });
     }
-
     if (input && welcomeModal) {
         input.addEventListener('focus', () => {
             welcomeModal.classList.add('hidden');
-            // =================================================================
-            // DESATIVA O MODO SURDEZ AO COMEÇAR A DIGITAR
+
             sessionStorage.setItem(SURDEZ_KEY, 'false');
-            // =================================================================
         });
     }
-
-    // =================================================================
-    // ADICIONAR VERIFICAÇÃO INICIAL DO MODO SURDEZ PARA FEEDBACK VISUAL
     if (sessionStorage.getItem(SURDEZ_KEY) === 'true') {
-        // Exemplo: Adiciona uma classe ao corpo ou container para feedback visual (feedback visual reforçado)
         document.body.classList.add('modo-surdez-ativo');
     }
-    // =================================================================
-
     window.resetChat = function() {
         sessionStorage.removeItem(HISTORICO_KEY);
+        sessionStorage.removeItem(SURDEZ_KEY); 
         location.reload();
     };
+    
+    if (resetButton) {
+        resetButton.addEventListener('click', () => {
+            window.resetChat();
+        });
+    }
 });

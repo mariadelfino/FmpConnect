@@ -130,39 +130,42 @@
                 </div>
             </div>
         </div>
-        <footer class="area-input-pergunta">
-            <div class="container-input full-width">
-                <input type="text" id="pergunta-input" name="senachat-pergunta" autocomplete="off" autocorrect="off"
-                    autocapitalize="off" spellcheck="false" placeholder="Faça a sua pergunta">
+    <footer class="area-input-pergunta">
+        <div class="container-input full-width">
+            <input type="text" id="pergunta-input" name="senachat-pergunta" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false" placeholder="Faça a sua pergunta">
+            <div class="acoes-input">
+                <button class="botao-icone" id="botao-reset" title="Reiniciar chat" type="button">
+                    <svg width="29" height="29" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 4V2.25C12 2.1125 11.8375 2.04167 11.75 2.125L8.75 5.125C8.6875 5.1875 8.6875 5.3125 8.75 5.375L11.75 8.375C11.8375 8.45833 12 8.3875 12 8.25V6.5C14.7625 6.5 17 8.7375 17 11.5C17 14.2625 14.7625 16.5 12 16.5C9.2375 16.5 7 14.2625 7 11.5H5C5 15.35 8.15 18.5 12 18.5C15.85 18.5 19 15.35 19 11.5C19 7.65 15.85 4.5 12 4.5V4ZM12 20C9.2375 20 7 17.7625 7 15H5C5 18.85 8.15 22 12 22C15.85 22 19 18.85 19 15H17C17 17.7625 14.7625 20 12 20Z" fill="currentColor"/>
+                    </svg>
+                </button>
 
-                <div class="acoes-input">
-                    <button class="botao-icone" id="botao-microfone" title="Ir para chat de voz" type="button">
-                        <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M14.5 18.7291C17.1704 18.7291 19.3333 16.5662 19.3333 13.8958V7.24996C19.3333 4.57954 17.1704 2.41663 14.5 2.41663C11.8295 2.41663 9.66663 4.57954 9.66663 7.24996V13.8958C9.66663 16.5662 11.8295 18.7291 14.5 18.7291Z"
-                                stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M5.25623 11.6605V13.7147C5.25623 18.8139 9.40081 22.9584 14.5 22.9584C19.5991 22.9584 23.7437 18.8139 23.7437 13.7147V11.6605"
-                                stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M12.8204 7.76964C13.9079 7.37089 15.0921 7.37089 16.1796 7.76964" stroke="white"
-                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M13.5333 10.3312C14.1737 10.1621 14.8383 10.1621 15.4787 10.3312" stroke="white"
-                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M14.5 22.9583V26.5833" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
+                <button class="botao-icone" id="botao-microfone" title="Ir para chat de voz" type="button">
+                    <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M14.5 18.7291C17.1704 18.7291 19.3333 16.5662 19.3333 13.8958V7.24996C19.3333 4.57954 17.1704 2.41663 14.5 2.41663C11.8295 2.41663 9.66663 4.57954 9.66663 7.24996V13.8958C9.66663 16.5662 11.8295 18.7291 14.5 18.7291Z"
+                            stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M5.25623 11.6605V13.7147C5.25623 18.8139 9.40081 22.9584 14.5 22.9584C19.5991 22.9584 23.7437 18.8139 23.7437 13.7147V11.6605"
+                            stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12.8204 7.76964C13.9079 7.37089 15.0921 7.37089 16.1796 7.76964" stroke="white"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13.5333 10.3312C14.1737 10.1621 14.8383 10.1621 15.4787 10.3312" stroke="white"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M14.5 22.9583V26.5833" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
 
-                    <button class="botao-icone" id="botao-enviar-wave" title="Enviar" type="button">
-                        <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
-                            <path d="M18 12V24M26 11V25M10 16V20M14 9V27M22 14V22" stroke="#FE29BB" stroke-width="1.5"
-                                stroke-linecap="round" />
-                        </svg>
-                    </button>
-                </div>
+                <button class="botao-icone" id="botao-enviar" title="Enviar" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20" fill="none">
+                        <path d="M5.01844 10.0046L9.88578 10.0046M4.87063 9.43439L1.15856 2.75463C0.59773 1.74543 1.67769 0.617821 2.71059 1.13412L18.3557 8.95439C19.2214 9.38712 19.2214 10.6222 18.3557 11.0549L2.71059 18.8752C1.67768 19.3915 0.597728 18.2639 1.15856 17.2547L4.87063 10.5749C5.06771 10.2202 5.06771 9.78903 4.87063 9.43439Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
             </div>
-        </footer>
+        </div>
+    </footer>
     </main>
     <script src="./assets/js/acessibilidade-global.js"></script>
     <script src="./assets/js/chat.js" defer></script>
