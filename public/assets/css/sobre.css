@@ -302,22 +302,15 @@
    DEPOIMENTOS (PCDs) - GRID DE TESTEMUNHOS
    ======================================== */
 .grid-testemunhos {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center; /* centraliza os cards horizontalmente */
     align-items: stretch;
 }
 
 @media (min-width: 768px) {
     .grid-testemunhos {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .grid-testemunhos {
-        grid-template-columns: repeat(3, 1fr); /* 3 depoimentos lado a lado em desktop grande */
         gap: 28px;
     }
 }
@@ -327,6 +320,9 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    width: 100%;
+    max-width: 450px; /* limita largura do card para manter o conjunto centralizado */
+    flex: 0 1 450px; /* não cresce, pode encolher, base de 450px */
 }
 
 /* ========================================
