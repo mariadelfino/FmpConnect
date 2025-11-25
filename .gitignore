@@ -1,0 +1,3 @@
+.env
+venv/
+public/js/services/gemini-service.js
