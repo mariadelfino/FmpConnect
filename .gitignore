@@ -1,3 +1,6 @@
+# Arquivos de Sistema e Ambiente (suas regras)
 .env
 venv/
-public/js/services/gemini-service.js
+
+# Arquivo de Serviço Local (sua regra crucial para o Chat de Voz)
+public/assets/js/services/gemini-service.js 
