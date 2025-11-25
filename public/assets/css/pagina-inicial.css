@@ -32,6 +32,12 @@
     margin: 0 auto;
 }
 
+.opcao-chat:nth-child(3):last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
 .opcao-chat {
     border: 2px solid var(--color-opcao-chat-border);
     border-radius: var(--radius-xl);
