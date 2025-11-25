@@ -46,6 +46,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
 
 <body>
@@ -142,10 +143,7 @@
             <div class="container">
                 <header class="header-centralizado gsap-fade-up">
                     <div class="icone-titulo">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
+                        <span class="material-icons-outlined" style="font-size: 40px;">chat_bubble_outline</span>
                     </div>
                     <h2 class="titulo-secao">O que é o <span class="destaque-gradiente">SenaChat?</span></h2>
                 </header>
@@ -210,13 +208,7 @@
             <div class="container">
                 <header class="header-centralizado gsap-fade-up">
                     <div class="icone-titulo" aria-hidden="true">
-                        <!-- Icon: users / equipe -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M17 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M7 21v-2a4 4 0 0 1 3-3.87"></path>
-                            <path d="M12 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path>
-                        </svg>
+                        <span class="material-icons-outlined" style="font-size: 40px;">groups</span>
                     </div>
                     <h2 class="titulo-secao">Nossa <span class="destaque-gradiente">equipe</span></h2>
                     <p class="texto-centralizado">Somos um time dedicado a construir o futuro da interação digital.</p>
@@ -235,7 +227,6 @@
                         </div>
                         <div class="card-membro_info">
                             <h3 class="card-membro_nome">Davi Amorim de Lima</h3>
-                            <p class="card-membro_funcao">Desenvolvedor Full Stack</p>
                         </div>
                     </article>
                     <article class="card-membro gsap-fade-up" data-delay="0.2">
@@ -250,7 +241,6 @@
                         </div>
                         <div class="card-membro_info">
                             <h3 class="card-membro_nome">Isabella Schlemper Bernardo</h3>
-                            <p class="card-membro_funcao">UI/UX Designer/Front end</p>
                         </div>
                     </article>
                     <article class="card-membro gsap-fade-up" data-delay="0.1">
@@ -259,14 +249,10 @@
                                 <path
                                     d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z" />
                             </svg></a>
-                        <div class="card-membro_foto"><svg class="card-membro_avatar" width="80" height="80"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="12" cy="8" r="5" />
-                                <path d="M20 21a8 8 0 1 0-16 0" />
-                            </svg></div>
+                        <div class="card-membro_foto"><img src="./assets/images/fotomaria.png"
+                                alt="Foto de Nathalia Schlemper Bernardo" width="100" height="100" loading="lazy"></div>
                         <div class="card-membro_info">
                             <h3 class="card-membro_nome">Maria Fernanda Delfino</h3>
-                            <p class="card-membro_funcao">Desenvolvedora Full Stack</p>
                         </div>
                     </article>
                     <article class="card-membro gsap-fade-up" data-delay="0.4">
@@ -280,7 +266,6 @@
                                 alt="Foto de Nathalia Schlemper Bernardo" width="100" height="100" loading="lazy"></div>
                         <div class="card-membro_info">
                             <h3 class="card-membro_nome">Nathalia Schlemper Bernardo</h3>
-                            <p class="card-membro_funcao">Product Owner/Agilista</p>
                         </div>
                     </article>
                 </div>
@@ -291,14 +276,7 @@
             <div class="container">
                 <header class="header-centralizado gsap-fade-up">
                     <div class="icone-titulo" aria-hidden="true">
-                        <!-- Icon: universal access / acessibilidade -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <circle cx="12" cy="4" r="2"></circle>
-                            <path d="M12 6v6"></path>
-                            <path d="M5 12h14"></path>
-                            <path d="M8 20l4-4 4 4"></path>
-                        </svg>
+                        <span class="material-icons-outlined" style="font-size: 40px;">accessibility_new</span>
                     </div>
                     <h2 class="titulo-secao">Acessibilidade para <span class="destaque-gradiente">todos</span></h2>
                     <p class="texto-padrao gsap-fade-up">
@@ -315,13 +293,7 @@
                     </p><br><br>
                     <div class="icone-titulo" aria-hidden="true">
                         <!-- Icon: checklist / implementadas -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M9 11l2 2 4-4"></path>
-                            <path
-                                d="M21 11v-6a2 2 0 0 0-2-2h-4.18a2 2 0 0 1-1.64-.82L12 2 10.82 2.18A2 2 0 0 1 9.18 3H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14">
-                            </path>
-                        </svg>
+                        <span class="material-icons-outlined" style="font-size: 40px;">checklist</span>
                     </div>
                     <h2 class="titulo-secao">Acessibilidades que <span class="destaque-gradiente">implementamos</span>
                     </h2>
@@ -483,11 +455,7 @@
                 </div>
                 <div class="grid-testemunhos-wrapper">
                     <div class="icone-titulo" aria-hidden="true">
-                        <!-- Icon: speech / depoimentos -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
+                        <span class="material-icons-outlined" style="font-size: 40px;">format_quote</span>
                     </div>
                     <h2 class="titulo-secao">Depoimento de <span class="destaque-gradiente">PCD's</span></h2><br>
                     <div class="grid-testemunhos">
@@ -580,13 +548,7 @@
 
                     <div class="icone-titulo" aria-hidden="true">
                         <!-- Icon: resources / caixa / pacote -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path
-                                d="M21 16V8a2 2 0 0 0-1-1.73L13 2l-7 4.27A2 2 0 0 0 5 8v8a2 2 0 0 0 1 1.73L11 22l7-4.27A2 2 0 0 0 21 16z">
-                            </path>
-                            <path d="M12 2v6"></path>
-                        </svg>
+                        <span class="material-icons-outlined" style="font-size: 40px;">inventory_2</span>
                     </div>
                     <h2 class="titulo-secao">Recursos <span class="destaque-gradiente">adicionais</span></h2><br>
                     <p class="texto-padrao gsap-fade-up">Para tornar a experiência de aprendizado dos próximos alunos
