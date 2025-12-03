@@ -17,12 +17,11 @@
                 if (saved) {
                     const estado = JSON.parse(saved);
 
-                    // Aplica tema IMEDIATAMENTE
                     if (estado.tema === 'claro') {
                         document.documentElement.setAttribute('data-theme', 'light');
                     }
 
-                    // Aplica escala de fonte
+
                     if (estado.scaleFactor && estado.scaleFactor !== 1) {
                         document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
                     }
