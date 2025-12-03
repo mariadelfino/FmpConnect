@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SenaChat - Converse por texto com seu assistente virtual">
+    <meta name="theme-color" content="#3B018A">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+
+    <title>FmpConnect - Conversa por Texto</title>
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('senachat-acessibilidade');
+                if (saved) {
+                    const estado = JSON.parse(saved);
+
+                    if (estado.tema === 'claro') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    }
+
+                    if (estado.scaleFactor && estado.scaleFactor !== 1) {
+                        document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
+                    }
+
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const mains = document.querySelectorAll('main');
+
+                        if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
+                            mains.forEach(function (main) {
+                                main.classList.add('filtro-' + estado.filtroDaltonismo);
+                            });
+                            document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
+                        }
+
+                        if (estado.contraste) {
+                            mains.forEach(function (main) {
+                                main.classList.add('alto-contraste');
+                            });
+                            document.body.setAttribute('data-alto-contraste', 'true');
+                        }
+                    });
+                }
+            } catch (e) {
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/componentes.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/chat.css">
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
+</head>
+
+<body>
+    <main class="pagina-chat">
+        <header class="cabecalho">
+            <a href="paginainicial.html" aria-label="Voltar para página inicial">
+                <button class="botao-voltar" type="button">
+                    <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </a>
+
+            <h1 class="logo-senachat">FmpConnect</h1>
+
+            <button class="botao-acessibilidade" aria-label="Opções de acessibilidade" type="button">
+
+                <svg width="1000" height="1000" viewBox="320 330 360 360" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path
+                        d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                </svg>
+
+            </button>
+        </header>
+        <section class="area-mensagens" id="chat-container">
+        </section>
+        <div id="welcome-modal" class="welcome-modal hidden" role="dialog" aria-modal="true"
+            aria-labelledby="welcome-title">
+            <div class="welcome-card">
+                <h2 id="welcome-title">Oi! Como posso te ajudar?</h2>
+                <div class="welcome-options">
+                    <button class="welcome-option">Como funciona o programa?</button>
+                    <button class="welcome-option">Como me inscrevo?</button>
+                    <button class="welcome-option">Existe idade mínima?</button>
+                    <button class="welcome-option">O curso é pra mim?</button>
+                    <button class="welcome-option **acessibilidade-surdez**" id="opcao-modo-surdez">
+                        Respostas Claras (Acessibilidade Auditiva)
+                    </button>
+                </div>
+            </div>
+        </div>
+    <footer class="area-input-pergunta">
+        <div class="container-input full-width">
+            <input type="text" id="pergunta-input" name="senachat-pergunta" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false" placeholder="Faça a sua pergunta">
+            <div class="acoes-input">
+                <button class="botao-icone" id="botao-reset" title="Reiniciar chat" type="button">
+                    <svg width="29" height="29" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 5V1L7 6L12 11V7C15.31 7 18 9.69 18 13C18 16.31 15.31 19 12 19C8.69 19 6 16.31 6 13H4C4 17.42 7.58 21 12 21C16.42 21 20 17.42 20 13C20 8.58 16.42 5 12 5Z" fill="currentColor"/>
+                    </svg>
+                </button>
+
+                <button class="botao-icone" id="botao-microfone" title="Falar agora" type="button">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17 11C17 13.76 14.76 16 12 16C9.24 16 7 13.76 7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 16V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 19H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <button class="botao-icone" id="botao-enviar" title="Enviar" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20" fill="none">
+                        <path d="M5.01844 10.0046L9.88578 10.0046M4.87063 9.43439L1.15856 2.75463C0.59773 1.74543 1.67769 0.617821 2.71059 1.13412L18.3557 8.95439C19.2214 9.38712 19.2214 10.6222 18.3557 11.0549L2.71059 18.8752C1.67768 19.3915 0.597728 18.2639 1.15856 17.2547L4.87063 10.5749C5.06771 10.2202 5.06771 9.78903 4.87063 9.43439Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </footer>
+    </main>
+    <script src="./assets/js/acessibilidade-global.js"></script>
+    <script src="./assets/js/chat.js" defer></script>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+</body>
+</html>

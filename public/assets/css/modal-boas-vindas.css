@@ -1,0 +1,248 @@
+
+.modal-boas-vindas_bloco-principal {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-boas-vindas {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    overflow: hidden;
+    animation: aparecer var(--transition-slow) ease-in-out;
+}
+
+.modal-boas-vindas_conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    text-align: center;
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+.modal-boas-vindas_bloco-principal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: var(--spacing-md);
+}
+
+/* Compensa espaço transparente do PNG do robô */
+.Fmpconnect_mascote {
+    margin-left: calc(var(--spacing-xl) * -1);
+}
+
+.modal-boas-vindas_cabecalho {
+    flex: 0 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.modal-boas-vindas_titulo {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-white);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.modal-boas-vindas_titulo-destaque {
+    display: block;
+    font-size: var(--font-size-6xl);
+    font-weight: var(--font-weight-extrabold);
+    background: var(--gradient-title);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: var(--spacing-sm);
+}
+
+.modal-boas-vindas_acao {
+    width: 100%;
+    max-width: 400px;
+    padding-bottom: var(--spacing-xl);
+}
+
+/* ========================================
+   Animações
+   ======================================== */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   Responsividade - Tablets
+   ======================================== */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .modal-boas-vindas_titulo {
+        font-size: var(--font-size-4xl);
+    }
+
+    .modal-boas-vindas_titulo-destaque {
+        font-size: calc(4rem * var(--scale-factor));
+    }
+}
+
+/* ========================================
+   Responsividade - Desktop Grande
+   ======================================== */
+
+@media (min-width: 1024px) {
+    .modal-boas-vindas_titulo {
+        font-size: var(--font-size-3xl);
+    }
+
+    .modal-boas-vindas_titulo-destaque {
+        font-size: var(--font-size-5xl);
+    }
+    
+    .modal-boas-vindas {
+        overflow-y: auto;
+        height: 100vh;
+    }
+
+    .modal-boas-vindas_conteudo {
+        max-height: 100%; /* Limita a altura do conteúdo para evitar cortes */
+        overflow-y: auto; /* Permite rolagem interna caso o conteúdo seja muito grande */
+        justify-content: center;
+    }
+    
+    /* Layout horizontal: texto à esquerda, robô à direita */
+    .modal-boas-vindas_bloco-principal {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--spacing-lg);
+    }
+    
+    .modal-boas-vindas_cabecalho {
+        text-align: left;
+        padding-top: 0;
+    }
+    
+    .Fmpconnect_mascote {
+        flex-shrink: 0;
+        margin-left: calc(var(--spacing-3xl) * -1.5);
+    }
+}
+
+/* Mobile: mantém layout vertical */
+@media (max-width: 1023px) {
+    .modal-boas-vindas_bloco-principal {
+        flex-direction: column;
+        gap: var(--spacing-xl);
+    }
+    
+    .modal-boas-vindas_cabecalho {
+        text-align: center;
+        padding-top: var(--spacing-2xl);
+    }
+    
+    .Fmpconnect_mascote {
+        margin-left: 0;
+    }
+}
+
+/* ========================================
+   Botão Começar - Simples e Acessível
+   ======================================== */
+
+.botao-comecar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+    max-width: 280px;
+    padding: calc(18px * var(--scale-factor)) calc(32px * var(--scale-factor));
+    background: var(--color-white);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
+    cursor: pointer;
+    user-select: none;
+}
+
+.botao-comecar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(254, 41, 187, 0.3);
+}
+
+.botao-comecar:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(254, 41, 187, 0.2);
+}
+
+.botao-comecar:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
+.botao-comecar_texto {
+    letter-spacing: 0.02em;
+}
+
+.botao-comecar_icone {
+    width: calc(24px * var(--scale-factor));
+    height: calc(24px * var(--scale-factor));
+    transition: transform var(--transition-base);
+}
+
+.botao-comecar:hover .botao-comecar_icone {
+    transform: translateX(4px);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .botao-comecar {
+        max-width: 320px;
+        padding: calc(20px * var(--scale-factor)) calc(40px * var(--scale-factor));
+        font-size: var(--font-size-xl);
+    }
+
+    .botao-comecar_icone {
+        width: calc(28px * var(--scale-factor));
+        height: calc(28px * var(--scale-factor));
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .botao-comecar {
+        max-width: 360px;
+        padding: calc(22px * var(--scale-factor)) calc(48px * var(--scale-factor));
+    }
+
+    .botao-comecar_icone {
+        width: calc(32px * var(--scale-factor));
+        height: calc(32px * var(--scale-factor));
+    }
+}

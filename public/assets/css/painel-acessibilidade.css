@@ -1,0 +1,418 @@
+
+.painel-acessibilidade {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    z-index: 9999;
+    display: none;
+    pointer-events: none;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+.painel-acessibilidade.ativo {
+    display: block;
+    pointer-events: auto;
+}
+
+.painel-acessibilidade_overlay {
+    display: none;
+}
+
+.painel-acessibilidade_conteudo {
+    position: absolute;
+    top: 70px;
+    right: 16px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: 1.5rem; 
+    width: calc(100% - 32px);
+    max-width: 420px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform: translateX(120%);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.painel-acessibilidade.ativo .painel-acessibilidade_conteudo {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* ========================================
+   Header - Flutuante Arredondado
+   ======================================== */
+
+.painel-acessibilidade_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(90deg, #FE29BB 0%, #7A01FF 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 9999px;
+    margin: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.painel-acessibilidade_titulo {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-bold);
+    color: white;
+    margin: 0;
+}
+
+.painel-acessibilidade_fechar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.painel-acessibilidade_fechar:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: rotate(90deg);
+}
+
+/* ========================================
+   Grid de Opções - 2 Colunas
+   ======================================== */
+
+.painel-acessibilidade_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* 16px fixo */
+    padding: 0 1rem 1rem; /* 0 16px 16px fixo */
+}
+
+.painel-acessibilidade_coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* 8px fixo */
+}
+
+.painel-acessibilidade_subtitulo {
+    font-size: 0.75rem; /* 12px fixo */
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+    margin: 1rem 0 0.5rem 0; /* 16px 0 8px 0 fixo */
+    padding-bottom: 0.5rem; /* 8px fixo */
+    border-bottom: 1px solid color-mix(in srgb, var(--color-white) 20%, transparent);
+    text-transform: uppercase;
+    grid-column: 1 / -1;
+}
+
+.painel-acessibilidade_subtitulo:first-child {
+    margin-top: 0;
+}
+
+/* ========================================
+   Opções de Acessibilidade (Botões)
+   ======================================== */
+
+.opcao-acessibilidade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem; /* 4px fixo */
+    padding: 0.5rem 1rem;
+    background: #3B018A;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 1rem; /* 16px fixo */
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+}
+
+.opcao-acessibilidade:hover {
+    background: #1A0145;
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.opcao-acessibilidade.ativo {
+    background: #FE29BB;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.opcao-acessibilidade_icone {
+    flex-shrink: 0;
+    width: 48px; /* fixo */
+    height: 48px; /* fixo */
+    border-radius: 0.5rem; /* 8px fixo */
+    background: rgba(255, 255, 255, 0.2);
+    display: grid;
+    place-items: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.opcao-acessibilidade_icone svg {
+    width: 24px;
+    height: 24px;
+}
+
+.opcao-acessibilidade:hover .opcao-acessibilidade_icone {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.08);
+}
+
+.opcao-acessibilidade.ativo .opcao-acessibilidade_icone {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(254, 41, 187, 0.5);
+}
+
+/* Ícones coloridos para daltonismo */
+.opcao-acessibilidade_icone--cor-vermelho {
+    background: rgb(239, 68, 68);
+}
+
+.opcao-acessibilidade:hover .opcao-acessibilidade_icone--cor-vermelho {
+    background: rgb(239, 68, 68);
+}
+
+.opcao-acessibilidade.ativo .opcao-acessibilidade_icone--cor-vermelho {
+    background: rgba(239, 68, 68, 0.85);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+}
+
+.opcao-acessibilidade_icone--cor-verde {
+    background: rgb(34, 197, 94);
+}
+
+.opcao-acessibilidade:hover .opcao-acessibilidade_icone--cor-verde {
+    background: rgb(34, 197, 94);
+}
+
+.opcao-acessibilidade.ativo .opcao-acessibilidade_icone--cor-verde {
+    background: rgba(34, 197, 94, 0.85);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
+.opcao-acessibilidade_icone--cor-azul {
+    background: rgb(59, 131, 246);
+}
+
+.opcao-acessibilidade:hover .opcao-acessibilidade_icone--cor-azul {
+    background: rgb(59, 131, 246);
+}
+
+.opcao-acessibilidade.ativo .opcao-acessibilidade_icone--cor-azul {
+    background: rgba(59, 130, 246, 0.85);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.opcao-acessibilidade_texto {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* fixo */
+    min-width: 0;
+}
+
+.opcao-acessibilidade_titulo {
+    font-size: 0.75rem; /* 12px fixo */
+    font-weight: var(--font-weight-semibold);
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.opcao-acessibilidade_status,
+.opcao-acessibilidade_descricao {
+    font-size: 10px; /* fixo */
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.opcao-acessibilidade.ativo .opcao-acessibilidade_status {
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: var(--font-weight-semibold);
+}
+
+.opcao-acessibilidade.ativo .opcao-acessibilidade_titulo {
+    color: white;
+}
+
+/* ========================================
+   Footer - Botão Reset
+   ======================================== */
+
+.painel-acessibilidade_footer {
+    padding: 1rem; /* 16px fixo */
+    display: flex;
+    justify-content: center;
+}
+
+.painel-acessibilidade_resetar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* 8px fixo */
+    padding: 1rem 2rem; /* 16px 32px fixo */
+    background: #3B018A;
+    border-radius: 9999px; /* radius-full fixo */
+    color: white;
+    font-size: 0.875rem; /* 14px fixo */
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    justify-content: center;
+}
+
+.painel-acessibilidade_resetar:hover {
+    background: #1A0145;
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.painel-acessibilidade_resetar:active {
+    transform: scale(0.95);
+}
+
+/* ========================================
+   Scrollbar Customizada
+   ======================================== */
+
+.painel-acessibilidade_conteudo::-webkit-scrollbar {
+    width: 8px;
+}
+
+.painel-acessibilidade_conteudo::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    margin: 4px;
+}
+
+.painel-acessibilidade_conteudo::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.painel-acessibilidade_conteudo::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================================
+   Responsividade Mobile
+   ======================================== */
+
+@media (max-width: 639px) {
+    .painel-acessibilidade {
+        top: auto;
+        bottom: 0;
+        left: auto;
+        right: 0;
+        max-width: 100%;
+        width: auto;
+    }
+
+    .painel-acessibilidade_conteudo {
+        position: relative;
+        bottom: 0;
+        left: auto;
+        right: 0;
+        width: calc(70vw - 16px);
+        max-width: 380px;
+        max-height: 75vh;
+        border-radius: 1.5rem; /* 24px fixo */
+        transform: translateY(120%);
+        margin: 0 0.5rem 0.5rem 0.5rem; /* 0 8px 8px 8px fixo */
+    }
+
+    .painel-acessibilidade.ativo .painel-acessibilidade_conteudo {
+        transform: translateY(0);
+    }
+
+    .painel-acessibilidade_header {
+        padding: 0.5rem 1rem; /* 8px 16px fixo */
+    }
+
+    .painel-acessibilidade_titulo {
+        font-size: 1rem;
+    }
+
+    .painel-acessibilidade_fechar {
+        width: 32px; /* fixo */
+        height: 32px; /* fixo */
+    }
+
+    .painel-acessibilidade_grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem; /* 8px fixo */
+    }
+
+    .painel-acessibilidade_subtitulo {
+        font-size: 10px; /* fixo */
+        margin-bottom: 0.25rem; /* 4px fixo */
+        padding-bottom: 0.25rem; /* 4px fixo */
+    }
+
+    .opcao-acessibilidade {
+        padding: 0.25rem 0.5rem; /* 4px 8px fixo */
+    }
+
+    .opcao-acessibilidade_icone {
+        width: 40px; /* fixo */
+        height: 40px; /* fixo */
+    }
+
+    .opcao-acessibilidade_icone svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .opcao-acessibilidade_titulo {
+        font-size: 10px; /* fixo */
+    }
+
+    .opcao-acessibilidade_status,
+    .opcao-acessibilidade_descricao {
+        font-size: 8px; /* fixo */
+    }
+
+    .painel-acessibilidade_footer {
+        padding: 0.5rem; /* 8px fixo */
+    }
+
+    .painel-acessibilidade_resetar {
+        padding: 0.5rem 1rem; /* 8px 16px fixo */
+        font-size: 0.75rem; /* 12px fixo */
+    }
+}
+
+/* ========================================
+   Acessibilidade - Prefers Reduced Motion
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .painel-acessibilidade_conteudo,
+    .painel-acessibilidade,
+    .opcao-acessibilidade,
+    .painel-acessibilidade_fechar {
+        animation: none !important;
+        transition: none !important;
+    }
+}

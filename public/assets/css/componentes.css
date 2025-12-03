@@ -1,0 +1,96 @@
+/* Componentes Reutilizáveis */
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    position: relative;
+    z-index: 10;
+}
+
+.logo-senachat {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
+    background: var(--gradient-title);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+}
+
+
+.botao-voltar {
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
+    border-radius: 50%;
+    border: 1.5px solid var(--color-primary-border);
+    display: grid;
+    place-items: center;
+    color: var(--color-primary-icon);
+    transition: background var(--transition-base),
+        border-color var(--transition-base),
+        transform var(--transition-base);
+    will-change: transform;
+}
+
+.botao-acessibilidade {
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
+    border-radius: 50%;
+    border: 1.5px solid var(--color-primary-border);
+    display: grid;
+    place-items: center;
+    color: var(--color-primary-icon);
+    transition: background var(--transition-base),
+        border-color var(--transition-base),
+        transform var(--transition-base);
+    flex-shrink: 0;
+    will-change: transform;
+}
+
+.botao-voltar:hover,
+.botao-acessibilidade:hover {
+    background: var(--color-primary-background-hover);
+    border-color: var(--color-primary-border-hover);
+    transform: scale(1.05);
+}
+
+.botao-acessibilidade:active {
+    transform: scale(0.95);
+}
+
+.botao-acessibilidade svg path {
+    fill: none;
+}
+
+.botao-acessibilidade svg {
+    width: 90%;
+    height: 90%;
+}
+
+.botao-voltar svg {
+    width: 40%;
+    height: 40%;
+}
+
+.botao-voltar:active,
+.botao-acessibilidade:active {
+    transform: scale(0.95);
+}
+
+@media (min-width: 768px) {
+    .cabecalho {
+        padding: var(--spacing-xl) var(--spacing-2xl);
+    }
+
+    .botao-voltar,
+    .botao-acessibilidade {
+        width: var(--size-icon-lg);
+        height: var(--size-icon-lg);
+    }
+
+    .logo-fmpconnect {
+        font-size: var(--font-size-5xl);
+    }
+}

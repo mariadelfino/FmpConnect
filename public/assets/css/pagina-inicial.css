@@ -1,0 +1,540 @@
+.pagina-inicial {
+    min-height: 100vh;
+    background: var(--gradient-primary);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.cabecalho-inicial {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-2xl) var(--container-padding);
+    position: relative;
+    z-index: 10;
+}
+
+.cabecalho-inicial_placeholder {
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
+    flex-shrink: 0;
+}
+
+.secao-opcoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) var(--container-padding) var(--spacing-xl);
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.opcao-chat {
+    border: 2px solid var(--color-opcao-chat-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    color: var(--color-white);
+    text-align: center;
+    min-height: var(--size-card-min-height-sm);
+    transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.opcao-chat:hover {
+    background: var(--color-opcao-chat-principal-background-hover);
+    transform: translateY(-4px);
+}
+
+.opcao-chat_icone {
+    width: var(--size-icon-xl);
+    height: var(--size-icon-xl);
+    color: var(--color-secondary-icon);
+    border-radius: 42%;
+    background: var( --color-secondary-background-icon);
+    display: grid;
+    place-items: center;
+    transition: transform var(--transition-base);
+}
+
+.opcao-chat:hover .opcao-chat_icone {
+    transform: scale(1.05);
+}
+
+.opcao-chat_titulo {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+}
+
+.opcao-chat_icone svg {
+    width: var(--size-svg-md);
+    height: var(--size-svg-md);
+    stroke: var(--color-white);
+    stroke-width: 1.5;
+}
+
+.opcao-chat--texto .opcao-chat_icone svg {
+    width: calc(var(--size-svg-md) * 1.125);
+    height: calc(var(--size-svg-md) * 1.125);
+    stroke-width: 2;
+}
+
+.opcao-chat--voz .opcao-chat_icone svg {
+    width: calc(var(--size-svg-md) * 1.29);
+    height: calc(var(--size-svg-md) * 1.29);
+    stroke-width: 2;
+}
+
+@media (min-width: 768px) {
+    .cabecalho-inicial {
+        padding: var(--spacing-xl) var(--spacing-2xl);
+    }
+
+    .cabecalho-inicial_placeholder {
+        width: var(--size-icon-lg);
+        height: var(--size-icon-lg);
+    }
+
+    .botao-acessibilidade {
+        width: var(--size-icon-lg);
+        height: var(--size-icon-lg);
+    }
+
+    .logo-inicial {
+        font-size: var(--font-size-6xl);
+    }
+
+    .secao-opcoes {
+        grid-template-columns: repeat(4, 1fr);
+        padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl);
+        gap: var(--spacing-lg);
+    }
+
+    .opcao-chat {
+        min-height: var(--size-card-min-height-md);
+        padding: var(--spacing-xl);
+    }
+
+    .opcao-chat_icone {
+        width: var(--size-icon-2xl);
+        height: var(--size-icon-2xl);
+    }
+
+    .opcao-chat_icone svg {
+        width: var(--size-svg-lg);
+        height: var(--size-svg-lg);
+    }
+
+    .opcao-chat--texto .opcao-chat_icone svg {
+        width: calc(var(--size-svg-lg) * 1.09);
+        height: calc(var(--size-svg-lg) * 1.09);
+    }
+
+    .opcao-chat--voz .opcao-chat_icone svg {
+        width: calc(var(--size-svg-lg) * 1.29);
+        height: calc(var(--size-svg-lg) * 1.29);
+    }
+}
+
+@media (min-width: 1024px) {
+    .secao-opcoes {
+        max-width: 1200px;
+        gap: var(--spacing-xl);
+    }
+
+    .opcao-chat {
+        min-height: var(--size-card-min-height-lg);
+    }
+
+    .opcao-chat_icone {
+        width: var(--size-icon-3xl);
+        height: var(--size-icon-3xl);
+    }
+
+    .opcao-chat_icone svg {
+        width: var(--size-svg-xl);
+        height: var(--size-svg-xl);
+    }
+    
+    .opcao-chat--texto .opcao-chat_icone svg {
+        width: var(--size-svg-2xl);
+        height: var(--size-svg-2xl);
+    }
+
+    .opcao-chat--voz .opcao-chat_icone svg {
+        width: calc(var(--size-svg-2xl) * 1.29);
+        height: calc(var(--size-svg-2xl) * 1.29);
+    }
+}
+
+/* ========================================
+   Seção de Dúvidas Frequentes
+   ======================================== */
+
+.secao-duvidas {
+    padding: var(--spacing-xl) var(--container-padding);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.secao-duvidas_titulo {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-text);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    width: 100%;
+}
+
+.container-carrossel {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.carrossel-seta {
+    flex-shrink: 0;
+    width: calc(40px * var(--scale-factor));
+    height: calc(40px * var(--scale-factor));
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-primary-icon);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    z-index: 2;
+}
+
+.carrossel-seta:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.carrossel-seta:active {
+    transform: scale(0.95);
+}
+
+.carrossel-seta--esquerda.oculto,
+.carrossel-seta--direita.oculto {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.carrossel-duvidas {
+    border: 2px solid var(--color-opcao-chat-border);
+    border-radius: var(--radius-xl);
+    display: flex;
+    gap: var(--spacing-md);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: var(--spacing-lg);
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    width: 100%;
+    position: relative;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 20px,
+        black calc(100% - 20px),
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 20px,
+        black calc(100% - 20px),
+        transparent
+    );
+}
+
+.carrossel-duvidas::-webkit-scrollbar {
+    display: none;
+}
+
+.carrossel-indicadores {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    justify-content: center;
+}
+
+.indicador {
+    width: calc(8px * var(--scale-factor));
+    height: calc(8px * var(--scale-factor));
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-primary-text) 20%, transparent);
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.indicador:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.indicador.ativo {
+    background: var(--color-primary-text);
+    width: calc(24px * var(--scale-factor));
+    border-radius: calc(4px * var(--scale-factor));
+}
+
+.duvida-btn {
+    flex-shrink: 0;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-white);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    min-width: calc(100px * var(--scale-factor));
+    text-align: center;
+}
+
+.duvida-btn:hover {
+    background: var(--color-opcao-chat-background-hover);
+    transform: translateY(-4px);
+}
+
+.duvida-btn_icone {
+    width: calc(60px * var(--scale-factor));
+    height: calc(60px * var(--scale-factor));
+    border-radius: 50%;
+    background: var(--color-secondary-background-icon);
+    display: grid;
+    place-items: center;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-secondary-icon);
+}
+
+.duvida-btn_texto {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.3;
+}
+
+/* ========================================
+   Botão Saiba Mais
+   ======================================== */
+
+.secao-saiba-mais {
+    padding: var(--spacing-xl) var(--container-padding);
+    display: flex;
+    justify-content: center;
+}
+
+.botao-saiba-mais {
+    border: 2px solid var(--color-opcao-chat-border);
+    border-radius: var(--radius-full);
+    padding: var(--spacing-md) var(--spacing-xl);
+    color: var(--color-primary-text);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: all var(--transition-base);
+    text-align: center;
+}
+
+.botao-saiba-mais:hover {
+    background: var(--color-opcao-chat-background-hover);
+    transform: translateY(-2px);
+}
+
+.botao-saiba-mais svg {
+    flex-shrink: 0;
+}
+
+/* ========================================
+   Marquee de Patrocinadores
+   ======================================== */
+
+.secao-patrocinadores {
+    overflow: hidden;
+}
+
+.secao-patrocinadores_titulo {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-text);
+    text-align: center;
+    margin: var(--spacing-xl);
+}
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgb(0, 0, 0) 15%,
+        rgb(0, 0, 0) 85%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgb(0, 0, 0) 15%,
+        rgb(0, 0, 0) 85%,
+        transparent 100%
+    );
+}
+
+.marquee_track {
+    display: flex;
+    animation: marquee 40s linear infinite;
+    will-change: transform;
+    width: max-content;
+}
+
+.marquee_logo {
+    height: calc(60px * var(--scale-factor));
+    width: auto;
+    margin-right: var(--spacing-2xl);
+    object-fit: contain;
+    transition: opacity var(--transition-base);
+    flex-shrink: 0;
+}
+
+.marquee_logo:hover {
+    opacity: 1;
+    animation-play-state: paused;
+}
+
+.marquee:hover .marquee_track {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ========================================
+   Redes Sociais
+   ======================================== */
+
+.secao-redes-sociais {
+    padding: var(--spacing-2xl) var(--container-padding) var(--spacing-3xl);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+}
+
+.rede-social-link {
+    width: calc(50px * var(--scale-factor));
+    height: calc(50px * var(--scale-factor));
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--color-secondary-icon);
+    transition: all var(--transition-base);
+}
+.rede-social-link svg {
+    fill: var(--color-secondary-icon);
+}
+
+.rede-social-link:hover {
+    background: var(--color-opcao-chat-background-hover);
+    transform: translateY(-4px) scale(1.1);
+}
+
+.rede-social-link svg {
+    width: calc(24px * var(--scale-factor));
+    height: calc(24px * var(--scale-factor));
+}
+
+/* ========================================
+   Responsividade - Dúvidas Frequentes
+   ======================================== */
+
+@media (min-width: 768px) {
+    .secao-duvidas_titulo {
+        font-size: var(--font-size-lg);
+    }
+
+    .container-carrossel {
+        justify-content: center;
+    }
+
+    .carrossel-seta {
+        display: none;
+    }
+
+    .carrossel-indicadores {
+        display: none;
+    }
+
+    .carrossel-duvidas {
+        justify-content: center;
+        flex-wrap: wrap;
+        overflow-x: visible;
+        padding: var(--spacing-xl);
+        width: 80%;
+        max-width: 100%;
+        mask-image: none;
+        -webkit-mask-image: none;
+        margin: 0 auto;
+    }
+
+    .duvida-btn {
+        min-width: calc(120px * var(--scale-factor));
+    }
+
+    .duvida-btn_icone {
+        width: calc(70px * var(--scale-factor));
+        height: calc(70px * var(--scale-factor));
+    }
+
+    .botao-saiba-mais {
+        font-size: var(--font-size-lg);
+        padding: var(--spacing-lg) var(--spacing-2xl);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .marquee_logo {
+        height: calc(80px * var(--scale-factor));
+    }
+
+    .rede-social-link {
+        width: calc(60px * var(--scale-factor));
+        height: calc(60px * var(--scale-factor));
+    }
+
+    .rede-social-link svg {
+        width: calc(28px * var(--scale-factor));
+        height: calc(28px * var(--scale-factor));
+    }
+}
+
+@media (min-width: 1024px) {
+    .duvida-btn_icone {
+        width: calc(80px * var(--scale-factor));
+        height: calc(80px * var(--scale-factor));
+    }
+}

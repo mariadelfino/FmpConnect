@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fmpconnect - Seu assistente virtual inteligente">
+    <meta name="theme-color" content="#6B21A8">
+    <title>SenaChat - Assistente Virtual Inteligente</title>
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+
+    <!-- Script Crítico de Acessibilidade - DEVE vir ANTES de tudo para evitar flash -->
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('senachat-acessibilidade');
+                if (saved) {
+                    const estado = JSON.parse(saved);
+
+                    // Aplica tema IMEDIATAMENTE
+                    if (estado.tema === 'claro') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    }
+
+                    // Aplica escala de fonte
+                    if (estado.scaleFactor && estado.scaleFactor !== 1) {
+                        document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
+                    }
+
+                    // Prepara classes de filtro no MAIN (não no body para evitar quebrar position:fixed)
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const mains = document.querySelectorAll('main');
+
+                        if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
+                            mains.forEach(function (main) {
+                                main.classList.add('filtro-' + estado.filtroDaltonismo);
+                            });
+                            document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
+                        }
+
+                        if (estado.contraste) {
+                            mains.forEach(function (main) {
+                                main.classList.add('alto-contraste');
+                            });
+                            document.body.setAttribute('data-alto-contraste', 'true');
+                        }
+                    });
+                }
+            } catch (e) {
+                // Silently fail - não quebrar a página
+            }
+        })();
+    </script>
+
+    <!-- Google Fonts - Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./assets/css/componentes.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/pagina-inicial.css">
+    <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/robo-animacao.css">
+</head>
+
+<body>
+    <!-- Conteúdo Principal da Home (começa oculto) -->
+    <main class="pagina-inicial" id="conteudoPrincipal">
+
+        <!-- Cabeçalho (Padrão voz.html) -->
+        <header class="cabecalho">
+            <a href="boasvindas.html" aria-label="Voltar para a página de boas vindas">
+                <button class="botao-voltar" type="button">
+                    <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </a>
+
+            <h1 class="logo-fmpconnect">FmpConnect</h1>
+
+            <button class="botao-acessibilidade" aria-label="Opções de acessibilidade" type="button">
+
+                <svg width="1000" height="1000" viewBox="320 330 360 360" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path
+                        d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                </svg>
+
+            </button>
+
+
+        </header>
+        <div class="Fmpconnect_mascote Fmpconnect_mascote">
+            <img src="./assets/images/fmpzinhoo.svg" alt="Robô mascote FmpConnect">
+        </div>
+        <!-- Seção de Opções de Chat -->
+        <section class="secao-opcoes">
+            <a href="./chat.html" class="opcao-chat opcao-chat--texto">
+                <div class="opcao-chat_icone">
+                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16.2917 36.4167H15.3333C7.66668 36.4167 3.83334 34.5 3.83334 24.9167V15.3334C3.83334 7.66671 7.66668 3.83337 15.3333 3.83337H30.6667C38.3333 3.83337 42.1667 7.66671 42.1667 15.3334V24.9167C42.1667 32.5834 38.3333 36.4167 30.6667 36.4167H29.7083C29.1142 36.4167 28.5392 36.7042 28.175 37.1834L25.3 41.0167C24.035 42.7034 21.965 42.7034 20.7 41.0167L17.825 37.1834C17.5183 36.7617 16.8092 36.4167 16.2917 36.4167Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M13.4167 15.3334H32.5834" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13.4167 24.9166H24.9167" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h2 class="opcao-chat_titulo">Converse por texto com o SenaChat</h2>
+            </a>
+
+            <a href="./voz.html" class="opcao-chat opcao-chat--voz">
+                <div class="opcao-chat_icone">
+                    <svg width="46" height="46" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M25 32.2916C29.6041 32.2916 33.3333 28.5625 33.3333 23.9583V12.5C33.3333 7.89579 29.6041 4.16663 25 4.16663C20.3958 4.16663 16.6666 7.89579 16.6666 12.5V23.9583C16.6666 28.5625 20.3958 32.2916 25 32.2916Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M9.0625 20.1042V23.6459C9.0625 32.4376 16.2083 39.5834 25 39.5834C33.7917 39.5834 40.9375 32.4376 40.9375 23.6459V20.1042"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M22.1041 13.3959C23.9791 12.7084 26.0208 12.7084 27.8958 13.3959" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M23.3334 17.8124C24.4375 17.5207 25.5834 17.5207 26.6875 17.8124" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M25 39.5834V45.8334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h2 class="opcao-chat_titulo">Fale com o SenaChat por voz</h2>
+            </a>
+
+            <a href="./programacao.html" class="opcao-chat opcao-programacao">
+                <div class="opcao-chat_icone">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                        <path fill-opacity="0" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"
+                            stroke-opacity="1" stroke-width="5"
+                            d="M126.6,8.7c-9.7,0-19,0.9-27.2,2.3c-24.1,4.3-28.5,13.2-28.5,29.6v21.7h56.9v7.2H70.9H49.6c-16.5,0-31,9.9-35.6,28.8c-5.2,21.7-5.5,35.2,0,57.8c4,16.9,13.7,28.8,30.2,28.8h19.6v-26c0-18.8,16.3-35.3,35.6-35.3h56.9c15.8,0,28.5-13,28.5-28.9V40.6c0-15.4-13-27-28.5-29.6C146.5,9.4,136.3,8.7,126.6,8.7z M95.8,26.2c5.9,0,10.7,4.9,10.7,10.9c0,6-4.8,10.8-10.7,10.8c-5.9,0-10.7-4.8-10.7-10.8C85.1,31,89.9,26.2,95.8,26.2z M191.8,69.5v25.3c0,19.6-16.6,36.1-35.6,36.1H99.4c-15.6,0-28.5,13.3-28.5,28.9V214c0,15.4,13.4,24.5,28.5,28.9c18,5.3,35.3,6.3,56.9,0c14.3-4.1,28.5-12.5,28.5-28.9v-21.7h-56.9v-7.2h56.9h28.5c16.5,0,22.7-11.5,28.5-28.8c5.9-17.8,5.7-35,0-57.8c-4.1-16.5-11.9-28.8-28.5-28.8L191.8,69.5L191.8,69.5z M159.8,206.8c5.9,0,10.7,4.8,10.7,10.8c0,6-4.8,10.9-10.7,10.9c-5.9,0-10.7-4.9-10.7-10.9C149.1,211.6,154,206.8,159.8,206.8z"
+                            style="stroke-dasharray: 1581, 1581; stroke-dashoffset: 0;"></path>
+                    </svg>
+                </div>
+                <h2 class="opcao-chat_titulo">Comece a Programar em Python</h2>
+            </a>
+
+            <a href="https://brdiagrama.com/gerador" class="opcao-chat opcao-modelagem">
+                <div class="opcao-chat_icone">
+                    <svg width="200px" height="200px" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path fill="currentColor" stroke="currentColor" stroke-width="0"
+                                d="M32.5,34v24h24V34H32.5z M54.5,56h-20V36h9v12.586l-4.293-4.293l-1.414,1.414l6.707,6.707l6.707-6.707l-1.414-1.414 L45.5,48.586V36h9V56z">
+                            </path>
+                            <path fill="currentColor" stroke="currentColor" stroke-width="0"
+                                d="M26.5,42c-0.827,0-1.637-0.016-2.432-0.044c-0.482-0.018-0.947-0.049-1.417-0.076c-0.297-0.017-0.603-0.028-0.895-0.049 c-0.624-0.045-1.23-0.103-1.829-0.165c-0.12-0.013-0.246-0.021-0.365-0.034c-0.686-0.075-1.354-0.161-2.005-0.256 c-0.024-0.003-0.049-0.006-0.072-0.009c-3.379-0.499-6.279-1.26-8.548-2.165c-0.017-0.007-0.035-0.013-0.051-0.02 c-0.414-0.167-0.803-0.338-1.174-0.514c-0.047-0.022-0.097-0.044-0.144-0.067c-0.333-0.16-0.64-0.325-0.935-0.491 c-0.073-0.042-0.15-0.083-0.221-0.125c-0.256-0.15-0.49-0.304-0.714-0.458c-0.089-0.062-0.18-0.123-0.263-0.185 c-0.188-0.139-0.358-0.28-0.52-0.421c-0.092-0.08-0.183-0.16-0.266-0.241C4.516,36.551,4.4,36.422,4.29,36.293 c-0.08-0.094-0.156-0.188-0.224-0.283c-0.087-0.121-0.161-0.242-0.227-0.363c-0.055-0.101-0.104-0.202-0.146-0.303 c-0.048-0.119-0.086-0.238-0.114-0.356C3.541,34.825,3.5,34.662,3.5,34.5v-8.207c0.018,0.016,0.039,0.032,0.057,0.048 c0.232,0.205,0.47,0.409,0.738,0.605C8.067,29.791,15.595,32,26.5,32c10.875,0,18.389-2.197,22.171-5.03 c0.299-0.218,0.567-0.443,0.822-0.671c0.002-0.002,0.005-0.004,0.007-0.006V30c0,0.553,0.447,1,1,1s1-0.447,1-1v-7v-0.5v-12V10 c0-0.163-0.047-0.31-0.116-0.445C50.163,4.365,39.061,0,26.5,0C13.938,0,2.837,4.365,1.616,9.555C1.547,9.69,1.5,9.838,1.5,10v0.5 v12V23v11.5V35v12c0,0.161,0.042,0.313,0.115,0.448c1.139,4.833,10.691,7.68,19.811,8.364c0.025,0.002,0.051,0.003,0.076,0.003 c0.519,0,0.957-0.399,0.996-0.925c0.042-0.551-0.372-1.031-0.922-1.072C10.461,52.984,3.984,49.6,3.532,46.838 C3.524,46.793,3.514,46.75,3.5,46.707v-8.414c0.018,0.016,0.039,0.032,0.057,0.048c0.232,0.205,0.47,0.409,0.738,0.605 C8.067,41.791,15.595,44,26.5,44c0.552,0,1-0.447,1-1S27.052,42,26.5,42z M4.101,14.797c0.3,0.236,0.624,0.469,0.975,0.696 c0.073,0.047,0.155,0.093,0.231,0.14c0.294,0.183,0.605,0.362,0.932,0.538c0.121,0.065,0.242,0.129,0.367,0.193 c0.365,0.186,0.748,0.366,1.151,0.542c0.066,0.029,0.126,0.059,0.193,0.087c0.469,0.199,0.967,0.389,1.485,0.572 c0.143,0.051,0.293,0.099,0.44,0.149c0.412,0.139,0.838,0.272,1.279,0.401c0.159,0.046,0.315,0.094,0.478,0.139 c0.585,0.162,1.189,0.316,1.823,0.458c0.087,0.02,0.181,0.037,0.269,0.056c0.559,0.122,1.139,0.235,1.735,0.34 c0.202,0.036,0.407,0.07,0.613,0.104c0.567,0.093,1.151,0.179,1.75,0.257c0.154,0.02,0.301,0.042,0.457,0.062 c0.744,0.09,1.514,0.167,2.305,0.233c0.195,0.016,0.398,0.028,0.596,0.042c0.633,0.046,1.28,0.084,1.942,0.114 c0.241,0.011,0.481,0.022,0.727,0.03C24.712,19.979,25.59,20,26.5,20s1.788-0.021,2.65-0.05c0.245-0.008,0.485-0.02,0.727-0.03 c0.662-0.03,1.309-0.068,1.942-0.114c0.198-0.015,0.4-0.026,0.596-0.042c0.791-0.065,1.561-0.143,2.305-0.233 c0.156-0.019,0.303-0.042,0.457-0.062c0.599-0.078,1.182-0.164,1.75-0.257c0.206-0.034,0.411-0.068,0.613-0.104 c0.596-0.105,1.176-0.218,1.735-0.34c0.088-0.019,0.182-0.036,0.269-0.056c0.634-0.142,1.238-0.296,1.823-0.458 c0.163-0.045,0.319-0.092,0.478-0.139c0.441-0.128,0.867-0.262,1.279-0.401c0.147-0.05,0.297-0.098,0.44-0.149 c0.518-0.184,1.017-0.374,1.485-0.572c0.067-0.028,0.127-0.059,0.193-0.087c0.403-0.176,0.786-0.356,1.151-0.542 c0.125-0.064,0.247-0.128,0.367-0.193c0.327-0.175,0.638-0.354,0.932-0.538c0.076-0.047,0.158-0.093,0.231-0.14 c0.351-0.227,0.675-0.459,0.975-0.696c0.075-0.06,0.142-0.12,0.215-0.18c0.13-0.108,0.267-0.215,0.387-0.324V22.5 c0,0.161-0.041,0.323-0.079,0.485c-0.028,0.121-0.067,0.241-0.116,0.362c-0.04,0.099-0.089,0.198-0.143,0.297 c-0.067,0.123-0.142,0.246-0.23,0.368c-0.067,0.093-0.142,0.186-0.22,0.278c-0.111,0.131-0.229,0.261-0.362,0.391 c-0.082,0.08-0.171,0.158-0.261,0.237c-0.163,0.143-0.334,0.284-0.524,0.425c-0.082,0.061-0.172,0.121-0.259,0.182 c-0.225,0.155-0.461,0.31-0.718,0.461c-0.069,0.041-0.144,0.081-0.215,0.122c-0.296,0.167-0.606,0.333-0.94,0.494 c-0.045,0.022-0.093,0.043-0.138,0.064c-0.373,0.176-0.763,0.349-1.18,0.516c-0.015,0.006-0.03,0.011-0.045,0.017 c-2.27,0.906-5.172,1.667-8.553,2.167c-0.021,0.003-0.044,0.005-0.066,0.009c-0.653,0.096-1.324,0.182-2.012,0.257 c-0.117,0.013-0.241,0.021-0.359,0.034c-0.602,0.062-1.21,0.12-1.835,0.165c-0.291,0.021-0.595,0.032-0.891,0.049 c-0.471,0.027-0.938,0.059-1.421,0.076C28.137,29.984,27.327,30,26.5,30c-0.827,0-1.637-0.016-2.432-0.044 c-0.482-0.018-0.947-0.049-1.417-0.076c-0.297-0.017-0.603-0.028-0.895-0.049c-0.624-0.045-1.23-0.103-1.829-0.165 c-0.12-0.013-0.246-0.021-0.365-0.034c-0.686-0.075-1.354-0.161-2.005-0.256c-0.024-0.003-0.049-0.006-0.072-0.009 c-3.379-0.499-6.279-1.26-8.548-2.165c-0.017-0.007-0.035-0.013-0.051-0.02c-0.414-0.167-0.803-0.338-1.174-0.514 c-0.047-0.022-0.097-0.044-0.144-0.067c-0.333-0.16-0.64-0.325-0.935-0.491c-0.073-0.042-0.15-0.083-0.221-0.125 c-0.256-0.15-0.49-0.304-0.714-0.458c-0.089-0.062-0.18-0.123-0.263-0.185c-0.188-0.139-0.358-0.28-0.52-0.421 c-0.092-0.08-0.183-0.16-0.266-0.241C4.516,24.551,4.4,24.422,4.29,24.293c-0.08-0.094-0.156-0.188-0.224-0.283 c-0.087-0.121-0.161-0.242-0.227-0.363c-0.055-0.101-0.104-0.202-0.146-0.303c-0.048-0.119-0.086-0.238-0.114-0.356 C3.541,22.825,3.5,22.662,3.5,22.5v-8.207c0.12,0.109,0.257,0.216,0.387,0.324C3.959,14.677,4.026,14.737,4.101,14.797z M26.5,2 c12.342,0,22.356,4.364,22.97,8.137c0.001,0.009-0.003,0.017-0.001,0.025c0.019,0.112,0.031,0.225,0.031,0.338 c0,3.548-9.446,7.5-23,7.5s-23-3.952-23-7.5c0-0.113,0.013-0.226,0.032-0.338c0.001-0.009-0.003-0.018-0.001-0.027 C4.147,6.363,14.159,2,26.5,2z">
+                            </path>
+                        </g>
+                    </svg>
+                </div>
+                <h2 class="opcao-chat_titulo">Comece a modelar um banco de dados</h2>
+            </a>
+        </section>
+
+        <!-- Seção de Dúvidas Frequentes -->
+        <section class="secao-duvidas">
+            <h2 class="secao-duvidas_titulo">Dúvidas frequentes</h2>
+            <div class="container-carrossel">
+                <button class="carrossel-seta carrossel-seta--esquerda" aria-label="Voltar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <div class="carrossel-duvidas" id="carrosselDuvidas">
+                    <button class="duvida-btn" type="button" data-question="O curso é pra mim?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <!-- Icon: user -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M20 21v-1c0-2.761-4.03-5-8-5s-8 2.239-8 5v1" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">O curso é pra mim?</span>
+                    </button>
+                    <button class="duvida-btn" type="button" data-question="Onde é o curso?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <!-- Icon: map-pin -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1 1 18 0z" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Onde é o curso?</span>
+                    </button>
+                    <button class="duvida-btn" type="button" data-question="Como me inscrever?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <!-- Icon: form / clipboard -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 2h6a2 2 0 0 1 2 2v2" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <rect x="3" y="6" width="18" height="14" rx="2" stroke="currentColor"
+                                    stroke-width="1.5" />
+                                <path d="M8 11h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M8 15h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Como me inscrever?</span>
+                    </button>
+                    <button class="duvida-btn" type="button" data-question="O que é o JP?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <!-- Icon: code (programação) -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="16 18 22 12 16 6" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                                <polyline points="8 6 2 12 8 18" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">O que é o JP?</span>
+                    </button>
+                    <button class="duvida-btn" type="button" data-question="Quanto tempo dura?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <!-- Icon: clock -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Quanto tempo dura?</span>
+                    </button>
+                    <button class="duvida-btn" type="button" data-question="Preciso de computador?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <!-- Icon: laptop -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="5" width="18" height="12" rx="2" stroke="currentColor"
+                                    stroke-width="1.5" />
+                                <path d="M2 19h20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Preciso de computador?</span>
+                    </button>
+                </div>
+
+                <button class="carrossel-seta carrossel-seta--direita" aria-label="Avançar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="carrossel-indicadores" id="carrosselIndicadores">
+                <span class="indicador ativo"></span>
+                <span class="indicador"></span>
+                <span class="indicador"></span>
+            </div>
+        </section>
+
+        <!-- Botão Saiba Mais -->
+        <section class="secao-saiba-mais">
+            <a href="./sobre.html" class="botao-saiba-mais">
+                Saiba mais sobre o projeto do SenaChat
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </a>
+        </section>
+
+        <!-- Redes Sociais -->
+        <footer class="secao-redes-sociais">
+            <a href="https://www.instagram.com/programa_jovemprogramador/#" target="_blank" rel="noopener noreferrer"
+                class="rede-social-link" aria-label="Instagram">
+                <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_22_195)">
+                        <path
+                            d="M10.5 1.89082C13.3055 1.89082 13.6377 1.90312 14.741 1.95234C15.7664 1.99746 16.3201 2.16973 16.6893 2.31328C17.1773 2.50195 17.5301 2.73164 17.8951 3.09668C18.2643 3.46582 18.4898 3.81445 18.6785 4.30254C18.8221 4.67168 18.9943 5.22949 19.0395 6.25078C19.0887 7.3582 19.101 7.69043 19.101 10.4918C19.101 13.2973 19.0887 13.6295 19.0395 14.7328C18.9943 15.7582 18.8221 16.3119 18.6785 16.6811C18.4898 17.1691 18.2602 17.5219 17.8951 17.8869C17.526 18.2561 17.1773 18.4816 16.6893 18.6703C16.3201 18.8139 15.7623 18.9861 14.741 19.0312C13.6336 19.0805 13.3014 19.0928 10.5 19.0928C7.69453 19.0928 7.36231 19.0805 6.25899 19.0312C5.23359 18.9861 4.67988 18.8139 4.31074 18.6703C3.82266 18.4816 3.46992 18.252 3.10488 17.8869C2.73574 17.5178 2.51016 17.1691 2.32148 16.6811C2.17793 16.3119 2.00566 15.7541 1.96055 14.7328C1.91133 13.6254 1.89902 13.2932 1.89902 10.4918C1.89902 7.68633 1.91133 7.3541 1.96055 6.25078C2.00566 5.22539 2.17793 4.67168 2.32148 4.30254C2.51016 3.81445 2.73984 3.46172 3.10488 3.09668C3.47402 2.72754 3.82266 2.50195 4.31074 2.31328C4.67988 2.16973 5.2377 1.99746 6.25899 1.95234C7.36231 1.90312 7.69453 1.89082 10.5 1.89082ZM10.5 0C7.64942 0 7.29258 0.0123047 6.17285 0.0615234C5.05723 0.110742 4.29024 0.291211 3.62578 0.549609C2.93262 0.820312 2.34609 1.17715 1.76367 1.76367C1.17715 2.34609 0.820313 2.93262 0.549609 3.62168C0.291211 4.29023 0.110742 5.05312 0.0615234 6.16875C0.0123047 7.29258 0 7.64941 0 10.5C0 13.3506 0.0123047 13.7074 0.0615234 14.8271C0.110742 15.9428 0.291211 16.7098 0.549609 17.3742C0.820313 18.0674 1.17715 18.6539 1.76367 19.2363C2.34609 19.8188 2.93262 20.1797 3.62168 20.4463C4.29024 20.7047 5.05313 20.8852 6.16875 20.9344C7.28848 20.9836 7.64531 20.9959 10.4959 20.9959C13.3465 20.9959 13.7033 20.9836 14.823 20.9344C15.9387 20.8852 16.7057 20.7047 17.3701 20.4463C18.0592 20.1797 18.6457 19.8188 19.2281 19.2363C19.8105 18.6539 20.1715 18.0674 20.4381 17.3783C20.6965 16.7098 20.877 15.9469 20.9262 14.8313C20.9754 13.7115 20.9877 13.3547 20.9877 10.5041C20.9877 7.65352 20.9754 7.29668 20.9262 6.17695C20.877 5.06133 20.6965 4.29434 20.4381 3.62988C20.1797 2.93262 19.8229 2.34609 19.2363 1.76367C18.6539 1.18125 18.0674 0.820312 17.3783 0.553711C16.7098 0.295312 15.9469 0.114844 14.8313 0.065625C13.7074 0.0123047 13.3506 0 10.5 0Z"
+                            fill="currentColor" />
+                        <path
+                            d="M10.5 5.10645C7.52227 5.10645 5.10645 7.52227 5.10645 10.5C5.10645 13.4777 7.52227 15.8936 10.5 15.8936C13.4777 15.8936 15.8936 13.4777 15.8936 10.5C15.8936 7.52227 13.4777 5.10645 10.5 5.10645ZM10.5 13.9986C8.56816 13.9986 7.00137 12.4318 7.00137 10.5C7.00137 8.56816 8.56816 7.00137 10.5 7.00137C12.4318 7.00137 13.9986 8.56816 13.9986 10.5C13.9986 12.4318 12.4318 13.9986 10.5 13.9986Z"
+                            fill="currentColor" />
+                        <path
+                            d="M17.366 4.89321C17.366 5.59048 16.8 6.1524 16.1068 6.1524C15.4096 6.1524 14.8477 5.58638 14.8477 4.89321C14.8477 4.19595 15.4137 3.63403 16.1068 3.63403C16.8 3.63403 17.366 4.20005 17.366 4.89321Z"
+                            fill="currentColor" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_22_195">
+                            <rect width="21" height="21" fill="currentColor" />
+                        </clipPath>
+                    </defs>
+                </svg>
+
+            </a>
+            <a href="https://www.facebook.com/programajovemprogramador" target="_blank" rel="noopener noreferrer"
+                class="rede-social-link" aria-label="Facebook">
+                <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_22_194)">
+                        <path
+                            d="M10.5 0C4.70106 0 0 4.70106 0 10.5C0 15.4241 3.39024 19.556 7.96362 20.6909V13.7088H5.79852V10.5H7.96362V9.11736C7.96362 5.54358 9.58104 3.8871 13.0897 3.8871C13.755 3.8871 14.9029 4.01772 15.3724 4.14792V7.05642C15.1246 7.03038 14.6941 7.01736 14.1595 7.01736C12.4379 7.01736 11.7726 7.66962 11.7726 9.36516V10.5H15.2023L14.6131 13.7088H11.7726V20.9231C16.9718 20.2952 21.0004 15.8684 21.0004 10.5C21 4.70106 16.2989 0 10.5 0Z"
+                            fill="currentColor" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_22_194">
+                            <rect width="21" height="21" fill="currentColor" />
+                        </clipPath>
+                    </defs>
+                </svg>
+
+            </a>
+            <a href="https://www.tiktok.com/@jovemprogramador_sc" target="_blank" rel="noopener noreferrer"
+                class="rede-social-link" aria-label="TikTok">
+                <svg width="21" height="21" viewBox="0 0 21 21" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M14.9385 0H11.3993V14.3043C11.3993 16.0087 10.0382 17.4087 8.34423 17.4087C6.65029 17.4087 5.2891 16.0087 5.2891 14.3043C5.2891 12.6304 6.62005 11.2608 8.2535 11.2V7.60871C4.65388 7.66955 1.75 10.6217 1.75 14.3043C1.75 18.0174 4.71437 21 8.37449 21C12.0346 21 14.9989 17.987 14.9989 14.3043V6.96955C16.3299 7.94348 17.9633 8.52174 19.6875 8.55219V4.96087C17.0256 4.86957 14.9385 2.67826 14.9385 0Z"
+                        fill="currentColor" />
+                </svg>
+
+            </a>
+            <a href="https://www.linkedin.com/company/programajovemprogramador" target="_blank"
+                rel="noopener noreferrer" class="rede-social-link" aria-label="LinkedIn">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_22_196)">
+                        <path
+                            d="M20.3715 0H1.62422C0.726172 0 0 0.708984 0 1.58555V20.4102C0 21.2867 0.726172 22 1.62422 22H20.3715C21.2695 22 22 21.2867 22 20.4145V1.58555C22 0.708984 21.2695 0 20.3715 0ZM6.52695 18.7473H3.26133V8.2457H6.52695V18.7473ZM4.89414 6.81484C3.8457 6.81484 2.99922 5.96836 2.99922 4.92422C2.99922 3.88008 3.8457 3.03359 4.89414 3.03359C5.93828 3.03359 6.78477 3.88008 6.78477 4.92422C6.78477 5.96406 5.93828 6.81484 4.89414 6.81484ZM18.7473 18.7473H15.4859V13.6426C15.4859 12.4266 15.4645 10.8582 13.7887 10.8582C12.0914 10.8582 11.8336 12.1859 11.8336 13.5566V18.7473H8.57656V8.2457H11.7047V9.68086H11.7477C12.1816 8.85586 13.2473 7.98359 14.8328 7.98359C18.1371 7.98359 18.7473 10.1578 18.7473 12.9852V18.7473Z"
+                            fill="currentColor" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_22_196">
+                            <rect width="22" height="22" fill="currentColor" />
+                        </clipPath>
+                    </defs>
+                </svg>
+            </a>
+        </footer>
+
+    </main>
+
+    <script src="./assets/js/acessibilidade-global.js"></script>
+    <script src="./assets/js/pagina-inicial.js"></script>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+</body>
+
+</html>
