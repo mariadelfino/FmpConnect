@@ -32,7 +32,6 @@
     margin: 0 auto;
 }
 
-
 .opcao-chat {
     border: 2px solid var(--color-opcao-chat-border);
     border-radius: var(--radius-xl);
@@ -93,6 +92,10 @@
     stroke-width: 2;
 }
 
+/* ========================================
+   Responsividade Desktop (AQUI ESTÁ A CORREÇÃO)
+   ======================================== */
+
 @media (min-width: 768px) {
     .cabecalho-inicial {
         padding: var(--spacing-xl) var(--spacing-2xl);
@@ -112,15 +115,21 @@
         font-size: var(--font-size-6xl);
     }
 
+    /* MUDANÇA: Usar Flexbox para centralizar os botões */
     .secao-opcoes {
-        grid-template-columns: repeat(4, 1fr);
+        display: flex;
+        justify-content: center; /* Centraliza horizontalmente */
+        align-items: center;
         padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl);
-        gap: var(--spacing-lg);
+        gap: var(--spacing-xl); /* Espaço maior entre os botões */
     }
 
+    /* Define um tamanho fixo bonito para os cards no desktop */
     .opcao-chat {
         min-height: var(--size-card-min-height-md);
         padding: var(--spacing-xl);
+        width: 320px; /* Largura fixa para ficarem iguais */
+        max-width: 100%;
     }
 
     .opcao-chat_icone {
@@ -147,11 +156,12 @@
 @media (min-width: 1024px) {
     .secao-opcoes {
         max-width: 1200px;
-        gap: var(--spacing-xl);
+        gap: var(--spacing-2xl); /* Espaço ainda maior em telas grandes */
     }
 
     .opcao-chat {
         min-height: var(--size-card-min-height-lg);
+        width: 360px; /* Cards um pouco maiores em telas grandes */
     }
 
     .opcao-chat_icone {

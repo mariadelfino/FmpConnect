@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - FMP Connect</title>
+    <!-- Fonte Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/componentes.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/feedback.css">
+</head>
+<body>
+
+    <header>
+        <a href="../public/paginainicial.html" class="back-btn-top">
+            <i data-lucide="arrow-left"></i> &nbsp; Voltar
+        </a>
+        <div class="brand-logo">
+            <i data-lucide="graduation-cap"></i>
+            FMP Connect
+        </div>
+        
+    </header>
+
+    <main>
+        <div class="feedback-card">
+            <div class="card-decoration"></div>
+
+            <h1>Sua Opinião Importa!</h1>
+            <p class="subtitle">Ajude-nos a tornar o FMP Connect mais inclusivo e útil para todos.</p>
+
+            <!-- SEU LINK DO FORMSPREE JÁ ESTÁ AQUI -->
+            <form action="https://formspree.io/f/myzrjlrr" method="POST">
+                
+                <!-- 1. Identificação -->
+                <div class="input-wrapper">
+                    <label>Nome</label>
+                    <input type="text" name="nome" placeholder="Seu nome" required>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>E-mail</label>
+                    <input type="email" name="email" placeholder="seu@email.com" required>
+                </div>
+
+                <!-- 2. Utilidade -->
+                <div class="question-group">
+                    <div class="question-title">
+                        <i data-lucide="check-circle-2" size="16"></i>
+                        A plataforma foi útil para você?
+                    </div>
+                    <div class="options-row">
+                        <input type="radio" id="util-sim" name="foi_util" value="Sim" required>
+                        <label for="util-sim" class="radio-btn-label">Sim</label>
+
+                        <input type="radio" id="util-parcial" name="foi_util" value="Parcialmente">
+                        <label for="util-parcial" class="radio-btn-label">Parcialmente</label>
+
+                        <input type="radio" id="util-nao" name="foi_util" value="Não">
+                        <label for="util-nao" class="radio-btn-label">Não</label>
+                    </div>
+                </div>
+
+                <!-- 3. Acessibilidade (Ponto chave da Maria) -->
+                <div class="question-group" style="border-left: 4px solid var(--brand-light);">
+                    <div class="question-title">
+                        <i data-lucide="accessibility" size="18"></i>
+                        Acessibilidade e Inclusão
+                    </div>
+                    <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">
+                        Pensamos em cores para daltônicos, leitor de tela e suporte a Libras.
+                    </p>
+                    
+                    <label style="font-size: 0.85rem; margin-bottom: 8px;">Os recursos atenderam suas necessidades?</label>
+                    <div class="options-row">
+                        <input type="radio" id="acess-sim" name="acessibilidade" value="Sim" required>
+                        <label for="acess-sim" class="radio-btn-label">👍 Sim</label>
+
+                        <input type="radio" id="acess-talvez" name="acessibilidade" value="Poderia Melhorar">
+                        <label for="acess-talvez" class="radio-btn-label">🤔 Poderia Melhorar</label>
+
+                        <input type="radio" id="acess-nao" name="acessibilidade" value="Não">
+                        <label for="acess-nao" class="radio-btn-label">👎 Não</label>
+                    </div>
+                </div>
+
+                <!-- 4. Avaliação Geral -->
+                <div class="input-wrapper">
+                    <label style="text-align: center;">Nota Geral</label>
+                    <div class="stars-container">
+                        <div class="rating">
+                            <input type="radio" id="s5" name="nota_geral" value="5"><label for="s5" title="Excelente"><i data-lucide="star" size="28" fill="currentColor"></i></label>
+                            <input type="radio" id="s4" name="nota_geral" value="4"><label for="s4" title="Muito bom"><i data-lucide="star" size="28" fill="currentColor"></i></label>
+                            <input type="radio" id="s3" name="nota_geral" value="3"><label for="s3" title="Bom"><i data-lucide="star" size="28" fill="currentColor"></i></label>
+                            <input type="radio" id="s2" name="nota_geral" value="2"><label for="s2" title="Ruim"><i data-lucide="star" size="28" fill="currentColor"></i></label>
+                            <input type="radio" id="s1" name="nota_geral" value="1"><label for="s1" title="Péssimo"><i data-lucide="star" size="28" fill="currentColor"></i></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Detalhes ou Sugestões</label>
+                    <textarea name="mensagem" rows="3" placeholder="O que podemos melhorar na acessibilidade ou funções?" required></textarea>
+                </div>
+
+                <button type="submit">
+                    Enviar Feedback Completo
+                    <i data-lucide="send" size="18"></i>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const chatContainer = document.getElementById('chat-container');
     const input = document.getElementById('pergunta-input');
-    // Captura direta do botão de envio
+
     const sendButton = document.getElementById('botao-enviar');
     const micButton = document.getElementById('botao-microfone');
     const resetButton = document.getElementById('botao-reset');
@@ -14,21 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const welcomeOptions = welcomeModal && welcomeModal.querySelectorAll('.welcome-option');
     const deafModeOption = document.getElementById('opcao-modo-surdez'); 
 
-    // --- Lógica de Voz (Web Speech API) ---
+    // --- Lógica de Voz (Web Speech API - Somente Entrada) ---
     if (micButton) {
-        // Verifica compatibilidade com a API
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
         if (SpeechRecognition) {
             const recognition = new SpeechRecognition();
             recognition.lang = 'pt-BR'; 
-            recognition.continuous = false; // Para de gravar ao detectar silêncio
+            recognition.continuous = false; 
             recognition.interimResults = false; 
 
             micButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 
-                // Se já estiver gravando, para
                 if (micButton.classList.contains('gravando')) {
                     recognition.stop();
                     return;
@@ -59,13 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log("Transcrição:", transcript);
                     input.value = transcript;
                     
-                    // Pequeno delay para o usuário ver o texto antes de enviar
                     setTimeout(() => {
                         enviarMensagemDoUsuario();
                     }, 500);
                 }
             };
-
             recognition.onerror = (event) => {
                 console.error("Erro voz:", event.error);
                 micButton.classList.remove('gravando');
@@ -137,6 +133,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return historico;
     }
 
+    function criarBotaoAudio(texto) {
+        const btnAudio = document.createElement('button');
+        btnAudio.className = 'botao-ler-texto';
+        btnAudio.title = "Ouvir mensagem";
+        btnAudio.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.75 6.51749C0.75 5.41292 1.64543 4.51749 2.75 4.51749H4.75C5.30228 4.51749 5.75 4.9652 5.75 5.51749V12.5175C5.75 13.0698 5.30228 13.5175 4.75 13.5175H2.75C1.64543 13.5175 0.75 12.6221 0.75 11.5175V6.51749Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M12.8556 0.964703L6.85557 3.9647C6.178 4.30349 5.75 4.99601 5.75 5.75356V12.1634C5.75 12.9812 6.2479 13.7166 7.00722 14.0204L13.0072 16.4204C14.3209 16.9459 15.75 15.9784 15.75 14.5634V2.75356C15.75 1.26679 14.1854 0.299802 12.8556 0.964703Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        `;
+        btnAudio.addEventListener('click', () => lerTexto(texto, btnAudio));
+        return btnAudio;
+    }
+
     function adicionarMensagemVisual(texto, tipo) {
         const wrapper = document.createElement('div');
         wrapper.classList.add('mensagem-wrapper', tipo);
@@ -145,8 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
         balaoMensagem.classList.add('mensagem-balao', tipo);
 
         if (tipo === 'bot') {
-            balaoMensagem.innerHTML = `<div class="mensagem-conteudo">${texto}</div>`;
+            balaoMensagem.innerHTML = `<div class="mensagem-conteudo">${renderMarkdownToHtml(texto)}</div>`;
             wrapper.appendChild(balaoMensagem);
+
+            if (texto !== '...') {
+                const btnAudio = criarBotaoAudio(texto);
+                wrapper.appendChild(btnAudio);
+            }
         } else {
             wrapper.classList.add('user');
             const balaoUsuario = document.createElement('div');
@@ -154,9 +169,11 @@ document.addEventListener("DOMContentLoaded", () => {
             balaoUsuario.innerHTML = `<p>${texto}</p>`;
             wrapper.appendChild(balaoUsuario);
         }
+
         chatContainer.appendChild(wrapper);
         rolarParaOFinal();
-        return balaoMensagem;
+        
+        return { balao: balaoMensagem, wrapper: wrapper };
     }
 
     function toggleInput(disable) {
@@ -200,7 +217,9 @@ document.addEventListener("DOMContentLoaded", () => {
         adicionarMensagemVisual(texto, 'usuario');
         input.value = "";
 
-        const botBalao = adicionarMensagemVisual('...', 'bot');
+        const botElementos = adicionarMensagemVisual('...', 'bot');
+        const botBalao = botElementos.balao;
+        const botWrapper = botElementos.wrapper;
 
         (async () => {
             try {
@@ -219,6 +238,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (data.answer) {
                     const htmlFinal = renderMarkdownToHtml(data.answer);
                     botBalao.querySelector('.mensagem-conteudo').innerHTML = htmlFinal;
+
+                    const btnAudio = criarBotaoAudio(data.answer);
+                    botWrapper.appendChild(btnAudio);
+
                     salvarSessaoLocal();
                     rolarParaOFinal();
                 } else {
@@ -229,7 +252,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 botBalao.querySelector('.mensagem-conteudo').textContent = "Erro de conexão.";
             } finally {
                 toggleInput(false);
-                // Foca de volta no input após responder
                 input.focus(); 
             }
         })();
@@ -237,18 +259,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderMarkdownToHtml(mdText) {
         if (!mdText) return '';
+        if (mdText === '...') return '...';
+
+        console.log("Texto original recebido:", mdText);
         let text = mdText.toString();
 
+        text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
         text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-        const listPattern = /(^|\n)[ \t]*([\*+-])[ \t]+(.*?)(?=\n|$)/g;
-        text = text.replace(listPattern, '$1<li>$3</li>');
-        text = text.replace(/((<li>.*?<\/li>[\s\S]*?)+)/g, '<ul>$1</ul>');
+        if (text.includes('\n')) {
+            const lines = text.split('\n');
+            let output = '';
+            let inList = false;
 
-        text = text.replace(/\n/g, '<br>');
-
-        return text;
+            lines.forEach(line => {
+                let trimmed = line.trim();
+                
+                if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+                    if (!inList) { output += '<ul>'; inList = true; }
+                    output += `<li>${trimmed.substring(2)}</li>`;
+                } else {
+                    if (inList) { output += '</ul>'; inList = false; }
+                    if (trimmed.length > 0) {
+                        output += `<p>${line}</p>`;
+                    }
+                }
+            });
+            if (inList) output += '</ul>';
+            return output;
+        } 
+        return text; 
     }
 
     if (sendButton) {
@@ -331,3 +372,74 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+let audioAtual = null; 
+
+function limparTextoParaAudio(textoMarkdown) {
+    let texto = textoMarkdown.toString();
+    texto = texto.replace(/\*\*/g, '') 
+                 .replace(/\*/g, '')    
+                 .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') 
+                 .replace(/^#+\s+/gm, '') 
+                 .replace(/- /g, ', ')    
+                 .replace(/\n\n/g, '. ') 
+                 .replace(/\n/g, ' ');   
+                 
+    return texto.trim();
+}
+
+async function lerTexto(texto, botaoElemento) {
+    if (audioAtual) {
+        audioAtual.pause();
+        audioAtual = null;
+        document.querySelectorAll('.botao-ler-texto').forEach(b => b.classList.remove('falando'));
+    
+        if (botaoElemento.classList.contains('tocando-agora')) {
+            botaoElemento.classList.remove('tocando-agora');
+            return;
+        }
+    }
+    document.querySelectorAll('.botao-ler-texto').forEach(b => {
+        b.classList.remove('falando');
+        b.classList.remove('tocando-agora');
+    });
+
+    const textoLimpo = limparTextoParaAudio(texto);
+    
+    try {
+        botaoElemento.classList.add('falando'); 
+        botaoElemento.classList.add('tocando-agora');
+
+        const response = await fetch(window.location.origin + '/text/tts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: textoLimpo })
+        });
+
+        if (!response.ok) throw new Error("Erro ao gerar áudio");
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        
+        audioAtual = new Audio(url);
+        
+        audioAtual.onended = () => {
+            botaoElemento.classList.remove('falando');
+            botaoElemento.classList.remove('tocando-agora');
+            audioAtual = null;
+        };
+        
+        audioAtual.onerror = () => {
+            console.error("Erro ao reproduzir áudio");
+            botaoElemento.classList.remove('falando');
+            botaoElemento.classList.remove('tocando-agora');
+        };
+
+        audioAtual.play();
+
+    } catch (error) {
+        console.error("Erro no TTS:", error);
+        botaoElemento.classList.remove('falando');
+        botaoElemento.classList.remove('tocando-agora');
+       
+    }
+}

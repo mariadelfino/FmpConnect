@@ -1,0 +1,231 @@
+:root {
+    --brand-blue: #003366;    
+    --brand-light: #3B82F6;   
+    --bg-page: #EFF6FF;       
+    --text-main: #1E293B;
+    --text-soft: #64748B;
+    --success-green: #10B981;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: var(--brand-blue);
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 51, 102, 0.2);
+    position: relative;
+    z-index: 10;
+}
+
+.brand-logo {
+    color: white;
+    font-size: 1.5rem; 
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.back-btn-top {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+.back-btn-top:hover { opacity: 1; }
+
+main {
+    width: 100%;
+    max-width: 600px; /* Um pouco mais largo para as novas perguntas */
+    padding: 30px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-card {
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 10px 30px -5px rgba(0, 51, 102, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-decoration {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--brand-blue), var(--brand-light));
+}
+
+h1 {
+    color: var(--brand-blue);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+p.subtitle {
+    color: var(--text-soft);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* == ESTILOS DOS INPUTS == */
+.input-wrapper { margin-bottom: 20px; }
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: 0.3s;
+    background-color: #F8FAFC;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--brand-light);
+    background-color: white;
+}
+
+/* == AVALIAÇÃO ESTRELAS == */
+.stars-container {
+    background: #F1F5F9;
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.rating { display: flex; flex-direction: row-reverse; gap: 8px; }
+.rating input { display: none; }
+.rating label { cursor: pointer; color: #CBD5E1; transition: 0.2s; }
+.rating label:hover, .rating label:hover ~ label { color: #F59E0B; transform: scale(1.1); }
+.rating input:checked ~ label { color: #F59E0B; }
+
+/* == NOVAS PERGUNTAS (Botões de Seleção) == */
+.question-group {
+    background-color: #F8FAFC;
+    padding: 15px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #F1F5F9;
+}
+
+.question-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--brand-blue);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.options-row {
+    display: flex;
+    gap: 10px;
+}
+
+/* Esconde o radio button nativo */
+.options-row input[type="radio"] {
+    display: none;
+}
+
+/* Estilo do Botão Customizado */
+.radio-btn-label {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #E2E8F0;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-soft);
+    background: white;
+}
+
+/* Quando selecionado */
+.options-row input[type="radio"]:checked + .radio-btn-label {
+    border-color: var(--brand-blue);
+    background-color: #E0F2FE;
+    color: var(--brand-blue);
+    font-weight: 700;
+}
+
+/* == CHECKBOX ACESSIBILIDADE == */
+.access-check {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+/* == BOTÃO ENVIAR == */
+button[type="submit"] {
+    width: 100%;
+    background-color: var(--brand-blue);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px -5px rgba(0, 51, 102, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    background-color: #002244;
+}

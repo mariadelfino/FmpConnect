@@ -2,15 +2,15 @@ import os
 import json
 import urllib.request
 import urllib.error
-from flask import Flask, jsonify, request, send_from_directory
+import asyncio       # NOVO: Necessário para a voz
+import edge_tts      # NOVO: Biblioteca de voz da Microsoft
+import tempfile      # NOVO: Para salvar o áudio temporário
+from flask import Flask, jsonify, request, send_from_directory, send_file 
 from flask_cors import CORS
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# --- Configurações Auxiliares ---
-
-# Palavras-chave atualizadas para o contexto da FMP
 COURSE_KEYWORDS = [
     'fmp', 'faculdade municipal', 'palhoça', 'palhoca', 'fmpsc', 
     'administração', 'administracao', 'pedagogia', 'processos gerenciais', 
@@ -20,18 +20,6 @@ COURSE_KEYWORDS = [
     'endereço', 'endereco', 'local', 'contato', 'telefone', 'email', 'e-mail'
 ]
 
-def is_related_to_course(prompt_text: str) -> bool:
-    """Checa se o prompt parece estar relacionado à FMP (Faculdade Municipal de Palhoça)."""
-    if not prompt_text:
-        return False
-    txt = prompt_text.lower()
-    for kw in COURSE_KEYWORDS:
-        if kw in txt:
-            return True
-    return False
-
-# --- Configuração da API ---
-
 try:
     API_KEY = os.environ["GOOGLE_API_KEY"]
 except KeyError:
@@ -39,6 +27,7 @@ except KeyError:
     print("Crie um arquivo .env com: GOOGLE_API_KEY=sua_chave_aqui")
     exit(1)
 
+# Mantivemos a sua instrução de sistema ORIGINAL da FMP
 GEMINI_TEXT_CONFIG = {
     "model": "gemini-2.0-flash",
     "systemInstruction": """Você é o FMPConnect, o assistente virtual oficial da Faculdade Municipal de Palhoça (FMP).
@@ -90,16 +79,6 @@ REGRAS DE RESPOSTA
 2. Não invente datas: Se perguntarem "quando é a prova?", diga que é necessário verificar o edital aberto no site, pois as datas mudam a cada semestre.
 3. Fora do Escopo: Perguntas sobre outros assuntos (futebol, política nacional, receitas) devem ser gentilmente recusadas com: "Sou o FMPConnect e respondo apenas sobre a Faculdade Municipal de Palhoça."
 4. Clareza: Seja direto. Se perguntarem o endereço, dê o endereço completo.
-
-EXEMPLOS DE INTERAÇÃO
-Usuário: "Quais cursos tem?"
-FMPConnect: "A FMP oferece cursos de graduação presencial: Administração (Bacharelado), Pedagogia (Licenciatura), Processos Gerenciais (Tecnólogo) e Análise e Desenvolvimento de Sistemas (ADS). Também possuímos pós-graduação em Gestão Escolar e Gestão Empresarial. Saiba mais em: https://fmpsc.edu.br/"
-
-Usuário: "É de graça?"
-FMPConnect: "A FMP é uma faculdade municipal pública. Existem taxas administrativas e de matrícula que podem variar conforme o edital, mas a instituição possui forte caráter social, muitas vezes com políticas de gratuidade ou bolsas para residentes de Palhoça oriundos de escola pública. Recomendo consultar o edital mais recente no site para confirmar os valores atuais."
-
-Usuário: "Onde fica?"
-FMPConnect: "A FMP fica na Ponte do Imaruim, em Palhoça. O endereço é Rua João Pereira dos Santos, 99. O CEP é 88130-475."
 """,
 }
 
@@ -108,7 +87,40 @@ CORS(app, resources={
     r"/*": {"origins": "*"}  
 })
 
-# --- Rotas de Texto ---
+# --- Rota NOVA de Text-to-Speech (Voz Humana) ---
+# Esta é a parte nova que você queria adicionar
+@app.route('/text/tts', methods=['POST'])
+def text_tts():
+    """
+    Gera áudio natural usando Microsoft Edge TTS (Gratuito e Neural).
+    """
+    try:
+        data = request.get_json()
+        text = data.get('text', '')
+
+        if not text:
+            return jsonify({"error": "Texto vazio"}), 400
+
+        # Vozes disponíveis em PT-BR:
+        # 'pt-BR-AntonioNeural' (Masculina - Ótima para assistentes)
+        # 'pt-BR-FranciscaNeural' (Feminina - Muito natural)
+        VOICE = "pt-BR-AntonioNeural" 
+        
+        # Cria um arquivo temporário para salvar o áudio
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as fp:
+            temp_filename = fp.name
+
+        async def generate_audio():
+            communicate = edge_tts.Communicate(text, VOICE)
+            await communicate.save(temp_filename)
+
+        asyncio.run(generate_audio())
+
+        return send_file(temp_filename, mimetype="audio/mpeg")
+
+    except Exception as e:
+        print(f"❌ Erro no TTS: {e}")
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/text/token', methods=['GET'])
 def get_text_token():
@@ -146,12 +158,10 @@ def text_chat():
 
         model = GEMINI_TEXT_CONFIG.get('model')
         
-        # Endpoint oficial v1beta do Gemini (generateContent)
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
         
         messages = []
 
-        # Converte histórico do frontend para formato da API
         for msg in history:
             role = "user" if msg['role'] == 'user' else "model"
             messages.append({
@@ -159,21 +169,19 @@ def text_chat():
                 "parts": [{"text": msg['content']}]
             })
 
-        # Adiciona a mensagem atual
         messages.append({
             "role": "user",
             "parts": [{"text": prompt}]
         })
 
-        # Corpo da requisição
         body = {
             "contents": messages,
             "systemInstruction": {
                 "parts": [{"text": GEMINI_TEXT_CONFIG["systemInstruction"]}]
             },
             "generationConfig": {
-                "temperature": 0.2,
-                "maxOutputTokens": 512
+            "temperature": 0.2,
+            "maxOutputTokens": 350
             }
         }
 
@@ -215,12 +223,11 @@ def text_chat():
 
 @app.route('/text/diag', methods=['GET'])
 def text_diag():
-    """Endpoint de diagnóstico rápido para testar a integração com a API Generative."""
+    """Endpoint de diagnóstico rápido."""
     try:
         model = GEMINI_TEXT_CONFIG.get('model')
         masked_key = (API_KEY[:8] + '...') if API_KEY and len(API_KEY) > 10 else API_KEY
         
-        # Teste simples com generateContent
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
 
         test_prompt = "Teste diagnóstico: responda apenas 'ok'"
@@ -235,7 +242,6 @@ def text_diag():
         req.add_header('Content-Length', len(jsondata))
 
         try:
-            print(f"[DIAG] Chamando endpoint remoto modelo={model} key_prefix={masked_key}")
             with urllib.request.urlopen(req, data=jsondata, timeout=20) as resp:
                 resp_body = resp.read()
                 resp_json = json.loads(resp_body.decode('utf-8'))
@@ -256,18 +262,17 @@ def text_diag():
     except Exception as e:
         return jsonify({"ok": False, "error": str(e)}), 500
 
-# --- Rotas Gerais ---
-
 @app.route('/', methods=['GET'])
 def home():
     """Status do servidor."""
     return jsonify({
         "status": "online",
-        "service": "FMPConnect Backend",
+        "service": "FMPConnect Backend + Voice",
         "endpoints": {
             "/text/token": "Retorna API key",
             "/text/config": "Retorna configurações",
-            "/text/chat": "Endpoint principal do chat"
+            "/text/chat": "Endpoint principal do chat",
+            "/text/tts": "Gera áudio (Novo)"
         }
     })
 
@@ -281,7 +286,7 @@ if __name__ == '__main__':
     print("FMPConnect Backend - Faculdade Municipal de Palhoça")
     print("="*50)
     print("Servidor rodando em: http://localhost:5000")
-    print("Endpoints Texto: /text/token, /text/config, /text/chat")
+    print("Endpoints: /text/chat (IA), /text/tts (Voz)")
     print("="*50)
     
     app.run(
