@@ -56,7 +56,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.5rem;
-    background: linear-gradient(90deg, #FE29BB 0%, #7A01FF 100%);
+    background: linear-gradient(90deg, #1D396C 0%, #009FE3 100%);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 9999px;
@@ -132,7 +132,7 @@
     align-items: center;
     gap: 0.25rem; /* 4px fixo */
     padding: 0.5rem 1rem;
-    background: #3B018A;
+    background: #009FE3;
     border: 1.5px solid rgba(255, 255, 255, 0.25);
     border-radius: 1rem; /* 16px fixo */
     color: white;
@@ -142,14 +142,14 @@
 }
 
 .opcao-acessibilidade:hover {
-    background: #1A0145;
+    background: #1D396C;
     border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .opcao-acessibilidade.ativo {
-    background: #FE29BB;
+    background: #1D396C;
     border-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -176,7 +176,7 @@
 
 .opcao-acessibilidade.ativo .opcao-acessibilidade_icone {
     background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 20px rgba(254, 41, 187, 0.5);
+    box-shadow: 0 0 20px #009FE3 0.5;
 }
 
 /* Ícones coloridos para daltonismo */
@@ -269,7 +269,7 @@
     align-items: center;
     gap: 0.5rem; /* 8px fixo */
     padding: 1rem 2rem; /* 16px 32px fixo */
-    background: #3B018A;
+    background: #009FE3;
     border-radius: 9999px; /* radius-full fixo */
     color: white;
     font-size: 0.875rem; /* 14px fixo */
@@ -281,7 +281,7 @@
 }
 
 .painel-acessibilidade_resetar:hover {
-    background: #1A0145;
+    background: #152C55;
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);

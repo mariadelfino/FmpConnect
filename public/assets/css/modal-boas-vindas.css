@@ -141,6 +141,7 @@
     
     .modal-boas-vindas_cabecalho {
         text-align: left;
+        padding-left: 200px;
         padding-top: 0;
     }
     
@@ -193,12 +194,12 @@
 
 .botao-comecar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(254, 41, 187, 0.3);
+    box-shadow: 0 8px 24px rgba(2, 0, 36, 0.105);
 }
 
 .botao-comecar:active {
     transform: translateY(0);
-    box-shadow: 0 4px 12px rgba(254, 41, 187, 0.2);
+    box-shadow: 0 4px 12px rgba(2, 0, 36, 0.105);
 }
 
 .botao-comecar:focus-visible {

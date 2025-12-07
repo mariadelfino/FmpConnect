@@ -19,7 +19,7 @@
 
     /* Cores de Ícones e Bordas */
     --color-primary-icon: #FFFFFF;
-    --color-secondary-icon: #009FE3; /* Ícones secundários agora são azul claro */
+    --color-secondary-icon: #5aceff; /* Ícones secundários agora são azul claro */
     
     /* Usando a cor transparente fornecida (#009FE317) para bordas e fundos sutis */
     --color-primary-border: rgba(29, 57, 108, 0.2);

@@ -510,10 +510,18 @@
         mask-image: none;
         -webkit-mask-image: none;
         margin: 0 auto;
+        width: 80%;
+        max-width: 900px;
+        mask-image: none;
+        -webkit-mask-image: none;
+        margin: 0 auto;
     }
 
     .duvida-btn {
         min-width: calc(120px * var(--scale-factor));
+        flex-basis: calc(33.33% - 15px);
+        flex-grow: 0;
+        flex-shrink: 0;
     }
 
     .duvida-btn_icone {
