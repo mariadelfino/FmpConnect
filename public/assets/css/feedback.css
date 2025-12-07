@@ -1,231 +1,367 @@
-:root {
-    --brand-blue: #003366;    
-    --brand-light: #3B82F6;   
-    --bg-page: #EFF6FF;       
-    --text-main: #1E293B;
-    --text-soft: #64748B;
-    --success-green: #10B981;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+/* ========================================
+   LAYOUT GERAL
+   ======================================== */
 
 body {
-    background-color: var(--bg-page);
-    color: var(--text-main);
+    background-color: var(--color-accent-purple-dark);
+    color: var(--color-primary-text);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
-
-header {
-    background-color: var(--brand-blue);
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 51, 102, 0.2);
-    position: relative;
-    z-index: 10;
-}
-
-.brand-logo {
-    color: white;
-    font-size: 1.5rem; 
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.back-btn-top {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    opacity: 0.8;
-    transition: 0.2s;
-}
-.back-btn-top:hover { opacity: 1; }
 
 main {
     width: 100%;
-    max-width: 600px; /* Um pouco mais largo para as novas perguntas */
-    padding: 30px 20px;
+    padding: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-.feedback-card {
-    background: white;
-    border-radius: 24px;
-    padding: 30px;
-    box-shadow: 0 10px 30px -5px rgba(0, 51, 102, 0.1);
-    position: relative;
-    overflow: hidden;
-}
+/* ========================================
+   SEÇÃO DE FEEDBACK
+   ======================================== */
 
-.card-decoration {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--brand-blue), var(--brand-light));
-}
-
-h1 {
-    color: var(--brand-blue);
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    text-align: center;
-}
-
-p.subtitle {
-    color: var(--text-soft);
-    font-size: 0.9rem;
-    margin-bottom: 25px;
-    text-align: center;
-    line-height: 1.4;
-}
-
-/* == ESTILOS DOS INPUTS == */
-.input-wrapper { margin-bottom: 20px; }
-
-label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--text-main);
-    font-size: 0.9rem;
-}
-
-input[type="text"], input[type="email"], textarea {
+.secao-feedback {
+    padding: var(--spacing-xl) var(--container-padding);
     width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #E2E8F0;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    transition: 0.3s;
-    background-color: #F8FAFC;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-input:focus, textarea:focus {
+.secao-feedback h1 {
+    color: var(--color-primary-text);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.secao-feedback .subtitle {
+    color: var(--color-gray-50);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-2xl);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* ========================================
+   FORMULÁRIO
+   ======================================== */
+
+.feedback-form {
+    width: 100%;
+}
+
+.input-wrapper {
+    margin-bottom: var(--spacing-lg);
+}
+
+.input-wrapper label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary-text);
+    font-size: var(--font-size-sm);
+}
+
+/* ========================================
+   CAMPOS DE ENTRADA
+   ======================================== */
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-primary-border);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-primary);
+    background-color: var(--color-secondary-background-icon);
+    color: var(--color-primary-text);
+    transition: var(--transition-base);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
     outline: none;
-    border-color: var(--brand-light);
-    background-color: white;
+    border-color: var(--color-primary-border-hover);
+    background-color: transparent;
 }
 
-/* == AVALIAÇÃO ESTRELAS == */
-.stars-container {
-    background: #F1F5F9;
-    padding: 10px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+    color: var(--color-gray-400);
+    font-size: var(--font-size-sm);
 }
 
-.rating { display: flex; flex-direction: row-reverse; gap: 8px; }
-.rating input { display: none; }
-.rating label { cursor: pointer; color: #CBD5E1; transition: 0.2s; }
-.rating label:hover, .rating label:hover ~ label { color: #F59E0B; transform: scale(1.1); }
-.rating input:checked ~ label { color: #F59E0B; }
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
 
-/* == NOVAS PERGUNTAS (Botões de Seleção) == */
+/* ========================================
+   GRUPOS DE PERGUNTAS
+   ======================================== */
+
 .question-group {
-    background-color: #F8FAFC;
-    padding: 15px;
-    border-radius: 16px;
-    margin-bottom: 20px;
-    border: 1px solid #F1F5F9;
+    background-color: var(--color-secondary-background-icon);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-xl);
+    border: 2px solid var(--color-opcao-chat-border);
 }
 
 .question-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--brand-blue);
-    margin-bottom: 10px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-text);
+    margin-bottom: var(--spacing-md);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--spacing-sm);
 }
+
+.question-group p {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-50);
+    margin-bottom: var(--spacing-md);
+}
+
+.question-group label {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* ========================================
+   RADIO BUTTONS
+   ======================================== */
 
 .options-row {
     display: flex;
-    gap: 10px;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
 }
 
-/* Esconde o radio button nativo */
 .options-row input[type="radio"] {
     display: none;
 }
 
-/* Estilo do Botão Customizado */
 .radio-btn-label {
     flex: 1;
-    padding: 10px;
-    border: 2px solid #E2E8F0;
-    border-radius: 10px;
+    min-width: 80px;
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-primary-medium);
+    border-radius: var(--radius-md);
     text-align: center;
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-50);
+    background: transparent;
     cursor: pointer;
-    transition: all 0.2s;
-    color: var(--text-soft);
-    background: white;
+    transition: var(--transition-base);
 }
 
-/* Quando selecionado */
+.radio-btn-label:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
 .options-row input[type="radio"]:checked + .radio-btn-label {
-    border-color: var(--brand-blue);
-    background-color: #E0F2FE;
-    color: var(--brand-blue);
-    font-weight: 700;
+    border-color: var(--color-primary-light);
+    background-color: var(--color-primary-background-hover);
+    color: var(--color-primary-light);
+    font-weight: var(--font-weight-bold);
 }
 
-/* == CHECKBOX ACESSIBILIDADE == */
-.access-check {
+/* ========================================
+   AVALIAÇÃO POR ESTRELAS
+   ======================================== */
+
+.stars-container {
+    background: var(--color-secondary-background-icon);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
 }
 
-.check-item {
+.rating {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.85rem;
-    color: var(--text-main);
+    flex-direction: row-reverse;
+    gap: var(--spacing-sm);
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
     cursor: pointer;
+    color: var(--color-gray-50);
+    transition: var(--transition-base);
 }
 
-/* == BOTÃO ENVIAR == */
+.rating label:hover,
+.rating label:hover ~ label {
+    color: var(--color-warning);
+    transform: scale(1.1);
+}
+
+.rating input:checked ~ label {
+    color: var(--color-warning);
+}
+
+/* ========================================
+   BOTÃO DE ENVIO
+   ======================================== */
+
 button[type="submit"] {
     width: 100%;
-    background-color: var(--brand-blue);
+    background: var(--gradient-button-pink);
     color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 16px;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+    padding: var(--spacing-lg);
     border: none;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 10px 20px -5px rgba(0, 51, 102, 0.25);
+    box-shadow: var(--shadow-lg);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-top: 10px;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    transition: var(--transition-base);
 }
 
 button[type="submit"]:hover {
     transform: translateY(-2px);
-    background-color: #002244;
+    filter: brightness(1.1);
+    box-shadow: var(--shadow-xl);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   MODO CLARO
+   ======================================== */
+
+[data-theme="light"] body {
+    background-color: var(--color-gray-900);
+}
+
+[data-theme="light"] .secao-feedback {
+    background: transparent;
+}
+
+[data-theme="light"] input[type="text"],
+[data-theme="light"] input[type="email"],
+[data-theme="light"] textarea {
+    background-color: white;
+    color: var(--color-primary-text);
+    border-color: var(--color-primary-border);
+}
+
+[data-theme="light"] input[type="text"]:focus,
+[data-theme="light"] input[type="email"]:focus,
+[data-theme="light"] textarea:focus {
+    background-color: white;
+    border-color: var(--color-primary);
+}
+
+[data-theme="light"] input[type="text"]::placeholder,
+[data-theme="light"] input[type="email"]::placeholder,
+[data-theme="light"] textarea::placeholder {
+    color: var(--color-gray-400);
+}
+
+[data-theme="light"] .question-group {
+    background-color: white;
+    border-color: var(--color-opcao-chat-border);
+}
+
+[data-theme="light"] .question-title,
+[data-theme="light"] .input-wrapper label,
+[data-theme="light"] .question-group label {
+    color: var(--color-primary-text);
+}
+
+[data-theme="light"] .question-group p {
+    color: var(--color-gray-400);
+}
+
+[data-theme="light"] .radio-btn-label {
+    background: var(--color-gray-900);
+    border-color: var(--color-primary-border);
+    color: var(--color-primary-text);
+}
+
+[data-theme="light"] .radio-btn-label:hover {
+    background: var(--color-opcao-chat-background-hover);
+    border-color: var(--color-primary);
+}
+
+[data-theme="light"] .options-row input[type="radio"]:checked + .radio-btn-label {
+    background-color: var(--color-primary-background-hover);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+[data-theme="light"] .stars-container {
+    background: var(--color-gray-900);
+}
+
+[data-theme="light"] button[type="submit"] {
+    color: #FFFFFF;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (min-width: 768px) {
+    .secao-feedback {
+        padding: var(--spacing-2xl) var(--container-padding);
+        max-width: 900px;
+    }
+
+    .secao-feedback h1 {
+        font-size: var(--font-size-2xl);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .secao-feedback .subtitle {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-3xl);
+    }
+
+    .question-group {
+        padding: var(--spacing-xl);
+    }
+
+    .radio-btn-label {
+        font-size: var(--font-size-base);
+        padding: var(--spacing-lg);
+    }
+
+    button[type="submit"] {
+        font-size: var(--font-size-sm);
+        padding: var(--spacing-xl);
+    }
+}
+
+@media (min-width: 1024px) {
+    .secao-feedback {
+        max-width: 1000px;
+        padding: var(--spacing-3xl) var(--container-padding);
+    }
+
+    .secao-feedback h1 {
+        font-size: var(--font-size-2xl);
+    }
 }

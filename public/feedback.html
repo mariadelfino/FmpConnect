@@ -3,40 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback - FMP Connect</title>
-    <!-- Fonte Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="description" content="FMPConnect - Feedback">
+    <meta name="theme-color" content="#6B21A8">
+    <title>FMPConnect - Feedback</title>
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('senachat-acessibilidade');
+                if (saved) {
+                    const estado = JSON.parse(saved);
+                    if (estado.tema === 'claro') document.documentElement.setAttribute('data-theme', 'light');
+                    if (estado.scaleFactor && estado.scaleFactor !== 1) document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const mains = document.querySelectorAll('main');
+                        if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
+                            mains.forEach(m => m.classList.add('filtro-' + estado.filtroDaltonismo));
+                            document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
+                        }
+                        if (estado.contraste) {
+                            mains.forEach(m => m.classList.add('alto-contraste'));
+                            document.body.setAttribute('data-alto-contraste', 'true');
+                        }
+                    });
+                }
+            } catch (e) { }
+        })();
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="./assets/css/componentes.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
     <link rel="stylesheet" href="./assets/css/feedback.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
 <body>
+    <main class="pagina-inicial" id="conteudoPrincipal">
+        <header class="cabecalho">
+            <a href="paginainicial.html" aria-label="Voltar para página inicial">
+                <button class="botao-voltar" type="button">
+                    <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </a>
 
-    <header>
-        <a href="../public/paginainicial.html" class="back-btn-top">
-            <i data-lucide="arrow-left"></i> &nbsp; Voltar
-        </a>
-        <div class="brand-logo">
-            <i data-lucide="graduation-cap"></i>
-            FMP Connect
-        </div>
-        
-    </header>
+            <h1 class="logo-senachat">
+                FMPConnect
+            </h1>
 
-    <main>
-        <div class="feedback-card">
-            <div class="card-decoration"></div>
-
-            <h1>Sua Opinião Importa!</h1>
-            <p class="subtitle">Ajude-nos a tornar o FMP Connect mais inclusivo e útil para todos.</p>
+            <button class="botao-acessibilidade" aria-label="Opções de acessibilidade" type="button">
+                <svg width="1000" height="1000" viewBox="320 330 360 360" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path
+                        d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                </svg>
+            </button>
+        </header>
+    
+        <section class="secao-feedback">
+            <h1>Sua opinião importa!</h1>
+            <p class="subtitle">Nos ajude a tornar o FMP Connect mais inclusivo e útil para todos.</p>
 
             <!-- SEU LINK DO FORMSPREE JÁ ESTÁ AQUI -->
-            <form action="https://formspree.io/f/myzrjlrr" method="POST">
+            <form class="feedback-form" action="https://formspree.io/f/myzrjlrr" method="POST">
                 
                 <!-- 1. Identificação -->
                 <div class="input-wrapper">
@@ -67,32 +136,30 @@
                     </div>
                 </div>
 
-                <!-- 3. Acessibilidade (Ponto chave da Maria) -->
-                <div class="question-group" style="border-left: 4px solid var(--brand-light);">
+                <!-- 3. Acessibilidade -->
+                <div class="question-group">
                     <div class="question-title">
                         <i data-lucide="accessibility" size="18"></i>
-                        Acessibilidade e Inclusão
+                        Os recursos atenderam suas necessidades?
                     </div>
-                    <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">
+                    <p>
                         Pensamos em cores para daltônicos, leitor de tela e suporte a Libras.
                     </p>
-                    
-                    <label style="font-size: 0.85rem; margin-bottom: 8px;">Os recursos atenderam suas necessidades?</label>
                     <div class="options-row">
                         <input type="radio" id="acess-sim" name="acessibilidade" value="Sim" required>
-                        <label for="acess-sim" class="radio-btn-label">👍 Sim</label>
+                        <label for="acess-sim" class="radio-btn-label">Sim</label>
 
                         <input type="radio" id="acess-talvez" name="acessibilidade" value="Poderia Melhorar">
-                        <label for="acess-talvez" class="radio-btn-label">🤔 Poderia Melhorar</label>
+                        <label for="acess-talvez" class="radio-btn-label">Poderia melhorar</label>
 
                         <input type="radio" id="acess-nao" name="acessibilidade" value="Não">
-                        <label for="acess-nao" class="radio-btn-label">👎 Não</label>
+                        <label for="acess-nao" class="radio-btn-label">Não</label>
                     </div>
                 </div>
-
-                <!-- 4. Avaliação Geral -->
-                <div class="input-wrapper">
-                    <label style="text-align: center;">Nota Geral</label>
+                <div class="question-group">
+                    <div class="question-title">
+                        <label>Nota geral</label>
+                    </div>
                     <div class="stars-container">
                         <div class="rating">
                             <input type="radio" id="s5" name="nota_geral" value="5"><label for="s5" title="Excelente"><i data-lucide="star" size="28" fill="currentColor"></i></label>
@@ -105,21 +172,31 @@
                 </div>
 
                 <div class="input-wrapper">
-                    <label>Detalhes ou Sugestões</label>
+                    <label>Detalhes ou sugestões</label>
                     <textarea name="mensagem" rows="3" placeholder="O que podemos melhorar na acessibilidade ou funções?" required></textarea>
                 </div>
 
                 <button type="submit">
-                    Enviar Feedback Completo
+                    Enviar feedback
                     <i data-lucide="send" size="18"></i>
                 </button>
             </form>
-        </div>
+        </section>
     </main>
 
+    <script src="./assets/js/acessibilidade-global.js"></script>
     <script>
         lucide.createIcons();
     </script>
-
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
 </html>
