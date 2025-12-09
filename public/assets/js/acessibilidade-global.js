@@ -397,7 +397,7 @@
     injetarFiltrosSVG();
 
     // Troca o mascote para a versão branca quando o tema estiver em modo escuro.
-    // Compatível com as páginas que usam a classe .SenaChat_mascote e <img src=".../senachat.svg">.
+    // Compatível com as páginas que usam a classe .FMPConnect_mascote e <img src=".../fmpconnect.svg">.
     (function () {
         function updateMascoteForTheme() {
             try {
@@ -406,15 +406,15 @@
                 const themeAttr = root.getAttribute('data-theme') || body.getAttribute('data-theme');
                 const isDark = themeAttr === 'dark' || (!themeAttr && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-                document.querySelectorAll('.SenaChat_mascote img').forEach(img => {
+                document.querySelectorAll('.FMPConnect_mascote img').forEach(img => {
                     if (!img || !img.src) return;
 
                         // Se a URL já referencia uma das versões do mascote, substitui pelo nome correto
-                        const match = img.src.match(/senachat(?:-branco)?\.svg/);
+                        const match = img.src.match(/fmpconnect(?:-branco)?\.svg/);
                         if (match) {
-                            const desired = isDark ? 'senachat-branco.svg' : 'senachat.svg';
+                            const desired = isDark ? 'fmpconnect-branco.svg' : 'fmpconnect.svg';
                             if (!img.src.includes(desired)) {
-                                img.src = img.src.replace(/senachat(?:-branco)?\.svg/, desired);
+                                img.src = img.src.replace(/fmpconnect(?:-branco)?\.svg/, desired);
                             }
                             return;
                         }
@@ -422,7 +422,7 @@
                         // Fallback: troca apenas o último segmento do path para o arquivo desejado
                         try {
                             const parts = img.src.split('/');
-                            parts[parts.length - 1] = isDark ? 'senachat-branco.svg' : 'senachat.svg';
+                            parts[parts.length - 1] = isDark ? 'fmpconnect-branco.svg' : 'fmpconnect.svg';
                             img.src = parts.join('/');
                         } catch (e) {
                             // não faz nada se não for possível modificar
@@ -518,7 +518,7 @@
                         };
 
                         // Se já estiver apontando para uma variante branca correta, não faz nada
-                        if (/senachat(?:-branco|-white|_white)?\.svg/.test(img.src) || /.+(?:-branco|-white|_white)\.[a-zA-Z0-9]+$/.test(img.src)) {
+                        if (/fmpconnect(?:-branco|-white|_white)?\.svg/.test(img.src) || /.+(?:-branco|-white|_white)\.[a-zA-Z0-9]+$/.test(img.src)) {
                             return;
                         }
 

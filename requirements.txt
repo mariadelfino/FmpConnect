@@ -1,4 +1,4 @@
-# Dependências Python - SenaChat Backend
+# Dependências Python - FMPConnect Backend
 
 # Framework web
 Flask==3.0.0

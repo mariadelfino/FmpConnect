@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const micButton = document.getElementById('botao-microfone');
     const resetButton = document.getElementById('botao-reset');
     
-    const SURDEZ_KEY = 'senachat_modo_surdez';
-    const HISTORICO_KEY = 'senachat_sessao_atual_v1';
+    const SURDEZ_KEY = 'fmpconnect_modo_surdez';
+    const HISTORICO_KEY = 'fmpconnect_sessao_atual_v1';
     
     const welcomeModal = document.getElementById('welcome-modal');
     const welcomeOptions = welcomeModal && welcomeModal.querySelectorAll('.welcome-option');

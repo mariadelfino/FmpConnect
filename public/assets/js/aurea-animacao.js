@@ -1,15 +1,15 @@
 /**
- * Controle de Animação da Áurea SenaChat
+ * Controle de Animação da Áurea FMPConnect
  * Ativa animações quando detecta áudio do bot falando (Web Audio API)
  */
 
 (function() {
     'use strict';
 
-    const aureaSenaChat = document.querySelector('.aurea-senachat');
+    const aureaFMPConnect = document.querySelector('.aurea-fmpconnect');
     
-    if (!aureaSenaChat) {
-        console.error('[ÁUREA] Elemento .aurea-senachat não encontrado');
+    if (!aureaFMPConnect) {
+        console.error('[ÁUREA] Elemento .aurea-fmpconnect não encontrado');
         return;
     }
 
@@ -131,21 +131,21 @@
     }
 
     function ativarAurea() {
-        aureaSenaChat.classList.remove('pausado');
-        aureaSenaChat.classList.add('ativo');
+        aureaFMPConnect.classList.remove('pausado');
+        aureaFMPConnect.classList.add('ativo');
     }
 
     function pausarAurea() {
         if (jaTevePrimeiraAtivacao) {
-            aureaSenaChat.classList.remove('ativo');
-            aureaSenaChat.classList.add('pausado');
+            aureaFMPConnect.classList.remove('ativo');
+            aureaFMPConnect.classList.add('pausado');
         } else {
             desativarAurea();
         }
     }
 
     function desativarAurea() {
-        aureaSenaChat.classList.remove('ativo', 'pausado');
+        aureaFMPConnect.classList.remove('ativo', 'pausado');
     }
 
     const observadorAudio = new MutationObserver((mutations) => {
