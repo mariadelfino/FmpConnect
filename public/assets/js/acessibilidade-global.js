@@ -7,8 +7,8 @@
     'use strict';
 
     const PAINEL_HTML_PATH = './assets/html/painel-acessibilidade.html';
-    const STORAGE_KEY = 'senachat-acessibilidade';
-    const PAINEL_OPEN_KEY = 'senachat-acessibilidade-painel-aberto';
+    const STORAGE_KEY = 'Fmpconnect-acessibilidade';
+    const PAINEL_OPEN_KEY = 'Fmpconnect-acessibilidade-painel-aberto';
     
     // Estado da acessibilidade
     let estadoAtual = {

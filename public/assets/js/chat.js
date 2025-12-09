@@ -1,81 +1,59 @@
 document.addEventListener("DOMContentLoaded", () => {
     const chatContainer = document.getElementById('chat-container');
     const input = document.getElementById('pergunta-input');
-
+    
     const sendButton = document.getElementById('botao-enviar');
     const micButton = document.getElementById('botao-microfone');
     const resetButton = document.getElementById('botao-reset');
     
     const SURDEZ_KEY = 'senachat_modo_surdez';
-    const INSTRUCAO_SURDEZ = 'INSTRUÇÃO ESPECIAL: Responda de forma extremamente concisa e clara. Use frases curtas, evite gírias, ironias, metáforas e termos difíceis. Se usar um termo técnico, explique-o rapidamente com um exemplo concreto. Aplique todas as regras de comunicação acessível para pessoas com deficiência auditiva em português.';
-
     const HISTORICO_KEY = 'senachat_sessao_atual_v1';
+    
     const welcomeModal = document.getElementById('welcome-modal');
     const welcomeOptions = welcomeModal && welcomeModal.querySelectorAll('.welcome-option');
     const deafModeOption = document.getElementById('opcao-modo-surdez'); 
-
-    // --- Lógica de Voz (Web Speech API - Somente Entrada) ---
+    
+    // --- Configuração de Voz (Mantida igual) ---
     if (micButton) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
+    
         if (SpeechRecognition) {
             const recognition = new SpeechRecognition();
             recognition.lang = 'pt-BR'; 
             recognition.continuous = false; 
             recognition.interimResults = false; 
-
+    
             micButton.addEventListener('click', (e) => {
                 e.preventDefault();
-                
                 if (micButton.classList.contains('gravando')) {
                     recognition.stop();
                     return;
                 }
-
-                try {
-                    recognition.start();
-                } catch (error) {
-                    console.error("Erro ao iniciar reconhecimento:", error);
-                }
+                try { recognition.start(); } catch (error) { console.error(error); }
             });
-
+    
             recognition.onstart = () => {
-                console.log("Gravando...");
                 micButton.classList.add('gravando');
                 input.placeholder = "Ouvindo... Fale agora.";
             };
-
+    
             recognition.onend = () => {
-                console.log("Gravação finalizada.");
                 micButton.classList.remove('gravando');
                 input.placeholder = "Faça a sua pergunta";
             };
-
+    
             recognition.onresult = (event) => {
                 const transcript = event.results[0][0].transcript;
                 if (transcript) {
-                    console.log("Transcrição:", transcript);
                     input.value = transcript;
-                    
-                    setTimeout(() => {
-                        enviarMensagemDoUsuario();
-                    }, 500);
-                }
-            };
-            recognition.onerror = (event) => {
-                console.error("Erro voz:", event.error);
-                micButton.classList.remove('gravando');
-                if(event.error === 'not-allowed') {
-                    alert("Permita o uso do microfone para usar o chat de voz.");
+                    setTimeout(() => enviarMensagemDoUsuario(), 500);
                 }
             };
         } else {
-            console.log("Navegador não suporta Web Speech API");
             micButton.style.display = 'none';
         }
     }
-    // --- Fim Lógica de Voz ---
-
+    
     function rolarParaOFinal() {
         if (chatContainer) {
             setTimeout(() => {
@@ -83,16 +61,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 50);
         }
     }
-
+    
     function salvarSessaoLocal() {
         const mensagens = [];
         const wrappers = chatContainer.querySelectorAll('.mensagem-wrapper');
-
+    
         wrappers.forEach(wrapper => {
             const isUser = wrapper.classList.contains('user');
             const role = isUser ? 'user' : 'model';
             let texto = "";
-
+    
             if (isUser) {
                 const p = wrapper.querySelector('.mensagem-balao p');
                 texto = p ? p.innerText : "";
@@ -100,25 +78,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 const conteudo = wrapper.querySelector('.mensagem-conteudo');
                 texto = conteudo ? conteudo.innerText : "";
             }
-
-            if (texto) mensagens.push({ role, content: texto });
+    
+            if (texto && texto !== '...' && texto !== 'Desculpe, não entendi.') {
+                mensagens.push({ role, content: texto });
+            }
         });
-
+    
         sessionStorage.setItem(HISTORICO_KEY, JSON.stringify(mensagens));
     }
-
+    
     function obterHistoricoParaAPI() {
         const historico = [];
         const wrappers = document.querySelectorAll('.area-mensagens .mensagem-wrapper');
-
+    
         wrappers.forEach(wrapper => {
             if (wrapper.innerText.trim() === '...') return;
             if (wrapper.innerText.includes("Erro de conexão")) return;
-
+    
             const isUser = wrapper.classList.contains('user');
             const role = isUser ? 'user' : 'model';
             let content = "";
-
+    
             if (isUser) {
                 const p = wrapper.querySelector('.mensagem-balao p');
                 if (p) content = p.innerText.trim();
@@ -132,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         return historico;
     }
-
+    
     function criarBotaoAudio(texto) {
         const btnAudio = document.createElement('button');
         btnAudio.className = 'botao-ler-texto';
@@ -146,18 +126,18 @@ document.addEventListener("DOMContentLoaded", () => {
         btnAudio.addEventListener('click', () => lerTexto(texto, btnAudio));
         return btnAudio;
     }
-
+    
     function adicionarMensagemVisual(texto, tipo) {
         const wrapper = document.createElement('div');
         wrapper.classList.add('mensagem-wrapper', tipo);
-
+    
         const balaoMensagem = document.createElement('div');
         balaoMensagem.classList.add('mensagem-balao', tipo);
-
+    
         if (tipo === 'bot') {
             balaoMensagem.innerHTML = `<div class="mensagem-conteudo">${renderMarkdownToHtml(texto)}</div>`;
             wrapper.appendChild(balaoMensagem);
-
+    
             if (texto !== '...') {
                 const btnAudio = criarBotaoAudio(texto);
                 wrapper.appendChild(btnAudio);
@@ -169,13 +149,13 @@ document.addEventListener("DOMContentLoaded", () => {
             balaoUsuario.innerHTML = `<p>${texto}</p>`;
             wrapper.appendChild(balaoUsuario);
         }
-
+    
         chatContainer.appendChild(wrapper);
         rolarParaOFinal();
         
         return { balao: balaoMensagem, wrapper: wrapper };
     }
-
+    
     function toggleInput(disable) {
         if (input) input.disabled = disable;
         if (sendButton) sendButton.disabled = disable;
@@ -184,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
             inputContainer.classList.toggle('input-disabled', disable);
         }
     }
-
+    
     function carregarSessaoAnterior() {
         const salvo = sessionStorage.getItem(HISTORICO_KEY);
         if (salvo && chatContainer) {
@@ -201,47 +181,47 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return false;
     }
-
+    
     function enviarMensagemDoUsuario(textoAutomatico) {
         const texto = textoAutomatico ? textoAutomatico.trim() : input.value.trim();
         if (texto === "") return;
         
         toggleInput(true);
-        let promptFinal = texto;
+        
         const modoSurdezAtivo = sessionStorage.getItem(SURDEZ_KEY) === 'true';
+        const modoEnvio = modoSurdezAtivo ? 'surdez' : 'normal';
+    
         const historicoContexto = obterHistoricoParaAPI();
-
-        if (modoSurdezAtivo && historicoContexto.length === 0) {
-            promptFinal = `${INSTRUCAO_SURDEZ} ${texto}`;
-        }
+    
         adicionarMensagemVisual(texto, 'usuario');
         input.value = "";
-
+    
         const botElementos = adicionarMensagemVisual('...', 'bot');
         const botBalao = botElementos.balao;
         const botWrapper = botElementos.wrapper;
-
+    
         (async () => {
             try {
                 const resp = await fetch(window.location.origin + '/text/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        prompt: promptFinal,
-                        history: historicoContexto
+                        prompt: texto,
+                        history: historicoContexto,
+                        mode: modoEnvio 
                     })
                 });
                 if (!resp.ok) throw new Error(`Erro ${resp.status}`);
-
+    
                 const data = await resp.json();
-
+    
                 if (data.answer) {
                     const htmlFinal = renderMarkdownToHtml(data.answer);
                     botBalao.querySelector('.mensagem-conteudo').innerHTML = htmlFinal;
-
+    
                     const btnAudio = criarBotaoAudio(data.answer);
                     botWrapper.appendChild(btnAudio);
-
+    
                     salvarSessaoLocal();
                     rolarParaOFinal();
                 } else {
@@ -256,23 +236,26 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })();
     }
-
+    
     function renderMarkdownToHtml(mdText) {
         if (!mdText) return '';
         if (mdText === '...') return '...';
-
-        console.log("Texto original recebido:", mdText);
+    
         let text = mdText.toString();
-
+    
+        // Links
         text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        // Negrito
         text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        // Itálico
         text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
-        if (text.includes('\n')) {
+    
+        // Tratamento de quebras e listas
+        if (text.includes('\n') || text.includes('- ')) {
             const lines = text.split('\n');
             let output = '';
             let inList = false;
-
+    
             lines.forEach(line => {
                 let trimmed = line.trim();
                 
@@ -289,52 +272,67 @@ document.addEventListener("DOMContentLoaded", () => {
             if (inList) output += '</ul>';
             return output;
         } 
-        return text; 
+        return `<p>${text}</p>`; 
     }
-
+    
+    // Event Listeners
     if (sendButton) {
         sendButton.addEventListener('click', (e) => {
             e.preventDefault(); 
             enviarMensagemDoUsuario();
         });
     }
-
-    input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            enviarMensagemDoUsuario();
-        }
-    });
-
+    
+    if (input) {
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                enviarMensagemDoUsuario();
+            }
+        });
+        // Desativar surdez ao focar no input se o modal ainda estivesse ativo (opcional, mas mantido da sua lógica)
+        input.addEventListener('focus', () => {
+            if (welcomeModal && !welcomeModal.classList.contains('hidden')) {
+                welcomeModal.classList.add('hidden');
+                sessionStorage.setItem(SURDEZ_KEY, 'false');
+            }
+        });
+    }
+    
+    // --- LÓGICA DO MODAL E URL ---
     const params = new URLSearchParams(window.location.search);
     const perguntaPreDefinida = params.get('pergunta');
-
+    
     if (perguntaPreDefinida) {
         history.replaceState(null, '', window.location.pathname);
     }
-
+    
     const temHistorico = carregarSessaoAnterior();
-
+    
+    // Se há pergunta na URL
     if (perguntaPreDefinida) {
         if (welcomeModal) welcomeModal.classList.add('hidden');
         setTimeout(() => enviarMensagemDoUsuario(perguntaPreDefinida), 200);
-
-    } else if (!temHistorico && welcomeModal) {
+    } 
+    // Se NÃO tem histórico e o modal existe, mostra o modal
+    else if (!temHistorico && welcomeModal) {
         setTimeout(() => {
             welcomeModal.classList.remove('hidden');
         }, 500);
     }
-
+    
+    // Configura os botões do Modal
     if (deafModeOption) {
         deafModeOption.addEventListener('click', () => {
-            const instrucaoAcessivel = 'Sou deficiente auditivo e desejo que você me responda de forma mais acessível e clara em português.';
             sessionStorage.setItem(SURDEZ_KEY, 'true');
-
             if (welcomeModal) welcomeModal.classList.add('hidden');
-            setTimeout(() => enviarMensagemDoUsuario(instrucaoAcessivel), 200);
+            document.body.classList.add('modo-surdez-ativo');
+    
+            // Envia mensagem inicial para o backend registrar o contexto
+            setTimeout(() => enviarMensagemDoUsuario("Olá, ativei o modo acessibilidade."), 200);
         });
     }
-
+    
     if (welcomeOptions) {
         welcomeOptions.forEach(btn => {
             if (btn.id === 'opcao-modo-surdez') return;
@@ -342,24 +340,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 const q = btn.textContent.trim();
                 input.value = q;
                 sessionStorage.setItem(SURDEZ_KEY, 'false');
-
+                document.body.classList.remove('modo-surdez-ativo');
+    
                 if (welcomeModal) welcomeModal.classList.add('hidden');
                 setTimeout(() => enviarMensagemDoUsuario(q), 200);
             });
         });
     }
-
-    if (input && welcomeModal) {
-        input.addEventListener('focus', () => {
-            welcomeModal.classList.add('hidden');
-            sessionStorage.setItem(SURDEZ_KEY, 'false');
-        });
-    }
-
+    
+    // Restaura classe visual se recarregar a página
     if (sessionStorage.getItem(SURDEZ_KEY) === 'true') {
         document.body.classList.add('modo-surdez-ativo');
     }
-
+    
     window.resetChat = function() {
         sessionStorage.removeItem(HISTORICO_KEY);
         sessionStorage.removeItem(SURDEZ_KEY); 
@@ -372,18 +365,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
 let audioAtual = null; 
 
 function limparTextoParaAudio(textoMarkdown) {
     let texto = textoMarkdown.toString();
     texto = texto.replace(/\*\*/g, '') 
-                 .replace(/\*/g, '')    
-                 .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') 
-                 .replace(/^#+\s+/gm, '') 
-                 .replace(/- /g, ', ')    
-                 .replace(/\n\n/g, '. ') 
-                 .replace(/\n/g, ' ');   
-                 
+                .replace(/\*/g, '')    
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') 
+                .replace(/^#+\s+/gm, '') 
+                .replace(/- /g, ', ')    
+                .replace(/\n\n/g, '. ') 
+                .replace(/\n/g, ' ');   
     return texto.trim();
 }
 
@@ -402,21 +395,21 @@ async function lerTexto(texto, botaoElemento) {
         b.classList.remove('falando');
         b.classList.remove('tocando-agora');
     });
-
+    
     const textoLimpo = limparTextoParaAudio(texto);
     
     try {
         botaoElemento.classList.add('falando'); 
         botaoElemento.classList.add('tocando-agora');
-
+    
         const response = await fetch(window.location.origin + '/text/tts', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: textoLimpo })
         });
-
+    
         if (!response.ok) throw new Error("Erro ao gerar áudio");
-
+    
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
         
@@ -428,18 +421,11 @@ async function lerTexto(texto, botaoElemento) {
             audioAtual = null;
         };
         
-        audioAtual.onerror = () => {
-            console.error("Erro ao reproduzir áudio");
-            botaoElemento.classList.remove('falando');
-            botaoElemento.classList.remove('tocando-agora');
-        };
-
         audioAtual.play();
-
+    
     } catch (error) {
         console.error("Erro no TTS:", error);
         botaoElemento.classList.remove('falando');
         botaoElemento.classList.remove('tocando-agora');
-       
     }
 }
