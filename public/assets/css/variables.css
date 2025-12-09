@@ -45,7 +45,7 @@
     --gradient-primary-hover: radial-gradient(circle at center, #009FE3 0%, #1D396C 100%);
     
     /* Gradiente Título (Linear) */
-    --gradient-title: linear-gradient(135deg, #1D396C 0%, #009FE3 100%);
+    --gradient-title: linear-gradient(135deg, #009FE3  0%, #89D6FA 100%);
     
     /* Gradiente Botão (Antes Rosa, agora Azul Vibrante) */
     --gradient-button-pink: linear-gradient(135deg, #009FE3 0%, #1D396C 100%);
@@ -100,7 +100,7 @@
     --font-size-lg: calc(1.125rem * var(--scale-factor));     /* 18px */
     --font-size-xl: calc(1.25rem * var(--scale-factor));      /* 20px */
     --font-size-2xl: calc(1.5rem * var(--scale-factor));      /* 24px */
-    --font-size-3xl: calc(2rem * var(--scale-factor));        /* 32px */
+    --font-size-3xl: calc(1.75rem * var(--scale-factor));        /* 32px */
     --font-size-4xl: calc(2.25rem * var(--scale-factor));     /* 36px */
     --font-size-5xl: calc(3rem * var(--scale-factor));        /* 48px */
     --font-size-6xl: calc(3.63rem * var(--scale-factor));     /* 58px */

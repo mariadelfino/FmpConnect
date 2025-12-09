@@ -66,7 +66,7 @@
 
 .modal-boas-vindas_titulo-destaque {
     display: block;
-    font-size: var(--font-size-6xl);
+    font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-extrabold);
     background: var(--gradient-title);
     -webkit-background-clip: text;

@@ -19,7 +19,7 @@
 }
 
 .destaque-gradiente {
-    background: linear-gradient(135deg, #1D396C 0%, #009FE3 100%);
+    background: var(--gradient-title);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -27,7 +27,7 @@
 }
 
 .titulo-secao {
-    font-size: 2.5rem; /* ~40px */
+    font-size: 2.2rem; /* ~40px */
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -384,7 +384,6 @@
     margin-top: 1rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
     background: rgba(255, 255, 255, 0.2);
     padding: 12px 24px;
     border-radius: 50px;

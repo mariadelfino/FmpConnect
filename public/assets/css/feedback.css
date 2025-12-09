@@ -140,8 +140,8 @@ textarea {
 
 .options-row {
     display: flex;
+    flex-direction: column;
     gap: var(--spacing-md);
-    flex-wrap: wrap;
 }
 
 .options-row input[type="radio"] {
@@ -149,8 +149,7 @@ textarea {
 }
 
 .radio-btn-label {
-    flex: 1;
-    min-width: 80px;
+    min-width: 70px;
     padding: var(--spacing-md);
     border: 2px solid var(--color-primary-medium);
     border-radius: var(--radius-md);
@@ -344,7 +343,14 @@ button[type="submit"]:active {
         padding: var(--spacing-xl);
     }
 
+    .options-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
     .radio-btn-label {
+        flex: 1;
+        min-width: 120px;
         font-size: var(--font-size-base);
         padding: var(--spacing-lg);
     }

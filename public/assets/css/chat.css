@@ -565,7 +565,7 @@ body {
     .welcome-card { width: calc(100% - 40px); padding: 20px; }
     .area-input-pergunta { padding: 16px; }
     #botao-microfone { width: 44px; height: 44px; }
-    #botao-microfone svg { width: 22px; height: 22px; }
+    #botao-microfone svg { width: 35px; height: 35px; }
     #botao-enviar { width: 44px; height: 44px; }
     #botao-enviar svg { width: 22px; height: 22px; }
 }
