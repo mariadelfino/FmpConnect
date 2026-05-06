@@ -1,0 +1,5 @@
+.env
+fmpconnect.db
+__pycache__/
+*.pyc
+.claude/

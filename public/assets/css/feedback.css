@@ -1,0 +1,373 @@
+/* ========================================
+   LAYOUT GERAL
+   ======================================== */
+
+body {
+    background-color: var(--color-accent-purple-dark);
+    color: var(--color-primary-text);
+    min-height: 100vh;
+}
+
+main {
+    width: 100%;
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========================================
+   SEÇÃO DE FEEDBACK
+   ======================================== */
+
+.secao-feedback {
+    padding: var(--spacing-xl) var(--container-padding);
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.secao-feedback h1 {
+    color: var(--color-primary-text);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.secao-feedback .subtitle {
+    color: var(--color-gray-50);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-2xl);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* ========================================
+   FORMULÁRIO
+   ======================================== */
+
+.feedback-form {
+    width: 100%;
+}
+
+.input-wrapper {
+    margin-bottom: var(--spacing-lg);
+}
+
+.input-wrapper label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary-text);
+    font-size: var(--font-size-sm);
+}
+
+/* ========================================
+   CAMPOS DE ENTRADA
+   ======================================== */
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-primary-border);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-primary);
+    background-color: var(--color-secondary-background-icon);
+    color: var(--color-primary-text);
+    transition: var(--transition-base);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-primary-border-hover);
+    background-color: transparent;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+    color: var(--color-gray-400);
+    font-size: var(--font-size-sm);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ========================================
+   GRUPOS DE PERGUNTAS
+   ======================================== */
+
+.question-group {
+    background-color: var(--color-secondary-background-icon);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-xl);
+    border: 2px solid var(--color-opcao-chat-border);
+}
+
+.question-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-text);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.question-group p {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-50);
+    margin-bottom: var(--spacing-md);
+}
+
+.question-group label {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* ========================================
+   RADIO BUTTONS
+   ======================================== */
+
+.options-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.options-row input[type="radio"] {
+    display: none;
+}
+
+.radio-btn-label {
+    min-width: 70px;
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-primary-medium);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-50);
+    background: transparent;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.radio-btn-label:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.options-row input[type="radio"]:checked + .radio-btn-label {
+    border-color: var(--color-primary-light);
+    background-color: var(--color-primary-background-hover);
+    color: var(--color-primary-light);
+    font-weight: var(--font-weight-bold);
+}
+
+/* ========================================
+   AVALIAÇÃO POR ESTRELAS
+   ======================================== */
+
+.stars-container {
+    background: var(--color-secondary-background-icon);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: var(--spacing-sm);
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    cursor: pointer;
+    color: var(--color-gray-50);
+    transition: var(--transition-base);
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+    color: var(--color-warning);
+    transform: scale(1.1);
+}
+
+.rating input:checked ~ label {
+    color: var(--color-warning);
+}
+
+/* ========================================
+   BOTÃO DE ENVIO
+   ======================================== */
+
+button[type="submit"] {
+    width: 100%;
+    background: var(--gradient-button-pink);
+    color: white;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+    padding: var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    transition: var(--transition-base);
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: var(--shadow-xl);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   MODO CLARO
+   ======================================== */
+
+[data-theme="light"] body {
+    background-color: var(--color-gray-900);
+}
+
+[data-theme="light"] .secao-feedback {
+    background: transparent;
+}
+
+[data-theme="light"] input[type="text"],
+[data-theme="light"] input[type="email"],
+[data-theme="light"] textarea {
+    background-color: white;
+    color: var(--color-primary-text);
+    border-color: var(--color-primary-border);
+}
+
+[data-theme="light"] input[type="text"]:focus,
+[data-theme="light"] input[type="email"]:focus,
+[data-theme="light"] textarea:focus {
+    background-color: white;
+    border-color: var(--color-primary);
+}
+
+[data-theme="light"] input[type="text"]::placeholder,
+[data-theme="light"] input[type="email"]::placeholder,
+[data-theme="light"] textarea::placeholder {
+    color: var(--color-gray-400);
+}
+
+[data-theme="light"] .question-group {
+    background-color: white;
+    border-color: var(--color-opcao-chat-border);
+}
+
+[data-theme="light"] .question-title,
+[data-theme="light"] .input-wrapper label,
+[data-theme="light"] .question-group label {
+    color: var(--color-primary-text);
+}
+
+[data-theme="light"] .question-group p {
+    color: var(--color-gray-400);
+}
+
+[data-theme="light"] .radio-btn-label {
+    background: var(--color-gray-900);
+    border-color: var(--color-primary-border);
+    color: var(--color-primary-text);
+}
+
+[data-theme="light"] .radio-btn-label:hover {
+    background: var(--color-opcao-chat-background-hover);
+    border-color: var(--color-primary);
+}
+
+[data-theme="light"] .options-row input[type="radio"]:checked + .radio-btn-label {
+    background-color: var(--color-primary-background-hover);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+[data-theme="light"] .stars-container {
+    background: var(--color-gray-900);
+}
+
+[data-theme="light"] button[type="submit"] {
+    color: #FFFFFF;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (min-width: 768px) {
+    .secao-feedback {
+        padding: var(--spacing-2xl) var(--container-padding);
+        max-width: 900px;
+    }
+
+    .secao-feedback h1 {
+        font-size: var(--font-size-2xl);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .secao-feedback .subtitle {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-3xl);
+    }
+
+    .question-group {
+        padding: var(--spacing-xl);
+    }
+
+    .options-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .radio-btn-label {
+        flex: 1;
+        min-width: 120px;
+        font-size: var(--font-size-base);
+        padding: var(--spacing-lg);
+    }
+
+    button[type="submit"] {
+        font-size: var(--font-size-sm);
+        padding: var(--spacing-xl);
+    }
+}
+
+@media (min-width: 1024px) {
+    .secao-feedback {
+        max-width: 1000px;
+        padding: var(--spacing-3xl) var(--container-padding);
+    }
+
+    .secao-feedback h1 {
+        font-size: var(--font-size-2xl);
+    }
+}

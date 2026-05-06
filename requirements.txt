@@ -1,0 +1,23 @@
+# Dependências Python - FMPConnect Backend
+
+# Framework web
+Flask==3.0.0
+Flask-CORS==4.0.0
+
+# Google Gemini AI
+google-genai==1.0.0
+
+# Variáveis de ambiente
+python-dotenv==1.0.0
+
+# Text-to-Speech Microsoft Edge
+edge-tts==6.1.9
+
+# Autenticação JWT
+PyJWT==2.8.0
+
+# Hash de senhas (incluído no Flask via Werkzeug)
+Werkzeug==3.0.1
+
+# Servidor WSGI para produção (opcional)
+# gunicorn==21.2.0

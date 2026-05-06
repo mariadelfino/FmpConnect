@@ -1,0 +1,661 @@
+.pagina-sobre {
+    min-height: 100vh;
+    background: var(--gradient-primary);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+    color: var(--color-white);
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ========================================
+   CONTAINER & UTILS
+   ======================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.destaque-gradiente {
+    background: var(--gradient-title);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.titulo-secao {
+    font-size: 2.2rem; /* ~40px */
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: var(--color-sobre-texto-principal);
+}
+
+.subtitulo-secao {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--color-sobre-texto-principal);
+}
+
+.texto-padrao {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-sobre-texto-secundario);
+    margin-bottom: 1.5rem;
+}
+
+.texto-centralizado {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: var(--color-sobre-texto-secundario);
+    line-height: 1.6;
+}
+
+.header-centralizado {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.icone-titulo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--color-accent-pink, #009FE3);
+}
+
+/* ========================================
+   SEÇÃO 1: CONTEXTO (Jovem Programador)
+   ======================================== */
+.secao-contexto {
+    padding: 60px 0;
+    margin-top: 20px;
+}
+
+.grid-contexto {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (min-width: 992px) {
+    .grid-contexto {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ========================================
+   EQUIPA - GRID DE MEMBROS
+   ======================================== */
+.grid-equipe {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (min-width: 768px) {
+    .grid-equipe {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid-equipe {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 28px;
+    }
+
+    .card-membro {
+        flex-basis: 300px; /* Base para o tamanho do card */
+    }
+}
+
+.grid-equipe .card-membro {
+    height: 100%; /* garante que o card ocupe toda a célula do grid */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--color-primary-border);
+    background: var(--color-opcao-chat-background);
+    color: var(--color-sobre-texto-secundario);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 1px solid var(--color-sobre-card-border);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ========================================
+   SEÇÃO 2: FMPCONNECT & MÓDULOS
+   ======================================== */
+.secao-sobre-projeto {
+    padding: 80px 0;
+    background: var(--color-sobre-secao-bg);
+}
+
+.grid-modulos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 40px;
+}
+
+/* Centraliza os parágrafos dentro do bloco de conteúdo do projeto (seção Sobre) */
+.conteudo-projeto .texto-padrao {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .grid-modulos {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.card-tech {
+    background: var(--color-sobre-card-bg);
+    border: 1px solid var(--color-sobre-card-border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px);
+    text-align: center;
+}
+
+.card-tech:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-sobre-card-border-hover);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.129);
+}
+
+.card-tech_header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    justify-content: center;
+}
+
+.card-tech h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-sobre-texto-principal);
+}
+
+.card-tech p {
+    font-size: 0.95rem;
+    color: var(--color-sobre-texto-secundario);
+    line-height: 1.5;
+}
+
+/* ========================================
+   SEÇÃO 4: ACESSIBILIDADE DETALHADA
+   ======================================== */
+.secao-acessibilidade-detalhes {
+    padding: 80px 0;
+}
+
+.grid-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-bottom: 80px;
+}
+
+.card-feature {
+    background: var(--color-sobre-card-bg);
+    border: 1px solid var(--color-sobre-card-border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.card-feature:hover {
+    background: var(--color-sobre-card-bg-hover);
+    border-color: var(--color-sobre-card-border-hover);
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--color-opcao-chat-background-hover);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    margin-bottom: 16px;
+}
+
+[data-theme="light"] .feature-icon {
+    color: var(--color-accent-purple);
+}
+
+.card-feature h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--color-sobre-texto-principal);
+}
+
+.card-feature p {
+    font-size: 0.9rem;
+    color: var(--color-sobre-texto-secundario);
+    line-height: 1.4;
+}
+
+/* Span 2 para cards maiores se houver espaço */
+@media (min-width: 768px) {
+    .card-feature.span-2 {
+        grid-column: span 2;
+    }
+}
+
+/* Ajustes no Wrapper de Testemunhos para espaçamento */
+.grid-testemunhos-wrapper {
+    margin-top: 60px;
+}
+
+/* Centraliza o título dentro do wrapper de depoimentos */
+.grid-testemunhos-wrapper .titulo-secao {
+    text-align: center;
+}
+
+/* ========================================
+   DEPOIMENTOS (PCDs) - GRID DE TESTEMUNHOS
+   ======================================== */
+.grid-testemunhos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center; /* centraliza os cards horizontalmente */
+    align-items: stretch;
+}
+
+@media (min-width: 768px) {
+    .grid-testemunhos {
+        gap: 28px;
+    }
+}
+
+.grid-testemunhos .card-testemunho {
+    height: 100%; /* garante que o card ocupe toda a célula do grid */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 450px; /* limita largura do card para manter o conjunto centralizado */
+    flex: 0 1 450px; /* não cresce, pode encolher, base de 450px */
+}
+
+/* ========================================
+   SEÇÃO 5: FEEDBACK (RECURSOS EXTRAS)
+   ======================================== */
+.secao-recursos {
+    padding: 60px 24px 100px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-feedback-link {
+    text-decoration: none;
+    color: white;
+    display: block;
+    max-width: 800px;
+    width: 100%;
+}
+
+.card-feedback {
+    background: linear-gradient(135deg, #1D396C 0%, #009FE3 100%);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.card-feedback:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 159, 227, 0.4);
+}
+
+.feedback-icon {
+    margin-bottom: 1rem;
+}
+
+.feedback-icon .material-icons-outlined {
+    font-size: 48px;
+    color: white;
+}
+
+.card-feedback .titulo-secao {
+    color: white;
+    font-size: 2.2rem;
+}
+
+.card-feedback .texto-padrao {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+.feedback-cta {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px 24px;
+    border-radius: 50px;
+    transition: background 0.3s;
+}
+
+.card-feedback:hover .feedback-cta {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos responsivos para dispositivos móveis */
+@media (max-width: 768px) {
+    .secao-recursos {
+        padding: 40px 16px 60px 16px;
+    }
+
+    .card-feedback {
+        padding: 24px;
+    }
+
+    .card-feedback .titulo-secao {
+        font-size: 1.8rem;
+    }
+
+    .feedback-icon .material-icons-outlined {
+        font-size: 40px;
+    }
+
+    .card-feedback .texto-padrao {
+        font-size: 0.95rem;
+    }
+
+    .feedback-cta {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Removendo estilos antigos que não são mais necessários */
+.grid-resources, .card-resource, .resource-content, .resource-visual, .tag-tech, .code-preview, .diagram-preview, .card-resource-link {
+    display: none;
+}
+
+/* ========================================
+   RODAPÉ E EQUIPE (MANTER AJUSTES BÁSICOS)
+   ======================================== */
+.secao-equipe {
+    background: transparent; /* Remove fundo sólido antigo */
+    padding: 60px 0;
+}
+
+/* Mantém as classes originais dos seus cards de equipe/testemunho funcionando
+   mas garante que elas se comportem bem no novo layout flex/grid */
+.card-membro {
+    box-sizing: border-box;
+}
+
+
+@media (min-width: 768px) {
+    .card-testemunho_avatar {
+        top: 30px;
+        left: -40px; /* No desktop, ele fica mais à esquerda */
+        width: 90px;
+        height: 90px;
+    }
+}
+
+/* ========================================
+   CARDS DE EQUIPE (DESENVOLVEDORES)
+   ======================================== */
+
+.card-membro {
+    background: var(--color-sobre-card-bg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--color-sobre-card-border);
+    border-radius: 20px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    color: var(--color-sobre-texto-principal);
+}
+
+@media (min-width: 768px) {
+    .card-membro {
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+        width: 480px;
+        min-height: 190px;
+    }
+}
+
+.card-membro:hover {
+    background: var(--color-sobre-card-bg-hover);
+    border-color: var(--color-sobre-card-border-hover);
+    transform: translateY(-8px);
+}
+
+/* LinkedIn Flutuante */
+.card-membro_linkedin {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    color: var(--color-sobre-texto-secundario);
+    transition: all 0.2s ease;
+}
+
+.card-membro_linkedin:hover {
+    color: var(--color-sobre-texto-principal);
+    background: var(--color-opcao-chat-background-hover);
+}
+
+/* Foto/Avatar */
+.card-membro_foto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--color-sobre-secao-bg);
+    border: 3px solid var(--color-accent-pink, #009FE3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* Quando houver uma imagem real dentro do círculo */
+.card-membro_foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+}
+
+.card-membro_avatar {
+    width: 60px;
+    height: 60px;
+    color: var(--color-sobre-texto-principal);
+}
+
+/* Informações */
+.card-membro_info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.card-membro_nome {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-sobre-texto-principal);
+}
+
+/* ========================================
+   RODAPÉ
+   ======================================== */
+.rodape-fmp {
+    width: 100%;
+    background: var(--color-primary-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+}
+
+.logo-fmp {
+    max-width: 140px;
+    height: auto;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+.logo-fmp:hover {
+    opacity: 1;
+}
+
+/* Make resource cards (wrapped anchors) behave and look like blocks */
+.card-resource-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card-resource-link:hover,
+.card-resource-link:focus {
+    text-decoration: none;
+}
+
+.carrossel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 4 / 5;
+    position: relative;
+}
+
+.carrossel-botao {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.carrossel-botao:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carrossel-botao.prev {
+    left: 10px;
+}
+
+.carrossel-botao.next {
+    right: 10px;
+}
+
+.carrossel-horizontal {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    height: 100%;
+}
+
+.carrossel-horizontal::-webkit-scrollbar {
+    display: none;
+}
+
+.lista-fotos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.lista-fotos li {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    height: 100%;
+}
+
+.lista-fotos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}

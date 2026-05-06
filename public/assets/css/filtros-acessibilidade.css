@@ -1,0 +1,117 @@
+
+body.filtro-protanopia,
+body.filtro-deuteranopia,
+body.filtro-tritanopia,
+body.alto-contraste {
+    isolation: isolate;
+    contain: layout style;
+}
+body.filtros-ativos * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition-duration: 0.15s !important;
+}
+body.filtros-ativos button:hover,
+body.filtros-ativos a:hover,
+body.filtros-ativos button:focus,
+body.filtros-ativos a:focus {
+    outline: 2px solid var(--cor-principal) !important;
+    outline-offset: 2px;
+}
+.secao-patrocinadores,
+.secao-patrocinadores *,
+.marquee,
+.marquee *,
+.marquee_track,
+.marquee_track * {
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+.filtro-protanopia {
+    filter: url('#protanopia-filter');
+    -webkit-filter: url('#protanopia-filter');
+    will-change: filter;
+    transform: translateZ(0); 
+}
+.filtro-deuteranopia {
+    filter: url('#deuteranopia-filter');
+    -webkit-filter: url('#deuteranopia-filter');
+    will-change: filter;
+    transform: translateZ(0); 
+}
+.filtro-tritanopia {
+    filter: url('#tritanopia-filter');
+    -webkit-filter: url('#tritanopia-filter');
+    will-change: filter;
+    transform: translateZ(0); 
+}
+.alto-contraste {
+    filter: contrast(1.25) brightness(1.08);
+    -webkit-filter: contrast(1.25) brightness(1.08);
+    will-change: filter;
+    transform: translateZ(0); 
+}
+@supports not (filter: url('#protanopia-filter')) {
+    .filtro-protanopia {
+        filter: grayscale(0.4) sepia(0.25) hue-rotate(-15deg) saturate(1.1);
+    }
+    
+    .filtro-deuteranopia {
+        filter: grayscale(0.35) sepia(0.3) hue-rotate(20deg) saturate(0.9);
+    }
+    
+    .filtro-tritanopia {
+        filter: grayscale(0.25) sepia(0.2) hue-rotate(-30deg) saturate(1.15);
+    }
+}
+body.filtros-ativos *[style*="blur"],
+body.filtros-ativos .blur {
+    filter: none !important;
+    backdrop-filter: none !important;
+}
+body.filtros-ativos *[class*="animate"],
+body.filtros-ativos .animation {
+    animation: none !important;
+}
+body.filtros-ativos .spinner,
+body.filtros-ativos .loading,
+body.filtros-ativos [aria-busy="true"] {
+    animation: revert !important;
+}
+
+/* ========================================
+   Filtros SVG (precisam ser injetados no HTML)
+   ======================================== */
+
+/* Os filtros SVG devem ser adicionados ao HTML como:
+<svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+    <defs>
+        <!-- Protanopia -->
+        <filter id="protanopia-filter">
+            <feColorMatrix type="matrix" values="
+                0.567, 0.433, 0,     0, 0
+                0.558, 0.442, 0,     0, 0
+                0,     0.242, 0.758, 0, 0
+                0,     0,     0,     1, 0"/>
+        </filter>
+        
+        <!-- Deuteranopia -->
+        <filter id="deuteranopia-filter">
+            <feColorMatrix type="matrix" values="
+                0.625, 0.375, 0,   0, 0
+                0.7,   0.3,   0,   0, 0
+                0,     0.3,   0.7, 0, 0
+                0,     0,     0,   1, 0"/>
+        </filter>
+        
+        <!-- Tritanopia -->
+        <filter id="tritanopia-filter">
+            <feColorMatrix type="matrix" values="
+                0.95, 0.05,  0,     0, 0
+                0,    0.433, 0.567, 0, 0
+                0,    0.475, 0.525, 0, 0
+                0,    0,     0,     1, 0"/>
+        </filter>
+    </defs>
+</svg>
+*/

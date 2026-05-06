@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FMPConnect - Seu assistente virtual inteligente">
+    <meta name="theme-color" content="#6B21A8">
+    <title>FMPConnect - Assistente Virtual Inteligente</title>
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('Fmpconnect-acessibilidade');
+                if (saved) {
+                    const estado = JSON.parse(saved);
+
+                    // Aplica tema IMEDIATAMENTE
+                    if (estado.tema === 'claro') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    }
+
+                    // Aplica escala de fonte
+                    if (estado.scaleFactor && estado.scaleFactor !== 1) {
+                        document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
+                    }
+
+                    // Prepara classes de filtro no MAIN (não no body para evitar quebrar position:fixed)
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const mains = document.querySelectorAll('main');
+
+                        if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
+                            mains.forEach(function (main) {
+                                main.classList.add('filtro-' + estado.filtroDaltonismo);
+                            });
+                            document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
+                        }
+
+                        if (estado.contraste) {
+                            mains.forEach(function (main) {
+                                main.classList.add('alto-contraste');
+                            });
+                            document.body.setAttribute('data-alto-contraste', 'true');
+                        }
+                    });
+                }
+            } catch (e) {
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/componentes.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/pagina-inicial.css">
+    <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/robo-animacao.css">
+</head>
+
+<body>
+    <main class="pagina-inicial" id="conteudoPrincipal">
+
+        <header class="cabecalho">
+             <a href="boasvindas.html" aria-label="Voltar para a página de boas vindas">
+                <button class="botao-voltar" type="button">
+                    <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </a>
+
+            <h1 class="logo-fmpconnect">
+                FMPConnect
+
+            </h1>
+
+            <a href="./admin/login.html" aria-label="Área restrita — acesso admin">
+                <button class="botao-acessibilidade" type="button" title="Área Restrita" style="opacity:0.35;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.35'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </a>
+
+            <button class="botao-acessibilidade" aria-label="Opções de acessibilidade" type="button">
+
+                <svg width="1000" height="1000" viewBox="320 330 360 360" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path
+                        d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                </svg>
+
+            </button>
+        </header>
+    
+        <div class="Fmpconnect_mascote Fmpconnect_mascote">
+            <img src="./assets/images/fmpzinhoo.svg" alt="Robô mascote FMPConnect">
+        </div>
+        
+        <section class="secao-opcoes">
+            
+            <a href="./chat.html" class="opcao-chat opcao-chat--texto">
+                <div class="opcao-chat_icone">
+                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16.2917 36.4167H15.3333C7.66668 36.4167 3.83334 34.5 3.83334 24.9167V15.3334C3.83334 7.66671 7.66668 3.83337 15.3333 3.83337H30.6667C38.3333 3.83337 42.1667 7.66671 42.1667 15.3334V24.9167C42.1667 32.5834 38.3333 36.4167 30.6667 36.4167H29.7083C29.1142 36.4167 28.5392 36.7042 28.175 37.1834L25.3 41.0167C24.035 42.7034 21.965 42.7034 20.7 41.0167L17.825 37.1834C17.5183 36.7617 16.8092 36.4167 16.2917 36.4167Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M13.4167 15.3334H32.5834" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13.4167 24.9166H24.9167" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h2 class="opcao-chat_titulo">Converse por texto com o FMPConnect</h2>
+            </a>
+
+            <a href="feedback.html" class="opcao-chat opcao-feedback">
+                <div class="opcao-chat_icone">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="46" viewBox="0 0 48 46" fill="none">
+                        <path d="M22.7076 1.40036C23.1342 0.533213 24.3669 0.533213 24.7935 1.40036L30.9999 14.0152C31.1693 14.3596 31.4968 14.5982 31.8756 14.6535L45.7535 16.6764C46.7074 16.8154 47.0883 17.9914 46.398 18.6664L36.3559 28.4857C36.0818 28.7537 35.9567 29.1399 36.0214 29.5184L38.3921 43.3835C38.555 44.3366 37.5578 45.0634 36.7045 44.6134L24.2918 38.0672C23.9529 37.8885 23.5482 37.8885 23.2093 38.0672L10.7966 44.6134C9.94333 45.0634 8.94608 44.3366 9.10904 43.3835L11.4797 29.5184C11.5444 29.1399 11.4193 28.7537 11.1452 28.4857L1.10305 18.6664C0.412754 17.9914 0.793669 16.8154 1.74764 16.6764L15.6255 14.6535C16.0043 14.5982 16.3318 14.3596 16.5012 14.0152L22.7076 1.40036Z" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <h2 class="opcao-chat_titulo">Deixe seu Feedback</h2>
+            </a>
+
+        </section>
+
+        <section class="secao-duvidas">
+            <h2 class="secao-duvidas_titulo">Dúvidas frequentes</h2>
+            <div class="container-carrossel">
+                <button class="carrossel-seta carrossel-seta--esquerda" aria-label="Voltar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <div class="carrossel-duvidas" id="carrosselDuvidas">
+                    <button class="duvida-btn" type="button" data-question="Como sei qual curso escolher?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M20 21v-1c0-2.761-4.03-5-8-5s-8 2.239-8 5v1" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Como sei qual curso escolher?</span>
+                    </button>
+
+                    <button class="duvida-btn" type="button" data-question="Onde fica a instituição?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1 1 18 0z" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Onde fica a instituição?</span>
+                    </button>
+
+                    <button class="duvida-btn" type="button" data-question="Como faço para me inscrever?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 2h6a2 2 0 0 1 2 2v2" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <rect x="3" y="6" width="18" height="14" rx="2" stroke="currentColor"
+                                    stroke-width="1.5" />
+                                <path d="M8 11h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M8 15h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Como me inscrever?</span>
+                    </button>
+
+                    <button class="duvida-btn" type="button" data-question="Tem o curso de ADS?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="16 18 22 12 16 6" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                                <polyline points="8 6 2 12 8 18" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Tem ADS?</span>
+                    </button>
+
+                    <button class="duvida-btn" type="button" data-question="Quanto tempo dura?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Quanto tempo dura?</span>
+                    </button>
+
+                    <button class="duvida-btn" type="button" data-question="Preciso de computador?">
+                        <div class="duvida-btn_icone" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="5" width="18" height="12" rx="2" stroke="currentColor"
+                                    stroke-width="1.5" />
+                                <path d="M2 19h20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="duvida-btn_texto">Preciso de computador?</span>
+                    </button>
+                </div>
+
+                <button class="carrossel-seta carrossel-seta--direita" aria-label="Avançar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="carrossel-indicadores" id="carrosselIndicadores">
+                <span class="indicador ativo"></span>
+                <span class="indicador"></span>
+                <span class="indicador"></span>
+            </div>
+        </section>
+
+        <section class="secao-saiba-mais">
+            <a href="./sobre.html" class="botao-saiba-mais">
+                Saiba mais sobre o projeto do FMPConnect
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </a>
+        </section>
+
+        <footer class="secao-redes-sociais">
+            <a href=https://www.instagram.com/faculdademunicipaldepalhoca/" target="_blank" rel="noopener noreferrer"
+                class="rede-social-link" aria-label="Instagram">
+                <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_22_195)">
+                        <path
+                            d="M10.5 1.89082C13.3055 1.89082 13.6377 1.90312 14.741 1.95234C15.7664 1.99746 16.3201 2.16973 16.6893 2.31328C17.1773 2.50195 17.5301 2.73164 17.8951 3.09668C18.2643 3.46582 18.4898 3.81445 18.6785 4.30254C18.8221 4.67168 18.9943 5.22949 19.0395 6.25078C19.0887 7.3582 19.101 7.69043 19.101 10.4918C19.101 13.2973 19.0887 13.6295 19.0395 14.7328C18.9943 15.7582 18.8221 16.3119 18.6785 16.6811C18.4898 17.1691 18.2602 17.5219 17.8951 17.8869C17.526 18.2561 17.1773 18.4816 16.6893 18.6703C16.3201 18.8139 15.7623 18.9861 14.741 19.0312C13.6336 19.0805 13.3014 19.0928 10.5 19.0928C7.69453 19.0928 7.36231 19.0805 6.25899 19.0312C5.23359 18.9861 4.67988 18.8139 4.31074 18.6703C3.82266 18.4816 3.46992 18.252 3.10488 17.8869C2.73574 17.5178 2.51016 17.1691 2.32148 16.6811C2.17793 16.3119 2.00566 15.7541 1.96055 14.7328C1.91133 13.6254 1.89902 13.2932 1.89902 10.4918C1.89902 7.68633 1.91133 7.3541 1.96055 6.25078C2.00566 5.22539 2.17793 4.67168 2.32148 4.30254C2.51016 3.81445 2.73984 3.46172 3.10488 3.09668C3.47402 2.72754 3.82266 2.50195 4.31074 2.31328C4.67988 2.16973 5.2377 1.99746 6.25899 1.95234C7.36231 1.90312 7.69453 1.89082 10.5 1.89082ZM10.5 0C7.64942 0 7.29258 0.0123047 6.17285 0.0615234C5.05723 0.110742 4.29024 0.291211 3.62578 0.549609C2.93262 0.820312 2.34609 1.17715 1.76367 1.76367C1.17715 2.34609 0.820313 2.93262 0.549609 3.62168C0.291211 4.29023 0.110742 5.05312 0.0615234 6.16875C0.0123047 7.29258 0 7.64941 0 10.5C0 13.3506 0.0123047 13.7074 0.0615234 14.8271C0.110742 15.9428 0.291211 16.7098 0.549609 17.3742C0.820313 18.0674 1.17715 18.6539 1.76367 19.2363C2.34609 19.8188 2.93262 20.1797 3.62168 20.4463C4.29024 20.7047 5.05313 20.8852 6.16875 20.9344C7.28848 20.9836 7.64531 20.9959 10.4959 20.9959C13.3465 20.9959 13.7033 20.9836 14.823 20.9344C15.9387 20.8852 16.7057 20.7047 17.3701 20.4463C18.0592 20.1797 18.6457 19.8188 19.2281 19.2363C19.8105 18.6539 20.1715 18.0674 20.4381 17.3783C20.6965 16.7098 20.877 15.9469 20.9262 14.8313C20.9754 13.7115 20.9877 13.3547 20.9877 10.5041C20.9877 7.65352 20.9754 7.29668 20.9262 6.17695C20.877 5.06133 20.6965 4.29434 20.4381 3.62988C20.1797 2.93262 19.8229 2.34609 19.2363 1.76367C18.6539 1.18125 18.0674 0.820312 17.3783 0.553711C16.7098 0.295312 15.9469 0.114844 14.8313 0.065625C13.7074 0.0123047 13.3506 0 10.5 0Z"
+                            fill="currentColor" />
+                        <path
+                            d="M10.5 5.10645C7.52227 5.10645 5.10645 7.52227 5.10645 10.5C5.10645 13.4777 7.52227 15.8936 10.5 15.8936C13.4777 15.8936 15.8936 13.4777 15.8936 10.5C15.8936 7.52227 13.4777 5.10645 10.5 5.10645ZM10.5 13.9986C8.56816 13.9986 7.00137 12.4318 7.00137 10.5C7.00137 8.56816 8.56816 7.00137 10.5 7.00137C12.4318 7.00137 13.9986 8.56816 13.9986 10.5C13.9986 12.4318 12.4318 13.9986 10.5 13.9986Z"
+                            fill="currentColor" />
+                        <path
+                            d="M17.366 4.89321C17.366 5.59048 16.8 6.1524 16.1068 6.1524C15.4096 6.1524 14.8477 5.58638 14.8477 4.89321C14.8477 4.19595 15.4137 3.63403 16.1068 3.63403C16.8 3.63403 17.366 4.20005 17.366 4.89321Z"
+                            fill="currentColor" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_22_195">
+                            <rect width="21" height="21" fill="currentColor" />
+                        </clipPath>
+                    </defs>
+                </svg>
+
+            </a>
+            <a href="https://www.facebook.com/people/FMP-Faculdade-Municipal-de-Palho%C3%A7a/61552586186312/#" target="_blank" rel="noopener noreferrer"
+                class="rede-social-link" aria-label="Facebook">
+                <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_22_194)">
+                        <path
+                            d="M10.5 0C4.70106 0 0 4.70106 0 10.5C0 15.4241 3.39024 19.556 7.96362 20.6909V13.7088H5.79852V10.5H7.96362V9.11736C7.96362 5.54358 9.58104 3.8871 13.0897 3.8871C13.755 3.8871 14.9029 4.01772 15.3724 4.14792V7.05642C15.1246 7.03038 14.6941 7.01736 14.1595 7.01736C12.4379 7.01736 11.7726 7.66962 11.7726 9.36516V10.5H15.2023L14.6131 13.7088H11.7726V20.9231C16.9718 20.2952 21.0004 15.8684 21.0004 10.5C21 4.70106 16.2989 0 10.5 0Z"
+                            fill="currentColor" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_22_194">
+                            <rect width="21" height="21" fill="currentColor" />
+                        </clipPath>
+                    </defs>
+                </svg>
+
+            </a>
+            <a href="https://fmpsc.edu.br/" target="_blank" rel="noopener noreferrer"
+                class="rede-social-link" aria-label="Site">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                    <path d="M20.977 10.8391C20.9839 11.3492 20.9196 11.8592 20.8323 12.3601C20.5428 14.0167 19.819 15.6342 18.7805 16.9484C17.8155 16.5693 16.823 16.2408 15.8074 16.0087C15.881 15.6158 16.0073 15.2298 16.0946 14.8369C16.1842 14.4371 16.2693 14.0075 16.3313 13.6031C16.4714 12.6887 16.5289 11.7627 16.5656 10.8391H20.977Z" fill="currentColor"/>
+                    <path d="M21 10.1498H16.5427C16.5427 10.1153 16.5656 10.0855 16.5633 10.0487C16.5082 8.70462 16.3703 7.37201 16.0717 6.06009C15.9912 5.70626 15.8764 5.36162 15.8074 5.00319C16.8207 4.76424 17.8109 4.44028 18.7782 4.06348C19.95 5.54313 20.7128 7.3812 20.9265 9.26753C20.9609 9.56162 20.9586 9.8603 20.9977 10.1498H21Z" fill="currentColor"/>
+                    <path d="M4.43433 10.8391C4.4642 11.0643 4.44352 11.2917 4.4573 11.5169C4.51934 12.5853 4.6526 13.6583 4.87776 14.7037C4.96967 15.131 5.07536 15.5653 5.21551 15.9742L5.17645 16.0041C4.1724 16.2568 3.17984 16.5624 2.21945 16.9484C0.859273 15.2252 0.0666035 13.0425 0.0229492 10.8391H4.43433Z" fill="currentColor"/>
+                    <path d="M4.45733 10.1498H0C0.0344639 9.89251 0.0413567 9.6214 0.0689278 9.35717C0.273414 7.44558 1.02702 5.56615 2.21718 4.06812C2.7709 4.26111 3.31773 4.47938 3.87834 4.6517C4.27123 4.77348 4.76061 4.85159 5.12823 4.98485C5.49584 5.11812 5.20635 5.00783 5.20864 5.0354C4.98348 5.77293 4.81116 6.52884 4.68939 7.29164C4.54464 8.20608 4.46193 9.1458 4.43206 10.0694C4.40219 10.9931 4.44814 10.1223 4.45503 10.1498H4.45733Z" fill="currentColor"/>
+                    <path d="M5.14664 10.1499C5.14434 9.82598 5.14664 9.49742 5.16961 9.17346C5.19259 8.8495 5.24084 8.36241 5.28679 7.98101C5.40397 7.0344 5.61305 6.06941 5.89565 5.16187C6.25408 5.23309 6.6148 5.31121 6.97782 5.36635C9.67979 5.78451 12.4415 5.72018 15.1182 5.16416C15.5915 6.77707 15.8488 8.46121 15.8534 10.1499H5.14664Z" fill="currentColor"/>
+                    <path d="M13.0894 1.311C13.7281 2.00717 14.2864 2.98135 14.6472 3.85443C14.7138 4.01297 14.8402 4.29557 14.8792 4.45181C14.9183 4.60804 14.8999 4.48857 14.8677 4.50925C14.8356 4.52992 14.2175 4.63332 14.1141 4.6517C11.8579 5.0308 9.47069 5.03999 7.20756 4.69995C4.94443 4.3599 6.48152 4.5575 6.1139 4.51844C6.45854 3.52128 6.94333 2.52642 7.59815 1.6947C9.1697 -0.306509 11.2858 -0.660338 13.0894 1.3087V1.311Z" fill="currentColor"/>
+                    <path d="M13.0504 0.316162C15.0722 0.812442 16.9379 1.94056 18.3118 3.49833C17.4273 3.84986 16.5036 4.12557 15.5777 4.35074C15.3273 3.67065 15.0424 3.00435 14.6816 2.37251C14.2428 1.60281 13.7121 0.906644 13.0504 0.316162Z" fill="currentColor"/>
+                    <path d="M7.94966 0.316162C7.71531 0.545921 7.47636 0.768788 7.26038 1.01693C6.42865 1.98651 5.86574 3.15599 5.42231 4.35074C4.49408 4.12557 3.57504 3.84756 2.68817 3.49833C4.06213 1.94056 5.92778 0.817037 7.94966 0.316162Z" fill="currentColor"/>
+                    <path d="M15.8534 10.8391C15.8534 12.5324 15.5892 14.2258 15.1182 15.8479C14.6632 15.7606 14.206 15.6641 13.7488 15.5974C11.3179 15.2482 8.82046 15.3079 6.40569 15.7399C6.23566 15.7697 6.06794 15.8203 5.89562 15.8502C5.6291 14.984 5.43151 14.0925 5.31203 13.1918C5.20864 12.413 5.14431 11.6249 5.1466 10.8414H15.8534V10.8391Z" fill="currentColor"/>
+                    <path d="M14.8884 16.5141C14.4036 17.8214 13.7166 19.1977 12.6482 20.1213C11.2651 21.3161 9.66597 21.2977 8.3058 20.0777C7.26269 19.1426 6.59868 17.8214 6.11389 16.5279C6.11389 16.5026 6.42177 16.4406 6.47461 16.4314C8.85492 15.9811 11.4443 15.9512 13.8361 16.3165C14.1876 16.3694 14.5415 16.4383 14.8884 16.5164V16.5141Z" fill="currentColor"/>
+                    <path d="M18.3118 17.5021C17.8156 18.0834 17.2205 18.6142 16.5955 19.0599C15.5318 19.8181 14.3209 20.3764 13.0504 20.6958C13.6087 20.188 14.0843 19.6113 14.4841 18.9703C14.9321 18.2535 15.2836 17.4769 15.557 16.6773C15.6168 16.6382 16.5818 16.9186 16.7265 16.9622C17.2618 17.1207 17.788 17.3091 18.3118 17.5021Z" fill="currentColor"/>
+                    <path d="M5.44299 16.6773C5.9071 18.0214 6.59178 19.3127 7.58205 20.3397L7.97264 20.6958C5.93927 20.2087 4.07592 19.0691 2.68817 17.5136C3.21202 17.3023 3.74966 17.1162 4.29189 16.9576C4.83412 16.7991 5.39703 16.6383 5.44299 16.6773Z" fill="currentColor"/>
+                </svg>
+
+            </a>
+            <a href="https://www.linkedin.com/school/faculdademunicipal/" target="_blank"
+                rel="noopener noreferrer" class="rede-social-link" aria-label="LinkedIn">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_22_196)">
+                        <path
+                            d="M20.3715 0H1.62422C0.726172 0 0 0.708984 0 1.58555V20.4102C0 21.2867 0.726172 22 1.62422 22H20.3715C21.2695 22 22 21.2867 22 20.4145V1.58555C22 0.708984 21.2695 0 20.3715 0ZM6.52695 18.7473H3.26133V8.2457H6.52695V18.7473ZM4.89414 6.81484C3.8457 6.81484 2.99922 5.96836 2.99922 4.92422C2.99922 3.88008 3.8457 3.03359 4.89414 3.03359C5.93828 3.03359 6.78477 3.88008 6.78477 4.92422C6.78477 5.96406 5.93828 6.81484 4.89414 6.81484ZM18.7473 18.7473H15.4859V13.6426C15.4859 12.4266 15.4645 10.8582 13.7887 10.8582C12.0914 10.8582 11.8336 12.1859 11.8336 13.5566V18.7473H8.57656V8.2457H11.7047V9.68086H11.7477C12.1816 8.85586 13.2473 7.98359 14.8328 7.98359C18.1371 7.98359 18.7473 10.1578 18.7473 12.9852V18.7473Z"
+                            fill="currentColor" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_22_196">
+                            <rect width="22" height="22" fill="currentColor" />
+                        </clipPath>
+                    </defs>
+                </svg>
+            </a>
+        </footer>
+
+    </main>
+
+    <script src="./assets/js/acessibilidade-global.js"></script>
+    <script src="./assets/js/pagina-inicial.js"></script>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+</body>
+
+</html>

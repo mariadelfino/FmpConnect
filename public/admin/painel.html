@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FMPConnect — Painel Admin</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ── LAYOUT ───────────────────────────────── -->
+<div class="painel-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Menu do painel">
+        <div class="sidebar-logo">
+            <div class="login-logo">
+                <span class="logo-text">FMPConnect</span>
+                <span class="logo-badge">Admin</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <span class="nav-grupo-titulo">Principal</span>
+            <button class="nav-item ativo" data-secao="dashboard" aria-current="page">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Dashboard
+            </button>
+
+            <span class="nav-grupo-titulo" style="margin-top:1rem">Conteúdo</span>
+            <button class="nav-item" data-secao="conhecimento">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 7h8M8 11h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                Base de Conhecimento
+            </button>
+
+            <span class="nav-grupo-titulo" style="margin-top:1rem" id="nav-titulo-usuarios">Configurações</span>
+            <button class="nav-item" data-secao="usuarios" id="nav-usuarios">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Usuários
+            </button>
+
+            <button class="nav-item" data-secao="minha-conta">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Minha Conta
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-usuario">
+                <div class="usuario-avatar" id="avatar-sidebar">A</div>
+                <div class="usuario-info">
+                    <div class="usuario-nome" id="nome-sidebar">Carregando...</div>
+                    <div class="usuario-papel" id="papel-sidebar">—</div>
+                </div>
+            </div>
+            <button class="btn-sair" id="btn-sair">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <polyline points="16 17 21 12 16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="21" y1="12" x2="9" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Sair
+            </button>
+        </div>
+    </aside>
+
+    <!-- Topbar -->
+    <header class="topbar" role="banner">
+        <div>
+            <div class="topbar-titulo" id="topbar-titulo">Dashboard</div>
+            <div class="topbar-subtitulo" id="topbar-subtitulo">Visão geral do sistema</div>
+        </div>
+        <div class="topbar-acoes" id="topbar-acoes"></div>
+    </header>
+
+    <!-- Conteúdo -->
+    <main class="conteudo-principal" role="main" id="conteudo-principal">
+
+        <!-- ── DASHBOARD ─────────────────── -->
+        <section class="secao ativa" id="secao-dashboard">
+            <div class="stats-grid" id="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icone azul">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-valor" id="stat-total">—</div>
+                        <div class="stat-label">Total de itens</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icone verde">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-valor" id="stat-ativos">—</div>
+                        <div class="stat-label">Itens ativos</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icone amarelo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-valor" id="stat-categorias">—</div>
+                        <div class="stat-label">Categorias</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icone roxo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-valor" id="stat-usuarios">—</div>
+                        <div class="stat-label">Usuários ativos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabela-card">
+                <div class="tabela-header">
+                    <div class="tabela-titulo">Itens recentes na base de conhecimento</div>
+                    <button class="btn btn-primario" onclick="navegarPara('conhecimento')">
+                        Ver todos
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="tabela-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Categoria</th>
+                                <th>Status</th>
+                                <th>Atualizado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-recentes-body">
+                            <tr><td colspan="4"><div class="estado-vazio"><p>Carregando...</p></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── BASE DE CONHECIMENTO ──────── -->
+        <section class="secao" id="secao-conhecimento">
+            <div class="tabela-card">
+                <div class="tabela-header">
+                    <div class="tabela-titulo">Base de Conhecimento</div>
+                    <div class="tabela-filtros">
+                        <input type="search" class="input-busca" id="busca-conhecimento" placeholder="Buscar..." aria-label="Buscar itens">
+                        <select class="select-filtro" id="filtro-categoria" aria-label="Filtrar por categoria">
+                            <option value="">Todas as categorias</option>
+                        </select>
+                        <select class="select-filtro" id="filtro-status" aria-label="Filtrar por status">
+                            <option value="">Todos os status</option>
+                            <option value="1">Ativos</option>
+                            <option value="0">Inativos</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primario" id="btn-novo-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Novo Item
+                    </button>
+                </div>
+                <div class="tabela-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Categoria</th>
+                                <th>Conteúdo</th>
+                                <th>Status</th>
+                                <th>Atualizado</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-conhecimento-body">
+                            <tr><td colspan="6"><div class="estado-vazio"><p>Carregando...</p></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── USUÁRIOS ──────────────────── -->
+        <section class="secao" id="secao-usuarios">
+            <div class="tabela-card">
+                <div class="tabela-header">
+                    <div class="tabela-titulo">Gerenciar Usuários</div>
+                    <button class="btn btn-primario" id="btn-novo-usuario">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Novo Usuário
+                    </button>
+                </div>
+                <div class="tabela-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Usuário</th>
+                                <th>E-mail</th>
+                                <th>Papel</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-usuarios-body">
+                            <tr><td colspan="6"><div class="estado-vazio"><p>Carregando...</p></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── MINHA CONTA ───────────────── -->
+        <section class="secao" id="secao-minha-conta">
+            <div class="tabela-card" style="max-width:480px">
+                <div class="tabela-header">
+                    <div class="tabela-titulo">Alterar Senha</div>
+                </div>
+                <form id="form-senha" class="modal-form" style="padding:1.25rem" novalidate>
+                    <div class="campo-grupo">
+                        <label for="senha-atual" class="campo-label">Senha Atual</label>
+                        <input type="password" id="senha-atual" class="campo-input" placeholder="••••••••" required>
+                    </div>
+                    <div class="campo-grupo">
+                        <label for="senha-nova" class="campo-label">Nova Senha</label>
+                        <input type="password" id="senha-nova" class="campo-input" placeholder="Mínimo 6 caracteres" required>
+                    </div>
+                    <div class="campo-grupo">
+                        <label for="senha-confirmar" class="campo-label">Confirmar Nova Senha</label>
+                        <input type="password" id="senha-confirmar" class="campo-input" placeholder="Repita a nova senha" required>
+                    </div>
+                    <div id="msg-senha" class="mensagem-erro" hidden></div>
+                    <div class="modal-acoes">
+                        <button type="submit" class="btn btn-primario">Salvar Nova Senha</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- ── MODAL: ITEM DE CONHECIMENTO ──────────── -->
+<div class="modal-backdrop" id="modal-item-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-item-titulo">
+    <div class="modal">
+        <h2 class="modal-titulo" id="modal-item-titulo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Novo Item
+        </h2>
+        <form id="form-item" class="modal-form" novalidate>
+            <input type="hidden" id="item-id">
+            <div class="campo-grupo">
+                <label for="item-categoria" class="campo-label">Categoria *</label>
+                <input type="text" id="item-categoria" class="campo-input" placeholder="Ex: Cursos, Calendário, Eventos…" list="lista-categorias" required>
+                <datalist id="lista-categorias">
+                    <option value="Cursos">
+                    <option value="Calendário Acadêmico">
+                    <option value="Eventos">
+                    <option value="Avisos">
+                    <option value="Biblioteca">
+                    <option value="Programas">
+                    <option value="Contatos">
+                    <option value="Editais">
+                    <option value="Geral">
+                </datalist>
+            </div>
+            <div class="campo-grupo">
+                <label for="item-titulo" class="campo-label">Título *</label>
+                <input type="text" id="item-titulo" class="campo-input" placeholder="Título curto e descritivo" required>
+            </div>
+            <div class="campo-grupo">
+                <label for="item-conteudo" class="campo-label">Conteúdo *</label>
+                <textarea id="item-conteudo" class="campo-input" placeholder="Informação completa que o chatbot usará para responder…" required></textarea>
+                <small style="color:var(--admin-text-muted);font-size:0.75rem">Este conteúdo será enviado diretamente ao chatbot. Seja claro e completo.</small>
+            </div>
+            <div id="msg-item" class="mensagem-erro" hidden></div>
+            <div class="modal-acoes">
+                <button type="button" class="btn btn-secundario" id="btn-cancelar-item">Cancelar</button>
+                <button type="submit" class="btn btn-primario" id="btn-salvar-item">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ── MODAL: USUÁRIO ───────────────────────── -->
+<div class="modal-backdrop" id="modal-usuario-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-usuario-titulo">
+    <div class="modal">
+        <h2 class="modal-titulo" id="modal-usuario-titulo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Novo Usuário
+        </h2>
+        <form id="form-usuario" class="modal-form" novalidate>
+            <input type="hidden" id="usuario-id">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div class="campo-grupo">
+                    <label for="usuario-nome" class="campo-label">Nome Completo *</label>
+                    <input type="text" id="usuario-nome" class="campo-input" placeholder="Nome do usuário" required>
+                </div>
+                <div class="campo-grupo">
+                    <label for="usuario-username" class="campo-label">Usuário (login) *</label>
+                    <input type="text" id="usuario-username" class="campo-input" placeholder="sem espaços" required>
+                </div>
+            </div>
+            <div class="campo-grupo">
+                <label for="usuario-email" class="campo-label">E-mail *</label>
+                <input type="email" id="usuario-email" class="campo-input" placeholder="email@fmpsc.edu.br" required>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div class="campo-grupo">
+                    <label for="usuario-papel" class="campo-label">Papel *</label>
+                    <select id="usuario-papel" class="campo-input select-filtro" style="width:100%" required>
+                        <option value="editor">Editor (Professor / Secretaria)</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                <div class="campo-grupo">
+                    <label for="usuario-ativo" class="campo-label">Status</label>
+                    <select id="usuario-ativo" class="campo-input select-filtro" style="width:100%">
+                        <option value="1">Ativo</option>
+                        <option value="0">Inativo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="campo-grupo" id="grupo-senha">
+                <label for="usuario-senha" class="campo-label">Senha *</label>
+                <input type="password" id="usuario-senha" class="campo-input" placeholder="Mínimo 6 caracteres">
+                <small id="dica-senha" style="color:var(--admin-text-muted);font-size:0.75rem">Deixe em branco para manter a senha atual.</small>
+            </div>
+            <div id="msg-usuario" class="mensagem-erro" hidden></div>
+            <div class="modal-acoes">
+                <button type="button" class="btn btn-secundario" id="btn-cancelar-usuario">Cancelar</button>
+                <button type="submit" class="btn btn-primario" id="btn-salvar-usuario">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+<script>
+const API = window.location.origin;
+let token = localStorage.getItem('fmpconnect_admin_token');
+let usuarioAtual = JSON.parse(localStorage.getItem('fmpconnect_admin_user') || '{}');
+let todosItens = [];
+let todosUsuarios = [];
+
+// ── Auth guard ─────────────────────────────
+async function verificarAuth() {
+    if (!token) { redirecionarLogin(); return; }
+    try {
+        const r = await fetch(API + '/admin/verify', { headers: authHeader() });
+        if (!r.ok) redirecionarLogin();
+        else {
+            const data = await r.json();
+            usuarioAtual = data.user;
+            aplicarPermissoes();
+            carregarDashboard();
+        }
+    } catch { redirecionarLogin(); }
+}
+
+function redirecionarLogin() {
+    localStorage.removeItem('fmpconnect_admin_token');
+    localStorage.removeItem('fmpconnect_admin_user');
+    window.location.href = 'login.html';
+}
+
+function authHeader() {
+    return { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' };
+}
+
+function aplicarPermissoes() {
+    const nome = usuarioAtual.name || usuarioAtual.username || 'Usuário';
+    document.getElementById('nome-sidebar').textContent = nome;
+    document.getElementById('papel-sidebar').textContent =
+        usuarioAtual.role === 'admin' ? 'Administrador' : 'Editor';
+    document.getElementById('avatar-sidebar').textContent = nome.charAt(0).toUpperCase();
+
+    if (usuarioAtual.role !== 'admin') {
+        const navUsuarios = document.getElementById('nav-usuarios');
+        if (navUsuarios) navUsuarios.style.display = 'none';
+        const navTitulo = document.getElementById('nav-titulo-usuarios');
+        // Renomeia o grupo
+    }
+}
+
+// ── Navegação ──────────────────────────────
+function navegarPara(secao) {
+    document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
+    document.querySelectorAll('.nav-item').forEach(n => {
+        n.classList.remove('ativo');
+        n.removeAttribute('aria-current');
+    });
+
+    const secaoEl = document.getElementById('secao-' + secao);
+    if (secaoEl) secaoEl.classList.add('ativa');
+
+    const navEl = document.querySelector('[data-secao="' + secao + '"]');
+    if (navEl) { navEl.classList.add('ativo'); navEl.setAttribute('aria-current', 'page'); }
+
+    const titulos = {
+        dashboard: ['Dashboard', 'Visão geral do sistema'],
+        conhecimento: ['Base de Conhecimento', 'Gerencie as informações do chatbot'],
+        usuarios: ['Usuários', 'Gerencie o acesso ao painel'],
+        'minha-conta': ['Minha Conta', 'Configurações da sua conta']
+    };
+
+    const [t, s] = titulos[secao] || ['Painel', ''];
+    document.getElementById('topbar-titulo').textContent = t;
+    document.getElementById('topbar-subtitulo').textContent = s;
+
+    const acoes = document.getElementById('topbar-acoes');
+    acoes.innerHTML = '';
+
+    if (secao === 'conhecimento') {
+        carregarConhecimento();
+    } else if (secao === 'usuarios') {
+        if (usuarioAtual.role !== 'admin') { navegarPara('dashboard'); return; }
+        carregarUsuarios();
+    } else if (secao === 'dashboard') {
+        carregarDashboard();
+    }
+
+    document.getElementById('conteudo-principal').scrollTop = 0;
+}
+
+document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.addEventListener('click', () => navegarPara(btn.dataset.secao));
+});
+
+document.getElementById('btn-sair').addEventListener('click', () => {
+    if (confirm('Deseja sair do painel?')) redirecionarLogin();
+});
+
+// ── Dashboard ──────────────────────────────
+async function carregarDashboard() {
+    try {
+        const [rItems, rUsers] = await Promise.all([
+            fetch(API + '/admin/knowledge', { headers: authHeader() }),
+            usuarioAtual.role === 'admin'
+                ? fetch(API + '/admin/users', { headers: authHeader() })
+                : Promise.resolve(null)
+        ]);
+
+        const { items } = await rItems.json();
+        todosItens = items;
+
+        const ativos = items.filter(i => i.active);
+        const cats = new Set(items.map(i => i.category));
+
+        document.getElementById('stat-total').textContent = items.length;
+        document.getElementById('stat-ativos').textContent = ativos.length;
+        document.getElementById('stat-categorias').textContent = cats.size;
+
+        if (rUsers) {
+            const { users } = await rUsers.json();
+            todosUsuarios = users;
+            document.getElementById('stat-usuarios').textContent = users.filter(u => u.active).length;
+        } else {
+            document.getElementById('stat-usuarios').textContent = '—';
+        }
+
+        const recentes = [...items].sort((a, b) =>
+            new Date(b.updated_at) - new Date(a.updated_at)
+        ).slice(0, 5);
+
+        const tbody = document.getElementById('tabela-recentes-body');
+        if (recentes.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4"><div class="estado-vazio"><p>Nenhum item ainda. Crie o primeiro!</p></div></td></tr>';
+        } else {
+            tbody.innerHTML = recentes.map(item => `
+                <tr>
+                    <td><strong>${escHtml(item.title)}</strong></td>
+                    <td><span class="badge-cat">${escHtml(item.category)}</span></td>
+                    <td><span class="badge ${item.active ? 'badge-ativo' : 'badge-inativo'}">${item.active ? 'Ativo' : 'Inativo'}</span></td>
+                    <td style="color:var(--admin-text-muted);font-size:0.8rem">${formatarData(item.updated_at)}</td>
+                </tr>
+            `).join('');
+        }
+    } catch (e) {
+        toast('Erro ao carregar dashboard', 'erro');
+    }
+}
+
+// ── Base de Conhecimento ───────────────────
+async function carregarConhecimento() {
+    try {
+        const r = await fetch(API + '/admin/knowledge', { headers: authHeader() });
+        const { items } = await r.json();
+        todosItens = items;
+        renderizarTabela();
+        atualizarFiltrosCategorias();
+    } catch { toast('Erro ao carregar itens', 'erro'); }
+}
+
+function atualizarFiltrosCategorias() {
+    const sel = document.getElementById('filtro-categoria');
+    const cats = [...new Set(todosItens.map(i => i.category))].sort();
+    const valorAtual = sel.value;
+    sel.innerHTML = '<option value="">Todas as categorias</option>' +
+        cats.map(c => `<option value="${escHtml(c)}" ${c === valorAtual ? 'selected' : ''}>${escHtml(c)}</option>`).join('');
+}
+
+function renderizarTabela() {
+    const busca = document.getElementById('busca-conhecimento').value.toLowerCase();
+    const cat = document.getElementById('filtro-categoria').value;
+    const status = document.getElementById('filtro-status').value;
+
+    let filtrados = todosItens.filter(item => {
+        const matchBusca = !busca || item.title.toLowerCase().includes(busca) || item.content.toLowerCase().includes(busca);
+        const matchCat = !cat || item.category === cat;
+        const matchStatus = status === '' || String(item.active) === status;
+        return matchBusca && matchCat && matchStatus;
+    });
+
+    const tbody = document.getElementById('tabela-conhecimento-body');
+    if (filtrados.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6">
+            <div class="estado-vazio">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <p>Nenhum item encontrado</p>
+            </div>
+        </td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = filtrados.map(item => `
+        <tr>
+            <td><strong>${escHtml(item.title)}</strong></td>
+            <td><span class="badge-cat">${escHtml(item.category)}</span></td>
+            <td class="td-conteudo" title="${escHtml(item.content)}">${escHtml(item.content)}</td>
+            <td><span class="badge ${item.active ? 'badge-ativo' : 'badge-inativo'}">${item.active ? 'Ativo' : 'Inativo'}</span></td>
+            <td style="color:var(--admin-text-muted);font-size:0.8rem;white-space:nowrap">${formatarData(item.updated_at)}</td>
+            <td>
+                <div class="acoes-celula">
+                    <button class="btn-acao" title="Editar" onclick="abrirModalItem(${item.id})" aria-label="Editar ${escHtml(item.title)}">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    ${item.active
+                        ? `<button class="btn-acao danger" title="Desativar" onclick="alterarStatusItem(${item.id}, false)" aria-label="Desativar ${escHtml(item.title)}">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                          </button>`
+                        : `<button class="btn-acao success" title="Reativar" onclick="alterarStatusItem(${item.id}, true)" aria-label="Reativar ${escHtml(item.title)}">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </button>`
+                    }
+                </div>
+            </td>
+        </tr>
+    `).join('');
+}
+
+['busca-conhecimento', 'filtro-categoria', 'filtro-status'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', renderizarTabela);
+});
+
+// Modal de item
+const modalItem = document.getElementById('modal-item-backdrop');
+
+function abrirModalItem(id) {
+    const item = id ? todosItens.find(i => i.id === id) : null;
+    document.getElementById('modal-item-titulo').querySelector('span') ||
+        document.getElementById('modal-item-titulo').insertAdjacentHTML('afterbegin', '<span></span>');
+    document.getElementById('modal-item-titulo').childNodes[1].textContent = ' ' + (item ? 'Editar Item' : 'Novo Item');
+    document.getElementById('item-id').value = item ? item.id : '';
+    document.getElementById('item-categoria').value = item ? item.category : '';
+    document.getElementById('item-titulo').value = item ? item.title : '';
+    document.getElementById('item-conteudo').value = item ? item.content : '';
+    document.getElementById('msg-item').hidden = true;
+    modalItem.classList.add('visivel');
+    document.getElementById('item-categoria').focus();
+}
+
+function fecharModalItem() {
+    modalItem.classList.remove('visivel');
+    document.getElementById('form-item').reset();
+}
+
+document.getElementById('btn-novo-item').addEventListener('click', () => abrirModalItem(null));
+document.getElementById('btn-cancelar-item').addEventListener('click', fecharModalItem);
+modalItem.addEventListener('click', e => { if (e.target === modalItem) fecharModalItem(); });
+
+document.getElementById('form-item').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('item-id').value;
+    const category = document.getElementById('item-categoria').value.trim();
+    const title = document.getElementById('item-titulo').value.trim();
+    const content = document.getElementById('item-conteudo').value.trim();
+    const msgEl = document.getElementById('msg-item');
+
+    if (!category || !title || !content) {
+        msgEl.textContent = 'Preencha todos os campos.';
+        msgEl.hidden = false;
+        return;
+    }
+
+    const btnSalvar = document.getElementById('btn-salvar-item');
+    btnSalvar.disabled = true;
+    btnSalvar.textContent = 'Salvando...';
+
+    try {
+        const url = id ? `${API}/admin/knowledge/${id}` : `${API}/admin/knowledge`;
+        const method = id ? 'PUT' : 'POST';
+        const r = await fetch(url, {
+            method, headers: authHeader(),
+            body: JSON.stringify({ category, title, content })
+        });
+        const data = await r.json();
+        if (!r.ok) { msgEl.textContent = data.error; msgEl.hidden = false; return; }
+        toast(id ? 'Item atualizado!' : 'Item criado!', 'sucesso');
+        fecharModalItem();
+        carregarConhecimento();
+    } catch { msgEl.textContent = 'Erro de conexão.'; msgEl.hidden = false; }
+    finally { btnSalvar.disabled = false; btnSalvar.textContent = 'Salvar'; }
+});
+
+async function alterarStatusItem(id, ativar) {
+    const acao = ativar ? 'reativar' : 'desativar';
+    if (!confirm(`Deseja ${acao} este item?`)) return;
+    try {
+        let r;
+        if (ativar) {
+            r = await fetch(`${API}/admin/knowledge/${id}/restore`, { method: 'POST', headers: authHeader() });
+        } else {
+            r = await fetch(`${API}/admin/knowledge/${id}`, { method: 'DELETE', headers: authHeader() });
+        }
+        if (r.ok) { toast(`Item ${ativar ? 'reativado' : 'desativado'}!`, 'sucesso'); carregarConhecimento(); }
+        else toast('Erro ao alterar item.', 'erro');
+    } catch { toast('Erro de conexão.', 'erro'); }
+}
+
+// ── Usuários ───────────────────────────────
+async function carregarUsuarios() {
+    try {
+        const r = await fetch(API + '/admin/users', { headers: authHeader() });
+        const { users } = await r.json();
+        todosUsuarios = users;
+        renderizarUsuarios();
+    } catch { toast('Erro ao carregar usuários', 'erro'); }
+}
+
+function renderizarUsuarios() {
+    const tbody = document.getElementById('tabela-usuarios-body');
+    if (todosUsuarios.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6"><div class="estado-vazio"><p>Nenhum usuário encontrado.</p></div></td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = todosUsuarios.map(u => `
+        <tr>
+            <td><strong>${escHtml(u.name)}</strong></td>
+            <td style="color:var(--admin-text-muted)">${escHtml(u.username)}</td>
+            <td style="font-size:0.82rem">${escHtml(u.email)}</td>
+            <td><span class="badge ${u.role === 'admin' ? 'badge-admin' : 'badge-editor'}">${u.role === 'admin' ? 'Admin' : 'Editor'}</span></td>
+            <td><span class="badge ${u.active ? 'badge-ativo' : 'badge-inativo'}">${u.active ? 'Ativo' : 'Inativo'}</span></td>
+            <td>
+                <div class="acoes-celula">
+                    <button class="btn-acao" title="Editar" onclick="abrirModalUsuario(${u.id})" aria-label="Editar ${escHtml(u.name)}">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    ${u.id !== usuarioAtual.user_id
+                        ? `<button class="btn-acao danger" title="${u.active ? 'Desativar' : 'Reativar'}" onclick="toggleUsuario(${u.id}, ${u.active})" aria-label="${u.active ? 'Desativar' : 'Reativar'} ${escHtml(u.name)}">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                ${u.active
+                                    ? '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+                                    : '<polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'}
+                            </svg>
+                          </button>`
+                        : ''}
+                </div>
+            </td>
+        </tr>
+    `).join('');
+}
+
+const modalUsuario = document.getElementById('modal-usuario-backdrop');
+
+function abrirModalUsuario(id) {
+    const u = id ? todosUsuarios.find(u => u.id === id) : null;
+    document.getElementById('modal-usuario-titulo').childNodes[
+        document.getElementById('modal-usuario-titulo').childNodes.length - 1
+    ].textContent = ' ' + (u ? 'Editar Usuário' : 'Novo Usuário');
+
+    document.getElementById('usuario-id').value = u ? u.id : '';
+    document.getElementById('usuario-nome').value = u ? u.name : '';
+    document.getElementById('usuario-username').value = u ? u.username : '';
+    document.getElementById('usuario-email').value = u ? u.email : '';
+    document.getElementById('usuario-papel').value = u ? u.role : 'editor';
+    document.getElementById('usuario-ativo').value = u ? String(u.active) : '1';
+    document.getElementById('usuario-senha').value = '';
+
+    const senhaInput = document.getElementById('usuario-senha');
+    const dicaSenha = document.getElementById('dica-senha');
+    if (u) { senhaInput.required = false; dicaSenha.style.display = 'block'; }
+    else { senhaInput.required = true; dicaSenha.style.display = 'none'; }
+
+    document.getElementById('msg-usuario').hidden = true;
+    modalUsuario.classList.add('visivel');
+    document.getElementById('usuario-nome').focus();
+}
+
+function fecharModalUsuario() {
+    modalUsuario.classList.remove('visivel');
+    document.getElementById('form-usuario').reset();
+}
+
+document.getElementById('btn-novo-usuario').addEventListener('click', () => abrirModalUsuario(null));
+document.getElementById('btn-cancelar-usuario').addEventListener('click', fecharModalUsuario);
+modalUsuario.addEventListener('click', e => { if (e.target === modalUsuario) fecharModalUsuario(); });
+
+document.getElementById('form-usuario').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('usuario-id').value;
+    const nome = document.getElementById('usuario-nome').value.trim();
+    const username = document.getElementById('usuario-username').value.trim();
+    const email = document.getElementById('usuario-email').value.trim();
+    const role = document.getElementById('usuario-papel').value;
+    const active = document.getElementById('usuario-ativo').value;
+    const password = document.getElementById('usuario-senha').value;
+    const msgEl = document.getElementById('msg-usuario');
+
+    if (!nome || !email || (!id && !password)) {
+        msgEl.textContent = 'Preencha todos os campos obrigatórios.';
+        msgEl.hidden = false;
+        return;
+    }
+
+    const btnSalvar = document.getElementById('btn-salvar-usuario');
+    btnSalvar.disabled = true;
+    btnSalvar.textContent = 'Salvando...';
+
+    try {
+        const payload = { name: nome, email, role, active: active === '1' };
+        if (!id) { payload.username = username; payload.password = password; }
+        else if (password) { payload.password = password; }
+
+        const url = id ? `${API}/admin/users/${id}` : `${API}/admin/users`;
+        const method = id ? 'PUT' : 'POST';
+        const r = await fetch(url, {
+            method, headers: authHeader(),
+            body: JSON.stringify(payload)
+        });
+        const data = await r.json();
+        if (!r.ok) { msgEl.textContent = data.error; msgEl.hidden = false; return; }
+        toast(id ? 'Usuário atualizado!' : 'Usuário criado!', 'sucesso');
+        fecharModalUsuario();
+        carregarUsuarios();
+    } catch { msgEl.textContent = 'Erro de conexão.'; msgEl.hidden = false; }
+    finally { btnSalvar.disabled = false; btnSalvar.textContent = 'Salvar'; }
+});
+
+async function toggleUsuario(id, ativo) {
+    const acao = ativo ? 'desativar' : 'reativar';
+    if (!confirm(`Deseja ${acao} este usuário?`)) return;
+    try {
+        const r = await fetch(`${API}/admin/users/${id}`, {
+            method: 'PUT',
+            headers: authHeader(),
+            body: JSON.stringify({ active: !ativo })
+        });
+        if (r.ok) { toast(`Usuário ${ativo ? 'desativado' : 'reativado'}!`, 'sucesso'); carregarUsuarios(); }
+        else toast('Erro.', 'erro');
+    } catch { toast('Erro de conexão.', 'erro'); }
+}
+
+// ── Minha Conta ────────────────────────────
+document.getElementById('form-senha').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const atual = document.getElementById('senha-atual').value;
+    const nova = document.getElementById('senha-nova').value;
+    const confirmar = document.getElementById('senha-confirmar').value;
+    const msgEl = document.getElementById('msg-senha');
+
+    if (nova !== confirmar) {
+        msgEl.textContent = 'As senhas não conferem.';
+        msgEl.hidden = false;
+        return;
+    }
+    if (nova.length < 6) {
+        msgEl.textContent = 'Nova senha deve ter ao menos 6 caracteres.';
+        msgEl.hidden = false;
+        return;
+    }
+
+    try {
+        const r = await fetch(API + '/admin/change-password', {
+            method: 'POST',
+            headers: authHeader(),
+            body: JSON.stringify({ current_password: atual, new_password: nova })
+        });
+        const data = await r.json();
+        if (!r.ok) { msgEl.textContent = data.error; msgEl.hidden = false; return; }
+        toast('Senha alterada com sucesso!', 'sucesso');
+        document.getElementById('form-senha').reset();
+        msgEl.hidden = true;
+    } catch { msgEl.textContent = 'Erro de conexão.'; msgEl.hidden = false; }
+});
+
+// ── Utilitários ────────────────────────────
+function toast(msg, tipo = 'info') {
+    const container = document.getElementById('toast-container');
+    const el = document.createElement('div');
+    el.className = `toast ${tipo}`;
+    el.textContent = msg;
+    container.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+}
+
+function escHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function formatarData(dt) {
+    if (!dt) return '—';
+    return new Date(dt + 'Z').toLocaleDateString('pt-BR', {
+        day: '2-digit', month: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+    });
+}
+
+// Fecha modais com Esc
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        fecharModalItem();
+        fecharModalUsuario();
+    }
+});
+
+// ── Inicializa ─────────────────────────────
+verificarAuth();
+</script>
+</body>
+</html>

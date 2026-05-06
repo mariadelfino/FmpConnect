@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FMPConnect - Sobre o Projeto">
+    <meta name="theme-color" content="#6B21A8">
+    <title>FMPConnect - Sobre Nós</title>
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('fmpconnect-acessibilidade');
+                if (saved) {
+                    const estado = JSON.parse(saved);
+                    if (estado.tema === 'claro') document.documentElement.setAttribute('data-theme', 'light');
+                    if (estado.scaleFactor && estado.scaleFactor !== 1) document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const mains = document.querySelectorAll('main');
+                        if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
+                            mains.forEach(m => m.classList.add('filtro-' + estado.filtroDaltonismo));
+                            document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
+                        }
+                        if (estado.contraste) {
+                            mains.forEach(m => m.classList.add('alto-contraste'));
+                            document.body.setAttribute('data-alto-contraste', 'true');
+                        }
+                    });
+                }
+            } catch (e) { }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/componentes.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/sobre.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+
+<body>
+    <main class="pagina-sobre">
+
+        <header class="cabecalho">
+            <a href="paginainicial.html" aria-label="Voltar para página inicial">
+                <button class="botao-voltar" type="button">
+                    <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </a>
+
+            <h1 class="logo-fmpconnect">
+                FMPConnect
+
+            </h1>
+
+            <button class="botao-acessibilidade" aria-label="Opções de acessibilidade" type="button">
+
+                <svg width="1000" height="1000" viewBox="320 330 360 360" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path
+                        d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                        stroke-miterlimit="10" />
+                    <path
+                        d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3"
+                        stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                </svg>
+
+            </button>
+        </header>
+
+        <section class="secao-contexto">
+            <div class="container">
+                <div class="grid-contexto">
+                    <div class="coluna-texto gsap-fade-up">
+                        <h2 class="titulo-secao">A Faculdade Municipal de Palhoça <span class="destaque-gradiente">(FMP)</span></h2>
+                        <p class="texto-padrao">
+                            A FMP é uma instituição que há mais de 20 anos transforma a educação palhocense. É uma das únicas faculdades municipais públicas do Brasil, oferecendo ensino 100% gratuito e de alta qualidade. Esse compromisso é reconhecido nacionalmente: a faculdade é nota máxima (5) no MEC!
+                        </p>
+                        <p class="texto-padrao">
+                            Com uma infraestrutura acessível e de qualidade, a FMP conta com um corpo docente excepcional que incentiva o aluno a voar alto e já formou mais de 2.200 profissionais.
+                        </p>
+                        <p class="texto-padrao">
+                            A responsabilidade social da faculdade integra atividades acadêmicas com ações reais de impacto na comunidade, apoiando famílias em vulnerabilidade social por meio de diversas campanhas solidárias. Além disso, conecta alunos no mercado de trabalho com um programa exclusivo de estágios, implementando na prática projetos criados por alunos e muito mais.
+                        </p>
+                        <p class="texto-padrao">
+                            Além das graduações em Administração, Pedagogia, Processos Gerenciais e Análise e Desenvolvimento de Sistemas (ADS), atualmente a FMP oferece pós-graduações em Gestão Escolar e Gestão Empresarial, e diversos cursos livres abertos à comunidade, como Marketing Digital, Empreendedorismo e Informática.
+                        </p>
+                    </div>
+                    <div class="coluna-video gsap-fade-up" data-delay="0.2">
+                        <div class="carrossel-wrapper">
+                            <ul class="carrossel-horizontal lista-fotos">
+                                <li><img src="./assets/images/fmp1.png" alt="Foto da FMP 1"></li>
+                                <li><img src="./assets/images/fmp2.png" alt="Foto da FMP 2"></li>
+                                <li><img src="./assets/images/fmp3.png" alt="Foto da FMP 3"></li>
+                                <li><img src="./assets/images/fmp4.png" alt="Foto da FMP 4"></li>
+                            </ul>
+                            <button class="carrossel-botao prev" aria-label="Foto anterior">&#10094;</button>
+                            <button class="carrossel-botao next" aria-label="Próxima foto">&#10095;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao-sobre-projeto">
+            <div class="container">
+                <header class="header-centralizado gsap-fade-up">
+                    <h2 class="titulo-secao">O que é o <span class="destaque-gradiente">FMPConnect?</span></h2>
+                </header>
+
+                <div class="conteudo-projeto">
+                    <p class="texto-centralizado gsap-fade-up">
+                        O FMPConnect é um chatbot desenvolvido para o Projeto Integrador da 4ª fase do curso de Análise e Desenvolvimento de Sistemas (ADS).
+                    </p>
+                    <p class="texto-centralizado gsap-fade-up">
+                        Criado pelas alunas Isabella Schlemper Bernardo, Maria Fernanda Delfino e Moniely Amaral, o projeto foi pensado para tornar as informações da faculdade mais acessíveis e rápidas para todos. Muitas vezes, dados sobre vestibulares e cursos não estão claros para o público geral, e o FMPConnect resolve isso.
+                    </p>
+                    <p class="texto-centralizado gsap-fade-up">
+                        Utilizando Inteligência Artificial, o sistema interpreta dúvidas e gera respostas precisas automaticamente, sem depender de cadastros manuais. Para tirar essa ideia do papel, utilizamos tecnologias modernas como Python, HTML, CSS, JavaScript e o framework Flask. O desenvolvimento foi guiado pelos professores:
+                    </p>
+
+                    <div class="grid-modulos">
+                        <div class="card-tech gsap-fade-up" data-delay="0.1">
+                            <div class="card-tech_header">
+                                <h3>Daniela Amorim</h3>
+                            </div>
+                            <p>Empreendedorismo e Inovação</p>
+                        </div>
+
+                        <div class="card-tech gsap-fade-up" data-delay="0.2">
+                            <div class="card-tech_header">
+                                <h3>Rafael Novo da Rosa</h3>
+                            </div>
+                            <p>Programação Servidor em Sistemas Internet</p>
+                        </div>
+                        <div class="card-tech gsap-fade-up" data-delay="0.3">
+                            <div class="card-tech_header">
+                                <h3>Thiago Leucz Astrizi</h3>
+                            </div>
+                            <p>Programação para Internet (Cliente)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao-equipe">
+            <div class="container">
+                <header class="header-centralizado gsap-fade-up">
+                    <h2 class="titulo-secao">Nossa <span class="destaque-gradiente">equipe</span></h2>
+                    <p class="texto-centralizado">Somos três estudantes da 4ª fase de ADS movidas pelo desejo de transformar a realidade ao nosso redor. Acreditamos que a tecnologia é a melhor e mais poderosa ferramenta para criar soluções que agreguem valor à vida das pessoas, da comunidade e da nossa faculdade. Nosso objetivo é deixar uma marca positiva e tornar o mundo um lugar melhor para todos.</p>
+                </header>
+
+                <div class="grid-equipe">
+                    <article class="card-membro gsap-fade-up" data-delay="0.1">
+                        <a class="card-membro_linkedin" href="https://www.linkedin.com/in/isabella-schlemper/" target="_blank"><svg width="22" height="22"
+                                viewBox="0 0 22 22" fill="currentColor">
+                                <path
+                                    d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z" />
+                            </svg></a>
+                        <div class="card-membro_foto">
+                            <img src="./assets/images/fotoisa.png" alt="Foto de Isabella Schlemper Bernardo" width="100"
+                                height="100" loading="lazy">
+                        </div>
+                        <div class="card-membro_info">
+                            <h3 class="card-membro_nome">Isabella Schlemper Bernardo</h3>
+                        </div>
+                    </article>
+                    <article class="card-membro gsap-fade-up" data-delay="0.2">
+                        <a class="card-membro_linkedin" href="https://www.linkedin.com/in/maria-fernanda-delfino/" target="_blank"><svg width="22" height="22"
+                                viewBox="0 0 22 22" fill="currentColor">
+                                <path
+                                    d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z" />
+                            </svg></a>
+                        <div class="card-membro_foto">
+                            <img src="./assets/images/fotomaria.png" alt="Foto de Maria Fernanda Delfino" width="100"
+                                height="100" loading="lazy">
+                        </div>
+                        <div class="card-membro_info">
+                            <h3 class="card-membro_nome">Maria Fernanda Delfino</h3>
+                        </div>
+                    </article>
+                    <article class="card-membro gsap-fade-up" data-delay="0.1">
+                        <a class="card-membro_linkedin" href="https://www.linkedin.com/in/moni%C3%A9ly-amaral-veloso-369599316/"
+                            target="_blank"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor">
+                                <path
+                                    d="M20.37 0H1.62C.72 0 0 .7 0 1.58v18.83c0 .88.72 1.59 1.62 1.59h18.75c.9 0 1.63-.71 1.63-1.59V1.58C22 .7 21.27 0 20.37 0zM6.53 18.75H3.26V8.25h3.27v10.5zM4.89 6.81c-1.05 0-1.9-.85-1.9-1.9 0-1.04.85-1.89 1.9-1.89 1.04 0 1.89.85 1.89 1.89 0 1.05-.85 1.9-1.89 1.9zm13.86 11.94h-3.26v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7v5.19h-3.26V8.25h3.13v1.43h.04c.44-.83 1.5-1.7 3.09-1.7 3.3 0 3.91 2.17 3.91 5v5.77z" />
+                            </svg></a>
+                        <div class="card-membro_foto"><img src="./assets/images/fotomony.png"
+                                alt="Foto de Moniely Amaral" width="100" height="100" loading="lazy"></div>
+                        <div class="card-membro_info">
+                            <h3 class="card-membro_nome">Moniely<br>Amaral</h3>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao-acessibilidade-detalhes">
+            <div class="container">
+                <header class="header-centralizado gsap-fade-up">
+                    <h2 class="titulo-secao">Acessibilidade para <span class="destaque-gradiente">todos</span></h2>
+                    <p class="texto-centralizado gsap-fade-up">
+                        Nós acreditamos em um mundo onde todos tenham as mesmas oportunidades. Por isso, a inclusão não é só um recurso do nosso sistema, e sim a base dele.
+                    </p>
+                    <p class="texto-centralizado gsap-fade-up">
+                        Queremos que a experiência de qualquer pessoa na FMP seja tão boa quanto a nossa. Para garantir isso, implementamos recursos avançados de acessibilidade digital.
+                    </p>
+                    <p class="texto-centralizado gsap-fade-up">
+                        A acessibilidade digital democratiza o acesso à informação, garantindo que usuários com diferentes capacidades físico-motoras, perceptivas ou sociais tenham total controle e entendimento da navegação.
+                    </p>
+                    <br><br><br><br><br><br>
+                    <h2 class="titulo-secao">Acessibilidades que <span class="destaque-gradiente">implementamos</span>
+                    </h2>
+                </header>
+                <div class="grid-features">
+                    <div class="card-feature gsap-fade-up">
+                        <div class="feature-icon">
+                            <!-- Icon: sliders (painel de acessibilidade) -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 6h6" />
+                                <circle cx="18" cy="6" r="2" />
+                                <path d="M14 18h6" />
+                                <circle cx="6" cy="18" r="2" />
+                                <path d="M10 12h4" />
+                                <circle cx="12" cy="12" r="1.5" />
+                            </svg>
+                        </div>
+                        <h3>Painel de acessibilidade customizável</h3>
+                        <p>Desenvolvemos um painel que permite ajustes de tema, fonte e filtros para daltonismo em tempo
+                            real, dando autonomia ao usuário para configurar a interface conforme sua necessidade
+                            visual.</p>
+                    </div>
+
+                    <div class="card-feature gsap-fade-up" data-delay="0.1">
+                        <div class="feature-icon">
+                            <!-- Icon: sun (temas e contraste) -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2"></path>
+                                <path d="M12 20v2"></path>
+                                <path d="M4.93 4.93l1.41 1.41"></path>
+                                <path d="M17.66 17.66l1.41 1.41"></path>
+                                <path d="M2 12h2"></path>
+                                <path d="M20 12h2"></path>
+                                <path d="M4.93 19.07l1.41-1.41"></path>
+                                <path d="M17.66 6.34l1.41-1.41"></path>
+                            </svg>
+                        </div>
+                        <h3>Temas e contraste</h3>
+                        <p><strong>Oferecemos modo claro, modo escuro e alto contraste.</strong> O alto contraste é
+                            fundamental para pessoas com baixa visão (visão subnormal) ou sensibilidade à luz
+                            (fotofobia), pois destaca os elementos essenciais da tela, facilitando a leitura e reduzindo
+                            a fadiga visual.</p>
+                    </div>
+
+                    <div class="card-feature gsap-fade-up" data-delay="0.2">
+                        <div class="feature-icon">
+                            <!-- Icon: text (tamanho do texto) -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 6h16"></path>
+                                <path d="M9 6v12"></path>
+                                <path d="M15 18V6"></path>
+                                <path d="M9 12h6"></path>
+                            </svg>
+                        </div>
+                        <h3>Tamanho do texto</h3>
+                        <p><strong>Opções para aumentar a fonte, diminuir a fonte e resetar para o tamanho
+                                original.</strong> Esse recurso é ideal para idosos, pessoas com presbiopia ("vista
+                            cansada") ou baixa visão, permitindo que o conteúdo seja lido confortavelmente sem a
+                            necessidade de ferramentas de zoom externas que podem quebrar o layout da página.</p>
+                    </div>
+
+                    <div class="card-feature gsap-fade-up" data-delay="0.3">
+                        <div class="feature-icon">
+                            <!-- Icon: hand (Libras) -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2c1 2 2 4 2 6v8a4 4 0 0 1-8 0V8c0-2 1-4 2-6"></path>
+                                <path d="M14 9v2"></path>
+                                <path d="M10 9v2"></path>
+                            </svg>
+                        </div>
+                        <h3>Libras</h3>
+                        <p><strong>Inclusão de um plugin de Libras (Língua Brasileira de Sinais).</strong> Essencial
+                            para a comunidade surda ou com deficiência auditiva severa que utiliza a língua de sinais
+                            como primeira língua, garantindo que o conteúdo textual seja traduzido e compreendido.
+                        </p>
+                    </div>
+
+                    <div class="card-feature gsap-fade-up" data-delay="0.4">
+                        <div class="feature-icon">
+                            <!-- Icon: color-droplet (filtros de cor) -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2s4 4 6 6a6 6 0 1 1-12 0c2-2 6-6 6-6z"></path>
+                                <circle cx="12" cy="14" r="2"></circle>
+                            </svg>
+                        </div>
+                        <h3>Filtros de cor</h3>
+                        <p>Implementamos filtros específicos para diferentes tipos de discromatopsia (daltonismo):
+                            <br>• Protanopia: Filtro para quem possui deficiência nos cones vermelhos (dificuldade em
+                            distinguir tons de vermelho e verde).
+                            <br>• Deuteranopia: Filtro para quem possui deficiência nos cones verdes (o tipo mais comum
+                            de daltonismo).
+                            <br>• Tritanopia: Filtro para quem possui deficiência nos cones azuis (dificuldade com tons
+                            de azul e amarelo).
+                            <br>• Normal: Visualização sem filtros, com as cores originais.
+                        </p>
+                    </div>
+
+                    <div class="card-feature gsap-fade-up" data-delay="0.5">
+                        <div class="feature-icon">
+                            <!-- Icon: speaker (leitor de tela / ARIA) -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+                                <path d="M19 8a5 5 0 0 1 0 8"></path>
+                                <path d="M17 5a9 9 0 0 1 0 14"></path>
+                            </svg>
+                        </div>
+                        <h3>Suporte total a leitor de tela (ARIA)</h3>
+                        <p><strong>O código-fonte foi marcado corretamente seguindo as diretrizes WAI-ARIA.</strong>
+                            Isso permite que pessoas cegas ou com baixíssima visão utilizem softwares leitores de tela
+                            (como NVDA ou VoiceOver) para "ouvir" a estrutura da página e o conteúdo do chat, garantindo
+                            uma navegação assistiva fluida. </p>
+                    </div>
+                    <div class="card-feature gsap-fade-up" data-delay="0.6">
+                        <div class="feature-icon">
+                            <!-- Icon: keyboard (navegação por teclado) -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                                <path d="M6 10h.01"></path>
+                                <path d="M10 10h4"></path>
+                                <path d="M18 10h.01"></path>
+                                <path d="M6 14h12"></path>
+                            </svg>
+                        </div>
+                        <h3>Navegação por teclado</h3>
+                        <p>Implementamos uma navegação completa sem o uso do mouse, fundamental para pessoas com
+                            deficiências motoras ou que não conseguem utilizar dispositivos apontadores. Ela funciona da
+                            seguinte forma:
+                        </p>
+                    </div>
+                    <div class="card-feature gsap-fade-up" data-delay="0.6">
+                        <div class="feature-icon">
+                            <!-- Icon: key (atalhos no teclado) -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 2l-6 6"></path>
+                                <circle cx="7" cy="17" r="4"></circle>
+                                <path d="M11 13l6-6"></path>
+                            </svg>
+                        </div>
+                        <h3>Atalhos no teclado</h3>
+                        <p>• Tab: Navega por todos os elementos.
+                            <br>• Shift + Tab: Volta para o elemento anterior.
+                            <br>• Espaço: Vai para o próximo conteúdo.
+                            <br>• Shift + Espaço: Rola a página para o conteúdo anterior.
+                            <br>• PageUp/PageDown: Têm a mesma função de rolar a página para cima ou para baixo.
+                            <br>• Home/End: A tecla "Home" leva ao topo da página, a tecla "End" leva direto ao final.
+                            <br>• Enter: Aciona botões ou links selecionados.
+                            <br>• Esc: Fecha menus dropdown abertos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao-recursos">
+            <div class="container">
+                <a href="feedback.html" class="card-feedback-link gsap-fade-up" aria-label="Deixar um feedback sobre o FMPConnect">
+                    <div class="card-feedback">
+                        <div class="feedback-icon">
+                            <span class="material-icons-outlined">rate_review</span>
+                        </div>
+                        <div class="feedback-content">
+                            <h2 class="titulo-secao">O que achou do FMPConnect?</h2>
+                            <p class="texto-padrao">
+                                Nos ajude a tornar o FMPConnect cada vez melhor deixando um feedback de como foi a sua experiência. São apenas 3 minutos do seu dia, mas que podem ajudar um sistema importante para todos!
+                            </p>
+                            <span class="feedback-cta">Clique aqui e deixe seu feedback!</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="rodape-fmp">
+        <img src="./assets/images/logo_rodape.png" alt="Logo FMP" class="logo-fmp"
+            id="logo-rodape" width="140" height="auto" loading="lazy">
+    </footer>
+
+    <script src="./assets/js/acessibilidade-global.js"></script>
+
+    <script>
+        // Atualiza logo do rodapé baseado no tema
+        function atualizarLogoRodape() {
+            const tema = document.documentElement.getAttribute('data-theme');
+            const logoRodape = document.getElementById('logo-rodape');
+            if (logoRodape) {
+                if (tema === 'light') {
+                    logoRodape.src = './assets/images/logo_rodape.png';
+                } else {
+                    logoRodape.src = './assets/images/logo_rodape.png';
+                }
+            }
+        }
+
+        // Atualiza logo no carregamento
+        atualizarLogoRodape();
+
+        // Observa mudanças no atributo data-theme
+        const observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                    atualizarLogoRodape();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    </script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animação Fade Up Geral
+        const fadeElements = document.querySelectorAll('.gsap-fade-up');
+
+        fadeElements.forEach(element => {
+            const delay = element.getAttribute('data-delay') || 0;
+
+            gsap.fromTo(element,
+                {
+                    y: 50,
+                    opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    delay: delay,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%", // Inicia quando o topo do elemento bate em 85% da tela
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+    </script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <script src="./assets/js/carrossel.js"></script>
+</body>
+
+</html>

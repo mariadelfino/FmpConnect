@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FMPConnect — Acesso Admin</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="login-page">
+
+    <main class="login-container" role="main">
+
+        <div class="login-card" role="region" aria-labelledby="login-titulo">
+            <div class="login-logo">
+                <span class="logo-text">FMPConnect</span>
+                <span class="logo-badge">Admin</span>
+            </div>
+
+            <h1 id="login-titulo" class="login-titulo">Área Restrita</h1>
+            <p class="login-subtitulo">Acesso para professores e secretaria acadêmica</p>
+
+            <form id="form-login" class="login-form" novalidate>
+                <div class="campo-grupo">
+                    <label for="username" class="campo-label">Usuário</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        class="campo-input"
+                        placeholder="Seu nome de usuário"
+                        autocomplete="username"
+                        required
+                        aria-required="true"
+                    >
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="password" class="campo-label">Senha</label>
+                    <div class="campo-senha-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="campo-input"
+                            placeholder="Sua senha"
+                            autocomplete="current-password"
+                            required
+                            aria-required="true"
+                        >
+                        <button type="button" class="btn-ver-senha" id="btn-ver-senha" aria-label="Mostrar senha">
+                            <svg id="icone-olho-aberto" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <svg id="icone-olho-fechado" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="mensagem-erro" class="mensagem-erro" role="alert" aria-live="polite" hidden></div>
+
+                <button type="submit" class="btn-login" id="btn-login">
+                    <span id="btn-login-texto">Entrar</span>
+                    <svg id="btn-login-spinner" class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="30 70" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </form>
+
+            <a href="../paginainicial.html" class="link-voltar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Voltar ao início
+            </a>
+        </div>
+
+    </main>
+
+    <script>
+        const API = window.location.origin;
+        const form = document.getElementById('form-login');
+        const btnLogin = document.getElementById('btn-login');
+        const btnLoginTexto = document.getElementById('btn-login-texto');
+        const btnLoginSpinner = document.getElementById('btn-login-spinner');
+        const mensagemErro = document.getElementById('mensagem-erro');
+        const btnVerSenha = document.getElementById('btn-ver-senha');
+        const inputSenha = document.getElementById('password');
+        const iconeAberto = document.getElementById('icone-olho-aberto');
+        const iconeFechado = document.getElementById('icone-olho-fechado');
+
+        // Redireciona se já estiver logado
+        const tokenSalvo = localStorage.getItem('fmpconnect_admin_token');
+        if (tokenSalvo) {
+            fetch(API + '/admin/verify', {
+                headers: { 'Authorization': 'Bearer ' + tokenSalvo }
+            }).then(r => {
+                if (r.ok) window.location.href = 'painel.html';
+            }).catch(() => {});
+        }
+
+        btnVerSenha.addEventListener('click', () => {
+            const visivel = inputSenha.type === 'text';
+            inputSenha.type = visivel ? 'password' : 'text';
+            iconeAberto.style.display = visivel ? 'block' : 'none';
+            iconeFechado.style.display = visivel ? 'none' : 'block';
+            btnVerSenha.setAttribute('aria-label', visivel ? 'Mostrar senha' : 'Ocultar senha');
+        });
+
+        function setCarregando(carregando) {
+            btnLogin.disabled = carregando;
+            btnLoginTexto.textContent = carregando ? 'Entrando...' : 'Entrar';
+            btnLoginSpinner.style.display = carregando ? 'inline-block' : 'none';
+        }
+
+        function mostrarErro(msg) {
+            mensagemErro.textContent = msg;
+            mensagemErro.hidden = false;
+        }
+
+        function limparErro() {
+            mensagemErro.hidden = true;
+            mensagemErro.textContent = '';
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            limparErro();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                mostrarErro('Preencha usuário e senha.');
+                return;
+            }
+
+            setCarregando(true);
+
+            try {
+                const resp = await fetch(API + '/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await resp.json();
+
+                if (!resp.ok) {
+                    mostrarErro(data.error || 'Erro ao fazer login.');
+                    return;
+                }
+
+                localStorage.setItem('fmpconnect_admin_token', data.token);
+                localStorage.setItem('fmpconnect_admin_user', JSON.stringify(data.user));
+                window.location.href = 'painel.html';
+
+            } catch (err) {
+                mostrarErro('Erro de conexão. Verifique se o servidor está rodando.');
+            } finally {
+                setCarregando(false);
+            }
+        });
+    </script>
+</body>
+</html>

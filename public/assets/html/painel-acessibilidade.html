@@ -1,0 +1,172 @@
+<div class="painel-acessibilidade" id="painelAcessibilidade">
+    <div class="painel-acessibilidade_overlay"></div>
+    
+    <div class="painel-acessibilidade_conteudo">
+        <!-- Cabeçalho -->
+        <header class="painel-acessibilidade_header">
+            <h2 class="painel-acessibilidade_titulo">Acessibilidade</h2>
+            <button class="painel-acessibilidade_fechar" aria-label="Fechar painel de acessibilidade">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Grid de Opções -->
+        <div class="painel-acessibilidade_grid">
+            
+            <!-- Subtítulo Tema -->
+            <h3 class="painel-acessibilidade_subtitulo">Tema</h3>
+            
+            <button class="opcao-acessibilidade" data-opcao="tema-escuro">
+                <div class="opcao-acessibilidade_icone">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="opcao-acessibilidade_texto">
+                    <span class="opcao-acessibilidade_titulo">Modo Escuro</span>
+                    <span class="opcao-acessibilidade_status">Ativo</span>
+                </div>
+            </button>
+
+            <button class="opcao-acessibilidade" data-opcao="tema-claro">
+                <div class="opcao-acessibilidade_icone">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="opcao-acessibilidade_texto">
+                    <span class="opcao-acessibilidade_titulo">Modo Claro</span>
+                    <span class="opcao-acessibilidade_status">Inativo</span>
+                </div>
+            </button>
+
+            <button class="opcao-acessibilidade" data-opcao="alto-contraste">
+                <div class="opcao-acessibilidade_icone">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 2v20" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="opcao-acessibilidade_texto">
+                    <span class="opcao-acessibilidade_titulo">Alto Contraste</span>
+                    <span class="opcao-acessibilidade_status">Inativo</span>
+                </div>
+            </button>
+
+            <!-- Subtítulo Tamanho do Texto -->
+            <h3 class="painel-acessibilidade_subtitulo">Tamanho do Texto</h3>
+            
+            <button class="opcao-acessibilidade" data-opcao="fonte-aumentar">
+                <div class="opcao-acessibilidade_icone">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19h16M4 5h16M8 9h8M9 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M18 15l3 3m0-3l-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="opcao-acessibilidade_texto">
+                    <span class="opcao-acessibilidade_titulo">Aumentar Fonte</span>
+                    <span class="opcao-acessibilidade_descricao">Tamanho: Normal</span>
+                </div>
+            </button>
+
+            <button class="opcao-acessibilidade" data-opcao="fonte-diminuir">
+                <div class="opcao-acessibilidade_icone">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19h16M4 5h16M8 9h8M9 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M18 15l3 3m0 0l-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="opcao-acessibilidade_texto">
+                    <span class="opcao-acessibilidade_titulo">Diminuir Fonte</span>
+                    <span class="opcao-acessibilidade_descricao">Tamanho: Normal</span>
+                </div>
+            </button>
+
+            <button class="opcao-acessibilidade" data-opcao="fonte-resetar">
+                <div class="opcao-acessibilidade_icone">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19h16M4 5h16M8 9h8M9 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="opcao-acessibilidade_texto">
+                    <span class="opcao-acessibilidade_titulo">Resetar Fonte</span>
+                    <span class="opcao-acessibilidade_descricao">Voltar ao padrão</span>
+                </div>
+            </button>
+
+            <!-- Subtítulo Filtros de Cor -->
+            <h3 class="painel-acessibilidade_subtitulo">Filtros de Cor</h3>
+            
+            <button class="opcao-acessibilidade" data-opcao="daltonismo-protanopia">
+                <div class="opcao-acessibilidade_icone opcao-acessibilidade_icone--cor-vermelho">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="opcao-acessibilidade_texto">
+                    <span class="opcao-acessibilidade_titulo">Protanopia</span>
+                    <span class="opcao-acessibilidade_descricao">Def. vermelho</span>
+                </div>
+            </button>
+
+            <button class="opcao-acessibilidade" data-opcao="daltonismo-deuteranopia">
+                <div class="opcao-acessibilidade_icone opcao-acessibilidade_icone--cor-verde">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="opcao-acessibilidade_texto">
+                    <span class="opcao-acessibilidade_titulo">Deuteranopia</span>
+                    <span class="opcao-acessibilidade_descricao">Def. verde</span>
+                </div>
+            </button>
+
+            <button class="opcao-acessibilidade" data-opcao="daltonismo-tritanopia">
+                <div class="opcao-acessibilidade_icone opcao-acessibilidade_icone--cor-azul">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="opcao-acessibilidade_texto">
+                    <span class="opcao-acessibilidade_titulo">Tritanopia</span>
+                    <span class="opcao-acessibilidade_descricao">Def. azul</span>
+                </div>
+            </button>
+
+            <button class="opcao-acessibilidade" data-opcao="daltonismo-desativar">
+                <div class="opcao-acessibilidade_icone">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M4.93 4.93l14.14 14.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="opcao-acessibilidade_texto">
+                    <path d="M4.93 4.93l14.14 14.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="opcao-acessibilidade_texto">
+                <span class="opcao-acessibilidade_titulo">Sem Filtro</span>
+                <span class="opcao-acessibilidade_descricao">Cores normais</span>
+            </div>
+        </button>
+
+        </div>
+
+        <!-- Rodapé com Reset -->
+        <footer class="painel-acessibilidade_footer">
+            <button class="painel-acessibilidade_resetar" data-opcao="resetar-tudo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 4v6h6M23 20v-6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Restaurar Padrões
+            </button>
+        </footer>
+    </div>
+</div>
