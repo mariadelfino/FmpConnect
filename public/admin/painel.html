@@ -99,6 +99,22 @@
 
         <!-- ── DASHBOARD ─────────────────── -->
         <section class="secao ativa" id="secao-dashboard">
+
+            <!-- Boas-vindas (visível apenas para editores) -->
+            <div id="card-boas-vindas" style="display:none;background:linear-gradient(135deg,rgba(0,159,227,0.12),rgba(29,57,108,0.2));border:1px solid rgba(0,159,227,0.3);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;align-items:center;gap:1rem">
+                <div style="flex-shrink:0;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#009FE3,#1D396C);display:grid;place-items:center">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2a5 5 0 1 1 0 10A5 5 0 0 1 12 2zm0 12c5.33 0 8 2.67 8 4v2H4v-2c0-1.33 2.67-4 8-4z" fill="white"/></svg>
+                </div>
+                <div>
+                    <div style="font-weight:700;font-size:0.95rem">Bem-vindo(a), <span id="boas-vindas-nome">—</span>!</div>
+                    <div style="font-size:0.8rem;color:var(--admin-text-muted);margin-top:0.15rem">Você pode adicionar ou editar informações que o chatbot usará para responder aos alunos.</div>
+                </div>
+                <button onclick="navegarPara('conhecimento')" class="btn btn-primario" style="margin-left:auto;white-space:nowrap;flex-shrink:0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    Nova informação
+                </button>
+            </div>
+
             <div class="stats-grid" id="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icone azul">
@@ -134,7 +150,7 @@
                         <div class="stat-label">Categorias</div>
                     </div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card admin-only">
                     <div class="stat-icone roxo">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -148,30 +164,77 @@
                 </div>
             </div>
 
+            <!-- Grid de duas colunas: recentes + categorias -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem" id="grid-dashboard-2col">
+                <div class="tabela-card">
+                    <div class="tabela-header">
+                        <div class="tabela-titulo">Itens recentes</div>
+                        <button class="btn btn-primario" onclick="navegarPara('conhecimento')">
+                            Ver todos
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </div>
+                    <div class="tabela-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Categoria</th>
+                                    <th>Status</th>
+                                    <th>Atualizado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-recentes-body">
+                                <tr><td colspan="4"><div class="estado-vazio"><p>Carregando...</p></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tabela-card">
+                    <div class="tabela-header">
+                        <div class="tabela-titulo">Itens por categoria</div>
+                    </div>
+                    <div style="padding:1rem" id="chart-categorias">
+                        <p style="color:var(--admin-text-muted);font-size:0.85rem">Carregando...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de ações rápidas -->
             <div class="tabela-card">
                 <div class="tabela-header">
-                    <div class="tabela-titulo">Itens recentes na base de conhecimento</div>
-                    <button class="btn btn-primario" onclick="navegarPara('conhecimento')">
-                        Ver todos
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
+                    <div class="tabela-titulo">Ações rápidas</div>
                 </div>
-                <div class="tabela-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Categoria</th>
-                                <th>Status</th>
-                                <th>Atualizado</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabela-recentes-body">
-                            <tr><td colspan="4"><div class="estado-vazio"><p>Carregando...</p></div></td></tr>
-                        </tbody>
-                    </table>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;padding:1rem">
+                    <button onclick="navegarPara('conhecimento'); setTimeout(()=>document.getElementById('btn-novo-item').click(),400)" style="background:rgba(0,159,227,0.08);border:1px solid rgba(0,159,227,0.25);border-radius:10px;padding:1.1rem;cursor:pointer;text-align:left;transition:.2s" onmouseover="this.style.background='rgba(0,159,227,0.15)'" onmouseout="this.style.background='rgba(0,159,227,0.08)'">
+                        <div style="color:#009FE3;margin-bottom:0.5rem">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                        <div style="font-weight:700;font-size:0.9rem;color:var(--admin-text)">Adicionar informação</div>
+                        <div style="font-size:0.75rem;color:var(--admin-text-muted);margin-top:0.2rem">Publicar novo conteúdo para o chatbot</div>
+                    </button>
+                    <button onclick="navegarPara('conhecimento')" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-radius:10px;padding:1.1rem;cursor:pointer;text-align:left;transition:.2s" onmouseover="this.style.background='rgba(16,185,129,0.15)'" onmouseout="this.style.background='rgba(16,185,129,0.08)'">
+                        <div style="color:#10B981;margin-bottom:0.5rem">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div style="font-weight:700;font-size:0.9rem;color:var(--admin-text)">Editar conteúdo</div>
+                        <div style="font-size:0.75rem;color:var(--admin-text-muted);margin-top:0.2rem">Atualizar informações existentes</div>
+                    </button>
+                    <button onclick="navegarPara('minha-conta')" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:1.1rem;cursor:pointer;text-align:left;transition:.2s" onmouseover="this.style.background='rgba(245,158,11,0.15)'" onmouseout="this.style.background='rgba(245,158,11,0.08)'">
+                        <div style="color:#F59E0B;margin-bottom:0.5rem">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                        <div style="font-weight:700;font-size:0.9rem;color:var(--admin-text)">Alterar senha</div>
+                        <div style="font-size:0.75rem;color:var(--admin-text-muted);margin-top:0.2rem">Atualizar credenciais de acesso</div>
+                    </button>
+                    <button id="btn-acao-usuarios" onclick="navegarPara('usuarios')" style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.25);border-radius:10px;padding:1.1rem;cursor:pointer;text-align:left;transition:.2s" onmouseover="this.style.background='rgba(139,92,246,0.15)'" onmouseout="this.style.background='rgba(139,92,246,0.08)'">
+                        <div style="color:#8B5CF6;margin-bottom:0.5rem">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                        <div style="font-weight:700;font-size:0.9rem;color:var(--admin-text)">Gerenciar usuários</div>
+                        <div style="font-size:0.75rem;color:var(--admin-text-muted);margin-top:0.2rem">Adicionar professores e secretaria</div>
+                    </button>
                 </div>
             </div>
         </section>
@@ -427,10 +490,13 @@ function aplicarPermissoes() {
     document.getElementById('avatar-sidebar').textContent = nome.charAt(0).toUpperCase();
 
     if (usuarioAtual.role !== 'admin') {
-        const navUsuarios = document.getElementById('nav-usuarios');
-        if (navUsuarios) navUsuarios.style.display = 'none';
-        const navTitulo = document.getElementById('nav-titulo-usuarios');
-        // Renomeia o grupo
+        document.getElementById('nav-usuarios')?.style.setProperty('display', 'none');
+        document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
+        document.getElementById('btn-acao-usuarios')?.style.setProperty('display', 'none');
+
+        const bv = document.getElementById('card-boas-vindas');
+        if (bv) { bv.style.display = 'flex'; }
+        document.getElementById('boas-vindas-nome').textContent = nome;
     }
 }
 
@@ -525,6 +591,28 @@ async function carregarDashboard() {
                     <td><span class="badge ${item.active ? 'badge-ativo' : 'badge-inativo'}">${item.active ? 'Ativo' : 'Inativo'}</span></td>
                     <td style="color:var(--admin-text-muted);font-size:0.8rem">${formatarData(item.updated_at)}</td>
                 </tr>
+            `).join('');
+        }
+
+        // Gráfico de barras por categoria
+        const contagem = {};
+        items.forEach(i => { contagem[i.category] = (contagem[i.category] || 0) + 1; });
+        const sorted = Object.entries(contagem).sort((a, b) => b[1] - a[1]);
+        const maxVal = sorted[0]?.[1] || 1;
+        const chartEl = document.getElementById('chart-categorias');
+        if (sorted.length === 0) {
+            chartEl.innerHTML = '<p style="color:var(--admin-text-muted);font-size:0.85rem">Nenhuma categoria ainda.</p>';
+        } else {
+            chartEl.innerHTML = sorted.map(([cat, count]) => `
+                <div style="margin-bottom:0.75rem">
+                    <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.25rem">
+                        <span style="font-weight:600">${escHtml(cat)}</span>
+                        <span style="color:var(--admin-text-muted)">${count} item${count > 1 ? 's' : ''}</span>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.08);border-radius:999px;height:7px;overflow:hidden">
+                        <div style="background:linear-gradient(90deg,#009FE3,#1D396C);height:100%;border-radius:999px;width:${Math.round(count/maxVal*100)}%;transition:width .4s ease"></div>
+                    </div>
+                </div>
             `).join('');
         }
     } catch (e) {
