@@ -57,6 +57,17 @@
                 Usuários
             </button>
 
+            <button class="nav-item admin-only" data-secao="rpa" id="nav-rpa">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 6.5h4M14 6.5a2.5 2.5 0 1 1 5 0v3a2.5 2.5 0 0 1-5 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M3 14h7M3 17h5M3 20h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="18" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M18 16v2l1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                RPA
+            </button>
+
             <button class="nav-item" data-secao="minha-conta">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
@@ -316,6 +327,77 @@
             </div>
         </section>
 
+        <!-- ── RPA ──────────────────────── -->
+        <section class="secao" id="secao-rpa">
+
+            <!-- Scraping do site -->
+            <div class="tabela-card" style="max-width:640px;margin-bottom:1.5rem">
+                <div class="tabela-header">
+                    <div class="tabela-titulo">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:6px"><path d="M21 12a9 9 0 1 1-9-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 3l-9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M15 3h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Buscar informações no site da FMP
+                    </div>
+                </div>
+                <div style="padding:1.25rem">
+                    <p style="font-size:0.85rem;color:var(--admin-text-muted);margin-bottom:1rem">
+                        O robô acessa o site <strong>fmpsc.edu.br</strong>, coleta notícias, editais e avisos e importa automaticamente como itens novos na base de conhecimento (itens já existentes são ignorados).
+                    </p>
+                    <div id="rpa-scrape-resultado" style="display:none;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:8px;padding:0.75rem;font-size:0.85rem;margin-bottom:1rem"></div>
+                    <button class="btn btn-primario" id="btn-rpa-scrape">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4v5h5M20 20v-5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L4 10m16 4l-1.64 4.36A9 9 0 0 1 3.51 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Executar busca no site
+                    </button>
+                </div>
+            </div>
+
+            <!-- Leitura de e-mails -->
+            <div class="tabela-card" style="max-width:640px">
+                <div class="tabela-header">
+                    <div class="tabela-titulo">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:6px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/></svg>
+                        Ler e-mails de feedback
+                    </div>
+                </div>
+                <div style="padding:1.25rem">
+                    <p style="font-size:0.85rem;color:var(--admin-text-muted);margin-bottom:1rem">
+                        Conecta à caixa de e-mail de feedbacks via IMAP, lê os e-mails não lidos e importa o conteúdo como itens na categoria <em>Feedbacks</em>.
+                    </p>
+                    <form id="form-rpa-email" class="modal-form" novalidate>
+                        <div style="display:grid;grid-template-columns:1fr 120px;gap:1rem">
+                            <div class="campo-grupo">
+                                <label class="campo-label">Servidor IMAP</label>
+                                <input type="text" id="rpa-imap-host" class="campo-input" placeholder="imap.gmail.com" required>
+                            </div>
+                            <div class="campo-grupo">
+                                <label class="campo-label">Porta</label>
+                                <input type="number" id="rpa-imap-port" class="campo-input" value="993" required>
+                            </div>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">E-mail</label>
+                            <input type="email" id="rpa-email" class="campo-input" placeholder="feedbacks@fmpsc.edu.br" required>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Senha / App Password</label>
+                            <input type="password" id="rpa-senha" class="campo-input" placeholder="••••••••••••" required>
+                            <small style="color:var(--admin-text-muted);font-size:0.75rem">Para Gmail use uma <a href="https://myaccount.google.com/apppasswords" target="_blank" style="color:var(--admin-primary)">Senha de App</a> (não a senha normal).</small>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Pasta</label>
+                            <input type="text" id="rpa-pasta" class="campo-input" value="INBOX">
+                        </div>
+                        <div id="rpa-email-resultado" style="display:none;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:8px;padding:0.75rem;font-size:0.85rem;margin-bottom:0.5rem"></div>
+                        <div class="modal-acoes">
+                            <button type="submit" class="btn btn-primario" id="btn-rpa-email">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                Ler e-mails e importar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <!-- ── MINHA CONTA ───────────────── -->
         <section class="secao" id="secao-minha-conta">
             <div class="tabela-card" style="max-width:480px">
@@ -518,6 +600,7 @@ function navegarPara(secao) {
         dashboard: ['Dashboard', 'Visão geral do sistema'],
         conhecimento: ['Base de Conhecimento', 'Gerencie as informações do chatbot'],
         usuarios: ['Usuários', 'Gerencie o acesso ao painel'],
+        rpa: ['RPA — Automação', 'Busca automática de informações e e-mails'],
         'minha-conta': ['Minha Conta', 'Configurações da sua conta']
     };
 
@@ -976,6 +1059,74 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
         fecharModalItem();
         fecharModalUsuario();
+    }
+});
+
+// ── RPA ────────────────────────────────────
+document.getElementById('btn-rpa-scrape')?.addEventListener('click', async () => {
+    const btn = document.getElementById('btn-rpa-scrape');
+    const resultado = document.getElementById('rpa-scrape-resultado');
+    btn.disabled = true;
+    btn.textContent = 'Executando...';
+    resultado.style.display = 'none';
+
+    try {
+        const r = await fetch(API + '/admin/rpa/scrape', { method: 'POST', headers: authHeader() });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || 'Erro desconhecido');
+        resultado.style.display = 'block';
+        resultado.style.background = 'rgba(16,185,129,0.1)';
+        resultado.style.borderColor = 'rgba(16,185,129,0.3)';
+        resultado.textContent = `✅ ${data.message} (${data.total_encontrados} encontrados no site)`;
+        toast(data.message, 'sucesso');
+    } catch (e) {
+        resultado.style.display = 'block';
+        resultado.style.background = 'rgba(239,68,68,0.1)';
+        resultado.style.borderColor = 'rgba(239,68,68,0.3)';
+        resultado.textContent = '❌ ' + e.message;
+        toast('Erro no RPA: ' + e.message, 'erro');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4v5h5M20 20v-5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L4 10m16 4l-1.64 4.36A9 9 0 0 1 3.51 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Executar busca no site';
+    }
+});
+
+document.getElementById('form-rpa-email')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('btn-rpa-email');
+    const resultado = document.getElementById('rpa-email-resultado');
+    btn.disabled = true;
+    btn.textContent = 'Conectando...';
+    resultado.style.display = 'none';
+
+    const payload = {
+        imap_host: document.getElementById('rpa-imap-host').value.trim(),
+        imap_port: document.getElementById('rpa-imap-port').value,
+        email: document.getElementById('rpa-email').value.trim(),
+        senha: document.getElementById('rpa-senha').value,
+        pasta: document.getElementById('rpa-pasta').value.trim() || 'INBOX',
+    };
+
+    try {
+        const r = await fetch(API + '/admin/rpa/emails', {
+            method: 'POST', headers: authHeader(), body: JSON.stringify(payload)
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || 'Erro desconhecido');
+        resultado.style.display = 'block';
+        resultado.style.background = 'rgba(16,185,129,0.1)';
+        resultado.style.borderColor = 'rgba(16,185,129,0.3)';
+        resultado.textContent = `✅ ${data.message}`;
+        toast(data.message, 'sucesso');
+    } catch (err) {
+        resultado.style.display = 'block';
+        resultado.style.background = 'rgba(239,68,68,0.1)';
+        resultado.style.borderColor = 'rgba(239,68,68,0.3)';
+        resultado.textContent = '❌ ' + err.message;
+        toast('Erro: ' + err.message, 'erro');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Ler e-mails e importar';
     }
 });
 

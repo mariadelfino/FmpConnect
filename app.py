@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 from werkzeug.security import check_password_hash, generate_password_hash
 
 import database
+import rpa
 
 load_dotenv()
 
@@ -550,6 +551,61 @@ def text_chat():
 
     except Exception as e:
         print(f"❌ Erro crítico no chat: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+# ──────────────────────────────────────────────
+# Rotas RPA
+# ──────────────────────────────────────────────
+
+@app.route("/admin/rpa/scrape", methods=["POST"])
+@require_auth
+def rpa_scrape():
+    """Raspa o site da FMP e importa itens novos para a base de conhecimento."""
+    try:
+        itens = rpa.scrape_site_fmp()
+        user_id = request.current_user.get("user_id", 1)
+        resultado = rpa.importar_para_base(itens, user_id=user_id)
+        return jsonify({
+            "message": f"{resultado['inseridos']} item(ns) importado(s), {resultado['ignorados']} ignorado(s).",
+            **resultado,
+            "total_encontrados": len(itens)
+        })
+    except Exception as e:
+        print(f"❌ Erro no RPA scrape: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/admin/rpa/emails", methods=["POST"])
+@require_auth
+def rpa_emails():
+    """
+    Lê e-mails de feedback via IMAP e importa como itens de conhecimento.
+    Body esperado: { imap_host, imap_port, email, senha, pasta (opcional) }
+    """
+    try:
+        data = request.get_json(force=True)
+        imap_host = data.get("imap_host", "")
+        imap_port = int(data.get("imap_port", 993))
+        email_addr = data.get("email", "")
+        senha = data.get("senha", "")
+        pasta = data.get("pasta", "INBOX")
+
+        if not imap_host or not email_addr or not senha:
+            return jsonify({"error": "Campos obrigatórios: imap_host, email, senha"}), 400
+
+        emails = rpa.ler_emails_feedback(imap_host, imap_port, email_addr, senha, pasta)
+        itens = rpa.emails_para_itens_conhecimento(emails)
+        user_id = request.current_user.get("user_id", 1)
+        resultado = rpa.importar_para_base(itens, user_id=user_id)
+
+        return jsonify({
+            "message": f"{len(emails)} e-mail(s) lido(s). {resultado['inseridos']} item(ns) importado(s).",
+            "emails_lidos": len(emails),
+            **resultado
+        })
+    except Exception as e:
+        print(f"❌ Erro no RPA emails: {e}")
         return jsonify({"error": str(e)}), 500
 
 

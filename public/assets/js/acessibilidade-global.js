@@ -15,7 +15,9 @@
         tema: null, // será definido pela detecção do sistema
         contraste: false,
         scaleFactor: 1,
-        filtroDaltonismo: 'none'
+        filtroDaltonismo: 'none',
+        fonteDislexia: false,
+        reduzirAnimacoes: false
     };
 
     // Detecta preferência do sistema
@@ -64,6 +66,20 @@
 
         // Aplica filtro de daltonismo
         aplicarFiltroDaltonismoCSS(estadoAtual.filtroDaltonismo);
+
+        // Aplica fonte para dislexia
+        if (estadoAtual.fonteDislexia) {
+            document.documentElement.classList.add('fonte-dislexia');
+        } else {
+            document.documentElement.classList.remove('fonte-dislexia');
+        }
+
+        // Aplica redução de animações
+        if (estadoAtual.reduzirAnimacoes) {
+            document.documentElement.classList.add('reduzir-animacoes');
+        } else {
+            document.documentElement.classList.remove('reduzir-animacoes');
+        }
 
         // Aplica alto contraste no MAIN em vez do body
         const mains = document.querySelectorAll('main');
@@ -148,6 +164,22 @@
 
         // Atualiza descrição do tamanho da fonte
         atualizarDescricaoFonte();
+
+        // Atualiza fonte dislexia
+        const btnDislexia = document.querySelector('[data-opcao="fonte-dislexia"]');
+        if (btnDislexia) {
+            btnDislexia.classList.toggle('ativo', estadoAtual.fonteDislexia);
+            const st = btnDislexia.querySelector('.opcao-acessibilidade_status');
+            if (st) st.textContent = estadoAtual.fonteDislexia ? 'Ativo' : 'Inativo';
+        }
+
+        // Atualiza reduzir animações
+        const btnAnim = document.querySelector('[data-opcao="reduzir-animacoes"]');
+        if (btnAnim) {
+            btnAnim.classList.toggle('ativo', estadoAtual.reduzirAnimacoes);
+            const st = btnAnim.querySelector('.opcao-acessibilidade_status');
+            if (st) st.textContent = estadoAtual.reduzirAnimacoes ? 'Ativo' : 'Inativo';
+        }
     }
 
     function inicializarPainel() {
@@ -229,6 +261,12 @@
             case 'daltonismo-desativar':
                 aplicarFiltroDaltonismo('none');
                 break;
+            case 'fonte-dislexia':
+                toggleFonteDislexia();
+                break;
+            case 'reduzir-animacoes':
+                toggleReduzirAnimacoes();
+                break;
             case 'resetar-tudo':
                 resetarTudo();
                 break;
@@ -298,6 +336,20 @@
         });
     }
 
+    function toggleFonteDislexia() {
+        estadoAtual.fonteDislexia = !estadoAtual.fonteDislexia;
+        aplicarEstado();
+        salvarPreferencias();
+        atualizarUIParaEstadoAtual();
+    }
+
+    function toggleReduzirAnimacoes() {
+        estadoAtual.reduzirAnimacoes = !estadoAtual.reduzirAnimacoes;
+        aplicarEstado();
+        salvarPreferencias();
+        atualizarUIParaEstadoAtual();
+    }
+
     function aplicarFiltroDaltonismo(tipo) {
         estadoAtual.filtroDaltonismo = tipo;
         aplicarEstado();
@@ -341,7 +393,9 @@
             tema: detectarTemaDoSistema(),
             contraste: false,
             scaleFactor: 1,
-            filtroDaltonismo: 'none'
+            filtroDaltonismo: 'none',
+            fonteDislexia: false,
+            reduzirAnimacoes: false
         };
         
         aplicarEstado();

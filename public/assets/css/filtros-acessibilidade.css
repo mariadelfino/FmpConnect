@@ -80,6 +80,48 @@ body.filtros-ativos [aria-busy="true"] {
 }
 
 /* ========================================
+   Fonte para Dislexia
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+:root.fonte-dislexia {
+    --font-dislexia: 'Lexend', sans-serif;
+}
+
+html.fonte-dislexia body,
+html.fonte-dislexia p,
+html.fonte-dislexia span,
+html.fonte-dislexia h1,
+html.fonte-dislexia h2,
+html.fonte-dislexia h3,
+html.fonte-dislexia h4,
+html.fonte-dislexia button,
+html.fonte-dislexia input,
+html.fonte-dislexia textarea,
+html.fonte-dislexia label,
+html.fonte-dislexia a,
+html.fonte-dislexia li,
+html.fonte-dislexia td,
+html.fonte-dislexia th {
+    font-family: var(--font-dislexia) !important;
+    letter-spacing: 0.04em;
+    word-spacing: 0.12em;
+    line-height: 1.75 !important;
+}
+
+/* ========================================
+   Reduzir Animações
+   ======================================== */
+html.reduzir-animacoes *,
+html.reduzir-animacoes *::before,
+html.reduzir-animacoes *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
+/* ========================================
    Filtros SVG (precisam ser injetados no HTML)
    ======================================== */
 
