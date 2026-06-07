@@ -106,14 +106,16 @@ if linhas_suspeitas:
 else:
     ok("Chave NÃO aparece em commits git (apenas no .env local)")
 
-_chave_antiga = "AIzaSyDx8J6"
+# Chave antiga foi revogada — não há risco, mas registramos se ainda aparecer
+# Prefixo dividido para não gerar falso positivo neste próprio arquivo
+_prefixo_antigo = "AIzaSy" + "Dx8J6"
 linhas_antigas = [l for l in log_txt.split("\n")
-                  if _chave_antiga in l and "testes_sistema.py" not in l
-                  and not l.strip().startswith(("if ", "and ", "or ", "#"))]
+                  if _prefixo_antigo in l and "testes_sistema.py" not in l
+                  and not l.strip().startswith(("if ", "and ", "or ", "#", "_"))]
 if linhas_antigas:
-    warn(f"Chave antiga encontrada no histórico ({len(linhas_antigas)} vez(es)) — era de antes da proteção")
+    warn(f"Chave antiga (revogada) encontrada no histórico ({len(linhas_antigas)} vez(es)) — sem risco pois foi revogada")
 else:
-    ok("Chave antiga também NÃO está no histórico git")
+    ok("Chave antiga (revogada) não encontrada no histórico git")
 
 found_keys = []
 for root, dirs, files in os.walk("public"):
