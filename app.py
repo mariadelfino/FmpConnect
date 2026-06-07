@@ -1,8 +1,14 @@
 import os
+import sys
 import json
 import urllib.request
 import urllib.error
 import asyncio
+
+# Garante que prints com emoji não travem no terminal Windows (cp1252)
+if sys.stdout.encoding and sys.stdout.encoding.lower() not in ("utf-8", "utf-8-sig"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 import edge_tts
 import tempfile
 from datetime import datetime, timezone, timedelta
@@ -451,7 +457,7 @@ def text_tts():
         return send_file(temp_filename, mimetype="audio/mpeg")
 
     except Exception as e:
-        print(f"❌ Erro no TTS: {e}")
+        print(f"[ERRO] TTS: {e}")
         return jsonify({"error": str(e)}), 500
 
 
@@ -524,7 +530,7 @@ def text_chat():
             "generationConfig": {"temperature": temperature_setting, "maxOutputTokens": 800}
         }
 
-        print(f"📡 [Chat] {model} | Modo: {mode} | Histórico: {len(history)} msgs")
+        print(f"[CHAT] {model} | Modo: {mode} | Histórico: {len(history)} msgs")
 
         jsondata = json.dumps(body).encode("utf-8")
         req = urllib.request.Request(url, data=jsondata, method="POST")
@@ -548,12 +554,14 @@ def text_chat():
                 return jsonify({"error": "Resposta vazia ou bloqueada pelo modelo", "raw": resp_json}), 502
 
         except urllib.error.HTTPError as e:
-            error_content = e.read().decode("utf-8")
-            print(f"❌ Erro {e.code}: {error_content}")
+            error_content = e.read().decode("utf-8", errors="replace")
+            safe_content = error_content.encode("ascii", errors="replace").decode("ascii")
+            print(f"[ERRO] HTTP {e.code}: {safe_content[:200]}")
             return jsonify({"answer": "Erro técnico na IA.", "error": str(e)}), 500
 
     except Exception as e:
-        print(f"❌ Erro crítico no chat: {e}")
+        safe_e = str(e).encode("ascii", errors="replace").decode("ascii")
+        print(f"[ERRO] Critico no chat: {safe_e}")
         return jsonify({"error": str(e)}), 500
 
 
@@ -575,7 +583,7 @@ def rpa_scrape():
             "total_encontrados": len(itens)
         })
     except Exception as e:
-        print(f"❌ Erro no RPA scrape: {e}")
+        print(f"[ERRO] RPA scrape: {e}")
         return jsonify({"error": str(e)}), 500
 
 
@@ -608,7 +616,7 @@ def rpa_emails():
             **resultado
         })
     except Exception as e:
-        print(f"❌ Erro no RPA emails: {e}")
+        print(f"[ERRO] RPA emails: {e}")
         return jsonify({"error": str(e)}), 500
 
 
