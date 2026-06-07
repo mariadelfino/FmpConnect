@@ -455,13 +455,9 @@ def text_tts():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/text/token", methods=["GET"])
-def get_text_token():
-    return jsonify({"token": API_KEY})
-
-
 @app.route("/text/config", methods=["GET"])
 def get_text_config():
+    # Retorna apenas o modelo — a chave NUNCA é enviada ao cliente
     dynamic_instruction = database.build_dynamic_system_instruction(BASE_SYSTEM_INSTRUCTION)
     return jsonify({"model": "gemini-2.5-flash", "systemInstruction": dynamic_instruction})
 
