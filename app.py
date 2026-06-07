@@ -440,7 +440,14 @@ def text_tts():
             communicate = edge_tts.Communicate(text, VOICE)
             await communicate.save(temp_filename)
 
-        asyncio.run(generate_audio())
+        # Cria um loop isolado para evitar conflito com o event loop do Flask/debug
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            loop.run_until_complete(generate_audio())
+        finally:
+            loop.close()
+
         return send_file(temp_filename, mimetype="audio/mpeg")
 
     except Exception as e:
