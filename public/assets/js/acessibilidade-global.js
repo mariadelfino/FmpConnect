@@ -370,7 +370,6 @@
             }
         });
         
-        // Exclui marquee de patrocinadores dos filtros (logos devem manter cores originais)
         const marquees = document.querySelectorAll('.secao-patrocinadores, .marquee, .marquee_track');
         marquees.forEach(marquee => {
             marquee.classList.remove('filtro-protanopia', 'filtro-deuteranopia', 'filtro-tritanopia');

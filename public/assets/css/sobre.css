@@ -6,7 +6,7 @@
     position: relative;
     overflow-x: hidden;
     color: var(--color-white);
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-family-primary);
 }
 
 /* ========================================
@@ -139,7 +139,7 @@
     font-weight: 600;
     text-transform: uppercase;
     margin-bottom: 16px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0;
 }
 
 .video-wrapper {

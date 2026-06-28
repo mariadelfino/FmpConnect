@@ -18,7 +18,7 @@
     --admin-radius: 12px;
     --admin-radius-sm: 8px;
     --admin-transition: 200ms ease;
-    --font: 'Montserrat', -apple-system, sans-serif;
+    --font: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -76,7 +76,7 @@ body {
     font-weight: 700;
     padding: 0.2rem 0.55rem;
     border-radius: 999px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0;
     text-transform: uppercase;
 }
 
@@ -104,7 +104,7 @@ body {
     font-weight: 600;
     color: var(--admin-text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0;
 }
 
 .campo-input {
@@ -236,7 +236,7 @@ body {
     font-weight: 700;
     color: var(--admin-text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
     padding: 0.75rem 0.75rem 0.4rem;
 }
 
@@ -457,7 +457,7 @@ th {
     color: var(--admin-text-muted);
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0;
     padding: 0.75rem 1rem;
     text-align: left;
     text-transform: uppercase;

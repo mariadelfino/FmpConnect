@@ -363,7 +363,7 @@ button[type="submit"]:active {
 
 @media (min-width: 1024px) {
     .secao-feedback {
-        max-width: 1000px;
+        max-width: 1200px;
         padding: var(--spacing-3xl) var(--container-padding);
     }
 

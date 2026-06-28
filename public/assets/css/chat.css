@@ -61,23 +61,23 @@ body {
 
 @media (min-width: 1024px) {
     .area-mensagens {
-        padding-left: 60px;
-        padding-right: 60px;
+        padding-left: 200px;
+        padding-right: 200px;
         padding-bottom: 20px;
     }
 }
 
 @media (min-width: 1280px) {
     .area-mensagens {
-        padding-left: 60px;
-        padding-right: 60px;
+        padding-left: 200px;
+        padding-right: 200px;
     }
 }
 
 @media (min-width: 1536px) {
     .area-mensagens {
-        padding-left: 60px;
-        padding-right: 60px;
+        padding-left: 200px;
+        padding-right: 200px;
     }
 }
 
@@ -290,7 +290,7 @@ body {
 
 /* Garante que se o JS criar parágrafos, eles tenham espaço */
 .mensagem-conteudo p {
-    margin-bottom: 10px;
+    margin-bottom: 1px;
     margin-top: 0;
 }
 
@@ -365,30 +365,27 @@ body {
 [data-theme="dark"] .mensagem-texto p {
     color: #fff !important;
 }
-[data-theme="light"] .area-input-pergunta .container-input.full-width #botao-microfone svg {
-    stroke: #009FE3 !important; 
-    color: #009FE3 !important;
-}
 
-[data-theme="light"] #botao-microfone:hover {
-    background-color: rgba(29, 57, 108, 0.08) !important;
-}
+/* =========================================================
+   Área de input — rodapé do chat
+   ========================================================= */
 
 .area-input-pergunta {
-    padding: 12px;
+    padding: 10px 16px 16px;
     background: transparent;
     position: sticky;
     bottom: 0;
     z-index: 50;
     box-sizing: border-box;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 @media (min-width: 1024px) {
     .area-input-pergunta {
-        padding-left: 60px;
-        padding-right: 60px;
-        padding-bottom: 60px;
+        padding: 10px 200px 48px;
         position: relative;
         bottom: auto;
     }
@@ -396,33 +393,98 @@ body {
 
 @media (min-width: 1280px) {
     .area-input-pergunta {
-        padding-left: 60px;
-        padding-right: 60px;
+        padding-left: 200px;
+        padding-right: 200px;
     }
 }
 
 @media (min-width: 1536px) {
     .area-input-pergunta {
-        padding-left: 60px;
-        padding-right: 60px;
+        padding-left: 200px;
+        padding-right: 200px;
     }
 }
 
+/* ---------------------------------------------------------
+   Chips de sugestão rápida
+   --------------------------------------------------------- */
+.sugestoes-rapidas {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+}
+.sugestoes-rapidas::-webkit-scrollbar { display: none; }
+
+.sugestao-chip {
+    flex-shrink: 0;
+    padding: calc(5px * var(--scale-factor, 1)) calc(14px * var(--scale-factor, 1));
+    border: 1.5px solid var(--color-primary);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--color-primary);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        background var(--transition-base),
+        color var(--transition-base),
+        transform var(--transition-base);
+}
+.sugestao-chip:hover {
+    background: var(--color-primary-background-hover);
+    transform: translateY(-1px);
+}
+.sugestao-chip:active { transform: translateY(0); }
+.sugestao-chip:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+[data-theme="light"] .sugestao-chip {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: rgba(0, 159, 227, 0.04);
+}
+[data-theme="light"] .sugestao-chip:hover {
+    background: var(--color-primary-background-hover);
+}
+
+/* ---------------------------------------------------------
+   Container do campo de texto
+   --------------------------------------------------------- */
 .container-input.full-width {
     width: 100%;
     margin: 0 auto;
-    padding: 8px 16px; 
+    padding: 5px 5px 5px 10px;
     box-sizing: border-box;
-    /* Gradiente Azul Claro -> Azul Escuro */
-    background: linear-gradient(90deg, #009FE3 0%, #1D396C 100%);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1.5px solid var(--color-opcao-chat-border);
     border-radius: var(--radius-full);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
+    transition: border-color var(--transition-base);
+}
+.container-input.full-width:focus-within {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: none;
 }
 
 [data-theme="light"] .container-input.full-width {
-    background: var(--color-opcao-chat-background)!important;
+    background: #ffffff;
+    border-color: rgba(0, 159, 227, 0.25);
+    box-shadow: 0 2px 10px rgba(29, 57, 108, 0.07);
+}
+[data-theme="light"] .container-input.full-width:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 12px rgba(0, 159, 227, 0.15);
 }
 
 .container-input.full-width input[type="text"] {
@@ -430,150 +492,174 @@ body {
     min-width: 0;
     background: transparent;
     border: none;
-    color: var(--color-white);
-    font-size: calc(1rem * var(--scale-factor));
-    padding: 3px 4px; 
+    color: #ffffff;
+    font-family: var(--font-family-primary);
+    font-size: calc(0.95rem * var(--scale-factor, 1));
+    padding: 8px 4px;
     outline: none !important;
     box-shadow: none !important;
 }
-
 .container-input.full-width input[type="text"]::placeholder {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 [data-theme="light"] .container-input.full-width input[type="text"] {
     color: #1D396C !important;
 }
 [data-theme="light"] .container-input.full-width input[type="text"]::placeholder {
-    color: rgba(29, 57, 108, 0.45) !important;
-}
-[data-theme="dark"] .container-input.full-width input[type="text"] {
-    color: #fff !important;
-}
-[data-theme="dark"] .container-input.full-width input[type="text"]::placeholder {
-    color: rgba(255,255,255,0.7) !important;
+    color: rgba(29, 57, 108, 0.4) !important;
 }
 
 .container-input.full-width .acoes-input {
     display: flex;
-    gap: 8px;
+    gap: 4px;
     align-items: center;
     flex-shrink: 0;
 }
 
-#botao-microfone {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px; 
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: transform 0.2s;
-}
-
-#botao-microfone svg {
-    width: 34px; 
-    height: 34px; 
-    stroke: #ffffff !important;
-    fill: none !important;
-    color: #ffffff !important;
-    display: block;
-}
-
+/* ---------------------------------------------------------
+   Botão reiniciar — lado esquerdo do campo
+   --------------------------------------------------------- */
 #botao-reset {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition:
+        background var(--transition-base),
+        border-color var(--transition-base),
+        color var(--transition-base),
+        transform var(--transition-base);
 }
-
 #botao-reset svg {
-    width: 24px;
-    height: 24px;
-    fill: #ffffff;
-    color: #ffffff;
-    display: block;
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+}
+#botao-reset:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-primary-background-hover);
+    transform: scale(1.05);
+}
+#botao-reset:active { transform: scale(0.95); }
+
+[data-theme="light"] #botao-reset {
+    border-color: rgba(29, 57, 108, 0.2);
+    color: #1D396C;
+}
+[data-theme="light"] #botao-reset:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-primary-background-hover);
 }
 
-[data-theme="light"] #botao-reset svg {
-    fill: #009FE3; /* Ícone Azul Claro */
-    color: #009FE3;
-}
-
-[data-theme="dark"] #botao-reset svg {
-    fill: #ffffff;
-    color: #ffffff;
-}
-#botao-enviar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px; 
-    height: 50px; 
+/* ---------------------------------------------------------
+   Botão microfone — dentro do campo, à direita
+   --------------------------------------------------------- */
+#botao-microfone {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
     background: transparent;
     border: none;
-    padding: 0;
     cursor: pointer;
     flex-shrink: 0;
-    transition: transform 0.2s;
-}
-
-#botao-enviar svg {
-    width: 26px; 
-    height: 26px; 
-}
-
-#botao-enviar svg path {
-    stroke: #FFFFFF; 
-}
-
-[data-theme="light"] #botao-enviar svg path {
-    stroke: #009FE3 !important; 
-}
-
-#botao-enviar:hover {
+    color: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
-    background-color: rgba(255,255,255,0.1); 
+    transition:
+        color var(--transition-base),
+        background var(--transition-base),
+        transform var(--transition-base);
 }
-
-[data-theme="light"] #botao-enviar:hover {
-    background-color: rgba(29, 57, 108, 0.08) !important; 
+#botao-microfone svg {
+    width: 25px;
+    height: 25px;
+    stroke: currentColor;
+    fill: none;
 }
-
-#botao-enviar-wave {
-    display: none; 
-}
-
-#botao-enviar-wave:hover {
-    display: none;
-}
-
-#botao-enviar-wave svg {
-    display: none;
-}
-
-#botao-enviar:hover,
 #botao-microfone:hover {
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.1);
+    color: var(--color-primary);
+    background: var(--color-primary-background-hover);
+    transform: scale(1.05);
 }
+#botao-microfone.gravando {
+    color: #EF4444;
+    background: rgba(239, 68, 68, 0.15);
+    animation: pulso-gravacao 1.5s infinite;
+}
+[data-theme="light"] #botao-microfone {
+    color: var(--color-primary);
+}
+[data-theme="light"] #botao-microfone:hover {
+    color: var(--color-primary-dark);
+    background: var(--color-primary-background-hover);
+}
+
+/* ---------------------------------------------------------
+   Botão enviar — círculo sólido à direita
+   --------------------------------------------------------- */
+#botao-enviar {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-primary-dark);
+    color: #ffffff;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition:
+        background var(--transition-base),
+        transform var(--transition-base),
+        box-shadow var(--transition-base);
+    box-shadow: 0 2px 8px rgba(29, 57, 108, 0.3);
+}
+#botao-enviar svg {
+    width: 18px;
+    height: 18px;
+    stroke: #ffffff;
+    fill: none;
+}
+#botao-enviar svg path { stroke: #ffffff; }
+#botao-enviar:hover {
+    background: var(--color-primary);
+    transform: scale(1.06);
+    box-shadow: 0 4px 14px rgba(0, 159, 227, 0.4);
+}
+#botao-enviar:active { transform: scale(0.95); }
+
+[data-theme="light"] #botao-enviar {
+    background: var(--color-primary-dark);
+    box-shadow: 0 2px 8px rgba(29, 57, 108, 0.2);
+}
+[data-theme="light"] #botao-enviar:hover {
+    background: var(--color-primary);
+    box-shadow: 0 4px 14px rgba(0, 159, 227, 0.35);
+}
+
+#botao-enviar-wave { display: none; }
+#botao-enviar-wave:hover { display: none; }
+#botao-enviar-wave svg { display: none; }
+.botao-waveform { display: none; }
 
 @media (max-width: 640px) {
     .welcome-card { width: calc(100% - 40px); padding: 20px; }
-    .area-input-pergunta { padding: 16px; }
-    #botao-microfone { width: 44px; height: 44px; }
-    #botao-microfone svg { width: 35px; height: 35px; }
-    #botao-enviar { width: 44px; height: 44px; }
-    #botao-enviar svg { width: 22px; height: 22px; }
-}
-.botao-waveform { display: none; }
-.container-input.full-width:focus-within {
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
+    .area-input-pergunta { padding: 8px 12px 14px; }
+    #botao-enviar { width: 38px; height: 38px; }
+    #botao-microfone { width: 34px; height: 34px; }
+    #botao-microfone svg { width: 18px; height: 18px; }
+    #botao-reset { width: 30px; height: 30px; }
+    #botao-reset svg { width: 14px; height: 14px; }
 }
 
 input:-webkit-autofill,
@@ -588,79 +674,23 @@ input:-internal-autofill-selected {
 html[data-theme="light"] .welcome-card h2 {
     color: var(--color-primary-text) !important;
 }
+
 .cabecalho {
     position: relative;
 }
+
 .cabecalho-acoes {
     display: flex;
-    gap: 12px; 
+    gap: 12px;
     align-items: center;
-}
-#botao-reset {
-    width: 50px; 
-    height: 50px; 
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: transform 0.2s;
-}
-#botao-reset svg {
-    width: 30px; 
-    height: 30px; 
-    fill: #ffffff; 
-}
-[data-theme="light"] #botao-reset svg {
-    fill: #1D396C !important; 
-}
-#botao-reset:hover {
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.1); 
-}
-[data-theme="light"] #botao-reset:hover {
-    background-color: rgba(29, 57, 108, 0.08) !important; 
-}
-
-#botao-microfone {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#botao-microfone svg {
-    stroke: white;
-}
-
-[data-theme="light"] #botao-microfone svg {
-    stroke: #009FE3; 
-}
-
-#botao-enviar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#botao-enviar svg {
-    stroke: white;
-}
-
-[data-theme="light"] #botao-enviar svg {
-    stroke: #009FE3; 
 }
 
 .acoes-input {
-    gap: 8px; 
-}
-
-#botao-microfone.gravando {
-    background-color: rgba(220, 53, 69, 0.2) !important;
-    animation: pulso-gravacao 1.5s infinite;
+    gap: 4px;
 }
 
 #botao-microfone.gravando svg {
-    stroke: #ff4444 !important; 
+    stroke: #ff4444 !important;
 }
 
 @keyframes pulso-gravacao {

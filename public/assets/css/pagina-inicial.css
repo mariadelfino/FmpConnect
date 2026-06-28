@@ -26,8 +26,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-md);
-    padding: var(--spacing-lg) var(--container-padding) var(--spacing-xl);
-    max-width: 1200px;
+    max-width: 1000px;
     width: 100%;
     margin: 0 auto;
 }
@@ -120,7 +119,6 @@
         display: flex;
         justify-content: center; /* Centraliza horizontalmente */
         align-items: center;
-        padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl);
         gap: var(--spacing-xl); /* Espaço maior entre os botões */
     }
 
@@ -155,7 +153,7 @@
 
 @media (min-width: 1024px) {
     .secao-opcoes {
-        max-width: 1200px;
+        max-width: 1000px;
         gap: var(--spacing-2xl); /* Espaço ainda maior em telas grandes */
     }
 
@@ -511,7 +509,7 @@
         -webkit-mask-image: none;
         margin: 0 auto;
         width: 80%;
-        max-width: 900px;
+        max-width: 1000px;
         mask-image: none;
         -webkit-mask-image: none;
         margin: 0 auto;

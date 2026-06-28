@@ -5,89 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FMPConnect — Chat por Voz</title>
     <link rel="icon" type="image/png" href="./assets/images/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        :root {
-            --primary: #009FE3;
-            --primary-dark: #1D396C;
-            --bg: #0a1628;
-            --font: 'Montserrat', sans-serif;
-        }
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('Fmpconnect-acessibilidade');
+                if (saved) {
+                    const estado = JSON.parse(saved);
+
+                    if (estado.tema === 'claro') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    }
+
+                    if (estado.scaleFactor && estado.scaleFactor !== 1) {
+                        document.documentElement.style.setProperty('--scale-factor', estado.scaleFactor);
+                    }
+
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const mains = document.querySelectorAll('main');
+
+                        if (estado.filtroDaltonismo && estado.filtroDaltonismo !== 'none') {
+                            mains.forEach(function (main) {
+                                main.classList.add('filtro-' + estado.filtroDaltonismo);
+                            });
+                            document.body.setAttribute('data-filtro-daltonismo', estado.filtroDaltonismo);
+                        }
+
+                        if (estado.contraste) {
+                            mains.forEach(function (main) {
+                                main.classList.add('alto-contraste');
+                            });
+                            document.body.setAttribute('data-alto-contraste', 'true');
+                        }
+                    });
+                }
+            } catch (e) {}
+        })();
+    </script>
+
+    <link rel="stylesheet" href="./assets/css/componentes.css">
+    <link rel="stylesheet" href="./assets/css/cabecalho.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
+
+    <style>
+        /* ==========================================================
+           Chat por Voz — estilos específicos da página
+           Os estilos base (cabecalho, botoes, variáveis) vêm dos
+           arquivos CSS linkados no <head>.
+           ========================================================== */
 
         body {
-            background: radial-gradient(ellipse at 50% 0%, #1D396C 0%, #0a1628 100%);
-            color: #fff;
-            font-family: var(--font);
+            background: var(--gradient-primary);
+            color: var(--color-primary-text);
+            font-family: var(--font-family-primary);
+            min-height: 100vh;
+        }
+
+        .pagina-voz {
+            width: 100%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: hidden;
         }
 
-        /* Header */
-        .cabecalho {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.5rem 1.5rem 0;
-        }
-
-        .botao-voltar {
-            width: 44px; height: 44px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(0,159,227,0.3);
-            background: none;
-            color: #fff;
-            cursor: pointer;
-            display: grid;
-            place-items: center;
-            transition: border-color .2s, background .2s;
-            flex-shrink: 0;
-        }
-        .botao-voltar:hover { border-color: var(--primary); background: rgba(0,159,227,0.1); }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #009FE3, #89D6FA);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
+        /* ----------------------------------------------------------
+           Botão de reiniciar — variante menor, dentro do conteúdo
+           ---------------------------------------------------------- */
         .botao-reset {
-            width: 44px; height: 44px;
+            width: var(--size-icon-sm);
+            height: var(--size-icon-sm);
             border-radius: 50%;
-            border: 1.5px solid rgba(0,159,227,0.3);
-            background: none;
-            color: rgba(255,255,255,0.6);
+            border: 1.5px solid var(--color-primary-border);
+            background: transparent;
+            color: var(--color-primary-icon);
             cursor: pointer;
             display: grid;
             place-items: center;
-            transition: border-color .2s, color .2s, background .2s;
+            transition:
+                background var(--transition-base),
+                border-color var(--transition-base),
+                transform var(--transition-base);
         }
-        .botao-reset:hover { border-color: var(--primary); color: var(--primary); background: rgba(0,159,227,0.1); }
+        .botao-reset svg {
+            width: 55%;
+            height: 55%;
+        }
+        .botao-reset:hover {
+            background: var(--color-primary-background-hover);
+            border-color: var(--color-primary);
+            transform: scale(1.05);
+        }
+        .botao-reset:active { transform: scale(0.95); }
 
-        /* Área central */
+        /* ----------------------------------------------------------
+           Área central — conteúdo da interface de voz
+           ---------------------------------------------------------- */
         .area-central {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 2.5rem;
-            padding: 2rem 1.5rem;
+            gap: var(--spacing-xl);
+            padding: var(--spacing-xl) var(--spacing-lg);
             width: 100%;
             max-width: 500px;
         }
 
-        /* Botão de microfone */
+        /* ----------------------------------------------------------
+           Anéis de pulso ao redor do microfone
+           ---------------------------------------------------------- */
         .area-microfone {
             position: relative;
             display: flex;
@@ -95,17 +126,16 @@
             justify-content: center;
         }
 
-        /* Anéis de pulso */
         .anel {
             position: absolute;
             border-radius: 50%;
-            border: 2px solid var(--primary);
+            border: 2px solid var(--color-primary);
             opacity: 0;
             pointer-events: none;
         }
-        .anel-1 { width: 140px; height: 140px; }
-        .anel-2 { width: 180px; height: 180px; }
-        .anel-3 { width: 220px; height: 220px; }
+        .anel-1 { width: calc(140px * var(--scale-factor, 1)); height: calc(140px * var(--scale-factor, 1)); }
+        .anel-2 { width: calc(180px * var(--scale-factor, 1)); height: calc(180px * var(--scale-factor, 1)); }
+        .anel-3 { width: calc(220px * var(--scale-factor, 1)); height: calc(220px * var(--scale-factor, 1)); }
 
         body.ouvindo .anel-1 { animation: pulso 1.5s ease-out infinite 0s; }
         body.ouvindo .anel-2 { animation: pulso 1.5s ease-out infinite .3s; }
@@ -116,7 +146,6 @@
             100% { transform: scale(1.3); opacity: 0; }
         }
 
-        /* Ondas do falando */
         body.falando .anel-1 { animation: onda 1s ease-in-out infinite alternate 0s; opacity: 0.4; }
         body.falando .anel-2 { animation: onda 1s ease-in-out infinite alternate .2s; opacity: 0.25; }
         body.falando .anel-3 { animation: onda 1s ease-in-out infinite alternate .4s; opacity: 0.15; }
@@ -126,45 +155,45 @@
             to   { transform: scale(1.1); }
         }
 
+        /* ----------------------------------------------------------
+           Botão do microfone
+           ---------------------------------------------------------- */
         .btn-microfone {
-            width: 110px;
-            height: 110px;
+            width: calc(110px * var(--scale-factor, 1));
+            height: calc(110px * var(--scale-factor, 1));
             border-radius: 50%;
             border: none;
-            background: linear-gradient(135deg, #009FE3, #1D396C);
+            background: var(--gradient-button-pink);
             color: white;
             cursor: pointer;
             display: grid;
             place-items: center;
             position: relative;
             z-index: 1;
-            box-shadow: 0 0 40px rgba(0,159,227,0.3);
-            transition: transform .2s, box-shadow .2s;
+            box-shadow: 0 0 40px rgba(0, 159, 227, 0.3);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
         }
 
         .btn-microfone:hover:not(:disabled) {
             transform: scale(1.05);
-            box-shadow: 0 0 60px rgba(0,159,227,0.5);
+            box-shadow: 0 0 60px rgba(0, 159, 227, 0.5);
         }
-
         .btn-microfone:active:not(:disabled) { transform: scale(0.97); }
-
         .btn-microfone:disabled { opacity: 0.6; cursor: not-allowed; }
 
+        /* Estados funcionais do botão (cores de feedback visual) */
         body.ouvindo .btn-microfone {
             background: linear-gradient(135deg, #EF4444, #991b1b);
-            box-shadow: 0 0 40px rgba(239,68,68,0.4);
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.4);
             animation: pulso-btn .8s ease-in-out infinite alternate;
         }
-
         body.falando .btn-microfone {
             background: linear-gradient(135deg, #10B981, #065f46);
-            box-shadow: 0 0 40px rgba(16,185,129,0.4);
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
         }
-
         body.processando .btn-microfone {
             background: linear-gradient(135deg, #F59E0B, #78350f);
-            box-shadow: 0 0 40px rgba(245,158,11,0.3);
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.3);
         }
 
         @keyframes pulso-btn {
@@ -172,11 +201,13 @@
             to   { transform: scale(1.04); }
         }
 
-        /* Ícone spinner dentro do botão quando processando */
+        /* Ícones dentro do botão — trocados por CSS conforme estado */
         .icone-mic, .icone-stop, .icone-spinner, .icone-som {
             position: absolute;
-            display: flex; align-items: center; justify-content: center;
-            transition: opacity .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity var(--transition-fast);
         }
         .icone-mic     { opacity: 1; }
         .icone-stop    { opacity: 0; }
@@ -185,35 +216,40 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        body.ouvindo  .icone-mic     { opacity: 0; }
-        body.ouvindo  .icone-stop    { opacity: 1; }
-        body.processando .icone-mic  { opacity: 0; }
-        body.processando .icone-spinner { opacity: 1; }
-        body.falando  .icone-mic     { opacity: 0; }
-        body.falando  .icone-som     { opacity: 1; }
+        body.ouvindo     .icone-mic      { opacity: 0; }
+        body.ouvindo     .icone-stop     { opacity: 1; }
+        body.processando .icone-mic      { opacity: 0; }
+        body.processando .icone-spinner  { opacity: 1; }
+        body.falando     .icone-mic      { opacity: 0; }
+        body.falando     .icone-som      { opacity: 1; }
 
-        /* Texto de estado */
-        .estado-texto {
-            text-align: center;
-        }
+        /* ----------------------------------------------------------
+           Texto de estado
+           ---------------------------------------------------------- */
+        .estado-texto { text-align: center; }
 
         .estado-principal {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary-text);
+            margin-bottom: var(--spacing-xs);
             min-height: 1.5em;
         }
 
         .estado-secundario {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.45);
+            font-size: var(--font-size-sm);
+            color: var(--color-primary-text);
+            opacity: 0.55;
             min-height: 1.2em;
         }
 
-        /* Transcrição do usuário */
+        /* ----------------------------------------------------------
+           Transcrição da fala do usuário
+           ---------------------------------------------------------- */
         .transcricao {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
+            font-size: var(--font-size-sm);
+            color: var(--color-primary-text);
+            opacity: 0.6;
             font-style: italic;
             text-align: center;
             min-height: 1.2em;
@@ -223,145 +259,299 @@
             white-space: nowrap;
         }
 
-        /* Modo continuo toggle */
+        /* ----------------------------------------------------------
+           Toggle modo contínuo
+           ---------------------------------------------------------- */
         .toggle-continuo {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.5);
+            gap: var(--spacing-sm);
+            font-size: var(--font-size-sm);
+            color: var(--color-primary-text);
+            opacity: 0.6;
             cursor: pointer;
             user-select: none;
-            margin-top: -1rem;
         }
-
         .toggle-continuo input { display: none; }
 
         .toggle-track {
-            width: 36px; height: 20px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 999px;
+            width: 36px;
+            height: 20px;
+            background: var(--color-primary-border);
+            border-radius: var(--radius-full);
             position: relative;
-            transition: background .2s;
+            transition: background var(--transition-base);
+            flex-shrink: 0;
         }
-
         .toggle-track::after {
             content: '';
             position: absolute;
-            width: 14px; height: 14px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
-            background: white;
-            top: 3px; left: 3px;
-            transition: transform .2s;
+            background: var(--color-primary-text);
+            top: 3px;
+            left: 3px;
+            transition: transform var(--transition-base);
         }
-
-        .toggle-continuo input:checked + .toggle-track { background: var(--primary); }
+        .toggle-continuo input:checked + .toggle-track { background: var(--color-primary); }
         .toggle-continuo input:checked + .toggle-track::after { transform: translateX(16px); }
 
-        /* Sem suporte */
+        /* ----------------------------------------------------------
+           Aviso de navegador sem suporte
+           ---------------------------------------------------------- */
         .sem-suporte {
-            background: rgba(239,68,68,0.1);
-            border: 1px solid rgba(239,68,68,0.3);
-            border-radius: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius-lg);
             color: #fca5a5;
-            font-size: 0.9rem;
-            padding: 1rem 1.5rem;
+            font-size: var(--font-size-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
             text-align: center;
             display: none;
+        }
+
+        /* ==========================================================
+           Modo claro — ajustes de contraste para fundo branco
+           ========================================================== */
+        [data-theme="light"] .anel {
+            border-color: var(--color-primary);
+            opacity: 0;
+        }
+        [data-theme="light"] .toggle-track {
+            background: var(--color-primary-border);
+        }
+        [data-theme="light"] .toggle-track::after {
+            background: var(--color-primary-dark);
+        }
+
+        /* ==========================================================
+           Responsividade
+           ========================================================== */
+        @media (min-width: 768px) {
+            .area-central {
+                max-width: 600px;
+                gap: var(--spacing-2xl);
+                padding: var(--spacing-2xl) var(--spacing-xl);
+            }
+            .btn-microfone {
+                width: calc(130px * var(--scale-factor, 1));
+                height: calc(130px * var(--scale-factor, 1));
+            }
+            .anel-1 { width: calc(170px * var(--scale-factor, 1)); height: calc(170px * var(--scale-factor, 1)); }
+            .anel-2 { width: calc(210px * var(--scale-factor, 1)); height: calc(210px * var(--scale-factor, 1)); }
+            .anel-3 { width: calc(250px * var(--scale-factor, 1)); height: calc(250px * var(--scale-factor, 1)); }
+        }
+
+        @media (min-width: 1024px) {
+            .area-central {
+                max-width: 700px;
+            }
+            .btn-microfone {
+                width: calc(140px * var(--scale-factor, 1));
+                height: calc(140px * var(--scale-factor, 1));
+            }
         }
     </style>
 </head>
 <body>
 
-    <header class="cabecalho" role="banner">
-        <a href="paginainicial.html" aria-label="Voltar para a página inicial">
-            <button class="botao-voltar" type="button">
-                <svg width="10" height="18" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <main class="pagina-voz">
+
+        <header class="cabecalho">
+
+            <!-- Esquerda: seta de voltar + logo -->
+            <div class="cabecalho__esquerda">
+                <a href="paginainicial.html" aria-label="Voltar para a página inicial">
+                    <button class="botao-voltar" type="button">
+                        <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.25667 17.8117L0.75 9.28083L9.25667 0.75" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </a>
+                <h1 class="cabecalho__logo">FMPConnect</h1>
+            </div>
+
+            <!-- Centro: navegação em cápsula -->
+            <nav class="cabecalho__nav" aria-label="Navegação principal">
+                <a href="./chat.html" class="cabecalho__nav-btn" aria-label="Converse por texto com o FMPConnect">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Converse por texto</span>
+                </a>
+
+                <span class="cabecalho__nav-divisor" aria-hidden="true"></span>
+
+                <a href="./chat-voz.html" class="cabecalho__nav-btn" aria-current="page" aria-label="Converse por voz com o FMPConnect">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19 10v2a7 7 0 01-14 0v-2"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="12" y1="19" x2="12" y2="23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="8" y1="23" x2="16" y2="23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span>Converse por voz</span>
+                </a>
+
+                <span class="cabecalho__nav-divisor" aria-hidden="true"></span>
+
+                <a href="./feedback.html" class="cabecalho__nav-btn" aria-label="Deixe seu feedback">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Deixe seu feedback</span>
+                </a>
+
+                <span class="cabecalho__nav-divisor" aria-hidden="true"></span>
+
+                <a href="./sobre.html" class="cabecalho__nav-btn" aria-label="Sobre o Projeto">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Sobre o Projeto</span>
+                </a>
+            </nav>
+
+            <!-- Direita: acessibilidade + segurança -->
+            <div class="cabecalho__direita">
+                <button class="botao-acessibilidade" aria-label="Opções de acessibilidade" type="button">
+                    <svg width="1000" height="1000" viewBox="320 330 360 360" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M415.3 662.2C425.849 662.2 434.4 653.649 434.4 643.1C434.4 632.551 425.849 624 415.3 624C404.751 624 396.2 632.551 396.2 643.1C396.2 653.649 404.751 662.2 415.3 662.2Z"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                        <path
+                            d="M584.7 662.2C595.249 662.2 603.8 653.649 603.8 643.1C603.8 632.551 595.249 624 584.7 624C574.151 624 565.6 632.551 565.6 643.1C565.6 653.649 574.151 662.2 584.7 662.2Z"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                        <path
+                            d="M652 487.2C662.549 487.2 671.1 478.649 671.1 468.1C671.1 457.551 662.549 449 652 449C641.451 449 632.9 457.551 632.9 468.1C632.9 478.649 641.451 487.2 652 487.2Z"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                        <path
+                            d="M348 487.2C358.549 487.2 367.1 478.649 367.1 468.1C367.1 457.551 358.549 449 348 449C337.451 449 328.9 457.551 328.9 468.1C328.9 478.649 337.451 487.2 348 487.2Z"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                        <path d="M366.6 480.6C388.4 492.8 438.7 516.9 506.4 515.3C566.8 513.9 611.7 492.7 633.4 480.6"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                        <path d="M427.2 627.4C451.5 590.1 475.7 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                            stroke-miterlimit="10" />
+                        <path d="M572.8 627.4C548.5 590.1 524.3 552.7 500 515.4" stroke="currentColor" stroke-width="8"
+                            stroke-miterlimit="10" />
+                        <path
+                            d="M500 477.5C523.527 477.5 542.6 458.427 542.6 434.9C542.6 411.373 523.527 392.3 500 392.3C476.473 392.3 457.4 411.373 457.4 434.9C457.4 458.427 476.473 477.5 500 477.5Z"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                        <path d="M360.6 434.9C388.7 384.6 441.8 353.2 499.3 353C557.3 352.8 611.1 384.2 639.4 434.9"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                        <path d="M343.7 500C342.3 513.1 341.5 537.5 351.4 565.5C362 595.5 379.5 614.7 389.2 624"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                        <path d="M656.3 500C657.7 513.1 658.5 537.5 648.6 565.5C638 595.5 620.5 614.7 610.8 624"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                        <path d="M445.1 657.3C456.1 662.3 477.4 670.3 505.1 669.2C527.3 668.3 544.6 662 554.9 657.3"
+                            stroke="currentColor" stroke-width="8" stroke-miterlimit="10" />
+                    </svg>
+                </button>
+
+                <a href="./admin/login.html" aria-label="Área restrita — acesso admin">
+                    <button class="botao-acessibilidade" type="button" title="Área Restrita">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </a>
+            </div>
+
+        </header>
+
+        <section class="area-central" aria-label="Chat por voz">
+
+            <!-- Botão de microfone -->
+            <div class="area-microfone" role="group" aria-label="Controle de voz">
+                <div class="anel anel-1" aria-hidden="true"></div>
+                <div class="anel anel-2" aria-hidden="true"></div>
+                <div class="anel anel-3" aria-hidden="true"></div>
+
+                <button class="btn-microfone" id="btn-mic" aria-label="Toque para falar">
+
+                    <!-- Ícone: microfone (padrão) -->
+                    <span class="icone-mic" aria-hidden="true">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="12" y1="19" x2="12" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="8" y1="23" x2="16" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+
+                    <!-- Ícone: parar (ouvindo) -->
+                    <span class="icone-stop" aria-hidden="true">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="6" y="6" width="12" height="12" rx="2" fill="white"/>
+                        </svg>
+                    </span>
+
+                    <!-- Ícone: spinner (processando) -->
+                    <span class="icone-spinner" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+                            <path d="M12 2a10 10 0 0 1 10 10" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+
+                    <!-- Ícone: som (falando) -->
+                    <span class="icone-som" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 5L6 9H2v6h4l5 4V5z" fill="white"/>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+
+                </button>
+            </div>
+
+            <!-- Estado textual -->
+            <div class="estado-texto" aria-live="polite">
+                <div class="estado-principal" id="estado-principal">Toque para falar</div>
+                <div class="estado-secundario" id="estado-secundario">Modo conversa por voz</div>
+            </div>
+
+            <!-- Transcrição -->
+            <div class="transcricao" id="transcricao" aria-label="Sua fala transcrita"></div>
+
+            <!-- Toggle modo contínuo -->
+            <label class="toggle-continuo" title="Quando ativo, o microfone volta a ouvir automaticamente após cada resposta">
+                <input type="checkbox" id="toggle-continuo" checked>
+                <span class="toggle-track"></span>
+                Modo contínuo (ouvir automaticamente)
+            </label>
+
+            <!-- Reiniciar conversa -->
+            <button class="botao-reset" id="btn-reset" title="Reiniciar conversa" aria-label="Reiniciar conversa">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3 3v5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
-        </a>
 
-        <span class="logo">FMPConnect</span>
+            <!-- Aviso sem suporte -->
+            <div class="sem-suporte" id="sem-suporte" role="alert">
+                Seu navegador não suporta reconhecimento de voz.<br>
+                Use <strong>Chrome</strong> ou <strong>Edge</strong> para usar esta funcionalidade.
+            </div>
 
-        <button class="botao-reset" id="btn-reset" title="Reiniciar conversa" aria-label="Reiniciar conversa">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M3 3v5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-    </header>
-
-    <main class="area-central" role="main" aria-label="Chat por voz">
-
-        <!-- Botão de microfone -->
-        <div class="area-microfone" role="group" aria-label="Controle de voz">
-            <div class="anel anel-1" aria-hidden="true"></div>
-            <div class="anel anel-2" aria-hidden="true"></div>
-            <div class="anel anel-3" aria-hidden="true"></div>
-
-            <button class="btn-microfone" id="btn-mic" aria-label="Toque para falar">
-
-                <!-- Ícone: microfone (padrão) -->
-                <span class="icone-mic" aria-hidden="true">
-                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M19 10v2a7 7 0 0 1-14 0v-2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <line x1="12" y1="19" x2="12" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="8" y1="23" x2="16" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </span>
-
-                <!-- Ícone: parar (ouvindo) -->
-                <span class="icone-stop" aria-hidden="true">
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="6" y="6" width="12" height="12" rx="2" fill="white"/>
-                    </svg>
-                </span>
-
-                <!-- Ícone: spinner (processando) -->
-                <span class="icone-spinner" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
-                        <path d="M12 2a10 10 0 0 1 10 10" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                    </svg>
-                </span>
-
-                <!-- Ícone: som (falando) -->
-                <span class="icone-som" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 5L6 9H2v6h4l5 4V5z" fill="white"/>
-                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </span>
-
-            </button>
-        </div>
-
-        <!-- Estado textual -->
-        <div class="estado-texto" aria-live="polite">
-            <div class="estado-principal" id="estado-principal">Toque para falar</div>
-            <div class="estado-secundario" id="estado-secundario">Modo conversa por voz</div>
-        </div>
-
-        <!-- Transcrição -->
-        <div class="transcricao" id="transcricao" aria-label="Sua fala transcrita"></div>
-
-        <!-- Toggle modo contínuo -->
-        <label class="toggle-continuo" title="Quando ativo, o microfone volta a ouvir automaticamente após cada resposta">
-            <input type="checkbox" id="toggle-continuo" checked>
-            <span class="toggle-track"></span>
-            Modo contínuo (ouvir automaticamente)
-        </label>
-
-        <!-- Aviso sem suporte -->
-        <div class="sem-suporte" id="sem-suporte" role="alert">
-            Seu navegador não suporta reconhecimento de voz.<br>
-            Use <strong>Chrome</strong> ou <strong>Edge</strong> para usar esta funcionalidade.
-        </div>
+        </section>
 
     </main>
+
+    <script src="./assets/js/acessibilidade-global.js"></script>
 
     <script>
         const API = window.location.origin;

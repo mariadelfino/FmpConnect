@@ -1,0 +1,258 @@
+/* ==========================================================
+   Cabeçalho Principal — Componente Reutilizável
+   Carregue APÓS componentes.css para que os overrides
+   se apliquem corretamente.
+   ========================================================== */
+
+/* Override do .cabecalho de componentes.css */
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 200px;
+    background: #fff;
+    border-bottom: 1px solid rgba(29, 57, 108, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky, 1020);
+    gap: 12px;
+    min-height: 60px;
+    box-shadow: 0 1px 4px rgba(29, 57, 108, 0.06);
+}
+
+/* ----------------------------------------------------------
+   Esquerda: seta de voltar + logo
+   ---------------------------------------------------------- */
+.cabecalho__esquerda {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.cabecalho__logo {
+    font-family: Arial, "Helvetica Neue", sans-serif;
+    font-size: calc(18px * var(--scale-factor, 1));
+    font-weight: 800;
+    background: var(--gradient-title, linear-gradient(135deg, #009FE3 0%, #89D6FA 100%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+    line-height: 1;
+    letter-spacing: -0.3px;
+}
+
+/* ----------------------------------------------------------
+   Centro: navegação em cápsula
+   ---------------------------------------------------------- */
+.cabecalho__nav {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(29, 57, 108, 0.16);
+    border-radius: 9999px;
+    padding: 10px;
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    background: transparent;
+}
+
+.cabecalho__nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(6px * var(--scale-factor, 1));
+    padding: calc(7px * var(--scale-factor, 1)) calc(14px * var(--scale-factor, 1));
+    border-radius: 9999px;
+    color: #1D396C;
+    font-family: Arial, sans-serif;
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition:
+        background var(--transition-base, 250ms cubic-bezier(0.4, 0, 0.2, 1)),
+        color var(--transition-base, 250ms cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.cabecalho__nav-btn svg {
+    width: calc(15px * var(--scale-factor, 1));
+    height: calc(15px * var(--scale-factor, 1));
+    flex-shrink: 0;
+}
+
+.cabecalho__nav-btn:hover,
+.cabecalho__nav-btn[aria-current="page"],
+.cabecalho__nav-btn--ativo {
+    background: #009FE3;
+    color: #fff;
+}
+
+.cabecalho__nav-btn:focus-visible {
+    outline: 2px solid #009FE3;
+    outline-offset: 2px;
+}
+
+.cabecalho__nav-divisor {
+    display: inline-block;
+    width: 1px;
+    height: 18px;
+    background: rgba(29, 57, 108, 0.14);
+    flex-shrink: 0;
+    margin: 0 2px;
+    align-self: center;
+}
+
+/* ----------------------------------------------------------
+   Direita: ícones de ação (acessibilidade + segurança)
+   ---------------------------------------------------------- */
+.cabecalho__direita {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+/* Garante opacidade total nos botões da direita */
+.cabecalho__direita .botao-acessibilidade {
+    opacity: 1 !important;
+}
+.cabecalho__direita .botao-acessibilidade[style] {
+    opacity: 1 !important;
+    transition: background var(--transition-base), border-color var(--transition-base), transform var(--transition-base) !important;
+}
+
+/* ----------------------------------------------------------
+   Tamanho dos botões circulares — override de componentes.css
+   componentes.css escala para var(--size-icon-lg) = 70px em
+   ≥768px, o que transborda a header de 60px.
+   ---------------------------------------------------------- */
+.cabecalho .botao-voltar,
+.cabecalho .botao-acessibilidade {
+    width: calc(50px * var(--scale-factor, 1));
+    height: calc(50px * var(--scale-factor, 1));
+}
+
+@media (min-width: 768px) {
+    .cabecalho .botao-voltar,
+    .cabecalho .botao-acessibilidade {
+        width: calc(50px * var(--scale-factor, 1));
+        height: calc(50px * var(--scale-factor, 1));
+    }
+}
+
+/* Seta de voltar: 45% do botão ≈ 15px, alinhado aos ícones do nav */
+.cabecalho .botao-voltar svg {
+    width: 45%;
+    height: 45%;
+}
+
+/* Ícone de acessibilidade: viewBox visível é 360×360 unidades.
+   stroke-width="8" nesse espaço equivale a ~0.7px visual.
+   Para igualar ao stroke-width 1.5 num viewBox 24×24:
+   1.5 / 24 × 360 ≈ 22.5  */
+.cabecalho__direita > button.botao-acessibilidade svg path {
+    stroke-width: 22;
+}
+
+/* Cadeado: viewBox 24×24 com stroke-width 1.5 já correto;
+   garante 90% do botão, sobrepondo o width/height inline do SVG */
+.cabecalho__direita a .botao-acessibilidade svg {
+    width: 70%;
+    height: 90%;
+}
+
+/* ==========================================================
+   Responsividade — Tablet e Mobile (≤ 1023px)
+   ========================================================== */
+@media (max-width: 1023px) {
+    .cabecalho {
+        padding: 12px 24px;
+    }
+
+    .cabecalho__nav {
+        display: none;
+    }
+
+    .cabecalho__esquerda {
+        gap: 12px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .cabecalho__logo {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .cabecalho__direita {
+        gap: 12px;
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .cabecalho {
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .cabecalho__esquerda {
+        gap: 8px;
+    }
+
+    .cabecalho__direita {
+        gap: 8px;
+    }
+}
+
+/* ==========================================================
+   Modo Escuro (padrão — sem data-theme="light")
+   ========================================================== */
+html:not([data-theme="light"]) .cabecalho {
+    background: #1D396C;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+html:not([data-theme="light"]) .cabecalho__nav {
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+html:not([data-theme="light"]) .cabecalho__nav-btn {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+html:not([data-theme="light"]) .cabecalho__nav-btn:hover,
+html:not([data-theme="light"]) .cabecalho__nav-btn--ativo,
+html:not([data-theme="light"]) .cabecalho__nav-btn[aria-current="page"] {
+    background: #009FE3;
+    color: #fff;
+}
+
+html:not([data-theme="light"]) .cabecalho__nav-divisor {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+html:not([data-theme="light"]) .cabecalho .botao-voltar,
+html:not([data-theme="light"]) .cabecalho .botao-acessibilidade {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================
+   Alto Contraste
+   O <header> está dentro de <main class="alto-contraste">, que recebe
+   filter: contrast(1.25) brightness(1.08) via filtros-acessibilidade.css.
+   Nenhum override necessário — o filtro aplica o alto contraste ao
+   cabeçalho da mesma forma que ao resto da página.
+   ========================================================== */
+
+/* ==========================================================
+   Tema Claro (data-theme="light")
+   Os estilos base acima (fundo branco, texto #1D396C) já cobrem
+   o tema claro — nenhum override adicional necessário.
+   ========================================================== */

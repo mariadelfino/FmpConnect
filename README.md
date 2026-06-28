@@ -183,7 +183,7 @@ Desenvolvido por alunos do iLAB — FMP ADS
 | Nome | Papel |
 |------|-------|
 | Maria Fernanda Delfino | Back-end |
-| Isabela | Front-end |
+| Isabella Schlemper | Front-end |
 
 ---
 

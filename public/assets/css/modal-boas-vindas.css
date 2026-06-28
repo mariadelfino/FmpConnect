@@ -61,7 +61,7 @@
     font-weight: var(--font-weight-regular);
     color: var(--color-white);
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 
 .modal-boas-vindas_titulo-destaque {
@@ -77,8 +77,19 @@
 
 .modal-boas-vindas_acao {
     width: 100%;
-    max-width: 400px;
     padding-bottom: var(--spacing-xl);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+    .modal-boas-vindas_acao {
+        flex-direction: column;
+        gap: 16px;
+    }
 }
 
 /* ========================================
@@ -169,51 +180,62 @@
 }
 
 /* ========================================
-   Botão Começar - Simples e Acessível
+   Botão Começar
    ======================================== */
 
 .botao-comecar {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-sm);
-    width: 100%;
-    max-width: 280px;
-    padding: calc(18px * var(--scale-factor)) calc(32px * var(--scale-factor));
-    background: var(--color-white);
-    color: var(--color-primary);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
+    gap: calc(8.01px * var(--scale-factor));
+    padding: calc(16px * var(--scale-factor)) calc(48px * var(--scale-factor));
+    background: var(--azul-escuro-1-d-396-c, #1D396C);
+    color: #FFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px 0 rgba(28, 57, 107, 0.06);
+    font-family: Arial, sans-serif;
+    font-size: calc(14px * var(--scale-factor));
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16.8px;
+    text-align: center;
     text-decoration: none;
-    box-shadow: var(--shadow-lg);
     transition: all var(--transition-base);
     cursor: pointer;
     user-select: none;
+    width: auto;
+    white-space: nowrap;
 }
 
 .botao-comecar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(2, 0, 36, 0.105);
+    box-shadow: 0 8px 24px 0 rgba(28, 57, 107, 0.20);
 }
 
 .botao-comecar:active {
     transform: translateY(0);
-    box-shadow: 0 4px 12px rgba(2, 0, 36, 0.105);
+    box-shadow: 0 2px 10px 0 rgba(28, 57, 107, 0.10);
 }
 
 .botao-comecar:focus-visible {
-    outline: 3px solid var(--color-accent);
+    outline: 3px solid #FFF;
     outline-offset: 4px;
 }
 
 .botao-comecar_texto {
-    letter-spacing: 0.02em;
+    color: #FFF;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: calc(14px * var(--scale-factor));
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16.8px;
 }
 
 .botao-comecar_icone {
-    width: calc(24px * var(--scale-factor));
-    height: calc(24px * var(--scale-factor));
+    width: calc(16px * var(--scale-factor));
+    height: calc(16px * var(--scale-factor));
+    flex-shrink: 0;
     transition: transform var(--transition-base);
 }
 
@@ -221,29 +243,10 @@
     transform: translateX(4px);
 }
 
-/* Tablet */
-@media (min-width: 768px) {
+/* Responsivo: garante que o botão não quebre em telas pequenas */
+@media (max-width: 360px) {
     .botao-comecar {
-        max-width: 320px;
-        padding: calc(20px * var(--scale-factor)) calc(40px * var(--scale-factor));
-        font-size: var(--font-size-xl);
-    }
-
-    .botao-comecar_icone {
-        width: calc(28px * var(--scale-factor));
-        height: calc(28px * var(--scale-factor));
-    }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-    .botao-comecar {
-        max-width: 360px;
-        padding: calc(22px * var(--scale-factor)) calc(48px * var(--scale-factor));
-    }
-
-    .botao-comecar_icone {
-        width: calc(32px * var(--scale-factor));
-        height: calc(32px * var(--scale-factor));
+        padding: calc(14px * var(--scale-factor)) calc(32px * var(--scale-factor));
+        white-space: normal;
     }
 }
