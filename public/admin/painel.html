@@ -273,6 +273,14 @@
                 </div>
                 <div class="tabela-wrapper">
                     <table>
+                        <colgroup>
+                            <col class="col-titulo">
+                            <col class="col-categoria">
+                            <col class="col-conteudo">
+                            <col class="col-status">
+                            <col class="col-atualizado">
+                            <col class="col-acoes">
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th>Título</th>
@@ -328,7 +336,7 @@
         <section class="secao" id="secao-rpa">
 
             <!-- Scraping do site -->
-            <div class="tabela-card" style="max-width:640px;margin-bottom:1.5rem">
+            <div class="tabela-card" style="margin-bottom:1.5rem">
                 <div class="tabela-header">
                     <div class="tabela-titulo">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:6px"><path d="M21 12a9 9 0 1 1-9-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 3l-9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M15 3h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -348,7 +356,7 @@
             </div>
 
             <!-- Leitura de e-mails -->
-            <div class="tabela-card" style="max-width:640px">
+            <div class="tabela-card">
                 <div class="tabela-header">
                     <div class="tabela-titulo">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:6px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/></svg>
@@ -397,7 +405,7 @@
 
         <!-- ── MINHA CONTA ───────────────── -->
         <section class="secao" id="secao-minha-conta">
-            <div class="tabela-card" style="max-width:480px">
+            <div class="tabela-card">
                 <div class="tabela-header">
                     <div class="tabela-titulo">Alterar Senha</div>
                 </div>
@@ -526,6 +534,25 @@
     </div>
 </div>
 
+<!-- ── MODAL: CONFIRMAÇÃO ───────────────────── -->
+<div class="modal-backdrop" id="modal-confirmacao-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-confirmacao-titulo">
+    <div class="modal modal-confirmacao">
+        <div class="confirmacao-icone perigo" id="confirmacao-icone" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <h2 class="modal-titulo" id="modal-confirmacao-titulo">Confirmar ação</h2>
+        <p class="confirmacao-texto" id="modal-confirmacao-texto"></p>
+        <div class="modal-acoes">
+            <button type="button" class="btn btn-secundario" id="btn-confirmacao-cancelar">Cancelar</button>
+            <button type="button" class="btn btn-perigo" id="btn-confirmacao-ok">Confirmar</button>
+        </div>
+    </div>
+</div>
+
 <!-- Toast container -->
 <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
 
@@ -624,8 +651,14 @@ document.querySelectorAll('.nav-item').forEach(btn => {
     btn.addEventListener('click', () => navegarPara(btn.dataset.secao));
 });
 
-document.getElementById('btn-sair').addEventListener('click', () => {
-    if (confirm('Deseja sair do painel?')) redirecionarLogin();
+document.getElementById('btn-sair').addEventListener('click', async () => {
+    const confirmado = await abrirConfirmacao({
+        titulo: 'Sair do painel',
+        mensagem: 'Deseja sair do painel? Você precisará fazer login novamente para acessar.',
+        textoBotao: 'Sair',
+        tipo: 'perigo'
+    });
+    if (confirmado) redirecionarLogin();
 });
 
 // ── Dashboard ──────────────────────────────
@@ -744,7 +777,7 @@ function renderizarTabela() {
 
     tbody.innerHTML = filtrados.map(item => `
         <tr>
-            <td><strong>${escHtml(item.title)}</strong></td>
+            <td class="td-titulo"><strong>${escHtml(item.title)}</strong></td>
             <td><span class="badge-cat">${escHtml(item.category)}</span></td>
             <td class="td-conteudo" title="${escHtml(item.content)}">${escHtml(item.content)}</td>
             <td><span class="badge ${item.active ? 'badge-ativo' : 'badge-inativo'}">${item.active ? 'Ativo' : 'Inativo'}</span></td>
@@ -783,6 +816,12 @@ function renderizarTabela() {
 // Modal de item
 const modalItem = document.getElementById('modal-item-backdrop');
 
+function ajustarAlturaConteudo() {
+    const el = document.getElementById('item-conteudo');
+    el.style.height = 'auto';
+    el.style.height = Math.max(120, el.scrollHeight) + 'px';
+}
+
 function abrirModalItem(id) {
     const item = id ? todosItens.find(i => i.id === id) : null;
     document.getElementById('modal-item-titulo').querySelector('span') ||
@@ -794,16 +833,19 @@ function abrirModalItem(id) {
     document.getElementById('item-conteudo').value = item ? item.content : '';
     document.getElementById('msg-item').hidden = true;
     modalItem.classList.add('visivel');
+    ajustarAlturaConteudo();
     document.getElementById('item-categoria').focus();
 }
 
 function fecharModalItem() {
     modalItem.classList.remove('visivel');
     document.getElementById('form-item').reset();
+    document.getElementById('item-conteudo').style.height = '';
 }
 
 document.getElementById('btn-novo-item').addEventListener('click', () => abrirModalItem(null));
 document.getElementById('btn-cancelar-item').addEventListener('click', fecharModalItem);
+document.getElementById('item-conteudo').addEventListener('input', ajustarAlturaConteudo);
 modalItem.addEventListener('click', e => { if (e.target === modalItem) fecharModalItem(); });
 
 document.getElementById('form-item').addEventListener('submit', async (e) => {
@@ -841,8 +883,17 @@ document.getElementById('form-item').addEventListener('submit', async (e) => {
 });
 
 async function alterarStatusItem(id, ativar) {
-    const acao = ativar ? 'reativar' : 'desativar';
-    if (!confirm(`Deseja ${acao} este item?`)) return;
+    const item = todosItens.find(i => i.id === id);
+    const tituloItem = item ? item.title : 'este item';
+    const confirmado = await abrirConfirmacao({
+        titulo: ativar ? 'Reativar item' : 'Desativar item',
+        mensagem: ativar
+            ? `Deseja reativar "${tituloItem}"? O item voltará a ser usado pelo chatbot.`
+            : `Deseja desativar "${tituloItem}"? O item deixará de aparecer nas respostas do chatbot.`,
+        textoBotao: ativar ? 'Reativar' : 'Desativar',
+        tipo: ativar ? 'sucesso' : 'perigo'
+    });
+    if (!confirmado) return;
     try {
         let r;
         if (ativar) {
@@ -1025,6 +1076,53 @@ document.getElementById('form-senha').addEventListener('submit', async (e) => {
     } catch { msgEl.textContent = 'Erro de conexão.'; msgEl.hidden = false; }
 });
 
+// ── Modal de confirmação ───────────────────
+let confirmacaoResolve = null;
+
+const ICONE_CONFIRMACAO = {
+    perigo: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
+    sucesso: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`
+};
+
+function abrirConfirmacao({ titulo, mensagem, textoBotao = 'Confirmar', tipo = 'perigo' }) {
+    return new Promise(resolve => {
+        confirmacaoResolve = resolve;
+        document.getElementById('modal-confirmacao-titulo').textContent = titulo;
+        document.getElementById('modal-confirmacao-texto').textContent = mensagem;
+
+        const icone = document.getElementById('confirmacao-icone');
+        icone.className = 'confirmacao-icone ' + tipo;
+        icone.innerHTML = ICONE_CONFIRMACAO[tipo] || ICONE_CONFIRMACAO.perigo;
+
+        const btnOk = document.getElementById('btn-confirmacao-ok');
+        btnOk.textContent = textoBotao;
+        btnOk.className = 'btn ' + (tipo === 'perigo' ? 'btn-perigo' : 'btn-primario');
+
+        document.getElementById('modal-confirmacao-backdrop').classList.add('visivel');
+        document.getElementById('btn-confirmacao-cancelar').focus();
+    });
+}
+
+function fecharConfirmacao(resultado) {
+    document.getElementById('modal-confirmacao-backdrop').classList.remove('visivel');
+    if (confirmacaoResolve) {
+        confirmacaoResolve(resultado);
+        confirmacaoResolve = null;
+    }
+}
+
+document.getElementById('btn-confirmacao-cancelar').addEventListener('click', () => fecharConfirmacao(false));
+document.getElementById('btn-confirmacao-ok').addEventListener('click', () => fecharConfirmacao(true));
+document.getElementById('modal-confirmacao-backdrop').addEventListener('click', e => {
+    if (e.target === e.currentTarget) fecharConfirmacao(false);
+});
+
 // ── Utilitários ────────────────────────────
 function toast(msg, tipo = 'info') {
     const container = document.getElementById('toast-container');
@@ -1054,6 +1152,10 @@ function formatarData(dt) {
 // Fecha modais com Esc
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
+        if (document.getElementById('modal-confirmacao-backdrop').classList.contains('visivel')) {
+            fecharConfirmacao(false);
+            return;
+        }
         fecharModalItem();
         fecharModalUsuario();
     }

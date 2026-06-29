@@ -69,7 +69,13 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: stretch;
+        }
+
+        .pagina-voz > .cabecalho {
+            width: 100%;
+            flex-shrink: 0;
+            box-sizing: border-box;
         }
 
         /* ----------------------------------------------------------
@@ -109,21 +115,31 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: var(--spacing-xl);
-            padding: var(--spacing-xl) var(--spacing-lg);
+            align-self: center;
+            position: relative;
             width: 100%;
             max-width: 500px;
+            min-height: 0;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            padding-bottom: var(--spacing-2xl);
         }
 
         /* ----------------------------------------------------------
            Anéis de pulso ao redor do microfone
            ---------------------------------------------------------- */
-        .area-microfone {
+        #bloco-microfone {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .area-microfone {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
         .anel {
@@ -226,7 +242,12 @@
         /* ----------------------------------------------------------
            Texto de estado
            ---------------------------------------------------------- */
-        .estado-texto { text-align: center; }
+        .estado-texto {
+            flex-shrink: 0;
+            text-align: center;
+            width: 100%;
+            padding-top: var(--spacing-lg);
+        }
 
         .estado-principal {
             font-size: var(--font-size-lg);
@@ -263,6 +284,10 @@
            Toggle modo contínuo
            ---------------------------------------------------------- */
         .toggle-continuo {
+            position: absolute;
+            top: var(--spacing-lg);
+            right: var(--spacing-lg);
+            z-index: 2;
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
@@ -271,6 +296,7 @@
             opacity: 0.6;
             cursor: pointer;
             user-select: none;
+            max-width: calc(100% - var(--spacing-xl) * 2);
         }
         .toggle-continuo input { display: none; }
 
@@ -308,7 +334,77 @@
             font-size: var(--font-size-sm);
             padding: var(--spacing-md) var(--spacing-lg);
             text-align: center;
-            display: none;
+        }
+        .sem-suporte[hidden] { display: none; }
+        .sem-suporte:not([hidden]) { display: block; }
+
+        /* Controles ativos — overlay abaixo do mic, sem deslocar o botão */
+        #controles-ativos {
+            position: absolute;
+            top: calc(100% + var(--spacing-lg));
+            left: 50%;
+            display: flex;
+            z-index: 2;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(10px);
+            transition:
+                opacity 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.32s;
+        }
+        body.ouvindo #controles-ativos,
+        body.processando #controles-ativos,
+        body.falando #controles-ativos {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #controles-ativos {
+                transition: opacity 0.15s ease, visibility 0.15s;
+                transform: translateX(-50%);
+            }
+            body.ouvindo #controles-ativos,
+            body.processando #controles-ativos,
+            body.falando #controles-ativos {
+                transform: translateX(-50%);
+            }
+        }
+
+        .area-central .cabecalho__nav {
+            border-color: rgba(255, 255, 255, 0.18);
+            padding: var(--spacing-sm);
+            gap: var(--spacing-xs);
+        }
+        .area-central .cabecalho__nav-btn {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .area-central .cabecalho__nav-btn:hover,
+        .area-central .cabecalho__nav-btn--ativo {
+            background: var(--color-primary);
+            color: #fff;
+        }
+        .area-central .cabecalho__nav-divisor {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        [data-theme="light"] .area-central .cabecalho__nav {
+            border-color: rgba(29, 57, 108, 0.16);
+        }
+        [data-theme="light"] .area-central .cabecalho__nav-btn {
+            color: #1D396C;
+        }
+        [data-theme="light"] .area-central .cabecalho__nav-divisor {
+            background: rgba(29, 57, 108, 0.14);
+        }
+
+        .transcricao,
+        .botao-reset {
+            flex-shrink: 0;
         }
 
         /* ==========================================================
@@ -331,8 +427,12 @@
         @media (min-width: 768px) {
             .area-central {
                 max-width: 600px;
-                gap: var(--spacing-2xl);
                 padding: var(--spacing-2xl) var(--spacing-xl);
+                padding-bottom: var(--spacing-3xl, var(--spacing-2xl));
+            }
+            .toggle-continuo {
+                top: var(--spacing-xl);
+                right: var(--spacing-xl);
             }
             .btn-microfone {
                 width: calc(130px * var(--scale-factor, 1));
@@ -472,8 +572,16 @@
 
         <section class="area-central" aria-label="Chat por voz">
 
-            <!-- Botão de microfone -->
+            <!-- Toggle modo contínuo — canto superior direito -->
+            <label class="toggle-continuo" title="Quando ativo, o microfone volta a ouvir automaticamente após cada resposta">
+                <input type="checkbox" id="toggle-continuo" checked>
+                <span class="toggle-track"></span>
+                Modo contínuo (ouvir automaticamente)
+            </label>
+
+            <!-- Botão de microfone — centro da tela -->
             <div class="area-microfone" role="group" aria-label="Controle de voz">
+                <div id="bloco-microfone">
                 <div class="anel anel-1" aria-hidden="true"></div>
                 <div class="anel anel-2" aria-hidden="true"></div>
                 <div class="anel anel-3" aria-hidden="true"></div>
@@ -515,23 +623,24 @@
                     </span>
 
                 </button>
-            </div>
 
-            <!-- Estado textual -->
-            <div class="estado-texto" aria-live="polite">
-                <div class="estado-principal" id="estado-principal">Toque para falar</div>
-                <div class="estado-secundario" id="estado-secundario">Modo conversa por voz</div>
+                <!-- Controles visíveis quando o microfone está ativo -->
+                <nav class="cabecalho__nav" id="controles-ativos" aria-label="Controles de voz ativos">
+                    <button type="button" class="cabecalho__nav-btn" id="btn-desligar">Desligar</button>
+                    <span class="cabecalho__nav-divisor" aria-hidden="true"></span>
+                    <button type="button" class="cabecalho__nav-btn" id="btn-mutar" aria-pressed="false">Mutar</button>
+                </nav>
+                </div>
             </div>
 
             <!-- Transcrição -->
             <div class="transcricao" id="transcricao" aria-label="Sua fala transcrita"></div>
 
-            <!-- Toggle modo contínuo -->
-            <label class="toggle-continuo" title="Quando ativo, o microfone volta a ouvir automaticamente após cada resposta">
-                <input type="checkbox" id="toggle-continuo" checked>
-                <span class="toggle-track"></span>
-                Modo contínuo (ouvir automaticamente)
-            </label>
+            <!-- Estado textual — próximo à borda inferior -->
+            <div class="estado-texto" aria-live="polite">
+                <div class="estado-principal" id="estado-principal">Toque para falar</div>
+                <div class="estado-secundario" id="estado-secundario">Modo conversa por voz</div>
+            </div>
 
             <!-- Reiniciar conversa -->
             <button class="botao-reset" id="btn-reset" title="Reiniciar conversa" aria-label="Reiniciar conversa">
@@ -542,7 +651,7 @@
             </button>
 
             <!-- Aviso sem suporte -->
-            <div class="sem-suporte" id="sem-suporte" role="alert">
+            <div class="sem-suporte" id="sem-suporte" role="alert" hidden>
                 Seu navegador não suporta reconhecimento de voz.<br>
                 Use <strong>Chrome</strong> ou <strong>Edge</strong> para usar esta funcionalidade.
             </div>
@@ -558,6 +667,8 @@
 
         const btnMic       = document.getElementById('btn-mic');
         const btnReset     = document.getElementById('btn-reset');
+        const btnDesligar  = document.getElementById('btn-desligar');
+        const btnMutar     = document.getElementById('btn-mutar');
         const estadoPrinc  = document.getElementById('estado-principal');
         const estadoSecund = document.getElementById('estado-secundario');
         const transcricao  = document.getElementById('transcricao');
@@ -567,6 +678,7 @@
         const HISTORICO_KEY = 'fmpconnect_voz_historico_v1';
         let historico = JSON.parse(sessionStorage.getItem(HISTORICO_KEY) || '[]');
         let estado = 'ocioso';
+        let mutado = false;
         let audioDesbloqueado = false;
         let audioAtual = null;
 
@@ -584,7 +696,7 @@
         // ── Verificar suporte ───────────────────
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SpeechRecognition) {
-            semSuporteEl.style.display = 'block';
+            semSuporteEl.hidden = false;
             btnMic.disabled = true;
             setEstado('ocioso', 'Navegador sem suporte', 'Use Chrome ou Edge');
         }
@@ -602,6 +714,7 @@
             };
 
             recognition.onresult = (event) => {
+                if (mutado) return;
                 let interim = '';
                 let final = '';
                 for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -643,13 +756,39 @@
         });
 
         btnReset.addEventListener('click', () => {
-            pararAudio();
-            if (recognition && estado === 'ouvindo') recognition.stop();
+            desligarSessao();
             historico = [];
             sessionStorage.removeItem(HISTORICO_KEY);
             transcricao.textContent = '';
             setEstado('ocioso', 'Toque para falar', 'Conversa reiniciada');
         });
+
+        btnDesligar.addEventListener('click', () => {
+            desligarSessao();
+            setEstado('ocioso', 'Toque para falar', 'Modo conversa por voz');
+        });
+
+        btnMutar.addEventListener('click', () => {
+            mutado = !mutado;
+            btnMutar.setAttribute('aria-pressed', mutado ? 'true' : 'false');
+            btnMutar.textContent = mutado ? 'Desmutar' : 'Mutar';
+            btnMutar.classList.toggle('cabecalho__nav-btn--ativo', mutado);
+            if (mutado) {
+                transcricao.textContent = '';
+                setEstado(estado, estadoPrinc.textContent, 'Microfone mutado');
+            } else if (estado === 'ouvindo') {
+                setEstado('ouvindo', 'Ouvindo...', 'Fale sua pergunta');
+            }
+        });
+
+        function desligarSessao() {
+            pararAudio();
+            mutado = false;
+            btnMutar.setAttribute('aria-pressed', 'false');
+            btnMutar.textContent = 'Mutar';
+            btnMutar.classList.remove('cabecalho__nav-btn--ativo');
+            if (recognition && estado === 'ouvindo') recognition.stop();
+        }
 
         function iniciarEscuta() {
             if (!recognition) return;
@@ -750,6 +889,13 @@
             document.body.className = novoEstado;
             estadoPrinc.textContent = principal;
             estadoSecund.textContent = secundario;
+
+            if (novoEstado === 'ocioso') {
+                mutado = false;
+                btnMutar.setAttribute('aria-pressed', 'false');
+                btnMutar.textContent = 'Mutar';
+                btnMutar.classList.remove('cabecalho__nav-btn--ativo');
+            }
 
             const labels = {
                 ocioso:       'Toque para falar',
