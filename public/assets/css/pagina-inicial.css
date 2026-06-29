@@ -7,6 +7,26 @@
     overflow-x: hidden;
 }
 
+.pagina-inicial_hero {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.pagina-inicial_hero .Fmpconnect_mascote {
+    width: auto;
+    max-width: none;
+    padding: 0;
+    margin: 0 !important;
+}
+
+@media (min-width: 1024px) {
+    .pagina-inicial_hero .modal-boas-vindas_cabecalho {
+        padding-left: 0;
+    }
+}
+
 .cabecalho-inicial {
     display: flex;
     align-items: center;

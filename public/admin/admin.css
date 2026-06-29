@@ -447,9 +447,16 @@ body {
 
 .select-filtro option { background: var(--admin-bg-card); }
 
-.tabela-wrapper { overflow-x: auto; }
+.tabela-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
-table { width: 100%; border-collapse: collapse; }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
 
 th {
     background: rgba(0,159,227,0.05);
@@ -476,12 +483,20 @@ tr:last-child td { border-bottom: none; }
 
 tr:hover td { background: rgba(0,159,227,0.04); }
 
-.td-conteudo {
-    max-width: 320px;
-    white-space: nowrap;
+.td-conteudo,
+.td-titulo {
+    max-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
+#secao-conhecimento table col.col-titulo { width: 22%; }
+#secao-conhecimento table col.col-categoria { width: 14%; }
+#secao-conhecimento table col.col-conteudo { width: 30%; }
+#secao-conhecimento table col.col-status { width: 10%; }
+#secao-conhecimento table col.col-atualizado { width: 14%; }
+#secao-conhecimento table col.col-acoes { width: 10%; }
 
 /* Badges */
 .badge {
@@ -637,10 +652,57 @@ tr:hover td { background: rgba(0,159,227,0.04); }
     margin-top: 0.5rem;
 }
 
+.modal-confirmacao {
+    max-width: 420px;
+    text-align: center;
+}
+
+.modal-confirmacao .modal-titulo {
+    justify-content: center;
+    margin-bottom: 0.75rem;
+}
+
+.confirmacao-icone {
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    height: 52px;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    width: 52px;
+}
+
+.confirmacao-icone.perigo {
+    background: rgba(239,68,68,0.15);
+    color: #fca5a5;
+}
+
+.confirmacao-icone.sucesso {
+    background: rgba(16,185,129,0.15);
+    color: var(--admin-success);
+}
+
+.confirmacao-texto {
+    color: var(--admin-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.modal-confirmacao .modal-acoes {
+    justify-content: center;
+}
+
 textarea.campo-input {
     min-height: 120px;
     resize: vertical;
     line-height: 1.6;
+}
+
+#item-conteudo {
+    min-height: 120px;
+    overflow-y: hidden;
+    resize: none;
 }
 
 /* Toast */
@@ -710,4 +772,30 @@ textarea.campo-input {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
 
     .topbar { flex-direction: column; align-items: flex-start; }
+
+    .tabela-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tabela-filtros {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .input-busca,
+    .select-filtro {
+        width: 100%;
+    }
+
+    .tabela-header .btn-primario {
+        justify-content: center;
+        width: 100%;
+    }
+
+    #secao-conhecimento table col.col-conteudo,
+    #secao-conhecimento table th:nth-child(3),
+    #secao-conhecimento table td:nth-child(3) {
+        display: none;
+    }
 }

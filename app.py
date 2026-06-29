@@ -627,7 +627,7 @@ def rpa_emails():
 @app.route("/", methods=["GET"])
 def home():
     from flask import redirect
-    return redirect("/public/boasvindas.html")
+    return redirect("/public/paginainicial.html")
 
 
 @app.route("/public/<path:filename>")

@@ -54,6 +54,7 @@
     align-items: center;
     justify-content: flex-start;
     text-align: left;
+    letter-spacing: -0.04em;
 }
 
 .modal-boas-vindas_titulo {
@@ -61,7 +62,7 @@
     font-weight: var(--font-weight-regular);
     color: var(--color-white);
     line-height: 1;
-    letter-spacing: 0;
+    letter-spacing: inherit;
 }
 
 .modal-boas-vindas_titulo-destaque {
