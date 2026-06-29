@@ -14,6 +14,19 @@
     padding: 0 var(--container-padding);
 }
 
+.pagina-inicial_hero_texto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
+}
+
+@media (max-width: 1023px) {
+    .pagina-inicial_hero_texto {
+        align-items: center;
+    }
+}
+
 .pagina-inicial_hero .Fmpconnect_mascote {
     width: auto;
     max-width: none;
