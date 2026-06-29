@@ -554,3 +554,54 @@
         height: calc(80px * var(--scale-factor));
     }
 }
+
+/* ========================================
+   Responsividade - Cards de Opções (Mobile)
+   ======================================== */
+
+/* Telas pequenas (< 480px): coluna única com cards horizontais */
+@media (max-width: 479px) {
+    .secao-opcoes {
+        grid-template-columns: 1fr;
+        padding: 0 var(--spacing-md);
+    }
+
+    .opcao-chat {
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+        min-height: unset;
+        padding: var(--spacing-md);
+        gap: var(--spacing-md);
+    }
+
+    .opcao-chat_icone {
+        flex-shrink: 0;
+        width: var(--size-icon-md);
+        height: var(--size-icon-md);
+    }
+
+    .opcao-chat_icone svg,
+    .opcao-chat--texto .opcao-chat_icone svg,
+    .opcao-chat--voz .opcao-chat_icone svg {
+        width: var(--size-svg-sm);
+        height: var(--size-svg-sm);
+    }
+
+    .opcao-chat_titulo {
+        font-size: var(--font-size-base);
+    }
+}
+
+/* Telas médias (480px–767px): 2 colunas, 3º card centralizado */
+@media (min-width: 480px) and (max-width: 767px) {
+    .secao-opcoes {
+        padding: 0 var(--spacing-md);
+    }
+
+    .opcao-chat:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        max-width: calc(50% - var(--spacing-md) / 2);
+        margin: 0 auto;
+    }
+}

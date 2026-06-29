@@ -163,6 +163,38 @@ body {
     .welcome-modal { max-width: 820px; }
 }
 
+/* ========================================
+   Mascote no Welcome Card
+   ======================================== */
+.welcome-mascote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-sm, 8px);
+    pointer-events: none;
+}
+
+.welcome-mascote img {
+    width: clamp(80px, 20vw, 130px);
+    height: auto;
+    animation:
+        float-subtle 3s ease-in-out infinite,
+        glow-pulse-subtle 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 4px 16px rgba(0, 159, 227, 0.4));
+}
+
+@media (min-width: 768px) {
+    .welcome-mascote img {
+        width: clamp(110px, 15vw, 150px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .welcome-mascote img {
+        animation: none;
+    }
+}
+
 .mensagem-wrapper {
     display: flex;
     gap: 12px;
@@ -412,12 +444,43 @@ body {
     display: flex;
     gap: 8px;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 2px;
+    padding-top: 6px;
+    margin-top: -6px;
 }
 .sugestoes-rapidas::-webkit-scrollbar { display: none; }
+
+.sugestoes-rapidas .welcome-option {
+    opacity: 1;
+    transform: none;
+    min-width: auto;
+    font-size: calc(0.875rem * var(--scale-factor, 1));
+    padding: 10px 16px;
+    background: transparent;
+    border: 1.5px solid #009FE3;
+    color: #009FE3;
+    box-shadow: none;
+    position: relative;
+    z-index: 1;
+}
+.sugestoes-rapidas .welcome-option:hover {
+    transform: translateY(-2px);
+    background: rgba(0, 159, 227, 0.1);
+    box-shadow: none;
+}
+.sugestoes-rapidas #opcao-modo-surdez {
+    background: linear-gradient(90deg, #009FE3 0%, #1D396C 100%);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 159, 227, 0.21);
+}
+.sugestoes-rapidas #opcao-modo-surdez:hover {
+    background: linear-gradient(90deg, #009FE3 0%, #1D396C 100%);
+    box-shadow: 0 5px 5px rgba(0, 159, 227, 0.3);
+}
 
 .sugestao-chip {
     flex-shrink: 0;

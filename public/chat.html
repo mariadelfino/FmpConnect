@@ -57,6 +57,7 @@
     <link rel="stylesheet" href="./assets/css/variables.css">
     <link rel="stylesheet" href="./assets/css/painel-acessibilidade.css">
     <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
+    <link rel="stylesheet" href="./assets/css/robo-animacao.css">
 </head>
 
 <body>
@@ -177,26 +178,21 @@
         <div id="welcome-modal" class="welcome-modal hidden" role="dialog" aria-modal="true"
             aria-labelledby="welcome-title">
             <div class="welcome-card">
-                <h2 id="welcome-title">Oi! Como posso te ajudar?</h2>
-                <div class="welcome-options">
-                    <button class="welcome-option">Quais são os cursos?</button>
-                    <button class="welcome-option">Como me inscrevo?</button>
-                    <button class="welcome-option">Existe idade mínima?</button>
-                    <button class="welcome-option">Horário das aulas</button>
-                    <button class="welcome-option **acessibilidade-surdez**" id="opcao-modo-surdez">
-                        Respostas Claras (Acessibilidade Auditiva)
-                    </button>
+                <div class="welcome-mascote" aria-hidden="true">
+                    <img src="./assets/images/fmpzinhoo.svg" alt="">
                 </div>
+                <h2 id="welcome-title">Oi! Como posso te ajudar?</h2>
             </div>
         </div>
     <footer class="area-input-pergunta">
 
         <!-- Chips de sugestão rápida -->
         <div class="sugestoes-rapidas" role="group" aria-label="Sugestões de perguntas rápidas">
-            <button class="sugestao-chip" type="button">Quais são os cursos?</button>
-            <button class="sugestao-chip" type="button">Como funciona o vestibular?</button>
-            <button class="sugestao-chip" type="button">Informações sobre bolsas</button>
-            <button class="sugestao-chip" type="button">Falar com atendente</button>
+            <button class="welcome-option" type="button">Quais são os cursos?</button>
+            <button class="welcome-option" type="button">Como me inscrevo?</button>
+            <button class="welcome-option" type="button">Existe idade mínima?</button>
+            <button class="welcome-option" type="button">Horário das aulas</button>
+            <button class="welcome-option" type="button" id="opcao-modo-surdez">Respostas Claras (Acessibilidade Auditiva)</button>
         </div>
 
         <!-- Barra de input -->
@@ -237,10 +233,10 @@
     <script src="./assets/js/acessibilidade-global.js"></script>
     <script src="./assets/js/chat.js" defer></script>
     <script>
-        document.querySelectorAll('.sugestao-chip').forEach(function(chip) {
-            chip.addEventListener('click', function() {
+        document.querySelectorAll('.sugestoes-rapidas .welcome-option:not(#opcao-modo-surdez)').forEach(function(btn) {
+            btn.addEventListener('click', function() {
                 var input = document.getElementById('pergunta-input');
-                input.value = chip.textContent.trim();
+                input.value = btn.textContent.trim();
                 input.focus();
                 document.getElementById('botao-enviar').click();
             });

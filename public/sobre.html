@@ -41,9 +41,20 @@
     <link rel="stylesheet" href="./assets/css/filtros-acessibilidade.css">
     <link rel="stylesheet" href="./assets/css/sobre.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        .texto-padrao, .texto-centralizado {
+            font-size: calc(0.95rem * var(--scale-factor));
+            color: rgba(255, 255, 255, 0.9);
+        }
+        [data-theme="light"] .texto-padrao,
+        [data-theme="light"] .texto-centralizado {
+            color: #1D396C;
+        }
+        [data-theme="light"] .card-feedback .texto-padrao {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -202,36 +213,10 @@
                 </header>
 
                 <div class="conteudo-projeto">
-                    <p class="texto-centralizado gsap-fade-up">
-                        O FMPConnect é um chatbot desenvolvido para o Projeto Integrador da 4ª fase do curso de Análise e Desenvolvimento de Sistemas (ADS).
+                    <p class="texto-centralizado">
+                        O FMPConnect é um chatbot desenvolvido para o Projeto Técnico de conclusão de curso da 5ª fase do curso de Análise e Desenvolvimento de Sistemas (ADS). Criado pelas alunas Isabella Schlemper Bernardo, Maria Fernanda Delfino e Moniely Amaral, o projeto foi pensado para tornar as informações da faculdade mais acessíveis e rápidas para todos.
+                        Utilizando Inteligência Artificial, o sistema interpreta dúvidas e gera respostas precisas automaticamente, sem depender de cadastros manuais. Para tirar essa ideia do papel, utilizamos tecnologias como Python, HTML, CSS, JavaScript e o framework Flask.
                     </p>
-                    <p class="texto-centralizado gsap-fade-up">
-                        Criado pelas alunas Isabella Schlemper Bernardo, Maria Fernanda Delfino e Moniely Amaral, o projeto foi pensado para tornar as informações da faculdade mais acessíveis e rápidas para todos. Muitas vezes, dados sobre vestibulares e cursos não estão claros para o público geral, e o FMPConnect resolve isso.
-                    </p>
-                    <p class="texto-centralizado gsap-fade-up">
-                        Utilizando Inteligência Artificial, o sistema interpreta dúvidas e gera respostas precisas automaticamente, sem depender de cadastros manuais. Para tirar essa ideia do papel, utilizamos tecnologias modernas como Python, HTML, CSS, JavaScript e o framework Flask. O desenvolvimento foi guiado pelos professores:
-                    </p>
-
-                    <div class="grid-modulos">
-                        <div class="card-tech gsap-fade-up" data-delay="0.1">
-                            <div class="card-tech_header">
-                                <h3>Daniela Amorim</h3>
-                            </div>
-                            <p>Empreendedorismo e Inovação</p>
-                        </div>
-
-                        <div class="card-tech gsap-fade-up" data-delay="0.2">
-                            <div class="card-tech_header">
-                                <h3>Rafael Novo da Rosa</h3>
-                            </div>
-                            <p>Programação Servidor em Sistemas Internet</p>
-                        </div>
-                        <div class="card-tech gsap-fade-up" data-delay="0.3">
-                            <div class="card-tech_header">
-                                <h3>Thiago Leucz Astrizi</h3>
-                            </div>
-                            <p>Programação para Internet (Cliente)</p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -240,7 +225,7 @@
             <div class="container">
                 <header class="header-centralizado gsap-fade-up">
                     <h2 class="titulo-secao">Nossa <span class="destaque-gradiente">equipe</span></h2>
-                    <p class="texto-centralizado">Somos três estudantes da 4ª fase de ADS movidas pelo desejo de transformar a realidade ao nosso redor. Acreditamos que a tecnologia é a melhor e mais poderosa ferramenta para criar soluções que agreguem valor à vida das pessoas, da comunidade e da nossa faculdade. Nosso objetivo é deixar uma marca positiva e tornar o mundo um lugar melhor para todos.</p>
+                    <p class="texto-centralizado">Somos três estudantes da 5ª fase de ADS movidas pelo desejo de transformar a realidade ao nosso redor. Acreditamos que a tecnologia é a melhor e mais poderosa ferramenta para criar soluções que agreguem valor à vida das pessoas, da comunidade e da nossa faculdade. Nosso objetivo é deixar uma marca positiva e tornar o mundo um lugar melhor para todos.</p>
                 </header>
 
                 <div class="grid-equipe">
@@ -294,11 +279,7 @@
                     <h2 class="titulo-secao">Acessibilidade para <span class="destaque-gradiente">todos</span></h2>
                     <p class="texto-centralizado gsap-fade-up">
                         Nós acreditamos em um mundo onde todos tenham as mesmas oportunidades. Por isso, a inclusão não é só um recurso do nosso sistema, e sim a base dele.
-                    </p>
-                    <p class="texto-centralizado gsap-fade-up">
                         Queremos que a experiência de qualquer pessoa na FMP seja tão boa quanto a nossa. Para garantir isso, implementamos recursos avançados de acessibilidade digital.
-                    </p>
-                    <p class="texto-centralizado gsap-fade-up">
                         A acessibilidade digital democratiza o acesso à informação, garantindo que usuários com diferentes capacidades físico-motoras, perceptivas ou sociais tenham total controle e entendimento da navegação.
                     </p>
                     <br><br><br><br><br><br>
@@ -523,35 +504,6 @@
         });
     </script>
 
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Animação Fade Up Geral
-        const fadeElements = document.querySelectorAll('.gsap-fade-up');
-
-        fadeElements.forEach(element => {
-            const delay = element.getAttribute('data-delay') || 0;
-
-            gsap.fromTo(element,
-                {
-                    y: 50,
-                    opacity: 0
-                },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.8,
-                    delay: delay,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: element,
-                        start: "top 85%", // Inicia quando o topo do elemento bate em 85% da tela
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
-    </script>
 
     <div vw class="enabled">
         <div vw-access-button class="active"></div>

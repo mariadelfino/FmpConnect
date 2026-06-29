@@ -27,7 +27,7 @@
 }
 
 .titulo-secao {
-    font-size: 2.2rem; /* ~40px */
+    font-size: var(--font-size-2xl);
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -368,7 +368,7 @@
 
 .card-feedback .titulo-secao {
     color: white;
-    font-size: 2.2rem;
+    font-size: var(--font-size-2xl);
 }
 
 .card-feedback .texto-padrao {
@@ -402,10 +402,6 @@
 
     .card-feedback {
         padding: 24px;
-    }
-
-    .card-feedback .titulo-secao {
-        font-size: 1.8rem;
     }
 
     .feedback-icon .material-icons-outlined {

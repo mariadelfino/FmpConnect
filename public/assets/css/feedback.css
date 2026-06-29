@@ -3,7 +3,7 @@
    ======================================== */
 
 body {
-    background-color: var(--color-accent-purple-dark);
+    background: var(--gradient-primary);
     color: var(--color-primary-text);
     min-height: 100vh;
 }
@@ -72,21 +72,20 @@ input[type="email"],
 textarea {
     width: 100%;
     padding: var(--spacing-md);
-    border: 2px solid var(--color-primary-border);
+    border: 1.5px solid var(--color-opcao-chat-border);
     border-radius: var(--radius-lg);
     font-size: var(--font-size-base);
     font-family: var(--font-family-primary);
-    background-color: var(--color-secondary-background-icon);
+    background-color: rgba(255, 255, 255, 0.07);
     color: var(--color-primary-text);
-    transition: var(--transition-base);
+    transition: border-color var(--transition-base);
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus {
     outline: none;
-    border-color: var(--color-primary-border-hover);
-    background-color: transparent;
+    border-color: var(--color-primary);
 }
 
 input[type="text"]::placeholder,
@@ -223,7 +222,7 @@ button[type="submit"] {
     color: white;
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-base);
-    padding: var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-lg);
     border: none;
     border-radius: var(--radius-lg);
     cursor: pointer;
@@ -251,7 +250,7 @@ button[type="submit"]:active {
    ======================================== */
 
 [data-theme="light"] body {
-    background-color: var(--color-gray-900);
+    background: var(--gradient-primary);
 }
 
 [data-theme="light"] .secao-feedback {
@@ -357,7 +356,7 @@ button[type="submit"]:active {
 
     button[type="submit"] {
         font-size: var(--font-size-sm);
-        padding: var(--spacing-xl);
+        padding: var(--spacing-sm) var(--spacing-xl);
     }
 }
 
